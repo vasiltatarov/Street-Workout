@@ -19,12 +19,15 @@ namespace StreetWorkout.Controllers
             this.data = data;
         }
 
-        public IActionResult Index()
+        public IActionResult CompleteAccount()
         {
-            var isUserTrainer = this.data.Users
-                .Any(x => x.Id == this.User.GetId() && x.UserRole == UserRole.Trainer);
-
-            return this.Ok();
+            return this.View();
         }
+
+        //[HttpPost]
+        //public IActionResult CompleteAccount(UserDataFormModel data)
+        //{
+
+        //}
     }
 }
