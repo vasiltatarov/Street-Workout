@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace StreetWorkout.Data.Models
+﻿namespace StreetWorkout.Data.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Identity;
@@ -25,5 +24,7 @@ namespace StreetWorkout.Data.Models
         public Gender Gender { get; set; }
 
         public DateTime DateOfBirth { get; set; }
+
+        public bool IsAccountCompleted { get; set; }
     }
 }

@@ -134,6 +134,7 @@
                     Gender = Input.Gender,
                     UserRole = Input.UserRole,
                     DateOfBirth = Input.DateOfBirth,
+                    IsAccountCompleted = false,
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

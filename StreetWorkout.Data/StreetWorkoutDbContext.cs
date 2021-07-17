@@ -13,5 +13,16 @@
         }
 
         public DbSet<Country> Countries { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<ApplicationUser>()
+                .HasOne(x => x.Country)
+                .WithMany(x => x.Users)
+                .HasForeignKey(x => x.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(builder);
+        }
     }
 }

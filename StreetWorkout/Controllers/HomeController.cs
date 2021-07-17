@@ -1,7 +1,7 @@
 ﻿namespace StreetWorkout.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using StreetWorkout.Models;
+    using Models;
     using System.Diagnostics;
 
     public class HomeController : Controller
