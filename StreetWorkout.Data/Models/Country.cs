@@ -2,14 +2,14 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static DataConstants.Country;
+    using static DataConstants;
 
     public class Country
     {
         public int Id { get; init; }
 
         [Required]
-        [MaxLength(NameMaxLength)]
+        [MaxLength(CountryNameMaxLength)]
         public string Name { get; init; }
     }
 }

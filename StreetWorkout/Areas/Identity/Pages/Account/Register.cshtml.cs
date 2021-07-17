@@ -1,5 +1,6 @@
 ﻿namespace StreetWorkout.Areas.Identity.Pages.Account
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -7,6 +8,7 @@
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -17,6 +19,9 @@
     using Microsoft.Extensions.Logging;
 
     using StreetWorkout.Data.Models;
+    using Data;
+
+    using static Data.DataConstants;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -25,17 +30,20 @@
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly StreetWorkoutDbContext _data;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            StreetWorkoutDbContext data)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _data = data;
         }
 
         [BindProperty]
@@ -45,8 +53,16 @@
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
+        public IEnumerable<Country> Countries { get; set; }
+
         public class InputModel
         {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Username")]
+            [StringLength(UsernameMaxLength, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = UsernameMinLength)]
+            public string UserName { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -62,10 +78,36 @@
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Image URL")]
+            [Url]
+            public string ImageUrl { get; set; }
+
+            [Display(Name = "Country")]
+            [Range(1, 241, ErrorMessage = "Please select valid Country.")]
+            public int CountryId { get; set; }
+
+            [Required]
+            [StringLength(CityMaxLength, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = CityMinLength)]
+            public string City { get; set; }
+
+            [Display(Name = "Select your role")]
+            [EnumDataType(typeof(UserRole), ErrorMessage = "Please select valid user role.")]
+            [Range(1, 2, ErrorMessage = "Please select valid user role.")]
+            public UserRole UserRole { get; set; }
+
+            [EnumDataType(typeof(Gender), ErrorMessage = "Please select valid gender.")]
+            [Range(1, 2, ErrorMessage = "Please select valid gender.")]
+            public Gender Gender { get; set; }
+
+            [Display(Name = "Date Of Birth")]
+            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+            public DateTime DateOfBirth { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            Countries = _data.Countries;
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -74,10 +116,27 @@
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            if (!await _data.Countries.AnyAsync(x => x.Id == Input.CountryId))
+            {
+                ModelState.AddModelError(nameof(Input.CountryId), "Please select valid Country.");
+            }
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = Input.UserName,
+                    Email = Input.Email,
+                    ImageUrl = Input.ImageUrl,
+                    CountryId = Input.CountryId,
+                    City = Input.City,
+                    Gender = Input.Gender,
+                    UserRole = Input.UserRole,
+                    DateOfBirth = Input.DateOfBirth,
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -108,7 +167,8 @@
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            
+
+            Countries = _data.Countries;
             return Page();
         }
     }
