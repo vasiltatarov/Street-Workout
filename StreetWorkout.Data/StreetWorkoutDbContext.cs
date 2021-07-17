@@ -5,7 +5,7 @@
 
     using Models;
 
-    public class StreetWorkoutDbContext : IdentityDbContext
+    public class StreetWorkoutDbContext : IdentityDbContext<ApplicationUser>
     {
         public StreetWorkoutDbContext(DbContextOptions<StreetWorkoutDbContext> options)
             : base(options)
