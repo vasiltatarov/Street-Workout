@@ -4,12 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using StreetWorkout.Data;
 
 namespace StreetWorkout.Data.Migrations
 {
     [DbContext(typeof(StreetWorkoutDbContext))]
-    [Migration("20210716211852_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20210717073846_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
