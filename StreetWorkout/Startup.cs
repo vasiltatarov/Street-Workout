@@ -36,6 +36,7 @@ namespace StreetWorkout
             services.AddControllersWithViews();
 
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IHomeService, HomeService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

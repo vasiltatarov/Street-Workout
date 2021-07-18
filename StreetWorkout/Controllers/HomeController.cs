@@ -1,50 +1,24 @@
 ﻿namespace StreetWorkout.Controllers
 {
-    using System.Linq;
     using System.Diagnostics;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
-    using Data;
-    using Data.Models;
+    using Services;
     using ViewModels;
-    using ViewModels.Home;
     using Infrastructure;
 
     public class HomeController : Controller
     {
-        private readonly StreetWorkoutDbContext data;
+        private readonly IHomeService homeService;
 
-        public HomeController(StreetWorkoutDbContext data)
-        {
-            this.data = data;
-        }
+        public HomeController(IHomeService homeService)
+            => this.homeService = homeService;
 
         [Authorize]
         public IActionResult Index()
-        {
-            var user = this.data.Users.Find(this.User.GetId());
-
-            if (user == null)
-            {
-                return this.Redirect("Identity/Account/Login");
-            }
-
-            return View(new IndexViewModel
-            {
-                IsAccountCompleted = user.IsAccountCompleted,
-                IsTrainer = user.UserRole == UserRole.Trainer,
-                Users = this.data.Users
-                    //.Where(x => x.UserRole == UserRole.Trainer)
-                    .Select(x => new UserIndexViewModel
-                    {
-                        Username = x.UserName,
-                        ImageUrl = x.ImageUrl,
-                    })
-                    .ToList(),
-            });
-        }
+            => View(this.homeService.IndexViewModel(this.User.GetId()));
 
         public IActionResult Privacy()
             => View();
