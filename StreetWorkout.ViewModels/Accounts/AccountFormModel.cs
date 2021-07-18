@@ -1,9 +1,9 @@
-﻿namespace StreetWorkout.Models.Accounts
+﻿namespace StreetWorkout.ViewModels.Accounts
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using static Data.DataConstants;
+    using static Common.DataConstants;
 
     public class AccountFormModel
     {

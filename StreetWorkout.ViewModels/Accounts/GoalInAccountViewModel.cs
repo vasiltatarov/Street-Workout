@@ -1,4 +1,4 @@
-﻿namespace StreetWorkout.Models.Accounts
+﻿namespace StreetWorkout.ViewModels.Accounts
 {
     public class GoalInAccountViewModel
     {

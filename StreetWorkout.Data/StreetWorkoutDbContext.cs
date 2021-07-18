@@ -31,13 +31,6 @@
                 .HasForeignKey(x => x.CountryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //builder
-            //    .Entity<UserData>()
-            //    .HasOne<ApplicationUser>()
-            //    .WithOne()
-            //    .HasForeignKey<UserData>(x => x.UserId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
             builder
                 .Entity<UserData>()
                 .HasOne(x => x.Sport)

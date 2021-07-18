@@ -1,7 +1,7 @@
-﻿namespace StreetWorkout.Models.Home
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace StreetWorkout.ViewModels.Home
+{
     public class IndexViewModel
     {
         public bool IsTrainer { get; set; }

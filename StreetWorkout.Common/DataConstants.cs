@@ -1,4 +1,4 @@
-﻿namespace StreetWorkout.Data
+﻿namespace StreetWorkout.Common
 {
     public class DataConstants
     {

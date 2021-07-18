@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StreetWorkout.Data\StreetWorkout.Data.csproj" />
+    <ProjectReference Include="..\StreetWorkout.ViewModels\StreetWorkout.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

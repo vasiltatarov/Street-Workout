@@ -5,7 +5,7 @@
 
     using Microsoft.AspNetCore.Identity;
 
-    using static DataConstants;
+    using static Common.DataConstants;
 
     public class ApplicationUser : IdentityUser
     {

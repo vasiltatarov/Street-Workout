@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
 
-    using static DataConstants;
+    using static Common.DataConstants;
 
     public class Country
     {

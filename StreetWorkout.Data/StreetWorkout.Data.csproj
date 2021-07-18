@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StreetWorkout.Common\StreetWorkout.Common.csproj" />
+  </ItemGroup>
+
 </Project>

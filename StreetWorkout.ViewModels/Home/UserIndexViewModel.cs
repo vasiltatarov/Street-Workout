@@ -1,4 +1,4 @@
-﻿namespace StreetWorkout.Models.Home
+﻿namespace StreetWorkout.ViewModels.Home
 {
     public class UserIndexViewModel
     {

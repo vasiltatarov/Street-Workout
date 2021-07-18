@@ -1,4 +1,4 @@
-namespace StreetWorkout.Models
+namespace StreetWorkout.ViewModels
 {
     public class ErrorViewModel
     {

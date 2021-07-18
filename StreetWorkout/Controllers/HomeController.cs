@@ -6,11 +6,11 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
-    using Models;
     using Data;
-    using StreetWorkout.Data.Models;
+    using Data.Models;
+    using ViewModels;
+    using ViewModels.Home;
     using Infrastructure;
-    using Models.Home;
 
     public class HomeController : Controller
     {

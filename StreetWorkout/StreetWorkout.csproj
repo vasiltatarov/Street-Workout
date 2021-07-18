@@ -20,8 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StreetWorkout.Common\StreetWorkout.Common.csproj" />
     <ProjectReference Include="..\StreetWorkout.Data\StreetWorkout.Data.csproj" />
     <ProjectReference Include="..\StreetWorkout.Services\StreetWorkout.Services.csproj" />
+    <ProjectReference Include="..\StreetWorkout.ViewModels\StreetWorkout.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

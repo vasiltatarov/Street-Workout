@@ -1,4 +1,6 @@
-﻿namespace StreetWorkout.Areas.Identity.Pages.Account
+﻿using StreetWorkout.Common;
+
+namespace StreetWorkout.Areas.Identity.Pages.Account
 {
     using System;
     using System.Collections.Generic;
@@ -21,7 +23,7 @@
     using StreetWorkout.Data.Models;
     using Data;
 
-    using static Data.DataConstants;
+    using static DataConstants;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel

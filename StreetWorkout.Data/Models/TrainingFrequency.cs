@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static DataConstants;
+    using static Common.DataConstants;
 
     public class TrainingFrequency
     {
