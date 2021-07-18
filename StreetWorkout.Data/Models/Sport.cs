@@ -3,6 +3,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using static DataConstants;
+
     public class Sport
     {
         public int Id { get; set; }

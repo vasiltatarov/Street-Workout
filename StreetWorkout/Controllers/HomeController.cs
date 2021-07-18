@@ -7,10 +7,10 @@
     using Microsoft.AspNetCore.Authorization;
 
     using Models;
-    using StreetWorkout.Data;
+    using Data;
     using StreetWorkout.Data.Models;
-    using StreetWorkout.Infrastructure;
-    using StreetWorkout.Models.Home;
+    using Infrastructure;
+    using Models.Home;
 
     public class HomeController : Controller
     {
@@ -25,6 +25,11 @@
         public IActionResult Index()
         {
             var user = this.data.Users.Find(this.User.GetId());
+
+            if (user == null)
+            {
+                return this.Redirect("Identity/Account/Login");
+            }
 
             return View(new IndexViewModel
             {

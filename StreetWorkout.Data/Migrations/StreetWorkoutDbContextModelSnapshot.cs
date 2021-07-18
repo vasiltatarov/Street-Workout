@@ -311,6 +311,51 @@ namespace StreetWorkout.Data.Migrations
                     b.ToTable("TrainingFrequencies");
                 });
 
+            modelBuilder.Entity("StreetWorkout.Data.Models.UserData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<int>("GoalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Height")
+                        .HasMaxLength(230)
+                        .HasColumnType("int");
+
+                    b.Property<int>("SportId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrainingFrequencyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Weight")
+                        .HasMaxLength(250)
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GoalId");
+
+                    b.HasIndex("SportId");
+
+                    b.HasIndex("TrainingFrequencyId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserDatas");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -371,6 +416,41 @@ namespace StreetWorkout.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("StreetWorkout.Data.Models.UserData", b =>
+                {
+                    b.HasOne("StreetWorkout.Data.Models.Goal", "Goal")
+                        .WithMany()
+                        .HasForeignKey("GoalId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("StreetWorkout.Data.Models.Sport", "Sport")
+                        .WithMany()
+                        .HasForeignKey("SportId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("StreetWorkout.Data.Models.TrainingFrequency", "TrainingFrequency")
+                        .WithMany()
+                        .HasForeignKey("TrainingFrequencyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("StreetWorkout.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Goal");
+
+                    b.Navigation("Sport");
+
+                    b.Navigation("TrainingFrequency");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StreetWorkout.Data.Models.Country", b =>

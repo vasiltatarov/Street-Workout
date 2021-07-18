@@ -12,6 +12,7 @@
                 <div class="form-group">
                     <label asp-for="SportId"></label>
                     <select asp-for="SportId" class="form-control">
+                        <option value="0">--- Select your Sport ---</option>
                         @foreach (var sport in Model.Sports)
                         {
                             <option value="@sport.Id">@sport.Name</option>
@@ -22,6 +23,7 @@
                 <div class="form-group">
                     <label asp-for="GoalId"></label>
                     <select asp-for="GoalId" class="form-control">
+                        <option value="0">--- Select your Goal ---</option>
                         @foreach (var goal in Model.Goals)
                         {
                             <option value="@goal.Id">@goal.Name</option>
@@ -32,6 +34,7 @@
                 <div class="form-group">
                     <label asp-for="TrainingFrequencyId"></label>
                     <select asp-for="TrainingFrequencyId" class="form-control">
+                        <option value="0">--- Select your Training Frequency ---</option>
                         @foreach (var trainingFrequency in Model.TrainingFrequencies)
                         {
                             <option value="@trainingFrequency.Id">@trainingFrequency.Name</option>

@@ -7,6 +7,7 @@
     using Data;
     using Models.Accounts;
     using Infrastructure;
+    using StreetWorkout.Data.Models;
 
     [Authorize]
     public class AccountsController : Controller
@@ -54,7 +55,9 @@
         [HttpPost]
         public IActionResult CompleteAccount(AccountFormModel data)
         {
-            if (this.data.Users.Find(this.User.GetId()).IsAccountCompleted)
+            var user = this.data.Users.Find(this.User.GetId());
+
+            if (user.IsAccountCompleted || this.data.UserDatas.Any(x => x.UserId == user.Id))
             {
                 return this.RedirectToAction("Index", "Home");
             }
@@ -104,6 +107,22 @@
 
                 return this.View(data);
             }
+
+            var userData = new UserData
+            {
+                UserId = user.Id,
+                SportId = data.SportId,
+                GoalId = data.GoalId,
+                TrainingFrequencyId = data.TrainingFrequencyId,
+                Weight = data.Weight,
+                Height = data.Height,
+                Description = data.Description,
+            };
+
+            this.data.UserDatas.AddRange(userData);
+            user.IsAccountCompleted = true;
+
+            this.data.SaveChanges();
 
             return this.RedirectToAction("Index", "Home");
         }
