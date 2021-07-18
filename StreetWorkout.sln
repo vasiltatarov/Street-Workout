@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout", "StreetWorkout\StreetWorkout.csproj", "{DAEA95FC-0FAC-40AF-8237-3F1DAD039124}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetWorkout.Data", "StreetWorkout.Data\StreetWorkout.Data.csproj", "{112EC844-F369-4C2A-B572-FC63A90F1842}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout.Data", "StreetWorkout.Data\StreetWorkout.Data.csproj", "{112EC844-F369-4C2A-B572-FC63A90F1842}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetWorkout.Services", "StreetWorkout.Services\StreetWorkout.Services.csproj", "{03300CF9-B5BE-4D75-821F-1C7F1E7E4FBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{112EC844-F369-4C2A-B572-FC63A90F1842}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{112EC844-F369-4C2A-B572-FC63A90F1842}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{112EC844-F369-4C2A-B572-FC63A90F1842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03300CF9-B5BE-4D75-821F-1C7F1E7E4FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03300CF9-B5BE-4D75-821F-1C7F1E7E4FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03300CF9-B5BE-4D75-821F-1C7F1E7E4FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03300CF9-B5BE-4D75-821F-1C7F1E7E4FBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,6 +9,7 @@ namespace StreetWorkout
 
     using Data;
     using StreetWorkout.Data.Models;
+    using Services;
     using Infrastructure;
 
     public class Startup
@@ -33,6 +34,8 @@ namespace StreetWorkout
                 })
                 .AddEntityFrameworkStores<StreetWorkoutDbContext>();
             services.AddControllersWithViews();
+
+            services.AddTransient<IAccountService, AccountService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

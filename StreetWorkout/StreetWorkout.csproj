@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StreetWorkout.Data\StreetWorkout.Data.csproj" />
+    <ProjectReference Include="..\StreetWorkout.Services\StreetWorkout.Services.csproj" />
   </ItemGroup>
 
 </Project>

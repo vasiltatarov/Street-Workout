@@ -5,23 +5,26 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Data;
+    using Services;
+    using StreetWorkout.Data.Models;
     using Models.Accounts;
     using Infrastructure;
-    using StreetWorkout.Data.Models;
 
     [Authorize]
     public class AccountsController : Controller
     {
         private readonly StreetWorkoutDbContext data;
+        private readonly IAccountService accountService;
 
-        public AccountsController(StreetWorkoutDbContext data)
+        public AccountsController(StreetWorkoutDbContext data, IAccountService accountService)
         {
             this.data = data;
+            this.accountService = accountService;
         }
 
         public IActionResult CompleteAccount()
         {
-            if (this.data.Users.Find(this.User.GetId()).IsAccountCompleted)
+            if (this.IsAccountComplete())
             {
                 return this.RedirectToAction("Index", "Home");
             }
@@ -108,23 +111,12 @@
                 return this.View(data);
             }
 
-            var userData = new UserData
-            {
-                UserId = user.Id,
-                SportId = data.SportId,
-                GoalId = data.GoalId,
-                TrainingFrequencyId = data.TrainingFrequencyId,
-                Weight = data.Weight,
-                Height = data.Height,
-                Description = data.Description,
-            };
-
-            this.data.UserDatas.AddRange(userData);
-            user.IsAccountCompleted = true;
-
-            this.data.SaveChanges();
+            this.accountService.CompleteAccount(user.Id, data.SportId, data.GoalId, data.GoalId, data.Weight, data.Height, data.Description);
 
             return this.RedirectToAction("Index", "Home");
         }
+
+        private bool IsAccountComplete()
+            => this.accountService.IsUserAccountComplete(this.User.GetId());
     }
 }
