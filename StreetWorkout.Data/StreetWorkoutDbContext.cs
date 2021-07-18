@@ -14,6 +14,8 @@
 
         public DbSet<Country> Countries { get; set; }
 
+        public DbSet<Sport> Sports { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<ApplicationUser>()

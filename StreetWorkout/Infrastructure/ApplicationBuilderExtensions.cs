@@ -19,8 +19,35 @@
             data.Database.Migrate();
 
             SeedCountries(data);
+            SeedSports(data);
 
             return app;
+        }
+
+        private static void SeedSports(StreetWorkoutDbContext data)
+        {
+            if (data.Sports.Any())
+            {
+                return;
+            }
+
+            data.Sports.AddRange(new Sport[]
+            {
+                new () { Name = "Street Workout/Calisthenics" },
+                new () { Name = "Fitness" },
+                new () { Name = "CrossFit" },
+                new () { Name = "Weightlifting" },
+                new () { Name = "Gymnastics" },
+                new () { Name = "Athletics" },
+                new () { Name = "MMA" },
+                new () { Name = "Box" },
+                new () { Name = "Kick-Box" },
+                new () { Name = "Taekwondo" },
+                new () { Name = "Judo" },
+                new () { Name = "Karate" },
+            });
+
+            data.SaveChanges();
         }
 
         private static void SeedCountries(StreetWorkoutDbContext data)
