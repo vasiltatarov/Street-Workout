@@ -10,8 +10,8 @@ using StreetWorkout.Data;
 namespace StreetWorkout.Data.Migrations
 {
     [DbContext(typeof(StreetWorkoutDbContext))]
-    [Migration("20210718073755_AddSportTable")]
-    partial class AddSportTable
+    [Migration("20210718110225_AddGoalTable")]
+    partial class AddGoalTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -262,6 +262,23 @@ namespace StreetWorkout.Data.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("StreetWorkout.Data.Models.Goal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Goals");
+                });
+
             modelBuilder.Entity("StreetWorkout.Data.Models.Sport", b =>
                 {
                     b.Property<int>("Id")
@@ -270,7 +287,9 @@ namespace StreetWorkout.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 

@@ -2,7 +2,7 @@
 
 namespace StreetWorkout.Data.Migrations
 {
-    public partial class AddSportTable : Migration
+    public partial class AddGoalTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,16 +11,16 @@ namespace StreetWorkout.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.CreateTable(
-                name: "Sports",
+                name: "Goals",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sports", x => x.Id);
+                    table.PrimaryKey("PK_Goals", x => x.Id);
                 });
 
             migrationBuilder.AddForeignKey(
@@ -39,7 +39,7 @@ namespace StreetWorkout.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Sports");
+                name: "Goals");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUsers_Countries_CountryId",

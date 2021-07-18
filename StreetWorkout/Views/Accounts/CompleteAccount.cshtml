@@ -1,1 +1,61 @@
-﻿<h1>Hiiiii</h1>
+﻿@model AccountFormModel
+
+@{
+    this.ViewData["Title"] = "Complete Account";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
+            <h1 class="text-center">@this.ViewData["Title"]</h1>
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="SportId"></label>
+                    <select asp-for="SportId" class="form-control">
+                        @foreach (var sport in Model.Sports)
+                        {
+                            <option value="@sport.Id">@sport.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="SportId" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GoalId"></label>
+                    <select asp-for="GoalId" class="form-control">
+                        @foreach (var goal in Model.Goals)
+                        {
+                            <option value="@goal.Id">@goal.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="GoalId" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TrainingFrequencyId"></label>
+                    <select asp-for="TrainingFrequencyId" class="form-control">
+                        @foreach (var trainingFrequency in Model.TrainingFrequencies)
+                        {
+                            <option value="@trainingFrequency.Id">@trainingFrequency.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="TrainingFrequencyId" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Weight"></label>
+                    <input asp-for="Weight" class="form-control">
+                    <span asp-validation-for="Weight" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Height"></label>
+                    <input asp-for="Height" class="form-control" placeholder="172 cm">
+                    <span asp-validation-for="Height" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" rows="4" class="form-control" placeholder="Description, What is your Interests ..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger small"></span>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Save Account Information" />
+            </form>
+        </div>
+    </div>
+</div>

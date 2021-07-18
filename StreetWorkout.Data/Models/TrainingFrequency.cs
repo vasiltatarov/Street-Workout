@@ -3,12 +3,13 @@
     using System.ComponentModel.DataAnnotations;
 
     using static DataConstants;
-    public class Sport
+
+    public class TrainingFrequency
     {
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(SportNameMaxLength)]
+        [MaxLength(TrainingFrequencyNameMaxLength)]
         public string Name { get; set; }
     }
 }

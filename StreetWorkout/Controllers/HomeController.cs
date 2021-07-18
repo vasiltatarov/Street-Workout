@@ -1,15 +1,16 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Authorization;
-using StreetWorkout.Data;
-using StreetWorkout.Data.Models;
-using StreetWorkout.Infrastructure;
-using StreetWorkout.Models.Home;
-
-namespace StreetWorkout.Controllers
+﻿namespace StreetWorkout.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-    using Models;
+    using System.Linq;
     using System.Diagnostics;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
+
+    using Models;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Models.Home;
 
     public class HomeController : Controller
     {

@@ -20,8 +20,49 @@
 
             SeedCountries(data);
             SeedSports(data);
+            SeedGoals(data);
+            SeedTrainingFrequencies(data);
 
             return app;
+        }
+
+        private static void SeedTrainingFrequencies(StreetWorkoutDbContext data)
+        {
+            if (data.TrainingFrequencies.Any())
+            {
+                return;
+            }
+
+            data.TrainingFrequencies.AddRange(new TrainingFrequency[]
+            {
+                new () { Name = "Little or nothing" },
+                new () { Name = "Light exercise 1 to 3 days" },
+                new () { Name = "Moderate exercise 3 to 5 days" },
+                new () { Name = "Strong exercise plus 5 days" },
+            });
+
+            data.SaveChanges();
+        }
+
+        private static void SeedGoals(StreetWorkoutDbContext data)
+        {
+            if (data.Goals.Any())
+            {
+                return;
+            }
+
+            data.Goals.AddRange(new Goal[]
+            {
+                new () { Name = "Reduced body fat" },
+                new () { Name = "Building muscles" },
+                new () { Name = "Gain weight" },
+                new () { Name = "Lose weight" },
+                new () { Name = "Toning (Just want to tone their bodies)" },
+                new () { Name = "Improving endurance" },
+                new () { Name = "Increasing flexibility and balance" },
+            });
+
+            data.SaveChanges();
         }
 
         private static void SeedSports(StreetWorkoutDbContext data)

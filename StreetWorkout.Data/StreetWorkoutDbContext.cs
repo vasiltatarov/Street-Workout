@@ -16,6 +16,10 @@
 
         public DbSet<Sport> Sports { get; set; }
 
+        public DbSet<Goal> Goals { get; set; }
+
+        public DbSet<TrainingFrequency> TrainingFrequencies { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<ApplicationUser>()
