@@ -92,7 +92,7 @@
                 .ToList();
 
         public IEnumerable<GoalInAccountViewModel> GetGoalsInAccountFormModel()
-            => this.data.Sports
+            => this.data.Goals
                 .Select(x => new GoalInAccountViewModel
                 {
                     Id = x.Id,
@@ -101,7 +101,7 @@
                 .ToList();
 
         public IEnumerable<TrainingFrequencyInAccountViewModel> GetTrainingFrequenciesInAccountFormModel()
-            => this.data.Sports
+            => this.data.TrainingFrequencies
                 .Select(x => new TrainingFrequencyInAccountViewModel()
                 {
                     Id = x.Id,

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace StreetWorkout.ViewModels.Home
+﻿namespace StreetWorkout.ViewModels.Home
 {
+    using System.Collections.Generic;
+
     public class IndexViewModel
     {
         public bool IsTrainer { get; set; }

@@ -62,7 +62,7 @@
                 return this.View(data);
             }
 
-            this.accountService.CompleteAccount(userId, data.SportId, data.GoalId, data.GoalId, data.Weight, data.Height, data.Description);
+            this.accountService.CompleteAccount(userId, data.SportId, data.GoalId, data.TrainingFrequencyId, data.Weight, data.Height, data.Description);
 
             return this.RedirectToAction("Index", "Home");
         }
