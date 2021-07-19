@@ -17,6 +17,8 @@
 
         void CompleteAccount(string userId, int sportId, int goalId, int trainingFrequency, int weight, int height, string description);
 
+        AccountViewModel GetAccount(string username);
+
         IEnumerable<SportInAccountViewModel> GetSportsInAccountFormModel();
 
         IEnumerable<GoalInAccountViewModel> GetGoalsInAccountFormModel();

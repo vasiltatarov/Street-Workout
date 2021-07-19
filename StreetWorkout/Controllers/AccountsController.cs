@@ -15,6 +15,9 @@
         public AccountsController(IAccountService accountService)
             => this.accountService = accountService;
 
+        public IActionResult Account(string username)
+            => this.View(this.accountService.GetAccount(username));
+
         public IActionResult CompleteAccount()
             => this.IsAccountComplete()
                 ? this.RedirectToAction("Index", "Home")

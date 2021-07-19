@@ -1,0 +1,111 @@
+﻿@model AccountViewModel
+
+@if (this.User.Identity.Name == this.Model.Username)
+{
+    @if (this.Model.IsAccountComplete)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <i class="fa fa-check"></i>
+            <strong>Yay!</strong> Everything is fine! Your account is completely finished.
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fa fa-exclamation-circle"></i>
+            <strong>Hey!</strong> Your account is not completed
+            <a asp-controller="Accounts" asp-action="CompleteAccount">click here.</a> to complete your account. This will unlock more options for you.
+        </div>
+    }
+    <hr/>
+}
+
+<div class="container">
+    <div class="info">
+        <div class="row">
+            <div class="col-12 col-md-6 text-center">
+                <img src="@this.Model.ImageUrl" alt="Raised circle image" class="img-fluid shadow-lg" style="width: 100%; height: 400px;">
+            </div>
+            <div class="col-12 col-md-6 d-flex flex-column align-items-center align-items-lg-start">
+                <p class="lead mb-0 mt-2">Username: <b>@this.Model.Username</b></p>
+                <p class="lead mb-0 mt-2">Title: <b>@(this.Model.IsTrainer ? "Trainer" : "Enthusiast")</b></p>
+                <p class="lead mb-0 mt-2">Country: <b>@this.Model.Country</b></p>
+                <p class="lead mb-0 mt-2">City: <b>@this.Model.City</b></p>
+                <p class="lead mb-0 mt-2">Age: <b>@this.Model.Age years</b></p>
+                @if (this.Model.Data != null)
+                {
+                    <p class="lead mb-0 mt-2">Sport: <b>@this.Model.Data.Sport</b></p>
+                    <p class="lead mb-0 mt-2">Goal: <b>@this.Model.Data.Goal</b></p>
+                    <p class="lead mb-0 mt-2">Training Frequency: <b>@this.Model.Data.TrainingFrequency</b></p>
+                    <p class="lead mb-0 mt-2">Weight: <b>@this.Model.Data.Weight kg</b></p>
+                    <p class="lead mb-0 mt-2">Height: <b>@this.Model.Data.Height cm</b></p>
+                    <p class="lead mb-0 mt-2">Description: <b>@this.Model.Data.Description</b></p>
+                }
+                else
+                {
+                    <br />
+                    <p class="lead mb-0 mt-2"><b>Cannot see other data, because this account is not completed.</b></p>
+                }
+            </div>
+        </div>
+    </div>
+
+    @*<div class="navigation d-flex justify-content-center">
+        <ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#photos">
+                    <i class="fas fa-th"></i> Photos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#saved">
+                    <i class="far fa-bookmark"></i> Saved
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tagged">
+                    <i class="far fa-id-badge"></i> Tagged
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="profile-tabs tab-content">
+        <div class="tab-pane fade show active" id="photos">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="square" style="background-image:url('assets/img/dog-4.jpg');"></div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="square" style="background-image:url('assets/img/dog-5.jpg');"></div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="square" style="background-image:url('assets/img/dog-6.jpg');"></div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="square" style="background-image:url('assets/img/dog-7.jpg');"></div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="square" style="background-image:url('assets/img/dog-8.jpg');"></div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="square" style="background-image:url('assets/img/dog-3.jpg');"></div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center my-5">
+                <a href="#a" class="btn btn-outline-primary btn-pill">Load More</a>
+            </div>
+        </div>
+        <div class="tab-pane fade text-center" id="saved">
+
+            <p class="lead"><span class="text-danger"><i class="far fa-frown-open"></i></span> Nothing saved yet.</p>
+        </div>
+        <div class="tab-pane fade text-center" id="tagged">
+            <p class="lead">Help people tag you.</p>
+            <a href="#a" class="btn btn-info btn-pill">Find Friends</a>
+        </div>
+    </div>*@
+
+</div>

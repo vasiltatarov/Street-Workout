@@ -1,7 +1,8 @@
 ﻿namespace StreetWorkout.Services
 {
-    using System.Collections.Generic;
+    using System;
     using System.Linq;
+    using System.Collections.Generic;
     
     using Data;
     using Data.Models;
@@ -50,6 +51,36 @@
 
             this.data.SaveChanges();
         }
+
+        public AccountViewModel GetAccount(string username)
+            => this.data.Users
+                .Where(x => x.UserName == username)
+                .Select(x => new AccountViewModel
+                {
+                    IsTrainer = x.UserRole == UserRole.Trainer,
+                    IsAccountComplete = x.IsAccountCompleted,
+                    Username = x.UserName,
+                    Age = DateTime.Now.Year - x.DateOfBirth.Year,
+                    City = x.City,
+                    Country = x.Country.Name,
+                    ImageUrl = x.ImageUrl,
+                    Data = !x.IsAccountCompleted
+                        ? null
+                        : this.data
+                            .UserDatas
+                            .Where(ud => ud.User.UserName == username)
+                            .Select(ud => new AccountUserDataViewModel
+                            {
+                                Sport = ud.Sport.Name,
+                                Goal = ud.Goal.Name,
+                                TrainingFrequency = ud.TrainingFrequency.Name,
+                                Weight = ud.Weight,
+                                Height = ud.Height,
+                                Description = ud.Description,   
+                            })
+                            .FirstOrDefault(),
+                })
+                .FirstOrDefault();
 
         public IEnumerable<SportInAccountViewModel> GetSportsInAccountFormModel()
             => this.data.Sports
