@@ -12,6 +12,9 @@ Steps to create a similar web application from scratch:
 6. Finished account complete functionality.
 7. Implement service layer.
 8. Separation of the application by projects.
+9. Implemented a account page in which user data is visualized.
 
 Potential Tasks:
 - Implement Account page and if user account is completed show user data or it is not completed, show account complete form.
+- Implement a Trainers page in which all trainers will be visualized.
+- Implement training creation.
