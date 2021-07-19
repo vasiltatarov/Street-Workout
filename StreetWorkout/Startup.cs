@@ -37,6 +37,7 @@ namespace StreetWorkout
 
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IHomeService, HomeService>();
+            services.AddTransient<ITrainerService, TrainerService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
