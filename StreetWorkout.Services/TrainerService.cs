@@ -15,12 +15,15 @@
             => this.data = data;
 
         public IEnumerable<TrainerViewModel> All()
-            => this.data.Users
-                .Where(x => x.UserRole == UserRole.Trainer)
+            => this.data.UserDatas
+                .Where(x => x.User.UserRole == UserRole.Trainer)
                 .Select(x => new TrainerViewModel
                 {
-                    Username = x.UserName,
-                    ImageUrl = x.ImageUrl,
+                    Username = x.User.UserName,
+                    ImageUrl = x.User.ImageUrl,
+                    Sport = x.Sport.Name,
+                    Goal = x.Goal.Name,
+                    TrainingFrequency = x.TrainingFrequency.Name,
                 })
                 .ToList();
     }

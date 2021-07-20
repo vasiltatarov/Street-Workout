@@ -6,29 +6,38 @@
 <link href="~/css/trainer.css" rel="stylesheet" asp-append-version="true" />
 
 <div class="container">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <i class="fa fa-warning"></i>
+        <strong>Oops!</strong> Only the users who are completed their account will be listed here.
+    </div>
+
     @foreach (var trainer in this.Model)
     {
         <div class="row card-trainer p-2 m-3">
             <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                <a asp-controller="Accounts" asp-action="Account" asp-route-username="@trainer.Username">
-                    <img src="@trainer.ImageUrl" alt="stack photo" class="img-trainer">
-                </a>
+                <img src="@trainer.ImageUrl" alt="stack photo" class="img-trainer">
             </div>
             <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
-                <div class="container name-trainer">
-                    <a asp-controller="Accounts" asp-action="Account" asp-route-username="@trainer.Username">
-                        <h2>@trainer.Username</h2>
-                    </a>
-                </div>
                 <ul class="container">
                     <li>
-                        <p><span class="glyphicon glyphicon-earphone one" style="width: 50px;"></span>+91 90000 00000</p>
+                        <p>Name:<b> @trainer.Username</b></p>
                     </li>
                     <li>
-                        <p><span class="glyphicon glyphicon-envelope one" style="width: 50px;"></span>somerandom@email.com</p>
+                        <p>Practice:<b> @trainer.Sport</b></p>
                     </li>
                     <li>
-                        <p><span class="glyphicon glyphicon-new-window one" style="width: 50px;"></span><a href="#">www.example.com</a></p>
+                        <p>Goal:<b> @trainer.Goal</b></p>
+                    </li>
+                    <li>
+                        <p>Training Frequency:<b> @trainer.TrainingFrequency</b></p>
+                    </li>
+                    <li>
+                        <a class="btn btn-info btn-sm" asp-controller="Accounts" asp-action="Account" asp-route-username="@trainer.Username">
+                            View More
+                        </a>
                     </li>
                 </ul>
             </div>
