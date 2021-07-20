@@ -19,7 +19,8 @@
                 .Where(x => x.UserRole == UserRole.Trainer)
                 .Select(x => new TrainerViewModel
                 {
-
+                    Username = x.UserName,
+                    ImageUrl = x.ImageUrl,
                 })
                 .ToList();
     }

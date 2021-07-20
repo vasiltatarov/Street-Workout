@@ -64,6 +64,7 @@
                     City = x.City,
                     Country = x.Country.Name,
                     ImageUrl = x.ImageUrl,
+                    Gender = x.Gender.ToString(),
                     Data = !x.IsAccountCompleted
                         ? null
                         : this.data

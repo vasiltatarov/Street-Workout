@@ -16,6 +16,8 @@
 
         public bool IsAccountComplete { get; set; }
 
+        public string Gender { get; set; }
+
         public AccountUserDataViewModel Data { get; set; }
     }
 }

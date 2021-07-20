@@ -1,4 +1,37 @@
 ﻿@model IEnumerable<TrainerViewModel>
 @{
-    this.ViewData["Title"] = "All Trainers";
+    this.ViewData["Title"] = "Trainers";
 }
+
+<link href="~/css/trainer.css" rel="stylesheet" asp-append-version="true" />
+
+<div class="container">
+    @foreach (var trainer in this.Model)
+    {
+        <div class="row card-trainer p-2 m-3">
+            <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                <a asp-controller="Accounts" asp-action="Account" asp-route-username="@trainer.Username">
+                    <img src="@trainer.ImageUrl" alt="stack photo" class="img-trainer">
+                </a>
+            </div>
+            <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                <div class="container name-trainer">
+                    <a asp-controller="Accounts" asp-action="Account" asp-route-username="@trainer.Username">
+                        <h2>@trainer.Username</h2>
+                    </a>
+                </div>
+                <ul class="container">
+                    <li>
+                        <p><span class="glyphicon glyphicon-earphone one" style="width: 50px;"></span>+91 90000 00000</p>
+                    </li>
+                    <li>
+                        <p><span class="glyphicon glyphicon-envelope one" style="width: 50px;"></span>somerandom@email.com</p>
+                    </li>
+                    <li>
+                        <p><span class="glyphicon glyphicon-new-window one" style="width: 50px;"></span><a href="#">www.example.com</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+</div>
