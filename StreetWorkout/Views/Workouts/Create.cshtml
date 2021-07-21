@@ -1,0 +1,58 @@
+﻿@using StreetWorkout.Data.Models.Enums
+@model CreateWorkoutFormModel
+@{
+    this.ViewData["Title"] = "Create Workout";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
+            <h1 class="text-center">@this.ViewData["Title"]</h1>
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="Title" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SportId"></label>
+                    <select asp-for="SportId" class="form-control">
+                        <option value="0">--- Select Sport ---</option>
+                        @foreach (var sport in Model.Sports)
+                        {
+                            <option value="@sport.Id">@sport.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="SportId" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DifficultLevel"></label>
+                    <select asp-for="DifficultLevel" class="form-control">
+                        <option value="0">--- Select Workout Difficult Level ---</option>
+                        <option value="@((int)DifficultLevel.Beginner)">@DifficultLevel.Beginner</option>
+                        <option value="@((int)DifficultLevel.Intermediate)">@DifficultLevel.Intermediate</option>
+                        <option value="@((int)DifficultLevel.Advanced)">@DifficultLevel.Advanced</option>
+                    </select>
+                    <span asp-validation-for="DifficultLevel" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BodyPartId"></label>
+                    <select asp-for="BodyPartId" class="form-control">
+                        <option value="0">--- Select Sport ---</option>
+                        @foreach (var bodyPart in Model.BodyParts)
+                        {
+                            <option value="@bodyPart.Id">@bodyPart.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="BodyPartId" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Minutes"></label>
+                    <input asp-for="Minutes" class="form-control">
+                    <span asp-validation-for="Minutes" class="text-danger small"></span>
+                </div>
+                <input type="submit" class="btn btn-info" value="@this.ViewData["Title"]" />
+            </form>
+        </div>
+    </div>
+</div>

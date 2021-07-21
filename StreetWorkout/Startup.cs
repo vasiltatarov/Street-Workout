@@ -1,3 +1,5 @@
+using StreetWorkout.Services.Workouts;
+
 namespace StreetWorkout
 {
     using Microsoft.AspNetCore.Builder;
@@ -42,6 +44,7 @@ namespace StreetWorkout
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<ITrainerService, TrainerService>();
             services.AddTransient<IStatisticsService, StatisticsService>();
+            services.AddTransient<IWorkoutService, WorkoutService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

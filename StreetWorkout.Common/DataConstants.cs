@@ -24,5 +24,7 @@
         public const int SportNameMaxLength = 30;
 
         public const int TrainingFrequencyNameMaxLength = 35;
+
+        public const int BodyPartNameMaxLength = 40;
     }
 }

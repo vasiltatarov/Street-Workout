@@ -22,6 +22,8 @@
 
         public DbSet<UserData> UserDatas { get; set; }
 
+        public DbSet<BodyPart> BodyParts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder

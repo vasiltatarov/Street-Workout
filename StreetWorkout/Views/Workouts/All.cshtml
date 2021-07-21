@@ -1,0 +1,11 @@
+﻿@model WorkoutsQueryModel
+@{
+    this.ViewData["Title"] = "Workouts";
+}
+
+@if (this.Model.IsUserTrainer)
+{
+    <div class="text-center">
+        <a asp-controller="Workouts" asp-action="Create" class="btn btn-info">Create Workout</a>
+    </div>
+}

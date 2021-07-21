@@ -22,8 +22,35 @@
             SeedSports(data);
             SeedGoals(data);
             SeedTrainingFrequencies(data);
+            SeedBodyParts(data);
 
             return app;
+        }
+
+        private static void SeedBodyParts(StreetWorkoutDbContext data)
+        {
+            if (data.BodyParts.Any())
+            {
+                return;
+            }
+
+            data.BodyParts.AddRange(new BodyPart[]
+            {
+                new () { Name = "Upper Body" },
+                new () { Name = "Lower Body" },
+                new () { Name = "Full Body" },
+                new () { Name = "Arms" },
+                new () { Name = "Biceps" },
+                new () { Name = "Triceps" },
+                new () { Name = "Chest" },
+                new () { Name = "Back" },
+                new () { Name = "Legs" },
+                new () { Name = "ABS" },
+                new () { Name = "Neck" },
+                new () { Name = "Shoulders" },
+                new () { Name = "Forearms" },
+            });
+            data.SaveChanges();
         }
 
         private static void SeedTrainingFrequencies(StreetWorkoutDbContext data)
