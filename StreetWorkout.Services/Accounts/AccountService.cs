@@ -1,12 +1,12 @@
-﻿namespace StreetWorkout.Services
+﻿namespace StreetWorkout.Services.Accounts
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     using Data;
     using Data.Models;
-    using ViewModels.Accounts;
+    using StreetWorkout.ViewModels.Accounts;
 
     public class AccountService : IAccountService
     {

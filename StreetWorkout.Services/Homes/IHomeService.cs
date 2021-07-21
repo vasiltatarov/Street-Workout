@@ -1,4 +1,4 @@
-﻿namespace StreetWorkout.Services
+﻿namespace StreetWorkout.Services.Homes
 {
     using ViewModels.Home;
 

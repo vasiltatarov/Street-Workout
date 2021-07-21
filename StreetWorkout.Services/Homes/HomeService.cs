@@ -1,7 +1,6 @@
-﻿namespace StreetWorkout.Services
+﻿namespace StreetWorkout.Services.Homes
 {
     using System.Linq;
-
     using Data;
     using Data.Models;
     using ViewModels.Home;

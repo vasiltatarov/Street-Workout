@@ -1,8 +1,7 @@
-﻿namespace StreetWorkout.Services
+﻿namespace StreetWorkout.Services.Trainings
 {
-    using System.Linq;
     using System.Collections.Generic;
-
+    using System.Linq;
     using Data;
     using Data.Models;
     using ViewModels.Trainers;

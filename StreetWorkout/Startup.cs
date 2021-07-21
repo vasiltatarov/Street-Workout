@@ -9,7 +9,9 @@ namespace StreetWorkout
 
     using Data;
     using Data.Models;
-    using Services;
+    using Services.Accounts;
+    using Services.Homes;
+    using Services.Trainings;
     using Services.Statistics;
     using Infrastructure;
 

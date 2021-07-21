@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Services;
+    using Services.Accounts;
     using Infrastructure;
     using ViewModels.Accounts;
 

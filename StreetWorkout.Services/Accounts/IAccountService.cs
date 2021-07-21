@@ -1,7 +1,7 @@
-﻿namespace StreetWorkout.Services
+﻿namespace StreetWorkout.Services.Accounts
 {
     using System.Collections.Generic;
-    using ViewModels.Accounts;
+    using StreetWorkout.ViewModels.Accounts;
 
     public interface IAccountService
     {

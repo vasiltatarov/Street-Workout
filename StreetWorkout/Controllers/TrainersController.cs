@@ -1,8 +1,7 @@
 ﻿namespace StreetWorkout.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-
-    using Services;
+    using Services.Trainings;
 
     public class TrainersController : Controller
     {
