@@ -8,8 +8,9 @@ namespace StreetWorkout
     using Microsoft.Extensions.Hosting;
 
     using Data;
-    using StreetWorkout.Data.Models;
+    using Data.Models;
     using Services;
+    using Services.Statistics;
     using Infrastructure;
 
     public class Startup
@@ -38,6 +39,7 @@ namespace StreetWorkout
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<ITrainerService, TrainerService>();
+            services.AddTransient<IStatisticsService, StatisticsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

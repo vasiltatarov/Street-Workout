@@ -3,12 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-    img {
-        height: 700px;
-        border-radius: 30px;
-    }
-</style>
+<link href="~/css/index.css" rel="stylesheet" asp-append-version="true" />
 
 <div class="text-center">
     <h1 class="display-4">
@@ -97,5 +92,17 @@ else
 <br />
 
 <div class="text-center">
-    <h1 class="display-4">Welcome Trainer</h1>
+    <button id="show-stats-btn" class="btn btn-info">Show Statistics</button>
 </div>
+
+<div id="show-stats" class="jumbotron d-none">
+    <div class="row">
+        <h2 id="total-trainers" class="col-md-4 text-center"></h2>
+        <h2 id="total-enthusiasts" class="col-md-4 text-center"></h2>
+        <h2 id="total-workouts" class="col-md-4 text-center"></h2>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/index.js" asp-append-version="true"></script>
+}
