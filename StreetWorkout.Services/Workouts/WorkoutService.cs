@@ -6,6 +6,7 @@
 
     using Data;
     using Data.Models;
+    using Data.Models.Enums;
 
     public class WorkoutService : IWorkoutService
     {
@@ -13,6 +14,22 @@
 
         public WorkoutService(StreetWorkoutDbContext data)
             => this.data = data;
+
+        public void Create(string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, string userId, int minutes, string content)
+        {
+            var workout = new Workout
+            {
+                Title = title,
+                SportId = sportId,
+                DifficultLevel = difficultLevel,
+                BodyPartId = bodyPartId,
+                UserId = userId,
+                Minutes = minutes,
+                Content = content,
+            };
+            this.data.Workouts.Add(workout);
+            this.data.SaveChanges();
+        }
 
         public WorkoutsQueryModel Workouts(string userId)
             => new()

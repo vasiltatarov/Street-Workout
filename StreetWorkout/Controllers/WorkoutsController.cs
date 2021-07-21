@@ -53,6 +53,8 @@
                 return this.View(workout);
             }
 
+            this.workouts.Create(workout.Title, workout.SportId, (DifficultLevel)workout.DifficultLevel, workout.BodyPartId, this.User.GetId(), workout.Minutes, workout.Content);
+
             return this.RedirectToAction("All");
         }
     }

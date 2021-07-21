@@ -24,6 +24,8 @@
 
         public DbSet<BodyPart> BodyParts { get; set; }
 
+        public DbSet<Workout> Workouts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
@@ -52,6 +54,27 @@
                 .HasOne(x => x.TrainingFrequency)
                 .WithMany()
                 .HasForeignKey(x => x.TrainingFrequencyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Workout>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Workouts)
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Workout>()
+                .HasOne(x => x.Sport)
+                .WithMany(x => x.Workouts)
+                .HasForeignKey(x => x.SportId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Workout>()
+                .HasOne(x => x.BodyPart)
+                .WithMany(x => x.Workouts)
+                .HasForeignKey(x => x.BodyPartId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);

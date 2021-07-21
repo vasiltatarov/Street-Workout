@@ -1,11 +1,11 @@
 ﻿namespace StreetWorkout.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
     using Microsoft.AspNetCore.Identity;
 
-    using static Common.DataConstants;
+    using static DataConstants;
 
     public class ApplicationUser : IdentityUser
     {
@@ -26,5 +26,7 @@
         public DateTime DateOfBirth { get; set; }
 
         public bool IsAccountCompleted { get; set; }
+
+        public IEnumerable<Workout> Workouts { get; set; } = new HashSet<Workout>();
     }
 }

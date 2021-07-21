@@ -47,14 +47,14 @@
                     <span asp-validation-for="BodyPartId" class="text-danger small"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Minutes"></label>
-                    <input asp-for="Minutes" class="form-control">
-                    <span asp-validation-for="Minutes" class="text-danger small"></span>
-                </div>
-                <div class="form-group">
                     <label asp-for="Content"></label>
                     <textarea asp-for="Content" rows="5" class="form-control"></textarea>
                     <span asp-validation-for="Content" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Minutes"></label>
+                    <input asp-for="Minutes" class="form-control">
+                    <span asp-validation-for="Minutes" class="text-danger small"></span>
                 </div>
                 <input type="submit" class="btn btn-info" value="@this.ViewData["Title"]" />
             </form>
