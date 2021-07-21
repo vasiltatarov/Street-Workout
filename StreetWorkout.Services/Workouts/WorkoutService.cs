@@ -40,5 +40,8 @@
 
         public bool IsValidSportId(int id)
             => this.data.Sports.Any(x => x.Id == id);
+
+        public bool IsValidBodyPartId(int id)
+            => this.data.BodyParts.Any(x => x.Id == id);
     }
 }

@@ -26,5 +26,8 @@
         public const int TrainingFrequencyNameMaxLength = 35;
 
         public const int BodyPartNameMaxLength = 40;
+
+        public const int CreateWorkoutFormModelMinutesMinValue = 5;
+        public const int CreateWorkoutFormModelMinutesMaxValue = 150;
     }
 }

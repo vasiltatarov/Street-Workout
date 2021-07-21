@@ -33,12 +33,17 @@
         {
             if (!Enum.IsDefined(typeof(DifficultLevel), workout.DifficultLevel))
             {
-                this.ModelState.AddModelError(nameof(workout.DifficultLevel), "Invalid Difficult Level");
+                this.ModelState.AddModelError(nameof(workout.DifficultLevel), "Invalid difficult level.");
             }
 
             if (!this.workouts.IsValidSportId(workout.SportId))
             {
-                this.ModelState.AddModelError(nameof(workout.SportId), "Invalid Sport");
+                this.ModelState.AddModelError(nameof(workout.SportId), "Invalid sport.");
+            }
+
+            if (!this.workouts.IsValidBodyPartId(workout.BodyPartId))
+            {
+                this.ModelState.AddModelError(nameof(workout.BodyPartId), "Invalid body part.");
             }
 
             if (!this.ModelState.IsValid)

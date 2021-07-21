@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
+        <div class="col-sm-12 offset-lg-2 col-lg-10 offset-xl-1 col-xl-10">
             <h1 class="text-center">@this.ViewData["Title"]</h1>
             <form method="post">
                 <div class="form-group">
@@ -51,8 +51,18 @@
                     <input asp-for="Minutes" class="form-control">
                     <span asp-validation-for="Minutes" class="text-danger small"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Content"></label>
+                    <textarea asp-for="Content" rows="5" class="form-control"></textarea>
+                    <span asp-validation-for="Content" class="text-danger small"></span>
+                </div>
                 <input type="submit" class="btn btn-info" value="@this.ViewData["Title"]" />
             </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/lib/tinymce/tinymce.min.js" type="text/javascript" asp-append-version="true"></script>
+    <script src="~/js/tinymce.js" type="text/javascript" asp-append-version="true"></script>
+}

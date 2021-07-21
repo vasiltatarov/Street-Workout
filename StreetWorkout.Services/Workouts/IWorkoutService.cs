@@ -12,5 +12,7 @@
         IEnumerable<BodyPartInCreateWorkoutModel> GetBodyParts();
 
         bool IsValidSportId(int id);
+
+        bool IsValidBodyPartId(int id);
     }
 }
