@@ -10,6 +10,8 @@
 
         WorkoutsQueryModel Workouts(string userId);
 
+        WorkoutDetailsServiceModel Details(int id);
+
         IEnumerable<SportInCreateWorkoutViewModel> GetSports();
 
         IEnumerable<BodyPartInCreateWorkoutViewModel> GetBodyParts();

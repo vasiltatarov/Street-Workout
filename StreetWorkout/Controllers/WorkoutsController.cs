@@ -21,6 +21,9 @@
         public IActionResult All()
             => this.View(this.workouts.Workouts(this.User.GetId()));
 
+        public IActionResult Details(int id)
+            => this.View(this.workouts.Details(id));
+
         public IActionResult Create()
             => this.View(new CreateWorkoutFormModel
             {

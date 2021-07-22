@@ -39,17 +39,34 @@
                     .Workouts
                     .Select(x => new WorkoutServiceModel
                     {
+                        Id = x.Id,
                         Title = x.Title,
                         Sport = x.Sport.Name,
                         DifficultLevel = x.DifficultLevel.ToString(),
                         BodyPart = x.BodyPart.Name,
-                        TrainerUsername = x.User.UserName,
-                        TrainerImageUrl = x.User.ImageUrl,
+                        ImageUrl = GetImage(x.BodyPart.Name),
                         Minutes = x.Minutes,
-                        Content = x.Content,
                     })
                     .ToList(),
             };
+
+        public WorkoutDetailsServiceModel Details(int id)
+            => this.data
+                .Workouts
+                .Where(x => x.Id == id)
+                .Select(x => new WorkoutDetailsServiceModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Sport = x.Sport.Name,
+                    DifficultLevel = x.DifficultLevel.ToString(),
+                    BodyPart = x.BodyPart.Name,
+                    UserUsername = x.User.UserName,
+                    UserImageUrl = x.User.ImageUrl,
+                    Minutes = x.Minutes,
+                    Content = x.Content,
+                })
+                .FirstOrDefault();
 
         public IEnumerable<SportInCreateWorkoutViewModel> GetSports()
             => this.data.Sports
@@ -74,5 +91,14 @@
 
         public bool IsValidBodyPartId(int id)
             => this.data.BodyParts.Any(x => x.Id == id);
+
+        private static string GetImage(string bodyPart)
+            => bodyPart switch
+            {
+                "Upper Body" => "https://cdna.artstation.com/p/assets/images/images/000/130/718/large/bhunesh-ramwani-uper-body.jpg?1405094263",
+                "Back" => "https://bestlifeonline.com/wp-content/uploads/2017/04/shutterstock_272601662-1024x682.jpg",
+                "Chest" => "https://i.ytimg.com/vi/lWXhih3xbVc/maxresdefault.jpg",
+                _ => "",
+            };
     }
 }
