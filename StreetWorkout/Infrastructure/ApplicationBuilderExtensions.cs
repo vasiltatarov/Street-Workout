@@ -1,4 +1,7 @@
-﻿namespace StreetWorkout.Infrastructure
+﻿using System;
+using StreetWorkout.Data.Models.Enums;
+
+namespace StreetWorkout.Infrastructure
 {
     using System.Linq;
 
@@ -7,7 +10,7 @@
     using Microsoft.AspNetCore.Builder;
 
     using Data;
-    using StreetWorkout.Data.Models;
+    using Data.Models;
 
     public static class ApplicationBuilderExtensions
     {
@@ -23,8 +26,36 @@
             SeedGoals(data);
             SeedTrainingFrequencies(data);
             SeedBodyParts(data);
+            SeedWorkouts(data); // First you have to seed user administrator and then workouts with seeded user id.
 
             return app;
+        }
+
+        private static void SeedWorkouts(StreetWorkoutDbContext data)
+        {
+            if (data.Workouts.Any())
+            {
+                return;
+            }
+
+            var rand = new Random();
+
+            for (int i = 1; i < 40; i++)
+            {
+                data.Workouts.Add(new Workout
+                {
+                    Title = "Test" + i,
+                    SportId = rand.Next(1, 13),
+                    DifficultLevel = (DifficultLevel)rand.Next(1, 4),
+                    BodyPartId = rand.Next(1, 14),
+                    UserId = "8b4ce34a-0ff8-4ae7-9ed1-a6b98b9a3a8e",
+                    Minutes = rand.Next(20, 130),
+                    Content = "Test" + i,
+                    CreatedOn = DateTime.UtcNow,
+                });
+            }
+
+            data.SaveChanges();
         }
 
         private static void SeedBodyParts(StreetWorkoutDbContext data)
