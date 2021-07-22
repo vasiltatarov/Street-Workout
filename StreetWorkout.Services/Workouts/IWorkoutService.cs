@@ -10,9 +10,9 @@
 
         WorkoutsQueryModel Workouts(string userId);
 
-        IEnumerable<SportInCreateWorkoutModel> GetSports();
+        IEnumerable<SportInCreateWorkoutViewModel> GetSports();
 
-        IEnumerable<BodyPartInCreateWorkoutModel> GetBodyParts();
+        IEnumerable<BodyPartInCreateWorkoutViewModel> GetBodyParts();
 
         bool IsValidSportId(int id);
 

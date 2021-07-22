@@ -26,8 +26,8 @@
         [Required]
         public string Content { get; set; }
 
-        public IEnumerable<SportInCreateWorkoutModel> Sports { get; set; }
+        public IEnumerable<SportInCreateWorkoutViewModel> Sports { get; set; }
 
-        public IEnumerable<BodyPartInCreateWorkoutModel> BodyParts { get; set; }
+        public IEnumerable<BodyPartInCreateWorkoutViewModel> BodyParts { get; set; }
     }
 }

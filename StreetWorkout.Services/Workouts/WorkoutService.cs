@@ -35,20 +35,34 @@
             => new()
             {
                 IsUserTrainer = this.data.Users.Find(userId).UserRole == UserRole.Trainer,
+                Workouts = this.data
+                    .Workouts
+                    .Select(x => new WorkoutServiceModel
+                    {
+                        Title = x.Title,
+                        Sport = x.Sport.Name,
+                        DifficultLevel = x.DifficultLevel.ToString(),
+                        BodyPart = x.BodyPart.Name,
+                        TrainerUsername = x.User.UserName,
+                        TrainerImageUrl = x.User.ImageUrl,
+                        Minutes = x.Minutes,
+                        Content = x.Content,
+                    })
+                    .ToList(),
             };
 
-        public IEnumerable<SportInCreateWorkoutModel> GetSports()
+        public IEnumerable<SportInCreateWorkoutViewModel> GetSports()
             => this.data.Sports
-                .Select(x => new SportInCreateWorkoutModel
+                .Select(x => new SportInCreateWorkoutViewModel
                 {
                     Id = x.Id,
                     Name = x.Name,
                 })
                 .ToList();
 
-        public IEnumerable<BodyPartInCreateWorkoutModel> GetBodyParts()
+        public IEnumerable<BodyPartInCreateWorkoutViewModel> GetBodyParts()
             => this.data.BodyParts
-                .Select(x => new BodyPartInCreateWorkoutModel
+                .Select(x => new BodyPartInCreateWorkoutViewModel
                 {
                     Id = x.Id,
                     Name = x.Name,

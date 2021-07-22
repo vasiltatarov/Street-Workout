@@ -8,4 +8,30 @@
     <div class="text-center">
         <a asp-controller="Workouts" asp-action="Create" class="btn btn-info">Create Workout</a>
     </div>
+    <br />
 }
+
+<div class="row">
+    @foreach (var workout in this.Model.Workouts)
+    {
+        <div class="col-sm-6 col-md-4 mb-4">
+            <div class="component">
+                <div class="card">
+                    <div class="card-header">
+                        <img class="card-img" src="@workout.TrainerImageUrl" alt="dog">
+                    </div>
+                    <div class="card-body">
+                        <span class="badge badge-success mb-2">@workout.Sport</span>
+                        <span class="badge badge-warning mb-2">@workout.Minutes Minutes</span>
+                        <h4 class="card-title">@workout.Title</h4>
+                        <p class="card-text">Body Part: <b>@workout.BodyPart</b></p>
+                        <p class="card-text">Difficult: <b>@workout.DifficultLevel</b></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#a" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
