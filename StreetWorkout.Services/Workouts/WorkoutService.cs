@@ -56,13 +56,17 @@
                 .Where(x => x.Id == id)
                 .Select(x => new WorkoutDetailsServiceModel
                 {
-                    Id = x.Id,
                     Title = x.Title,
                     Sport = x.Sport.Name,
                     DifficultLevel = x.DifficultLevel.ToString(),
                     BodyPart = x.BodyPart.Name,
+                    ImageUrl = GetImage(x.BodyPart.Name),
                     UserUsername = x.User.UserName,
                     UserImageUrl = x.User.ImageUrl,
+                    UserDescription = this.data
+                        .UserDatas
+                        .FirstOrDefault(ud => ud.UserId == x.UserId)
+                        .Description,
                     Minutes = x.Minutes,
                     Content = x.Content,
                 })
