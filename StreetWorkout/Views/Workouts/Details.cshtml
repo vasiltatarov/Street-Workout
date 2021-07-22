@@ -3,10 +3,9 @@
     this.ViewData["Title"] = this.Model.Title;
 }
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/details.css" rel="stylesheet" asp-append-version="true" />
 
-<div class="container pb50">
+<div class="container">
     <div class="row">
         <div class="col-md-9 mb40">
             <article>
@@ -16,49 +15,30 @@
                     <hr />
                     <ul class="post-meta list-inline">
                         <li class="list-inline-item">
-                            <i class="fa fa-user-circle-o"></i> <a href="#">@this.Model.UserUsername</a>
+                            <i class="fas fa-user-circle"></i> <a href="#">@this.Model.UserUsername</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fa fa-calendar-o"></i> <a href="#">29 June 2017</a>
+                            <i class="far fa-calendar-alt"></i> <a href="#">29 June 2017</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fa fa-tags"></i> <a href="#">@this.Model.Sport</a>
+                            <i class="fas fa-dumbbell"></i> <a href="#">@this.Model.Sport</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fa fa-tags"></i> <a href="#">@this.Model.DifficultLevel</a>
+                            <i class="fas fa-tags"></i> <a href="#">@this.Model.DifficultLevel</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fa fa-tags"></i> <a href="#">@this.Model.BodyPart</a>
+                            <i class="fas fa-child"></i> <a href="#">@this.Model.BodyPart</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fa fa-tags"></i> <a href="#">@this.Model.Minutes Minutes</a>
+                            <i class="fas fa-clock"></i> <a href="#">@this.Model.Minutes Minutes</a>
                         </li>
                     </ul>
                     <hr />
                     <h3 class="text-center">Content</h3>
                     <hr />
-                    @Html.Raw(this.Model.Content)
-                    <ul class="list-inline share-buttons">
-                        <li class="list-inline-item">Share Post:</li>
-                        <li class="list-inline-item">
-                            <a href="#" class="social-icon-sm si-dark si-colored-facebook si-gray-round">
-                                <i class="fa fa-facebook"></i>
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" class="social-icon-sm si-dark si-colored-twitter si-gray-round">
-                                <i class="fa fa-twitter"></i>
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" class="social-icon-sm si-dark si-colored-linkedin si-gray-round">
-                                <i class="fa fa-linkedin"></i>
-                                <i class="fa fa-linkedin"></i>
-                            </a>
-                        </li>
-                    </ul>
+                    <div>
+                        @Html.Raw(this.Model.Content)
+                    </div>
                     <hr class="mb40">
                     <h4 class="mb40 text-uppercase font500">About Author</h4>
                     <div class="media mb40">
