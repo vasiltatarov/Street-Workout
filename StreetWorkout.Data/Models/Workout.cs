@@ -1,7 +1,7 @@
 ﻿namespace StreetWorkout.Data.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
-
     using Enums;
 
     using static DataConstants;
@@ -33,5 +33,7 @@
 
         [Required]
         public string Content { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

@@ -15,22 +15,23 @@
                     <hr />
                     <ul class="post-meta list-inline">
                         <li class="list-inline-item">
-                            <i class="fas fa-user-circle"></i> <a href="#">@this.Model.UserUsername</a>
+                            <i class="fas fa-user-circle"></i>
+                            <a asp-controller="Accounts" asp-action="Account" asp-route-username="@this.Model.UserUsername">@this.Model.UserUsername</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="far fa-calendar-alt"></i> <a href="#">29 June 2017</a>
+                            <i class="far fa-calendar-alt"></i> <a href="javascript:void(0)">@this.Model.CreatedOn.ToString("D")</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fas fa-dumbbell"></i> <a href="#">@this.Model.Sport</a>
+                            <i class="fas fa-dumbbell"></i> <a href="javascript:void(0)">@this.Model.Sport</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fas fa-tags"></i> <a href="#">@this.Model.DifficultLevel</a>
+                            <i class="fas fa-tags"></i> <a href="javascript:void(0)">@this.Model.DifficultLevel</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fas fa-child"></i> <a href="#">@this.Model.BodyPart</a>
+                            <i class="fas fa-child"></i> <a href="javascript:void(0)">@this.Model.BodyPart</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fas fa-clock"></i> <a href="#">@this.Model.Minutes Minutes</a>
+                            <i class="fas fa-clock"></i> <a href="javascript:void(0)">@this.Model.Minutes Minutes</a>
                         </li>
                     </ul>
                     <hr />

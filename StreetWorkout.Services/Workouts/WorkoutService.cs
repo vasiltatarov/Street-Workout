@@ -1,5 +1,6 @@
 ﻿namespace StreetWorkout.Services.Workouts
 {
+    using System;
     using System.Linq;
     using System.Collections.Generic;
     using StreetWorkout.ViewModels.Workouts;
@@ -26,6 +27,7 @@
                 UserId = userId,
                 Minutes = minutes,
                 Content = content,
+                CreatedOn = DateTime.UtcNow,
             };
             this.data.Workouts.Add(workout);
             this.data.SaveChanges();
@@ -69,6 +71,7 @@
                         .Description,
                     Minutes = x.Minutes,
                     Content = x.Content,
+                    CreatedOn = x.CreatedOn,
                 })
                 .FirstOrDefault();
 

@@ -1,5 +1,7 @@
 ﻿namespace StreetWorkout.Services.Workouts
 {
+    using System;
+
     public class WorkoutDetailsServiceModel
     {
         public string Title { get; set; }
@@ -21,5 +23,7 @@
         public int Minutes { get; set; }
 
         public string Content { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }
