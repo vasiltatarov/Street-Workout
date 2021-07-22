@@ -33,12 +33,14 @@
             this.data.SaveChanges();
         }
 
-        public WorkoutsQueryModel Workouts(string userId)
+        public WorkoutsQueryModel Workouts(string userId, int currentPage)
             => new()
             {
                 IsUserTrainer = this.data.Users.Find(userId).UserRole == UserRole.Trainer,
                 Workouts = this.data
                     .Workouts
+                    .Skip((currentPage - 1) * WorkoutsQueryModel.WorkoutsPerPage)
+                    .Take(WorkoutsQueryModel.WorkoutsPerPage)
                     .Select(x => new WorkoutServiceModel
                     {
                         Id = x.Id,
@@ -50,6 +52,8 @@
                         Minutes = x.Minutes,
                     })
                     .ToList(),
+                CurrentPage = currentPage,
+                TotalWorkouts = this.data.Workouts.Count(),
             };
 
         public WorkoutDetailsServiceModel Details(int id)

@@ -18,8 +18,8 @@
         public WorkoutsController(IWorkoutService workouts)
             => this.workouts = workouts;
 
-        public IActionResult All()
-            => this.View(this.workouts.Workouts(this.User.GetId()));
+        public IActionResult All([FromQuery]WorkoutsQueryModel query)
+            => this.View(this.workouts.Workouts(this.User.GetId(), query.CurrentPage));
 
         public IActionResult Details(int id)
             => this.View(this.workouts.Details(id));
