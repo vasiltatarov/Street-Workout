@@ -269,3 +269,8 @@ Template sidebar
     width: 50%;
     height: 100px;
 }
+
+.comment-img {
+    width: 10%;
+    height: 50px;
+}

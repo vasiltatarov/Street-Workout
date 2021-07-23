@@ -139,6 +139,7 @@
                             Id = c.Id,
                             Username = c.User.UserName,
                             Content = c.Content,
+                            UserImageUrl = c.User.ImageUrl,
                         })
                         .OrderByDescending(c => c.Id)
                         .ToList(),
