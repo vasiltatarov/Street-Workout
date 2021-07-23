@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace StreetWorkout
 {
     using Microsoft.AspNetCore.Builder;
@@ -30,14 +32,17 @@ namespace StreetWorkout
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<ApplicationUser>(options =>
+            services
+                .AddDefaultIdentity<ApplicationUser>(options =>
                 {
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequiredLength = 6;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StreetWorkoutDbContext>();
+
             services.AddControllersWithViews();
 
             services.AddTransient<IAccountService, AccountService>();

@@ -1,44 +1,121 @@
-﻿using System;
-using StreetWorkout.Data.Models.Enums;
-
-namespace StreetWorkout.Infrastructure
+﻿namespace StreetWorkout.Infrastructure
 {
+    using System;
     using System.Linq;
+    using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.AspNetCore.Builder;
 
     using Data;
     using Data.Models;
+    using Data.Models.Enums;
+
+    using static WebConstants;
 
     public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder PrepareDatabase(this IApplicationBuilder app)
         {
-            using var scopedServices = app.ApplicationServices.CreateScope();
+            using var serviceScope = app.ApplicationServices.CreateScope();
+            var services = serviceScope.ServiceProvider;
 
-            var data = scopedServices.ServiceProvider.GetService<StreetWorkoutDbContext>();
-            data.Database.Migrate();
+            MigrateDatabase(services);
 
-            SeedCountries(data);
-            SeedSports(data);
-            SeedGoals(data);
-            SeedTrainingFrequencies(data);
-            SeedBodyParts(data);
-            SeedWorkouts(data); // First you have to seed user administrator and then workouts with seeded user id.
+            SeedCountries(services);
+            SeedSports(services);
+            SeedGoals(services);
+            SeedTrainingFrequencies(services);
+            SeedBodyParts(services);
+
+            SeedAdministrator(services);
+            CompleteUserAdministratorAccount(services);
+
+            SeedWorkouts(services);
 
             return app;
         }
 
-        private static void SeedWorkouts(StreetWorkoutDbContext data)
+        private static void CompleteUserAdministratorAccount(IServiceProvider services)
         {
+            var data = services.GetRequiredService<StreetWorkoutDbContext>();
+            var user = data.Users.FirstOrDefault(x => x.UserName == "Vasilkovski");
+
+            if (user == null || user.IsAccountCompleted)
+            {
+                return;
+            }
+
+            var userData = new UserData
+            {
+                UserId = user.Id,
+                SportId = 12,
+                GoalId = 6,
+                TrainingFrequencyId = 2,
+                Weight = 80,
+                Height = 180,
+                Description = "My passion is street workouts.",
+            };
+
+            user.IsAccountCompleted = true;
+            data.UserDatas.Add(userData);
+            data.SaveChanges();
+        }
+
+        private static void SeedAdministrator(IServiceProvider services)
+        {
+            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+            Task
+                .Run(async () =>
+                {
+                    if (await roleManager.RoleExistsAsync(AdministratorRoleName))
+                    {
+                        return;
+                    }
+
+                    var role = new IdentityRole { Name = AdministratorRoleName };
+                    await roleManager.CreateAsync(role);
+
+                    var user = new ApplicationUser
+                    {
+                        Email = "Vasko@gmail.com",
+                        UserName = "Vasilkovski",
+                        ImageUrl = "https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo400/2861978/2861978-1583463193883-7b2af23b7b533.jpg",
+                        CountryId = 126,
+                        City = "Chakalarovo",
+                        UserRole = UserRole.Trainer,
+                        Gender = Gender.Male,
+                        DateOfBirth = DateTime.UtcNow,
+                    };
+
+                    await userManager.CreateAsync(user, "vasko123");
+                    await userManager.AddToRoleAsync(user, AdministratorRoleName);
+                })
+                .GetAwaiter()
+                .GetResult();
+        }
+
+        private static void MigrateDatabase(IServiceProvider services)
+        {
+            var data = services.GetRequiredService<StreetWorkoutDbContext>();
+            data.Database.Migrate();
+        }
+
+        private static void SeedWorkouts(IServiceProvider services)
+        {
+            var data = services.GetRequiredService<StreetWorkoutDbContext>();
+
             if (data.Workouts.Any())
             {
                 return;
             }
 
             var rand = new Random();
+            var userId = data.UserRoles.First().UserId;
 
             for (int i = 1; i < 40; i++)
             {
@@ -48,7 +125,7 @@ namespace StreetWorkout.Infrastructure
                     SportId = rand.Next(1, 13),
                     DifficultLevel = (DifficultLevel)rand.Next(1, 4),
                     BodyPartId = rand.Next(1, 14),
-                    UserId = "8b4ce34a-0ff8-4ae7-9ed1-a6b98b9a3a8e",
+                    UserId = userId,
                     Minutes = rand.Next(20, 130),
                     Content = "Test" + i,
                     CreatedOn = DateTime.UtcNow,
@@ -58,8 +135,9 @@ namespace StreetWorkout.Infrastructure
             data.SaveChanges();
         }
 
-        private static void SeedBodyParts(StreetWorkoutDbContext data)
+        private static void SeedBodyParts(IServiceProvider services)
         {
+            var data = services.GetRequiredService<StreetWorkoutDbContext>();
             if (data.BodyParts.Any())
             {
                 return;
@@ -84,8 +162,10 @@ namespace StreetWorkout.Infrastructure
             data.SaveChanges();
         }
 
-        private static void SeedTrainingFrequencies(StreetWorkoutDbContext data)
+        private static void SeedTrainingFrequencies(IServiceProvider services)
         {
+            var data = services.GetRequiredService<StreetWorkoutDbContext>();
+
             if (data.TrainingFrequencies.Any())
             {
                 return;
@@ -102,8 +182,10 @@ namespace StreetWorkout.Infrastructure
             data.SaveChanges();
         }
 
-        private static void SeedGoals(StreetWorkoutDbContext data)
+        private static void SeedGoals(IServiceProvider services)
         {
+            var data = services.GetRequiredService<StreetWorkoutDbContext>();
+
             if (data.Goals.Any())
             {
                 return;
@@ -123,8 +205,10 @@ namespace StreetWorkout.Infrastructure
             data.SaveChanges();
         }
 
-        private static void SeedSports(StreetWorkoutDbContext data)
+        private static void SeedSports(IServiceProvider services)
         {
+            var data = services.GetRequiredService<StreetWorkoutDbContext>();
+
             if (data.Sports.Any())
             {
                 return;
@@ -149,8 +233,10 @@ namespace StreetWorkout.Infrastructure
             data.SaveChanges();
         }
 
-        private static void SeedCountries(StreetWorkoutDbContext data)
+        private static void SeedCountries(IServiceProvider services)
         {
+            var data = services.GetRequiredService<StreetWorkoutDbContext>();
+
             if (data.Countries.Any())
             {
                 return;

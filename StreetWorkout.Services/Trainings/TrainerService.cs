@@ -14,7 +14,8 @@
             => this.data = data;
 
         public IEnumerable<TrainerViewModel> All()
-            => this.data.UserDatas
+            => this.data
+                .UserDatas
                 .Where(x => x.User.UserRole == UserRole.Trainer)
                 .Select(x => new TrainerViewModel
                 {
