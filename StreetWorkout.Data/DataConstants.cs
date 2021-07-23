@@ -23,5 +23,7 @@
         public const int CreateWorkoutFormModelMinutesMaxValue = 150;
         
         public const int WorkoutTitleMaxLength = 200;
+
+        public const int CommentContentMaxLength = 1000;
     }
 }

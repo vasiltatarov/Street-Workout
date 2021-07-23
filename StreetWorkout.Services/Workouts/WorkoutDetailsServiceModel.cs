@@ -5,6 +5,8 @@
 
     public class WorkoutDetailsServiceModel
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         public string Sport { get; set; }
@@ -30,5 +32,7 @@
         public IEnumerable<string> Sports { get; set; }
 
         public IEnumerable<WorkoutDetailsLatestTraining> LatestWorkouts { get; set; }
+
+        public IEnumerable<CommentInDetailsServiceModel> Comments { get; set; }
     }
 }

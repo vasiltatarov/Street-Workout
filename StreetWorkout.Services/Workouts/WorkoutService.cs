@@ -100,6 +100,7 @@
                 .Where(x => x.Id == id)
                 .Select(x => new WorkoutDetailsServiceModel
                 {
+                    Id = x.Id,
                     Title = x.Title,
                     Sport = x.Sport.Name,
                     DifficultLevel = x.DifficultLevel.ToString(),
@@ -130,6 +131,16 @@
                             ImageUrl = GetImage(w.BodyPart.Name),
                             CreatedOn = w.CreatedOn,
                         })
+                        .ToList(),
+                    Comments = this.data
+                        .Comments
+                        .Select(c => new CommentInDetailsServiceModel
+                        {
+                            Id = c.Id,
+                            Username = c.User.UserName,
+                            Content = c.Content,
+                        })
+                        .OrderByDescending(c => c.Id)
                         .ToList(),
                 })
                 .FirstOrDefault();
