@@ -264,3 +264,8 @@ Template sidebar
     width: 20%;
     height: 100px;
 }
+
+.latest-workout-img {
+    width: 50%;
+    height: 100px;
+}

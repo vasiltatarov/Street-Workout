@@ -114,6 +114,23 @@
                     Minutes = x.Minutes,
                     Content = x.Content,
                     CreatedOn = x.CreatedOn,
+                    Sports = this.data
+                        .Sports
+                        .Select(s => s.Name)
+                        .OrderBy(s => s)
+                        .ToList(),
+                    LatestWorkouts = this.data
+                        .Workouts
+                        .OrderByDescending(w => w.Id)
+                        .Take(3)
+                        .Select(w => new WorkoutDetailsLatestTraining
+                        {
+                            Id = w.Id,
+                            Title = w.Title,
+                            ImageUrl = GetImage(w.BodyPart.Name),
+                            CreatedOn = w.CreatedOn,
+                        })
+                        .ToList(),
                 })
                 .FirstOrDefault();
 

@@ -1,6 +1,7 @@
 ﻿namespace StreetWorkout.Services.Workouts
 {
     using System;
+    using System.Collections.Generic;
 
     public class WorkoutDetailsServiceModel
     {
@@ -25,5 +26,9 @@
         public string Content { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public IEnumerable<string> Sports { get; set; }
+
+        public IEnumerable<WorkoutDetailsLatestTraining> LatestWorkouts { get; set; }
     }
 }
