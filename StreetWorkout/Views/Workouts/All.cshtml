@@ -17,6 +17,37 @@
     <br />
 }
 
+<form>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="Sport"></label>
+            <select asp-for="Sport" class="form-control">
+                <option value="">Search by Sport</option>
+                @foreach (var sport in Model.Sports)
+                {
+                    <option value="@sport">@sport</option>
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="BodyPart"></label>
+            <select asp-for="BodyPart" class="form-control">
+                <option value="">Search by Body Part</option>
+                @foreach (var bodyPart in Model.BodyParts)
+                {
+                    <option value="@bodyPart">@bodyPart</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchTerms"></label>
+        <input asp-for="SearchTerms" class="form-control" placeholder="Search by Title and Content.">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<hr/>
+
 <div class="row">
     @foreach (var workout in this.Model.Workouts)
     {
@@ -41,6 +72,7 @@
         </div>
     }
 </div>
+<hr/>
 
 @{
     var previousPage = Model.CurrentPage - 1;
@@ -57,6 +89,9 @@
             <a class="page-link"
                asp-controller="Workouts"
                asp-action="All"
+               asp-route-sport="@this.Model.Sport"
+               asp-route-bodyPart="@this.Model.BodyPart"
+               asp-route-searchTerms="@this.Model.SearchTerms"
                asp-route-currentPage="@previousPage">
                 Previous
             </a>
@@ -67,6 +102,9 @@
                 <a class="page-link"
                    asp-controller="Workouts"
                    asp-action="All"
+                   asp-route-sport="@this.Model.Sport"
+                   asp-route-bodyPart="@this.Model.BodyPart"
+                   asp-route-searchTerms="@this.Model.SearchTerms"
                    asp-route-currentPage="@(Model.CurrentPage - 2)">
                     @(Model.CurrentPage - 2)
                 </a>
@@ -78,6 +116,9 @@
                 <a class="page-link"
                    asp-controller="Workouts"
                    asp-action="All"
+                   asp-route-sport="@this.Model.Sport"
+                   asp-route-bodyPart="@this.Model.BodyPart"
+                   asp-route-searchTerms="@this.Model.SearchTerms"
                    asp-route-currentPage="@(Model.CurrentPage - 1)">
                     @(Model.CurrentPage - 1)
                 </a>
@@ -87,6 +128,9 @@
             <a class="page-link"
                asp-controller="Workouts"
                asp-action="All"
+               asp-route-sport="@this.Model.Sport"
+               asp-route-bodyPart="@this.Model.BodyPart"
+               asp-route-searchTerms="@this.Model.SearchTerms"
                asp-route-currentPage="@Model.CurrentPage">
                 @Model.CurrentPage
             </a>
@@ -97,6 +141,9 @@
                 <a class="page-link"
                    asp-controller="Workouts"
                    asp-action="All"
+                   asp-route-sport="@this.Model.Sport"
+                   asp-route-bodyPart="@this.Model.BodyPart"
+                   asp-route-searchTerms="@this.Model.SearchTerms"
                    asp-route-currentPage="@(Model.CurrentPage + 1)">
                     @(Model.CurrentPage + 1)
                 </a>
@@ -108,6 +155,9 @@
                 <a class="page-link"
                    asp-controller="Workouts"
                    asp-action="All"
+                   asp-route-sport="@this.Model.Sport"
+                   asp-route-bodyPart="@this.Model.BodyPart"
+                   asp-route-searchTerms="@this.Model.SearchTerms"
                    asp-route-currentPage="@(Model.CurrentPage + 2)">
                     @(Model.CurrentPage + 2)
                 </a>
@@ -117,6 +167,9 @@
             <a class="page-link"
                asp-controller="Workouts"
                asp-action="All"
+               asp-route-sport="@this.Model.Sport"
+               asp-route-bodyPart="@this.Model.BodyPart"
+               asp-route-searchTerms="@this.Model.SearchTerms"
                asp-route-currentPage="@(Model.CurrentPage + 1)">
                 Next
             </a>

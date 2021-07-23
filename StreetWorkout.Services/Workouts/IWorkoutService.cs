@@ -8,7 +8,7 @@
     {
         void Create(string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, string userId, int minutes, string content);
 
-        WorkoutsQueryModel Workouts(string userId, int currentPage);
+        WorkoutsQueryModel Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage);
 
         WorkoutDetailsServiceModel Details(int id);
 

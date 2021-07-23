@@ -19,7 +19,7 @@
             => this.workouts = workouts;
 
         public IActionResult All([FromQuery]WorkoutsQueryModel query)
-            => this.View(this.workouts.Workouts(this.User.GetId(), query.CurrentPage));
+            => this.View(this.workouts.Workouts(this.User.GetId(), query.Sport, query.BodyPart, query.SearchTerms, query.CurrentPage));
 
         public IActionResult Details(int id)
             => this.View(this.workouts.Details(id));

@@ -33,28 +33,66 @@
             this.data.SaveChanges();
         }
 
-        public WorkoutsQueryModel Workouts(string userId, int currentPage)
-            => new()
+        public WorkoutsQueryModel Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage)
+        {
+            var workoutsQuery = this.data.Workouts.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(sport))
+            {
+                workoutsQuery = workoutsQuery.Where(x => x.Sport.Name.ToLower() == sport.ToLower());
+            }
+
+            if (!string.IsNullOrWhiteSpace(bodyPart))
+            {
+                workoutsQuery = workoutsQuery.Where(x => x.BodyPart.Name.ToLower() == bodyPart.ToLower());
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchTerms))
+            {
+                workoutsQuery = workoutsQuery
+                    .Where(x => x.Title.ToLower().Contains(searchTerms.ToLower()) || 
+                                x.Content.ToLower().Contains(searchTerms.ToLower()));
+            }
+
+            var workouts = workoutsQuery
+                .Skip((currentPage - 1) * WorkoutsQueryModel.WorkoutsPerPage)
+                .Take(WorkoutsQueryModel.WorkoutsPerPage)
+                .Select(x => new WorkoutServiceModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Sport = x.Sport.Name,
+                    DifficultLevel = x.DifficultLevel.ToString(),
+                    BodyPart = x.BodyPart.Name,
+                    ImageUrl = GetImage(x.BodyPart.Name),
+                    Minutes = x.Minutes,
+                });
+
+            var sports = this.data
+                .Sports
+                .Select(x => x.Name)
+                .ToList();
+
+            var bodyParts = this.data
+                .BodyParts
+                .Select(x => x.Name)
+                .ToList();
+
+            var totalWorkouts = workoutsQuery.Count();
+
+            return new()
             {
                 IsUserTrainer = this.data.Users.Find(userId).UserRole == UserRole.Trainer,
-                Workouts = this.data
-                    .Workouts
-                    .Skip((currentPage - 1) * WorkoutsQueryModel.WorkoutsPerPage)
-                    .Take(WorkoutsQueryModel.WorkoutsPerPage)
-                    .Select(x => new WorkoutServiceModel
-                    {
-                        Id = x.Id,
-                        Title = x.Title,
-                        Sport = x.Sport.Name,
-                        DifficultLevel = x.DifficultLevel.ToString(),
-                        BodyPart = x.BodyPart.Name,
-                        ImageUrl = GetImage(x.BodyPart.Name),
-                        Minutes = x.Minutes,
-                    })
-                    .ToList(),
+                Workouts = workouts,
                 CurrentPage = currentPage,
-                TotalWorkouts = this.data.Workouts.Count(),
+                TotalWorkouts = totalWorkouts,
+                Sport = sport,
+                BodyPart = bodyPart,
+                Sports = sports,
+                BodyParts = bodyParts,
+                SearchTerms = searchTerms,
             };
+        }
 
         public WorkoutDetailsServiceModel Details(int id)
             => this.data
