@@ -28,5 +28,7 @@
         public bool IsAccountCompleted { get; set; }
 
         public IEnumerable<Workout> Workouts { get; set; } = new HashSet<Workout>();
+
+        public IEnumerable<Vote> Votes { get; set; } = new HashSet<Vote>();
     }
 }

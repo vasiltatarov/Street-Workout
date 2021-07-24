@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StreetWorkout.Data;
 
 namespace StreetWorkout.Data.Migrations
 {
     [DbContext(typeof(StreetWorkoutDbContext))]
-    partial class StreetWorkoutDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210724112206_AddVoteModel")]
+    partial class AddVoteModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -416,14 +418,9 @@ namespace StreetWorkout.Data.Migrations
                     b.Property<byte>("Value")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("VotedUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("VotedUserId");
 
                     b.ToTable("Votes");
                 });
@@ -595,13 +592,7 @@ namespace StreetWorkout.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("StreetWorkout.Data.Models.ApplicationUser", "VotedUser")
-                        .WithMany()
-                        .HasForeignKey("VotedUserId");
-
                     b.Navigation("User");
-
-                    b.Navigation("VotedUser");
                 });
 
             modelBuilder.Entity("StreetWorkout.Data.Models.Workout", b =>

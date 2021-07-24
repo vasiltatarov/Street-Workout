@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-
 namespace StreetWorkout
 {
     using Microsoft.AspNetCore.Builder;
@@ -8,6 +6,7 @@ namespace StreetWorkout
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.AspNetCore.Identity;
 
     using Data;
     using Data.Models;
@@ -18,6 +17,7 @@ namespace StreetWorkout
     using Infrastructure;
     using Services.Comments;
     using Services.Workouts;
+    using Services.Votes;
 
     public class Startup
     {
@@ -43,6 +43,11 @@ namespace StreetWorkout
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StreetWorkoutDbContext>();
 
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
+
             services.AddControllersWithViews();
 
             services.AddTransient<IAccountService, AccountService>();
@@ -51,6 +56,7 @@ namespace StreetWorkout
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<IWorkoutService, WorkoutService>();
             services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<IVoteService, VoteService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

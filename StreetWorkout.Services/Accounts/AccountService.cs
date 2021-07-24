@@ -57,6 +57,7 @@
                 .Where(x => x.UserName == username)
                 .Select(x => new AccountViewModel
                 {
+                    Id = x.Id,
                     IsTrainer = x.UserRole == UserRole.Trainer,
                     IsAccountComplete = x.IsAccountCompleted,
                     Username = x.UserName,
@@ -65,6 +66,9 @@
                     Country = x.Country.Name,
                     ImageUrl = x.ImageUrl,
                     Gender = x.Gender.ToString(),
+                    VotesAverageValue = this.data.Votes.Any(v => v.UserId == x.Id)
+                        ? this.data.Votes.Where(v => v.UserId == x.Id).Average(v => v.Value)
+                        : 0,
                     Data = !x.IsAccountCompleted
                         ? null
                         : this.data

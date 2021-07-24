@@ -28,6 +28,8 @@
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<Vote> Votes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
@@ -77,6 +79,13 @@
                 .HasOne(x => x.BodyPart)
                 .WithMany(x => x.Workouts)
                 .HasForeignKey(x => x.BodyPartId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Vote>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Votes)
+                .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
