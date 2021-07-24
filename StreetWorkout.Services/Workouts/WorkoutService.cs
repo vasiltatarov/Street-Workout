@@ -55,6 +55,7 @@
             }
 
             var workouts = workoutsQuery
+                .OrderByDescending(x => x.Id)
                 .Skip((currentPage - 1) * WorkoutsQueryModel.WorkoutsPerPage)
                 .Take(WorkoutsQueryModel.WorkoutsPerPage)
                 .Select(x => new WorkoutServiceModel
@@ -134,6 +135,7 @@
                         .ToList(),
                     Comments = this.data
                         .Comments
+                        .Where(c => c.WorkoutId == id)
                         .Select(c => new CommentInDetailsServiceModel
                         {
                             Id = c.Id,
