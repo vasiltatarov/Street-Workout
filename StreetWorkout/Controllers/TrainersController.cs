@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Services.Trainings;
+    using ViewModels.Trainers;
 
     public class TrainersController : Controller
     {
@@ -10,7 +11,7 @@
         public TrainersController(ITrainerService trainerService)
             => this.trainerService = trainerService;
 
-        public IActionResult All()
-            => this.View(this.trainerService.All());
+        public IActionResult All([FromQuery]AllTrainersViewModel model)
+            => this.View(this.trainerService.All(model.CurrentPage));
     }
 }

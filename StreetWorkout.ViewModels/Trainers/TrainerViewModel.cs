@@ -10,6 +10,6 @@
 
         public string Goal { get; set; }
 
-        public string TrainingFrequency { get; set; }
+        public double VotesAverageValue { get; set; }
     }
 }

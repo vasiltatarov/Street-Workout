@@ -1,6 +1,5 @@
 ﻿namespace StreetWorkout.Services.Trainings
 {
-    using System.Collections.Generic;
     using System.Linq;
     using Data;
     using Data.Models;
@@ -13,18 +12,34 @@
         public TrainerService(StreetWorkoutDbContext data)
             => this.data = data;
 
-        public IEnumerable<TrainerViewModel> All()
-            => this.data
-                .UserDatas
-                .Where(x => x.User.UserRole == UserRole.Trainer)
-                .Select(x => new TrainerViewModel
-                {
-                    Username = x.User.UserName,
-                    ImageUrl = x.User.ImageUrl,
-                    Sport = x.Sport.Name,
-                    Goal = x.Goal.Name,
-                    TrainingFrequency = x.TrainingFrequency.Name,
-                })
-                .ToList();
+        public AllTrainersViewModel All(int currentPage)
+            => new()
+            {
+                Trainers = this.data
+                    .UserDatas
+                    .Where(x => x.User.UserRole == UserRole.Trainer)
+                    .Skip((currentPage - 1) * AllTrainersViewModel.TrainersPerPage)
+                    .Take(AllTrainersViewModel.TrainersPerPage)
+                    .Select(x => new TrainerViewModel
+                    {
+                        Username = x.User.UserName,
+                        ImageUrl = x.User.ImageUrl,
+                        Sport = x.Sport.Name,
+                        Goal = x.Goal.Name,
+                        VotesAverageValue = this.data
+                            .Votes
+                            .Any(v => v.UserId == x.UserId)
+                            ? this.data
+                            .Votes
+                            .Where(v => v.UserId == x.UserId)
+                            .Average(v => v.Value)
+                            : 0,
+                    })
+                    .ToList(),
+                TotalTrainers = this.data
+                    .UserDatas
+                    .Count(x => x.User.UserRole == UserRole.Trainer),
+                CurrentPage = currentPage,
+            };
     }
 }
