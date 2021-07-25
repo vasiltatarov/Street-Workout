@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace StreetWorkout.Data.Migrations
+﻿namespace StreetWorkout.Data.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddCommentModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

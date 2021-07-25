@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace StreetWorkout.Data.Migrations
+﻿namespace StreetWorkout.Data.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class CreateDbTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

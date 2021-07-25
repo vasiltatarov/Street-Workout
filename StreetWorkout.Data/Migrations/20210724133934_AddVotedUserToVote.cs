@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace StreetWorkout.Data.Migrations
+﻿namespace StreetWorkout.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddVotedUserToVote : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
