@@ -3,12 +3,6 @@
     this.ViewData["Title"] = this.Model.Username;
 }
 
-<style>
-    .checked {
-        color: orange;
-    }
-</style>
-
 <div class="container">
     @if (this.User.Identity.Name == this.Model.Username)
     {
@@ -41,7 +35,7 @@
         <h2>Star Rating</h2>
         for (int i = 1; i <= 5; i++)
         {
-            <span class="fa fa-star @(isStarChecked >= i ? "checked" : "")" data-vote="@i"></span>   
+            <span class="fa fa-star @(isStarChecked >= i ? "star-checked" : "")" data-vote="@i"></span>   
         }
         <span>&nbsp; <b id="avg-vote-rating">@Model.VotesAverageValue.ToString("F1")</b></span><span> / <b>5</b></span>
         <hr />

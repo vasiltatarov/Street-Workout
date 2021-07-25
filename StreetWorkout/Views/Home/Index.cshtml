@@ -3,8 +3,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<link href="~/css/index.css" rel="stylesheet" asp-append-version="true" />
-
 @if (this.Model.IsAccountCompleted)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -39,7 +37,7 @@ else
             <div class="component">
                 <div class="card">
                     <div class="card-header">
-                        <img class="card-img home-img" src="@user.ImageUrl" alt="@user.Username">
+                        <img class="card-img card-home-img" src="@user.ImageUrl" alt="@user.Username">
                     </div>
                     <div class="card-body">
                         <span class="badge badge-warning mb-2">@user.Sport</span>
@@ -63,7 +61,7 @@ else
             <div class="component">
                 <div class="card">
                     <div class="card-header">
-                        <img class="card-img home-img" src="@workout.ImageUrl" alt="dog">
+                        <img class="card-img card-home-img" src="@workout.ImageUrl" alt="dog">
                     </div>
                     <div class="card-body">
                         <span class="badge badge-success mb-2">@workout.Sport</span>
