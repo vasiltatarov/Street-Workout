@@ -352,3 +352,4 @@ MigrationBackup/
 StreetWorkout/wwwroot/img
 StreetWorkout/wwwroot/lib/tinymce
 StreetWorkout/wwwroot/lib/fontawesome
+/StreetWorkout/WebKeys.cs

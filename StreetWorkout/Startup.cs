@@ -49,12 +49,15 @@ namespace StreetWorkout
                 options.HeaderName = "X-CSRF-TOKEN";
             });
 
+            var s = WebKeys.FacebookAuthenticationAppId;
+
+
             services
                 .AddAuthentication()
                 .AddFacebook(options =>
             {
-                options.AppId = Configuration["FacebookAuthentication:AppId"];
-                options.AppSecret = Configuration["FacebookAuthentication:AppSecret"];
+                options.AppId = WebKeys.FacebookAuthenticationAppId;
+                options.AppSecret = WebKeys.FacebookAuthenticationAppSecret;
             });
 
             services.AddControllersWithViews();
