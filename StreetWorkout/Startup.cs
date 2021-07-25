@@ -43,9 +43,18 @@ namespace StreetWorkout
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StreetWorkoutDbContext>();
 
-            services.AddAntiforgery(options =>
+            services
+                .AddAntiforgery(options =>
             {
                 options.HeaderName = "X-CSRF-TOKEN";
+            });
+
+            services
+                .AddAuthentication()
+                .AddFacebook(options =>
+            {
+                options.AppId = Configuration["FacebookAuthentication:AppId"];
+                options.AppSecret = Configuration["FacebookAuthentication:AppSecret"];
             });
 
             services.AddControllersWithViews();
