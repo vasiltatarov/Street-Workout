@@ -16,7 +16,7 @@
             {
                 TotalTrainers = this.data.Users.Count(x => x.UserRole == UserRole.Trainer),
                 TotalEnthusiasts = this.data.Users.Count(x => x.UserRole == UserRole.Enthusiast),
-                TotalWorkouts = 2,
+                TotalWorkouts = this.data.Workouts.Count(),
             };
     }
 }
