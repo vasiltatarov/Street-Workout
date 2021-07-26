@@ -3,6 +3,7 @@
     using System;
     using Data;
     using Data.Models;
+    using StreetWorkout.ViewModels.Comments;
 
     public class CommentService : ICommentService
     {
@@ -11,7 +12,7 @@
         public CommentService(StreetWorkoutDbContext data)
             => this.data = data;
 
-        public void Create(string content, string userId, int workoutId)
+        public CommentResponseModel Add(string content, string userId, int workoutId)
         {
             var comment = new Comment
             {
@@ -20,8 +21,18 @@
                 WorkoutId = workoutId,
                 CreatedOn = DateTime.UtcNow,
             };
+
             this.data.Comments.Add(comment);
             this.data.SaveChanges();
+
+            var user = this.data.Users.Find(userId);
+
+            return new CommentResponseModel
+            {
+                UserImageUrl = user.ImageUrl,
+                UserUsername = user.UserName,
+                Content = content,
+            };
         }
     }
 }
