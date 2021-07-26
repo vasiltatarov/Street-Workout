@@ -148,9 +148,9 @@
                 })
                 .FirstOrDefault();
 
-        public IEnumerable<SportInCreateWorkoutViewModel> GetSports()
+        public IEnumerable<SportViewModel> GetSports()
             => this.data.Sports
-                .Select(x => new SportInCreateWorkoutViewModel
+                .Select(x => new SportViewModel
                 {
                     Id = x.Id,
                     Name = x.Name,

@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Workouts;
 
     using static Common.DataConstants;
 
@@ -27,7 +28,7 @@
         [StringLength(DescriptionMaxLength, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = DescriptionMinLength)]
         public string Description { get; set; }
 
-        public IEnumerable<SportInAccountViewModel> Sports { get; set; }
+        public IEnumerable<SportViewModel> Sports { get; set; }
 
         public IEnumerable<GoalInAccountViewModel> Goals { get; set; }
 

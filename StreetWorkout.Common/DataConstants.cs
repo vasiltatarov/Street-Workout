@@ -33,4 +33,19 @@
         public const int WorkoutTitleMinLength = 10;
         public const int WorkoutTitleMaxLength = 200;
     }
+
+    public class GroupWorkoutConstants
+    {
+        public const int TitleMinLength = 10;
+        public const int TitleMaxLength = 200;
+
+        public const int AddressMinLength = 10;
+        public const int AddressMaxLength = 150;
+
+        public const int MaximumParticipantsMinValue = 10;
+        public const int MaximumParticipantsMaxValue = 500;
+
+        public const int PricePerPersonMinValue = 5;
+        public const int PricePerPersonMaxValue = 100;
+    }
 }

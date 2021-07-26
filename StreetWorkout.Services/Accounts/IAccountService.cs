@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using StreetWorkout.ViewModels.Accounts;
-
+    using StreetWorkout.ViewModels.Workouts;
     public interface IAccountService
     {
         bool IsUserAccountComplete(string userId);
@@ -19,7 +19,7 @@
 
         AccountViewModel GetAccount(string username);
 
-        IEnumerable<SportInAccountViewModel> GetSportsInAccountFormModel();
+        IEnumerable<SportViewModel> GetSportsInAccountFormModel();
 
         IEnumerable<GoalInAccountViewModel> GetGoalsInAccountFormModel();
 

@@ -30,6 +30,8 @@
 
         public DbSet<Vote> Votes { get; set; }
 
+        public DbSet<GroupWorkout> GroupWorkouts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
@@ -86,6 +88,20 @@
                 .HasOne(x => x.User)
                 .WithMany(x => x.Votes)
                 .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<GroupWorkout>()
+                .HasOne(x => x.Sport)
+                .WithMany(x => x.GroupWorkouts)
+                .HasForeignKey(x => x.SportId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<GroupWorkout>()
+                .HasOne(x => x.Trainer)
+                .WithMany(x => x.GroupWorkouts)
+                .HasForeignKey(x => x.TrainerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);

@@ -12,7 +12,7 @@
 
         WorkoutDetailsServiceModel Details(int id);
 
-        IEnumerable<SportInCreateWorkoutViewModel> GetSports();
+        IEnumerable<SportViewModel> GetSports();
 
         IEnumerable<BodyPartInCreateWorkoutViewModel> GetBodyParts();
 

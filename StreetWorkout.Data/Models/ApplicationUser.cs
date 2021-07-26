@@ -30,5 +30,7 @@
         public IEnumerable<Workout> Workouts { get; set; } = new HashSet<Workout>();
 
         public IEnumerable<Vote> Votes { get; set; } = new HashSet<Vote>();
+
+        public IEnumerable<GroupWorkout> GroupWorkouts { get; set; } = new HashSet<GroupWorkout>();
     }
 }

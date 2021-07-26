@@ -1,0 +1,66 @@
+﻿@model GroupWorkoutFormModel
+@{
+    this.ViewData["Title"] = "Create New Group Workout";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-10 offset-xl-1 col-xl-10">
+            <h1 class="text-center">@this.ViewData["Title"]</h1>
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="Title" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SportId"></label>
+                    <select asp-for="SportId" class="form-control">
+                        <option value="0">--- Select Sport ---</option>
+                        @foreach (var sport in Model.Sports)
+                        {
+                            <option value="@sport.Id">@sport.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="SportId" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address"></label>
+                    <input asp-for="Address" class="form-control" placeholder="Example: Plovdiv, Arena Armeec...">
+                    <span asp-validation-for="Address" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartOn"></label>
+                    <input asp-for="StartOn" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="StartOn" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndOn"></label>
+                    <input asp-for="EndOn" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="EndOn" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaximumParticipants"></label>
+                    <input asp-for="MaximumParticipants" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="MaximumParticipants" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PricePerPerson"></label>
+                    <input asp-for="PricePerPerson" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="PricePerPerson" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Content"></label>
+                    <textarea asp-for="Content" rows="5" class="form-control"></textarea>
+                    <span asp-validation-for="Content" class="text-danger small"></span>
+                </div>
+                <input type="submit" class="btn btn-info" value="@this.ViewData["Title"]" />
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/tinymce/tinymce.min.js" type="text/javascript" asp-append-version="true"></script>
+    <script src="~/js/tinymce.js" type="text/javascript" asp-append-version="true"></script>
+}

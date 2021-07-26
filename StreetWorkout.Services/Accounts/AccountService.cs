@@ -7,6 +7,7 @@
     using Data;
     using Data.Models;
     using StreetWorkout.ViewModels.Accounts;
+    using StreetWorkout.ViewModels.Workouts;
 
     public class AccountService : IAccountService
     {
@@ -87,9 +88,9 @@
                 })
                 .FirstOrDefault();
 
-        public IEnumerable<SportInAccountViewModel> GetSportsInAccountFormModel()
+        public IEnumerable<SportViewModel> GetSportsInAccountFormModel()
             => this.data.Sports
-                .Select(x => new SportInAccountViewModel
+                .Select(x => new SportViewModel()
                 {
                     Id = x.Id,
                     Name = x.Name

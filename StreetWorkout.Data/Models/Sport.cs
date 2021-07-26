@@ -14,5 +14,7 @@
         public string Name { get; set; }
 
         public IEnumerable<Workout> Workouts { get; set; } = new HashSet<Workout>();
+
+        public IEnumerable<GroupWorkout> GroupWorkouts { get; set; } = new HashSet<GroupWorkout>();
     }
 }

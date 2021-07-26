@@ -1,6 +1,6 @@
 ﻿namespace StreetWorkout.ViewModels.Workouts
 {
-    public class SportInCreateWorkoutViewModel
+    public class SportViewModel
     {
         public int Id { get; set; }
 
