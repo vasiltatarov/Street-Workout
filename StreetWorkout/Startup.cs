@@ -18,6 +18,7 @@ namespace StreetWorkout
     using Services.Comments;
     using Services.Workouts;
     using Services.Votes;
+    using Services.GroupWorkouts;
 
     public class Startup
     {
@@ -66,6 +67,7 @@ namespace StreetWorkout
             services.AddTransient<IWorkoutService, WorkoutService>();
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IVoteService, VoteService>();
+            services.AddTransient<IGroupWorkoutService, GroupWorkoutService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

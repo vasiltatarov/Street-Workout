@@ -7,14 +7,19 @@
     using Infrastructure;
     using Services.Workouts;
     using ViewModels.GroupWorkouts;
+    using Services.GroupWorkouts;
 
     [Authorize]
     public class GroupWorkoutsController : Controller
     {
         private readonly IWorkoutService workouts;
+        private readonly IGroupWorkoutService groupWorkouts;
 
-        public GroupWorkoutsController(IWorkoutService workouts)
-            => this.workouts = workouts;
+        public GroupWorkoutsController(IWorkoutService workouts, IGroupWorkoutService groupWorkouts)
+        {
+            this.workouts = workouts;
+            this.groupWorkouts = groupWorkouts;
+        }
 
         public IActionResult All()
             => this.View();
@@ -48,9 +53,8 @@
                 input.Sports = this.workouts.GetSports();
                 return this.View(input);
             }
-
-            var userId = this.User.GetId();
-            // add 
+            
+            this.groupWorkouts.Create(input.Title, input.SportId, input.Address, input.StartOn, input.EndOn, input.MaximumParticipants, input.PricePerPerson, this.User.GetId(), input.Content);
 
             return this.RedirectToAction("All");
         }
