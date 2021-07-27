@@ -1,0 +1,105 @@
+﻿@model GroupWorkoutDetailsModel
+@{
+    this.ViewData["Title"] = this.Model.Title;
+}
+
+<link href="~/css/details.css" rel="stylesheet" asp-append-version="true" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 mb40">
+            <article>
+                <img src="@this.Model.ImageUrl" alt="" class="img-fluid mb30">
+                <div class="post-content">
+                    <h3 class="text-center">@this.ViewData["Title"]</h3>
+                    <hr />
+                    <ul class="post-meta list-inline">
+                        <li class="list-inline-item">
+                            <i class="fas fa-user-circle"></i>
+                            <a asp-controller="Accounts" asp-action="Account" asp-route-username="@this.Model.TrainerUsername">@this.Model.TrainerUsername</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="far fa-calendar-alt"></i> <a href="javascript:void(0)">@this.Model.CreatedOn</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fas fa-dumbbell"></i> <a href="javascript:void(0)">@this.Model.Sport</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fas fa-tags"></i> <a href="javascript:void(0)">@this.Model.Address</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fas fa-child"></i> <a href="javascript:void(0)">@this.Model.MaximumParticipants</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fas fa-clock"></i> <a href="javascript:void(0)">@this.Model.PricePerPerson BGN</a>
+                        </li>
+                    </ul>
+                    <hr />
+                    <p>Enjoy with training "<b>@this.Model.Title</b>" On <b>@this.Model.StartOn.ToString("D")</b> (<b>@this.Model.StartOn.DayOfWeek</b>) from <b>@this.Model.StartOn.TimeOfDay.ToString("hh':'mm")</b> hours, with trainer <b>@this.Model.TrainerUsername</b>. In <b>@this.Model.Address</b>.</p>
+                    <hr />
+                    <h3 class="text-center">Content</h3>
+                    <div>
+                        @Html.Raw(this.Model.Content)
+                    </div>
+                    <hr class="mb40">
+                    <h4 class="mb40 text-uppercase font500">About Author</h4>
+                    <div class="media mb40">
+                        <img src="@this.Model.TrainerImageUrl" class="d-flex mr-3 img-fluid rounded-circle author-img" alt="@this.Model.TrainerUsername" />
+                        <div class="media-body">
+                            <h5 class="mt-0"><b>@this.Model.TrainerUsername</b></h5> @this.Model.TrainerDescription
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="col-md-3 mb40">
+            <div class="mb40">
+                <ul class="list-unstyled categories">
+                    <li>
+                        <h4 class="sidebar-title">Ticket Price:</h4>
+                        <a href="javascript:void(0)">@Model.PricePerPerson BGN</a>
+                        <br />
+                    </li>
+                    <li>
+                        <h4 class="sidebar-title">Maximum Participants:</h4>
+                        <a href="javascript:void(0)"><span>@Model.MaximumParticipants</span> People</a>
+                        <br />
+                    </li>
+                    <li>
+                        <h4 class="sidebar-title">Start/End Time:</h4>
+                        <a href="javascript:void(0)">@Model.StartOn.ToString("D")</a>
+                        <a href="javascript:void(0)">@Model.EndOn.ToString("D")</a>
+                        <br />
+                    </li>
+                    <li>
+                        <h4 class="sidebar-title">Duration:</h4>
+                        <a href="javascript:void(0)">@((this.Model.EndOn - this.Model.StartOn).ToString("hh':'mm")) Hours</a>
+                        <br />
+                    </li>
+                </ul>
+            </div>
+            <h4 class="sidebar-title">Free Places: 30</h4>
+            <h4 class="sidebar-title">Recorded: 0</h4>
+            <br />
+            <div class="mb40">
+                <a class="btn btn-primary btn-block text-white">Order your Place</a>
+            </div>
+            <div>
+                @*<h4 class="sidebar-title">Latest Workouts</h4>
+                    <ul class="list-unstyled">
+                        @foreach (var workout in this.Model.LatestWorkouts)
+                    {
+                        <li class="media mb-4">
+                            <img class="d-flex mr-3 img-fluid latest-workout-img" width="64" src="@workout.ImageUrl" alt="Generic placeholder image">
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-1">
+                                    <a asp-controller="Workouts" asp-action="Details" asp-route-id="@workout.Id">@workout.Title</a>
+                                </h5> @workout.CreatedOn.ToString("D")
+                            </div>
+                        </li>
+                    }
+                    </ul>*@
+            </div>
+        </div>
+    </div>
+</div>

@@ -65,5 +65,8 @@
 
             return this.RedirectToAction("All");
         }
+
+        public IActionResult Details(int id)
+            => this.View(this.groupWorkouts.Details(id));
     }
 }
