@@ -67,8 +67,8 @@
                     </li>
                     <li>
                         <h4 class="sidebar-title">Start/End Time:</h4>
-                        <a href="javascript:void(0)">@Model.StartOn.ToString("D")</a>
-                        <a href="javascript:void(0)">@Model.EndOn.ToString("D")</a>
+                        <a href="javascript:void(0)">@Model.StartOn.ToString("f")</a>
+                        <a href="javascript:void(0)">@Model.EndOn.ToString("f")</a>
                         <br />
                     </li>
                     <li>
@@ -82,10 +82,10 @@
             <h4 class="sidebar-title">Recorded: 0</h4>
             <br />
             <div class="mb40">
-                <a class="btn btn-primary btn-block text-white">Order your Place</a>
+                <a class="btn btn-primary btn-block text-white">Buy Ticket</a>
             </div>
             <div>
-                @*<h4 class="sidebar-title">Latest Workouts</h4>
+                <h4 class="sidebar-title">Latest Workouts</h4>
                     <ul class="list-unstyled">
                         @foreach (var workout in this.Model.LatestWorkouts)
                     {
@@ -98,7 +98,7 @@
                             </div>
                         </li>
                     }
-                    </ul>*@
+                    </ul>
             </div>
         </div>
     </div>

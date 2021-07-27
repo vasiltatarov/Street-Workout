@@ -5,6 +5,7 @@
 
     using Data;
     using Data.Models;
+    using Workouts;
 
     public class GroupWorkoutService : IGroupWorkoutService
     {
@@ -97,6 +98,18 @@
                     StartOn = x.StartOn,
                     EndOn = x.EndOn,
                     CreatedOn = x.CreatedOn.ToString("D"),
+                    LatestWorkouts = this.data
+                        .Workouts
+                        .OrderByDescending(w => w.Id)
+                        .Take(3)
+                        .Select(w => new WorkoutDetailsLatestTraining
+                        {
+                            Id = w.Id,
+                            Title = w.Title,
+                            ImageUrl = GetImageBySport(w.Sport.Name),
+                            CreatedOn = w.CreatedOn,
+                        })
+                        .ToList(),
                 })
                 .FirstOrDefault();
 

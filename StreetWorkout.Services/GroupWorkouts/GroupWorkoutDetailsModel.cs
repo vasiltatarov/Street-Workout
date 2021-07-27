@@ -1,6 +1,8 @@
 ﻿namespace StreetWorkout.Services.GroupWorkouts
 {
+    using System.Collections.Generic;
     using System;
+    using Workouts;
 
     public class GroupWorkoutDetailsModel
     {
@@ -31,5 +33,7 @@
         public DateTime EndOn { get; set; }
 
         public string CreatedOn { get; set; }
+
+        public IEnumerable<WorkoutDetailsLatestTraining> LatestWorkouts { get; set; }
     }
 }
