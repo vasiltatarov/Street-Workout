@@ -21,8 +21,8 @@
             this.groupWorkouts = groupWorkouts;
         }
 
-        public IActionResult All()
-            => this.View();
+        public IActionResult All([FromQuery]GroupWorkoutsQueryModel model)
+            => this.View(this.groupWorkouts.All(model.CurrentPage, this.User.GetId()));
 
         public IActionResult Create()
             => this.View(new GroupWorkoutFormModel
@@ -33,6 +33,13 @@
         [HttpPost]
         public IActionResult Create(GroupWorkoutFormModel input)
         {
+            var userId = this.User.GetId();
+
+            if (!this.groupWorkouts.IsUserTrainer(userId))
+            {
+                return this.Unauthorized();
+            }
+
             if (!this.workouts.IsValidSportId(input.SportId))
             {
                 this.ModelState.AddModelError(nameof(input.SportId), "Sport is invalid.");
@@ -54,7 +61,7 @@
                 return this.View(input);
             }
             
-            this.groupWorkouts.Create(input.Title, input.SportId, input.Address, input.StartOn, input.EndOn, input.MaximumParticipants, input.PricePerPerson, this.User.GetId(), input.Content);
+            this.groupWorkouts.Create(input.Title, input.SportId, input.Address, input.StartOn, input.EndOn, input.MaximumParticipants, input.PricePerPerson, userId, input.Content);
 
             return this.RedirectToAction("All");
         }
