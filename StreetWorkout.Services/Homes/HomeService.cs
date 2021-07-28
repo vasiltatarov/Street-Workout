@@ -1,10 +1,10 @@
-﻿using AutoMapper.QueryableExtensions;
-
-namespace StreetWorkout.Services.Homes
+﻿namespace StreetWorkout.Services.Homes
 {
     using System;
     using System.Linq;
+
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using Data;
     using Data.Models;

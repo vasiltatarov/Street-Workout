@@ -3,8 +3,11 @@
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using StreetWorkout.ViewModels.Workouts;
 
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+
+    using StreetWorkout.ViewModels.Workouts;
     using Data;
     using Data.Models;
     using Data.Models.Enums;
@@ -12,9 +15,13 @@
     public class WorkoutService : IWorkoutService
     {
         private readonly StreetWorkoutDbContext data;
+        private readonly IMapper mapper;
 
-        public WorkoutService(StreetWorkoutDbContext data)
-            => this.data = data;
+        public WorkoutService(StreetWorkoutDbContext data, IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
         public void Create(string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, string userId, int minutes, string content)
         {
@@ -139,7 +146,7 @@
                         .Select(c => new CommentInDetailsServiceModel
                         {
                             Id = c.Id,
-                            Username = c.User.UserName,
+                            UserUserName = c.User.UserName,
                             Content = c.Content,
                             UserImageUrl = c.User.ImageUrl,
                         })
@@ -150,20 +157,12 @@
 
         public IEnumerable<SportViewModel> GetSports()
             => this.data.Sports
-                .Select(x => new SportViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                })
+                .ProjectTo<SportViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
         public IEnumerable<BodyPartInCreateWorkoutViewModel> GetBodyParts()
             => this.data.BodyParts
-                .Select(x => new BodyPartInCreateWorkoutViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                })
+                .ProjectTo<BodyPartInCreateWorkoutViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
         public bool IsValidSportId(int id)
