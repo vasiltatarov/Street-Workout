@@ -1,35 +1,153 @@
-﻿@model StreetWorkout.Services.Homes.IndexServiceModel
+﻿@model IndexServiceModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
-@if (this.Model.IsAccountCompleted)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-        <i class="fa fa-check"></i>
-        <strong>Yay!</strong> Everything is fine! Your account is completely finished.
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h1 class="display-4">Welcome <br> @(this.Model.IsTrainer ? "Trainer" : "Enthusiast").</h1>
+                <p class="lead my-4">
+                    @(this.Model.IsAccountCompleted ? "Your account is fully completed." : "Your account is not completed. Please complete your account to use all of the functionality of the website.")
+                    <br> Enjoy yourself with us ...
+                    <br /> And move your body to the next level because, the movements are healthy.
+                </p>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="devices pl-md-4 pt-5 pt-md-0">
+                    <img src="https://static.sportzbusiness.com/uploads/2020/04/Athletes.jpg" alt="Example Navbar 1" class="img-fluid">
+                </div>
+            </div>
+        </div>
     </div>
-}
-else
+</div>
+@if (!this.Model.IsAccountCompleted)
 {
+    <br />
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <i class="fa fa-exclamation-circle"></i>
         <strong>Hey!</strong> Your account is not completed
         <a asp-controller="Accounts" asp-action="CompleteAccount">click here.</a> to complete your account. This will unlock more options for you.
     </div>
 }
-
-<div class="text-center">
-    <h1 class="display-4">
-        @(this.Model.IsTrainer ? "Welcome Trainer" : "Welcome Enthusiast")
-    </h1>
+<br />
+<br />
+<div class="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="feature">
+                    <div class="big-icon text-primary"><i class="fas fa-tools"></i></div>
+                    <h5 class="text-primary">Work with Bootstrap</h5>
+                    <p class="lead">Bootstrap 4 is a toolkit of front-end components for websites. It provides multiple utilities and components for writing responsive websites. </p>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="feature">
+                    <div class="big-icon text-secondary"><i class="fas fa-puzzle-piece"></i></div>
+                    <h5 class="text-secondary">Mix &amp; Match</h5>
+                    <p class="lead">Lazy Kit comes with a variety of different components and sections. By fitting them together you can easily create your desired pages.</p>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="feature">
+                    <div class="big-icon text-success"><i class="fas fa-palette"></i></div>
+                    <h5 class="text-success">Customise the Kit</h5>
+                    <p class="lead">Want to try different colours, spacing or typography? You can customise the Lazy Kit by modifying its SCSS files. </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<h2 class="text-center">Our last register users</h2>
-<hr />
+<br />
+<br />
+<div class="blog-posts">
+    <div class="text-center">
+        <h2>Latest Workouts</h2>
+        <br />
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach (var workout in this.Model.Workouts)
+            {
+                <div class="col-sm-6 col-md-4 mb-4">
+                    <div class="component">
+                        <div class="card">
+                            <div class="card-header">
+                                <img class="card-img card-home-img" src="@workout.ImageUrl" alt="dog">
+                            </div>
+                            <div class="card-body">
+                                <span class="badge badge-success mb-2">@workout.Sport</span>
+                                <span class="badge badge-warning mb-2">@workout.Minutes Minutes</span>
+                                <h4 class="card-title">@workout.Title</h4>
+                                <p class="card-text">Body Part: <b>@workout.BodyPart</b></p>
+                                <p class="card-text">Difficult: <b>@workout.DifficultLevel</b></p>
+                            </div>
+                            <div class="card-footer">
+                                <a asp-controller="Workouts" asp-action="Details" asp-route-id="@workout.Id" class="btn btn-primary">View More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<br />
+<div class="testimonials">
+    <div class="info text-center">
+        <h2>Testimonials</h2>
+        <br />
+    </div>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <div class="testimonial d-flex flex-column align-items-center">
+                    <div class="big-bubble bg-info bubble-top-left"></div>
+                    <p class="lead font-italic">"Lazy kit impressed me on multiple levels. It's the perfect solution for our business. Thank you so much for your help. Best. Product. Ever!"</p>
+                    <p>
+                        <b>Cathee V.</b>,<br>
+                        Web Developer
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="testimonial d-flex flex-column align-items-center mt-md-4">
+                    <div class="big-bubble"></div>
+                    <p class="lead font-italic">"I will recommend you to my colleagues. Thank you for making it painless, pleasant and most of all hassle free! It really saves me time and effort."</p>
+                    <p>
+                        <b>Tom B.</b>,<br>
+                        Fullstack Developer
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="testimonial d-flex flex-column align-items-center">
+                    <div class="big-bubble bg-warning bubble-top-right"></div>
+                    <p class="lead font-italic">"Needless to say we are extremely satisfied with the results. Lazy kit did exactly what you said it does. Lazy kit has really helped our business."</p>
+                    <p>
+                        <b>Billie A.</b>,<br>
+                        Web Designer
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="testimonial d-flex flex-column align-items-center mt-md-4">
+                    <div class="big-bubble bg-success bubble-bottom-right"></div>
+                    <p class="lead font-italic">"We've used Lazy kit for the last five projects. I wish I would have thought of it first. I am completely blown away. Definitely worth giving it a try."</p>
+                    <p>
+                        <b>Jack F.</b>,<br>
+                        Front-End Developer
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<h2 class="text-center">Latest Register Users</h2>
+<br />
 <div class="row">
     @foreach (var user in this.Model.Users)
     {
@@ -44,41 +162,15 @@ else
                         <h4 class="card-title">@user.UserUserName</h4>
                     </div>
                     <div class="card-footer">
-                        <a asp-controller="Accounts" asp-action="Account" asp-route-username="@user.UserUserName" class="btn btn-outline-primary">Read More</a>
+                        <a asp-controller="Accounts" asp-action="Account" asp-route-username="@user.UserUserName" class="btn btn-primary">View More</a>
                     </div>
                 </div>
             </div>
         </div>
     }
 </div>
-<hr />
-<h2 class="text-center">See any of the best workouts</h2>
-<hr />
-<div class="row">
-    @foreach (var workout in this.Model.Workouts)
-    {
-        <div class="col-sm-6 col-md-4 mb-4">
-            <div class="component">
-                <div class="card">
-                    <div class="card-header">
-                        <img class="card-img card-home-img" src="@workout.ImageUrl" alt="dog">
-                    </div>
-                    <div class="card-body">
-                        <span class="badge badge-success mb-2">@workout.Sport</span>
-                        <span class="badge badge-warning mb-2">@workout.Minutes Minutes</span>
-                        <h4 class="card-title">@workout.Title</h4>
-                        <p class="card-text">Body Part: <b>@workout.BodyPart</b></p>
-                        <p class="card-text">Difficult: <b>@workout.DifficultLevel</b></p>
-                    </div>
-                    <div class="card-footer">
-                        <a asp-controller="Workouts" asp-action="Details" asp-route-id="@workout.Id" class="btn btn-primary">View More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-</div>
-<hr />
+
+<br />
 
 <div class="text-center">
     <button id="show-stats-btn" class="btn btn-info">Show Statistics</button>

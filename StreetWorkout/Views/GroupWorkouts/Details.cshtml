@@ -78,16 +78,25 @@
                     </li>
                 </ul>
             </div>
-            <h4 class="sidebar-title">Free Places: <span id="available-tickets">@this.Model.AvailableTickets</span></h4>
-            <h4 class="sidebar-title">Bought Tickets: <span id="bought-tickets">@(this.Model.MaximumParticipants - this.Model.AvailableTickets)</span></h4>
-            <br />
-            <div class="mb40">
-                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-block text-white">Buy Ticket</button>
-            </div>
+            @if (this.Model.StartOn >= DateTime.UtcNow)
+            {
+                <h4 class="sidebar-title">Free Places: <span id="available-tickets">@this.Model.AvailableTickets</span></h4>
+                <h4 class="sidebar-title">Bought Tickets: <span id="bought-tickets">@(this.Model.MaximumParticipants - this.Model.AvailableTickets)</span></h4>
+                <br />
+                <div class="mb40">
+                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-block text-white">Buy Ticket</button>
+                </div>
+            }
+            else
+            {
+                <h4 class="sidebar-title">It's too late to buy a ticket.</h4>
+                <h4 class="sidebar-title">Go and find another workout.</h4>
+            }
             <div>
+                <br/>
                 <h4 class="sidebar-title">Latest Workouts</h4>
-                    <ul class="list-unstyled">
-                        @foreach (var workout in this.Model.LatestWorkouts)
+                <ul class="list-unstyled">
+                    @foreach (var workout in this.Model.LatestWorkouts)
                     {
                         <li class="media mb-4">
                             <img class="d-flex mr-3 img-fluid latest-workout-img" width="64" src="@workout.ImageUrl" alt="Generic placeholder image">
@@ -98,7 +107,7 @@
                             </div>
                         </li>
                     }
-                    </ul>
+                </ul>
             </div>
         </div>
     </div>
