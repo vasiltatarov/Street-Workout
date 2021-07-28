@@ -3,9 +3,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Statistics;
 
-    [ApiController]
     [Route("api/statistics")]
-    public class StatisticsApiController : ControllerBase
+    public class StatisticsApiController : ApiController
     {
         private readonly IStatisticsService statistics;
 

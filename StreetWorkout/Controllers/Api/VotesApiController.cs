@@ -7,9 +7,8 @@
     using Infrastructure;
     using Services.Votes;
 
-    [ApiController]
     [Route("api/votes")]
-    public class VotesApiController : ControllerBase
+    public class VotesApiController : ApiController
     {
         private readonly IVoteService votes;
 

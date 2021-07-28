@@ -35,7 +35,7 @@
                         </li>
                     </ul>
                     <hr />
-                    <p>Enjoy with training "<b>@this.Model.Title</b>" On <b>@this.Model.StartOn.ToString("D")</b> (<b>@this.Model.StartOn.DayOfWeek</b>) from <b>@this.Model.StartOn.TimeOfDay.ToString("hh':'mm")</b> hours, with trainer <b>@this.Model.TrainerUsername</b>. In <b>@this.Model.Address</b>.</p>
+                    <p>Enjoy with training "<b>@this.Model.Title</b>" On <b>@this.Model.StartOn.ToString("D")</b> (<b>@this.Model.StartOn.DayOfWeek</b>) from <b>@this.Model.StartOn.TimeOfDay.ToString("hh':'mm")</b> h, with trainer <b>@this.Model.TrainerUsername</b>. In <b>@this.Model.Address</b>.</p>
                     <hr />
                     <h3 class="text-center">Content</h3>
                     <div>
@@ -67,19 +67,19 @@
                     </li>
                     <li>
                         <h4 class="sidebar-title">Start/End Time:</h4>
-                        <a href="javascript:void(0)">@Model.StartOn.ToString("f")</a>
-                        <a href="javascript:void(0)">@Model.EndOn.ToString("f")</a>
+                        <a href="javascript:void(0)">@Model.StartOn.ToString("f") h</a>
+                        <a href="javascript:void(0)">@Model.EndOn.ToString("f") h</a>
                         <br />
                     </li>
                     <li>
                         <h4 class="sidebar-title">Duration:</h4>
-                        <a href="javascript:void(0)">@((this.Model.EndOn - this.Model.StartOn).ToString("hh':'mm")) Hours</a>
+                        <a href="javascript:void(0)">@((this.Model.EndOn - this.Model.StartOn).ToString("hh':'mm")) h</a>
                         <br />
                     </li>
                 </ul>
             </div>
-            <h4 class="sidebar-title">Free Places: @this.Model.AvailableTickets</h4>
-            <h4 class="sidebar-title">Bought Tickets: @(this.Model.MaximumParticipants - this.Model.AvailableTickets)</h4>
+            <h4 class="sidebar-title">Free Places: <span id="available-tickets">@this.Model.AvailableTickets</span></h4>
+            <h4 class="sidebar-title">Bought Tickets: <span id="bought-tickets">@(this.Model.MaximumParticipants - this.Model.AvailableTickets)</span></h4>
             <br />
             <div class="mb40">
                 <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-block text-white">Buy Ticket</button>
@@ -115,7 +115,7 @@
             </div>
             <div class="modal-body">
                 <p>@this.Model.AvailableTickets Tickets Left</p>
-                <form method="post" asp-controller="GroupWorkouts" asp-action="BuyTicket" asp-route-groupWorkoutId="@this.Model.Id">
+                <form id="buy-ticket" method="post">
                     <div class="form-group">
                         <label class="col-form-label">Full Name</label>
                         <input name="fullName" required="" class="form-control">
@@ -141,3 +141,37 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $('#buy-ticket').submit(ev => {
+            ev.preventDefault();
+
+            var groupWorkoutId = @this.Model.Id;
+            var fullName = $('#buy-ticket').find('input[name="fullName"]').val();
+            var phoneNumber = $('#buy-ticket').find('input[name="phoneNumber"]').val();
+            var card = $('#buy-ticket').find('input[name="card"]').val();
+            var boughtTickets = $('#buy-ticket').find('input[name="boughtTickets"]').val();
+
+            var data = { groupWorkoutId: groupWorkoutId, fullName: fullName, phoneNumber: phoneNumber, card: card, boughtTickets: boughtTickets };
+
+            var maximumParticipants = @this.Model.MaximumParticipants;
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/workouts',
+                data: JSON.stringify(data),
+                success: function (data) {
+                    var availableTickets = data.availableTickets;
+                    var boughtTickets = maximumParticipants - availableTickets;
+
+                    $('#exampleModal').modal('hide');
+
+                    $('#available-tickets').html(availableTickets);
+                    $('#bought-tickets').html(boughtTickets);
+                },
+                contentType: 'application/json'
+            });
+        })
+    </script>
+}

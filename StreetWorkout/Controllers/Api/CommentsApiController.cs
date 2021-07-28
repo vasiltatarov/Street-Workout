@@ -1,17 +1,13 @@
 ﻿namespace StreetWorkout.Controllers.Api
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using ViewModels.Comments;
     using Services.Comments;
     using Infrastructure;
 
-    [ApiController]
     [Route("api/comments")]
-    [Authorize]
-    [IgnoreAntiforgeryToken]
-    public class CommentsApiController : ControllerBase
+    public class CommentsApiController : ApiController
     {
         private readonly ICommentService comments;
 
