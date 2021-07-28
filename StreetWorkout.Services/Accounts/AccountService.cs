@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+
     using Data;
     using Data.Models;
     using StreetWorkout.ViewModels.Accounts;
@@ -12,9 +15,13 @@
     public class AccountService : IAccountService
     {
         private readonly StreetWorkoutDbContext data;
+        private readonly IMapper mapper;
 
-        public AccountService(StreetWorkoutDbContext data)
-            => this.data = data;
+        public AccountService(StreetWorkoutDbContext data, IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
         public bool IsUserAccountComplete(string userId)
             => this.data.Users.Find(userId).IsAccountCompleted;
@@ -90,20 +97,12 @@
 
         public IEnumerable<SportViewModel> GetSportsInAccountFormModel()
             => this.data.Sports
-                .Select(x => new SportViewModel()
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                })
+                .ProjectTo<SportViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
         public IEnumerable<GoalInAccountViewModel> GetGoalsInAccountFormModel()
             => this.data.Goals
-                .Select(x => new GoalInAccountViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                })
+                .ProjectTo<GoalInAccountViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
         public IEnumerable<TrainingFrequencyInAccountViewModel> GetTrainingFrequenciesInAccountFormModel()

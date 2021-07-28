@@ -2,10 +2,10 @@
 {
     public class UserIndexServiceModel
     {
-        public string Username { get; set; }
+        public string UserUserName { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string UserImageUrl { get; set; }
 
-        public string Sport { get; set; }
+        public string SportName { get; set; }
     }
 }

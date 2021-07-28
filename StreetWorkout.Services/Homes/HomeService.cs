@@ -1,7 +1,11 @@
-﻿namespace StreetWorkout.Services.Homes
+﻿using AutoMapper.QueryableExtensions;
+
+namespace StreetWorkout.Services.Homes
 {
     using System;
     using System.Linq;
+    using AutoMapper;
+
     using Data;
     using Data.Models;
     using Workouts;
@@ -9,9 +13,13 @@
     public class HomeService : IHomeService
     {
         private readonly StreetWorkoutDbContext data;
+        private readonly IMapper mapper;
 
-        public HomeService(StreetWorkoutDbContext data)
-            => this.data = data;
+        public HomeService(StreetWorkoutDbContext data, IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
         public IndexServiceModel IndexViewModel(string userId)
         {
@@ -25,12 +33,7 @@
                     .UserDatas
                     .OrderByDescending(x => Guid.NewGuid())
                     .Take(3)
-                    .Select(x => new UserIndexServiceModel
-                    {
-                        Username = x.User.UserName,
-                        ImageUrl = x.User.ImageUrl,
-                        Sport = x.Sport.Name,
-                    })
+                    .ProjectTo<UserIndexServiceModel>(this.mapper.ConfigurationProvider)
                     .ToList(),
                 Workouts = this.data
                     .Workouts

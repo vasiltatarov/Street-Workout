@@ -37,14 +37,14 @@ else
             <div class="component">
                 <div class="card">
                     <div class="card-header">
-                        <img class="card-img card-home-img" src="@user.ImageUrl" alt="@user.Username">
+                        <img class="card-img card-home-img" src="@user.UserImageUrl" alt="@user.UserUserName">
                     </div>
                     <div class="card-body">
-                        <span class="badge badge-warning mb-2">@user.Sport</span>
-                        <h4 class="card-title">@user.Username</h4>
+                        <span class="badge badge-warning mb-2">@user.SportName</span>
+                        <h4 class="card-title">@user.UserUserName</h4>
                     </div>
                     <div class="card-footer">
-                        <a asp-controller="Accounts" asp-action="Account" asp-route-username="@user.Username" class="btn btn-outline-primary">Read More</a>
+                        <a asp-controller="Accounts" asp-action="Account" asp-route-username="@user.UserUserName" class="btn btn-outline-primary">Read More</a>
                     </div>
                 </div>
             </div>

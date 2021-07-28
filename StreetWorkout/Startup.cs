@@ -44,6 +44,8 @@ namespace StreetWorkout
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StreetWorkoutDbContext>();
 
+            services.AddAutoMapper(typeof(Startup));
+
             services
                 .AddAntiforgery(options =>
             {
