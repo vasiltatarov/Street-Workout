@@ -170,6 +170,9 @@
                     $('#available-tickets').html(availableTickets);
                     $('#bought-tickets').html(boughtTickets);
                 },
+                error: function() {
+                    alert("Invalid data, fill your data correct please.");
+                },
                 contentType: 'application/json'
             });
         })
