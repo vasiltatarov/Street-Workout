@@ -21,7 +21,7 @@
             this.groupWorkouts = groupWorkouts;
         }
 
-        public IActionResult All([FromQuery]GroupWorkoutsQueryModel model)
+        public IActionResult All([FromQuery] GroupWorkoutsQueryModel model)
             => this.View(this.groupWorkouts.All(model.CurrentPage, this.User.GetId()));
 
         public IActionResult Create()
@@ -60,7 +60,7 @@
                 input.Sports = this.workouts.GetSports();
                 return this.View(input);
             }
-            
+
             this.groupWorkouts.Create(input.Title, input.SportId, input.Address, input.StartOn, input.EndOn, input.MaximumParticipants, input.PricePerPerson, userId, input.Content);
 
             return this.RedirectToAction("All");
@@ -68,5 +68,25 @@
 
         public IActionResult Details(int id)
             => this.View(this.groupWorkouts.Details(id));
+
+        [HttpPost]
+        public IActionResult BuyTicket(int groupWorkoutId, [FromForm]GroupWorkoutPaymentViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest();
+            }
+
+            var availableTickets = this.groupWorkouts.AvailableTickets(groupWorkoutId);
+
+            if (model.BoughtTickets > availableTickets)
+            {
+                return this.BadRequest();
+            }
+
+            this.groupWorkouts.BuyTicket(this.User.GetId(), groupWorkoutId, model.FullName, model.PhoneNumber, model.Card, model.BoughtTickets);
+
+            return this.RedirectToAction("Details", new { Id = groupWorkoutId });
+        }
     }
 }

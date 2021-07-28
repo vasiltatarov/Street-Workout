@@ -45,6 +45,34 @@
             this.data.SaveChanges();
         }
 
+        public byte AvailableTickets(int groupWorkoutId)
+        {
+            var maxPlaces = this.data.GroupWorkouts.Find(groupWorkoutId).MaximumParticipants;
+
+            var boughtTickets = this.data
+                .UserWorkoutPayments
+                .Where(x => x.GroupWorkoutId == groupWorkoutId)
+                .Sum(x => x.BoughtTickets);
+
+            return (byte)(maxPlaces - boughtTickets);
+        }
+
+        public void BuyTicket(string userId, int groupWorkoutId, string fullName, string phoneNumber, string card, byte boughtTickets)
+        {
+            var userWorkoutPayment = new UserWorkoutPayment
+            {
+                UserId = userId,
+                GroupWorkoutId = groupWorkoutId,
+                FullName = fullName,
+                PhoneNumber = phoneNumber,
+                Card = card,
+                BoughtTickets = boughtTickets,
+                CreatedOn = DateTime.UtcNow,
+            };
+            this.data.UserWorkoutPayments.Add(userWorkoutPayment);
+            this.data.SaveChanges();
+        }
+
         public GroupWorkoutsQueryModel All(int currentPage, string userId)
         {
             var workoutsQuery = this.data.GroupWorkouts.AsQueryable();
@@ -98,6 +126,7 @@
                     StartOn = x.StartOn,
                     EndOn = x.EndOn,
                     CreatedOn = x.CreatedOn.ToString("D"),
+                    AvailableTickets = AvailableTickets(id),
                     LatestWorkouts = this.data
                         .Workouts
                         .OrderByDescending(w => w.Id)

@@ -78,11 +78,11 @@
                     </li>
                 </ul>
             </div>
-            <h4 class="sidebar-title">Free Places: 30</h4>
-            <h4 class="sidebar-title">Recorded: 0</h4>
+            <h4 class="sidebar-title">Free Places: @this.Model.AvailableTickets</h4>
+            <h4 class="sidebar-title">Bought Tickets: @(this.Model.MaximumParticipants - this.Model.AvailableTickets)</h4>
             <br />
             <div class="mb40">
-                <a class="btn btn-primary btn-block text-white">Buy Ticket</a>
+                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-block text-white">Buy Ticket</button>
             </div>
             <div>
                 <h4 class="sidebar-title">Latest Workouts</h4>
@@ -99,6 +99,44 @@
                         </li>
                     }
                     </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>@this.Model.AvailableTickets Tickets Left</p>
+                <form method="post" asp-controller="GroupWorkouts" asp-action="BuyTicket" asp-route-groupWorkoutId="@this.Model.Id">
+                    <div class="form-group">
+                        <label class="col-form-label">Full Name</label>
+                        <input name="fullName" required="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Phone Number</label>
+                        <input name="phoneNumber" required="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Card</label>
+                        <input name="card" required="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Bought Tickets</label>
+                        <input name="boughtTickets" type="number" required="" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Buy Ticket</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -1,4 +1,6 @@
-﻿namespace StreetWorkout.Data.Models
+﻿using System.Collections.Generic;
+
+namespace StreetWorkout.Data.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -37,5 +39,7 @@
         public string Content { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public IEnumerable<UserWorkoutPayment> UserWorkoutPayments { get; set; } = new HashSet<UserWorkoutPayment>();
     }
 }

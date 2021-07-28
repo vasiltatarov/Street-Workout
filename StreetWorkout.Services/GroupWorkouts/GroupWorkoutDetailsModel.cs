@@ -34,6 +34,8 @@
 
         public string CreatedOn { get; set; }
 
+        public byte AvailableTickets { get; set; }
+
         public IEnumerable<WorkoutDetailsLatestTraining> LatestWorkouts { get; set; }
     }
 }

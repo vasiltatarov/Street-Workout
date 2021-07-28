@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StreetWorkout.Data;
 
 namespace StreetWorkout.Data.Migrations
 {
     [DbContext(typeof(StreetWorkoutDbContext))]
-    partial class StreetWorkoutDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210727224837_AddUserWorkoutPaymentEntity")]
+    partial class AddUserWorkoutPaymentEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -460,9 +462,6 @@ namespace StreetWorkout.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<byte>("BoughtTickets")
-                        .HasColumnType("tinyint");
 
                     b.Property<string>("Card")
                         .IsRequired()

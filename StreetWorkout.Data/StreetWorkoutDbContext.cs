@@ -32,6 +32,8 @@
 
         public DbSet<GroupWorkout> GroupWorkouts { get; set; }
 
+        public DbSet<UserWorkoutPayment> UserWorkoutPayments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
@@ -102,6 +104,20 @@
                 .HasOne(x => x.Trainer)
                 .WithMany(x => x.GroupWorkouts)
                 .HasForeignKey(x => x.TrainerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<UserWorkoutPayment>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.UserWorkoutPayments)
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<UserWorkoutPayment>()
+                .HasOne(x => x.GroupWorkout)
+                .WithMany(x => x.UserWorkoutPayments)
+                .HasForeignKey(x => x.GroupWorkoutId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
