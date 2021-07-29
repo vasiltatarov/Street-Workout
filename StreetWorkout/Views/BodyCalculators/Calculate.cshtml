@@ -1,0 +1,130 @@
+﻿@using StreetWorkout.Data.Models.Enums
+@model CalculatorFormModel
+@{
+    this.ViewData["Title"] = "Calories Calculator";
+}
+
+<div class="text-center">
+    <h1>@this.ViewData["Title"]</h1>
+</div>
+
+<form method="post">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="Weight"></label>
+            <input asp-for="Weight" class="form-control" placeholder="Weight in kg." />
+            <span asp-validation-for="Weight" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="Height"></label>
+            <input asp-for="Height" class="form-control" placeholder="Height in cm." />
+            <span asp-validation-for="Height" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="Activity"></label>
+            <select asp-for="Activity" class="form-control">
+                <option selected value="1,2">Sedentary (little to no exercise).</option>
+                <option value="1,375">Lightly active (light exercise 1–3 days per week).</option>
+                <option value="1,55">Moderately active (moderate exercise 3–5 days per week).</option>
+                <option value="1,725">Very active (hard exercise 6–7 days per week).</option>
+                <option value="1,9">Extra active (very hard exercise, training, or a physical job).</option>
+            </select>
+            <span asp-validation-for="Activity" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Age"></label>
+            <input asp-for="Age" class="form-control" placeholder="Age 10 - 90" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-2">
+            <label asp-for="Gender"></label>
+            <select asp-for="Gender" class="form-control">
+                <option selected value="@((int) @Gender.Male)">@Gender.Male</option>
+                <option value="@((int) @Gender.Female)">@Gender.Female</option>
+            </select>
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Calculate</button>
+</form>
+
+@if (this.ViewData["Calories"] != null)
+{
+    <br />
+
+    var totalCalories = (int)this.ViewData["Calories"];
+
+    var mildWeightLossCalories = (int)(totalCalories * 0.91);
+    var weightLossCalories = (int)(totalCalories * 0.81);
+    var extremeWeightLossCalories = (int)(totalCalories * 0.63);
+
+    var mildWeightGainCalories = (int)(totalCalories * 1.09);
+    var weightGainCalories = (int)(totalCalories * 1.19);
+    var extremeGainCalories = (int)(totalCalories * 1.35);
+
+    <div class="text-center">
+        <h3>You Need <span class="text-danger">@totalCalories</span> Calories Per Day To Maintain your weight</h3>
+        <br />
+    </div>
+
+    <h1 class="text-center">Weight Loss</h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th colspan="2" scope="col">Goal</th>
+                <th scope="col">Calories/Day</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-success">
+                <th scope="row">1</th>
+                <td colspan="2">Mild weight loss</td>
+                <td>@mildWeightLossCalories</td>
+            </tr>
+            <tr class="table-warning">
+                <th scope="row">2</th>
+                <td colspan="2">Weight loss</td>
+                <td>@weightLossCalories</td>
+            </tr>
+            <tr class="table-danger">
+                <th scope="row">3</th>
+                <td colspan="2">Extreme weight loss</td>
+                <td>@extremeWeightLossCalories</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+
+    <h1 class="text-center">Weight Gain</h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th colspan="2" scope="col">Goal</th>
+                <th scope="col">Calories/Day</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-success">
+                <th scope="row">1</th>
+                <td colspan="2">Mild weight gain</td>
+                <td>@mildWeightGainCalories</td>
+            </tr>
+            <tr class="table-warning">
+                <th scope="row">2</th>
+                <td colspan="2">Weight gain</td>
+                <td>@weightGainCalories</td>
+            </tr>
+            <tr class="table-danger">
+                <th scope="row">3</th>
+                <td colspan="2">Extreme weight gain</td>
+                <td>@extremeGainCalories</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
