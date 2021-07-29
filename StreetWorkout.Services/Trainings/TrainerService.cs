@@ -2,8 +2,8 @@
 {
     using System.Linq;
     using Data;
-    using Data.Models;
     using ViewModels.Trainers;
+    using Data.Models.Enums;
 
     public class TrainerService : ITrainerService
     {

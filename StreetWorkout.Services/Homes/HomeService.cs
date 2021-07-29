@@ -7,8 +7,8 @@
     using AutoMapper.QueryableExtensions;
 
     using Data;
-    using Data.Models;
     using Workouts;
+    using Data.Models.Enums;
 
     public class HomeService : IHomeService
     {

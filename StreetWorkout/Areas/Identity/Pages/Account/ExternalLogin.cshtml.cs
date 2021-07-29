@@ -14,6 +14,7 @@
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
     using Data.Models;
+    using Data.Models.Enums;
 
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel

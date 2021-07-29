@@ -9,6 +9,7 @@
 
     using Data;
     using Data.Models;
+    using Data.Models.Enums;
     using StreetWorkout.ViewModels.Accounts;
     using StreetWorkout.ViewModels.Workouts;
 

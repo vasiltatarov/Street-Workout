@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using Data;
-    using Data.Models;
+    using Data.Models.Enums;
 
     public class StatisticsService : IStatisticsService
     {

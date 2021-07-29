@@ -6,6 +6,7 @@
     using Data;
     using Data.Models;
     using Workouts;
+    using Data.Models.Enums;
 
     public class GroupWorkoutService : IGroupWorkoutService
     {

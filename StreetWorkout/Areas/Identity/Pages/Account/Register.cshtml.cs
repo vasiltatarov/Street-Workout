@@ -1,4 +1,6 @@
-﻿namespace StreetWorkout.Areas.Identity.Pages.Account
+﻿using StreetWorkout.Data.Models.Enums;
+
+namespace StreetWorkout.Areas.Identity.Pages.Account
 {
     using System;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿namespace StreetWorkout.Data.Models
+﻿namespace StreetWorkout.Data.Models.Enums
 {
     public enum UserRole
     {

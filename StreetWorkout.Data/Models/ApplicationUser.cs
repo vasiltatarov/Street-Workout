@@ -1,4 +1,6 @@
-﻿namespace StreetWorkout.Data.Models
+﻿using StreetWorkout.Data.Models.Enums;
+
+namespace StreetWorkout.Data.Models
 {
     using System;
     using System.Collections.Generic;
