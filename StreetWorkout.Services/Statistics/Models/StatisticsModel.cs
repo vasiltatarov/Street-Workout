@@ -1,4 +1,4 @@
-﻿namespace StreetWorkout.Services.Statistics
+﻿namespace StreetWorkout.Services.Statistics.Models
 {
     public class StatisticsModel
     {

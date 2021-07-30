@@ -26,6 +26,7 @@
             var result = homeService.IndexViewModel(UserId);
 
             // Assert
+            Assert.NotNull(result);
             Assert.IsType<IndexServiceModel>(result);
             Assert.True(result.IsAccountCompleted);
             Assert.True(result.IsTrainer);

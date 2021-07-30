@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Services.Statistics;
+    using Services.Statistics.Models;
 
     [Route("api/statistics")]
     public class StatisticsApiController : ApiController
