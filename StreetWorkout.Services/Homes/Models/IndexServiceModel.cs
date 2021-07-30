@@ -1,7 +1,7 @@
 ﻿namespace StreetWorkout.Services.Homes.Models
 {
     using System.Collections.Generic;
-    using Workouts;
+    using StreetWorkout.Services.Workouts.Models;
 
     public class IndexServiceModel
     {

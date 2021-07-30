@@ -8,8 +8,8 @@
 
     using Data;
     using Models;
-    using Workouts;
     using Data.Models.Enums;
+    using StreetWorkout.Services.Workouts.Models;
 
     public class HomeService : IHomeService
     {

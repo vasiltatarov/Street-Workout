@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using StreetWorkout.ViewModels.Workouts;
     using Data.Models.Enums;
+    using Models;
 
     public interface IWorkoutService
     {

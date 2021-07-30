@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System;
-    using Workouts;
+    using Workouts.Models;
 
     public class GroupWorkoutDetailsModel
     {

@@ -11,6 +11,7 @@
     using Data;
     using Data.Models;
     using Data.Models.Enums;
+    using Models;
 
     public class WorkoutService : IWorkoutService
     {

@@ -1,4 +1,4 @@
-﻿namespace StreetWorkout.Services.Workouts
+﻿namespace StreetWorkout.Services.Workouts.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

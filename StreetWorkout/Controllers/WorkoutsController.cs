@@ -9,6 +9,7 @@
     using Data.Models.Enums;
     using Infrastructure;
     using ViewModels.Workouts;
+    using Services.Workouts.Models;
 
     [Authorize]
     public class WorkoutsController : Controller
