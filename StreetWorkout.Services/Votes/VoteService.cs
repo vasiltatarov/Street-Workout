@@ -32,12 +32,15 @@
         }
 
         public VoteResponseModel GetAverageVotes(string userId)
-            => new ()
+            => new()
             {
-                AverageVotes = this.data
+                AverageVotes = this.data.Votes
+                    .Any(x => x.UserId == userId)
+                    ? this.data
                     .Votes
                     .Where(x => x.UserId == userId)
                     .Average(x => x.Value)
+                    : 0
             };
     }
 }
