@@ -10,15 +10,16 @@ namespace StreetWorkout
 
     using Data;
     using Data.Models;
+    using Infrastructure;
     using Services.Accounts;
     using Services.Homes;
     using Services.Trainings;
     using Services.Statistics;
-    using Infrastructure;
     using Services.Comments;
     using Services.Workouts;
     using Services.Votes;
     using Services.GroupWorkouts;
+    using Services.BodyCalculators;
 
     public class Startup
     {
@@ -70,6 +71,7 @@ namespace StreetWorkout
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IVoteService, VoteService>();
             services.AddTransient<IGroupWorkoutService, GroupWorkoutService>();
+            services.AddTransient<IBodyCalculatorService, BodyCalculatorService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
