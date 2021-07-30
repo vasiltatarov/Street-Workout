@@ -1,5 +1,6 @@
 namespace StreetWorkout
 {
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -48,12 +49,6 @@ namespace StreetWorkout
             services.AddAutoMapper(typeof(Startup));
 
             services
-                .AddAntiforgery(options =>
-            {
-                options.HeaderName = "X-CSRF-TOKEN";
-            });
-
-            services
                 .AddAuthentication()
                 .AddFacebook(options =>
             {
@@ -61,7 +56,16 @@ namespace StreetWorkout
                 options.AppSecret = WebKeys.FacebookAuthenticationAppSecret;
             });
 
-            services.AddControllersWithViews();
+            services
+                .AddAntiforgery(options =>
+                {
+                    options.HeaderName = "X-CSRF-TOKEN";
+                });
+
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
 
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IHomeService, HomeService>();

@@ -117,6 +117,8 @@
         $('#calculator').on('submit', ev => {
             ev.preventDefault();
 
+            var antiForgeryToken = $('#calculator').find('input[name="__RequestVerificationToken"]').val();
+
             var weight = $('#calculator').find('input[name="Weight"]').val();
             var height = $('#calculator').find('input[name="Height"]').val();
             var activity = $('#calculator').find('select[name="Activity"]').val();
@@ -129,6 +131,9 @@
                 type: 'POST',
                 url: '/api/calculator',
                 data: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': antiForgeryToken
+                },
                 success: function (data) {
                     var calories = data.calories;
 

@@ -162,6 +162,8 @@
             var card = $('#buy-ticket').find('input[name="card"]').val();
             var boughtTickets = $('#buy-ticket').find('input[name="boughtTickets"]').val();
 
+            var antiForgeryToken = $('#buy-ticket').find('input[name="__RequestVerificationToken"]').val();
+
             var data = { groupWorkoutId: groupWorkoutId, fullName: fullName, phoneNumber: phoneNumber, card: card, boughtTickets: boughtTickets };
 
             var maximumParticipants = @this.Model.MaximumParticipants;
@@ -170,6 +172,9 @@
                 type: 'POST',
                 url: '/api/workouts',
                 data: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': antiForgeryToken
+                },
                 success: function (data) {
                     var availableTickets = data.availableTickets;
                     var boughtTickets = maximumParticipants - availableTickets;
@@ -180,7 +185,7 @@
                     $('#bought-tickets').html(boughtTickets);
                 },
                 error: function() {
-                    alert("Invalid data, fill your data correct please.");
+                    alert("Invalid input, Please fill all of the input fields correctly.");
                 },
                 contentType: 'application/json'
             });

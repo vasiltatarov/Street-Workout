@@ -66,7 +66,7 @@
                     </div>
                     <hr class="mb40">
                     <h4 class="mb40 text-uppercase font500">Post a comment</h4>
-                    <form role="form" method="post">
+                    <form id="comment-form" role="form" method="post">
                         <div class="form-group">
                             <label>Comment</label>
                             <textarea id="comment-content" class="form-control" minlength="10" maxlength="1000" name="Content" required="" rows="5" placeholder="Comment"></textarea>
@@ -118,12 +118,16 @@
                 ev.preventDefault();
                 var content = $('#comment-content').val();
                 var workoutId = @this.Model.Id;
+                var antiForgeryToken = $('#comment-form').find('input[name="__RequestVerificationToken"]').val();
                 var data = { content: content, workoutId: workoutId };
 
                 $.ajax({
                     type: 'POST',
                     url: '/api/comments',
                     data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
                     success: function(data) {
                         $('#comment-content').val('');
                         var newComment = `<div class="media mb40"><i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i><img src=${data.userImageUrl} class="d-flex mr-3 img-fluid rounded-circle comment-img" /><div class="media-body"><h5 class="mt-0 font400 clearfix"><b>${data.userUsername}</b></h5> ${data.content}</div></div>`;
