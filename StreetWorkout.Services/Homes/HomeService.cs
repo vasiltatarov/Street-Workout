@@ -7,6 +7,7 @@
     using AutoMapper.QueryableExtensions;
 
     using Data;
+    using Models;
     using Workouts;
     using Data.Models.Enums;
 

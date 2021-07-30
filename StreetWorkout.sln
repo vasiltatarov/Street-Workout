@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout", "StreetWork
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout.Data", "StreetWorkout.Data\StreetWorkout.Data.csproj", "{112EC844-F369-4C2A-B572-FC63A90F1842}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetWorkout.Services", "StreetWorkout.Services\StreetWorkout.Services.csproj", "{03300CF9-B5BE-4D75-821F-1C7F1E7E4FBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout.Services", "StreetWorkout.Services\StreetWorkout.Services.csproj", "{03300CF9-B5BE-4D75-821F-1C7F1E7E4FBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetWorkout.ViewModels", "StreetWorkout.ViewModels\StreetWorkout.ViewModels.csproj", "{4A694325-041E-4C3B-AC2B-6CACBD923E53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout.ViewModels", "StreetWorkout.ViewModels\StreetWorkout.ViewModels.csproj", "{4A694325-041E-4C3B-AC2B-6CACBD923E53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetWorkout.Common", "StreetWorkout.Common\StreetWorkout.Common.csproj", "{608B2699-FA19-4F9E-9022-9D5495CC18BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout.Common", "StreetWorkout.Common\StreetWorkout.Common.csproj", "{608B2699-FA19-4F9E-9022-9D5495CC18BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetWorkout.Test", "StreetWorkout.Test\StreetWorkout.Test.csproj", "{00348A00-69B6-4D2B-8024-8782F0105952}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{608B2699-FA19-4F9E-9022-9D5495CC18BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{608B2699-FA19-4F9E-9022-9D5495CC18BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{608B2699-FA19-4F9E-9022-9D5495CC18BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00348A00-69B6-4D2B-8024-8782F0105952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00348A00-69B6-4D2B-8024-8782F0105952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00348A00-69B6-4D2B-8024-8782F0105952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00348A00-69B6-4D2B-8024-8782F0105952}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

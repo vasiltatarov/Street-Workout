@@ -1,4 +1,4 @@
-﻿namespace StreetWorkout.Services.Homes
+﻿namespace StreetWorkout.Services.Homes.Models
 {
     public class UserIndexServiceModel
     {

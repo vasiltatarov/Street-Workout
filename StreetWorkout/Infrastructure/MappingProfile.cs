@@ -2,10 +2,9 @@
 {
     using AutoMapper;
     using Data.Models;
-    using Services.Homes;
-    using Services.Workouts;
     using ViewModels.Workouts;
     using ViewModels.Accounts;
+    using Services.Homes.Models;
 
     public class MappingProfile : Profile
     {
