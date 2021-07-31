@@ -1,3 +1,20 @@
+# Project Introduction
+StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (April-June 2021). <br /> The website is application for people who are active in the sports.
+
+# Built With
+* ASP.NET Core 5 MVC
+* ASP.NET CORE view components
+* ASP.NET Core areas
+* MSSQL Server
+* Entity Framework Core
+* Auto-Mapper
+* AJAX
+* jQuery
+* Moq
+* XUnit
+* Bootstrap
+* Font Awesome Icons
+
 #  Street-Workout
 
 ASP .NET Core MVC Application with a purpose to be a fitness app.
@@ -23,6 +40,10 @@ Potential Tasks:
 - Use Moment.js when visualized dates.
 - Introduced Admin area.
 - Write Unit, Integration, System... Tests.
+
+# Database Diagram
+
+
 
 # Test
 
