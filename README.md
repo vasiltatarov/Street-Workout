@@ -1,4 +1,4 @@
-# Street-Workout
+#  Street-Workout
 
 ASP .NET Core MVC Application with a purpose to be a fitness app.
 
@@ -23,3 +23,9 @@ Potential Tasks:
 - Use Moment.js when visualized dates.
 - Introduced Admin area.
 - Write Unit, Integration, System... Tests.
+
+# Test
+
+* Services Test Coverage 100%
+
+![](img/ServicesTest.jpg)
