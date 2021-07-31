@@ -1,4 +1,4 @@
-﻿namespace StreetWorkout.Services.GroupWorkouts
+﻿namespace StreetWorkout.Services.GroupWorkouts.Models
 {
     public class GroupWorkoutModel
     {

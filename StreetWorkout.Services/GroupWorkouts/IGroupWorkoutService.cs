@@ -1,6 +1,7 @@
 ﻿namespace StreetWorkout.Services.GroupWorkouts
 {
     using System;
+    using Models;
 
     public interface IGroupWorkoutService
     {

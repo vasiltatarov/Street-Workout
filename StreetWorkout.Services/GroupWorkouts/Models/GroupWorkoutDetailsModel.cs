@@ -1,8 +1,8 @@
-﻿namespace StreetWorkout.Services.GroupWorkouts
+﻿namespace StreetWorkout.Services.GroupWorkouts.Models
 {
-    using System.Collections.Generic;
     using System;
-    using Workouts.Models;
+    using System.Collections.Generic;
+    using StreetWorkout.Services.Workouts.Models;
 
     public class GroupWorkoutDetailsModel
     {

@@ -8,6 +8,7 @@
     using Services.Workouts;
     using ViewModels.GroupWorkouts;
     using Services.GroupWorkouts;
+    using Services.GroupWorkouts.Models;
 
     [Authorize]
     public class GroupWorkoutsController : Controller

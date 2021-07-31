@@ -7,6 +7,7 @@
     using Data.Models;
     using Data.Models.Enums;
     using Workouts.Models;
+    using Models;
 
     public class GroupWorkoutService : IGroupWorkoutService
     {
@@ -48,7 +49,14 @@
 
         public byte AvailableTickets(int groupWorkoutId)
         {
-            var maxPlaces = this.data.GroupWorkouts.Find(groupWorkoutId).MaximumParticipants;
+            var groupWorkout = this.data.GroupWorkouts.FirstOrDefault(x => x.Id == groupWorkoutId);
+
+            if (groupWorkout == null)
+            {
+                return 0;
+            }
+
+            var maxPlaces = groupWorkout.MaximumParticipants;
 
             var boughtTickets = this.data
                 .UserWorkoutPayments
