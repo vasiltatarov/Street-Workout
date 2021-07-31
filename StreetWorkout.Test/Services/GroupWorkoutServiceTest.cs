@@ -193,8 +193,8 @@
         }
 
         [Theory]
-        [InlineData(1, "title 1", 1, "tuka", 12, 2, "vs1", "test")]
-        public void DetailsShouldReturnCorrectGroupWorkoutDetailsModelWithDetailsForGivenGroupWorkoutId(int groupWorkoutId, string title, int sportId, string address, byte maximumParticipants, byte pricePerPerson, string trainerId, string content)
+        [InlineData(1, "title 1", "tuka", 12, 2, "test")]
+        public void DetailsShouldReturnCorrectGroupWorkoutDetailsModelWithDetailsForGivenGroupWorkoutId(int groupWorkoutId, string title, string address, byte maximumParticipants, byte pricePerPerson, string content)
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -229,8 +229,8 @@
         }
 
         [Theory]
-        [InlineData(1, "title 1", 1, "tuka", 12, 2, "vs1", "test")]
-        public void DetailsShouldReturnNullWhenGroupWorkoutNotExist(int groupWorkoutId, string title, int sportId, string address, byte maximumParticipants, byte pricePerPerson, string trainerId, string content)
+        [InlineData(1)]
+        public void DetailsShouldReturnNullWhenGroupWorkoutNotExist(int groupWorkoutId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
