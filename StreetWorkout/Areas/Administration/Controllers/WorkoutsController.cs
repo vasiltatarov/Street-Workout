@@ -1,12 +1,11 @@
-﻿using StreetWorkout.Infrastructure;
-
-namespace StreetWorkout.Areas.Administration.Controllers
+﻿namespace StreetWorkout.Areas.Administration.Controllers
 {
     using System;
     using Microsoft.AspNetCore.Mvc;
     using Services.Workouts;
     using ViewModels.Workouts;
     using Data.Models.Enums;
+    using Infrastructure;
 
     public class WorkoutsController : AdministrationController
     {
