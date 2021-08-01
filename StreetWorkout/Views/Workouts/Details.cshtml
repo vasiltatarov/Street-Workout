@@ -8,11 +8,22 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9 mb40">
+            @if (this.User.IsInRole(WebConstants.AdministratorRoleName))
+            {
+                <div class="mb-1">
+                    <a asp-area="Administration" asp-controller="Workouts" asp-action="Edit" asp-route-id="@this.Model.Id" class="btn btn-primary text-white">
+                        Edit
+                    </a>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Delete
+                    </button>
+                </div>
+            }
             <article>
                 <img src="@this.Model.ImageUrl" alt="" class="img-fluid mb30">
                 <div class="post-content">
                     <h3 class="text-center">@this.ViewData["Title"]</h3>
-                    <hr />
+                    <hr/>
                     <ul class="post-meta list-inline">
                         <li class="list-inline-item">
                             <i class="fas fa-user-circle"></i>
@@ -34,16 +45,16 @@
                             <i class="fas fa-clock"></i> <a href="javascript:void(0)">@this.Model.Minutes Minutes</a>
                         </li>
                     </ul>
-                    <hr />
+                    <hr/>
                     <h3 class="text-center">Content</h3>
-                    <hr />
+                    <hr/>
                     <div>
                         @Html.Raw(this.Model.Content)
                     </div>
                     <hr class="mb40">
                     <h4 class="mb40 text-uppercase font500">About Author</h4>
                     <div class="media mb40">
-                        <img src="@this.Model.UserImageUrl" class="d-flex mr-3 img-fluid rounded-circle author-img" alt="@this.Model.UserUsername" />
+                        <img src="@this.Model.UserImageUrl" class="d-flex mr-3 img-fluid rounded-circle author-img" alt="@this.Model.UserUsername"/>
                         <div class="media-body">
                             <h5 class="mt-0"><b>@this.Model.UserUsername</b></h5> @this.Model.UserDescription
                         </div>
@@ -55,7 +66,7 @@
                         {
                             <div class="media mb40">
                                 <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i>
-                                <img src="@comment.UserImageUrl" class="d-flex mr-3 img-fluid rounded-circle comment-img" />
+                                <img src="@comment.UserImageUrl" class="d-flex mr-3 img-fluid rounded-circle comment-img"/>
                                 <div class="media-body">
                                     <h5 class="mt-0 font400 clearfix">
                                         <b>@comment.UserUserName</b>
@@ -106,6 +117,28 @@
                         </li>
                     }
                 </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete @this.Model.Title ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this workout?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a asp-area="Administration" asp-controller="Workouts" asp-action="Delete" asp-route-id="@this.Model.Id" class="btn btn-primary text-white">
+                    Delete
+                </a>
             </div>
         </div>
     </div>

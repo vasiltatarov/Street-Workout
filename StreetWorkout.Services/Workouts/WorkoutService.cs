@@ -43,7 +43,10 @@
 
         public WorkoutsQueryModel Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage)
         {
-            var workoutsQuery = this.data.Workouts.AsQueryable();
+            var workoutsQuery = this.data
+                .Workouts
+                .Where(x => !x.IsDeleted)
+                .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(sport))
             {
@@ -58,7 +61,7 @@
             if (!string.IsNullOrWhiteSpace(searchTerms))
             {
                 workoutsQuery = workoutsQuery
-                    .Where(x => x.Title.ToLower().Contains(searchTerms.ToLower()) || 
+                    .Where(x => x.Title.ToLower().Contains(searchTerms.ToLower()) ||
                                 x.Content.ToLower().Contains(searchTerms.ToLower()));
             }
 
@@ -171,6 +174,21 @@
 
         public bool IsValidBodyPartId(int id)
             => this.data.BodyParts.Any(x => x.Id == id);
+
+        public bool Delete(int id)
+        {
+            var workout = this.data.Workouts.FirstOrDefault(x => x.Id == id);
+
+            if (workout == null)
+            {
+                return false;
+            }
+
+            workout.IsDeleted = true;
+            this.data.SaveChanges();
+
+            return true;
+        }
 
         private static string GetImage(string bodyPart)
             => bodyPart switch

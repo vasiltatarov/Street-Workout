@@ -20,5 +20,7 @@
         bool IsValidSportId(int id);
 
         bool IsValidBodyPartId(int id);
+
+        bool Delete(int id);
     }
 }
