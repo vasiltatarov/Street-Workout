@@ -18,6 +18,7 @@
             this.CreateMap<Goal, GoalInAccountViewModel>();
             this.CreateMap<BodyPart, BodyPartInCreateWorkoutViewModel>();
             this.CreateMap<Sport, SportViewModel>();
+            this.CreateMap<Workout, WorkoutFormModel>();
         }
     }
 }

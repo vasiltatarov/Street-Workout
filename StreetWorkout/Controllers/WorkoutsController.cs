@@ -26,14 +26,14 @@
             => this.View(this.workouts.Details(id));
 
         public IActionResult Create()
-            => this.View(new CreateWorkoutFormModel
+            => this.View(new WorkoutFormModel
             {
                 Sports = this.workouts.GetSports(),
                 BodyParts = this.workouts.GetBodyParts(),
             });
 
         [HttpPost]
-        public IActionResult Create(CreateWorkoutFormModel workout)
+        public IActionResult Create(WorkoutFormModel workout)
         {
             if (!Enum.IsDefined(typeof(DifficultLevel), workout.DifficultLevel))
             {

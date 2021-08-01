@@ -41,6 +41,27 @@
             this.data.SaveChanges();
         }
 
+        public bool Edit(int id, string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, int minutes, string content)
+        {
+            var workout = this.data.Workouts.FirstOrDefault(x => x.Id == id);
+
+            if (workout == null)
+            {
+                return false;
+            }
+
+            workout.Title = title;
+            workout.SportId = sportId;
+            workout.DifficultLevel = difficultLevel;
+            workout.BodyPartId = bodyPartId;
+            workout.Minutes = minutes;
+            workout.Content = content;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
         public WorkoutsQueryModel Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage)
         {
             var workoutsQuery = this.data
@@ -157,6 +178,13 @@
                         .OrderByDescending(c => c.Id)
                         .ToList(),
                 })
+                .FirstOrDefault();
+
+        public WorkoutFormModel EditFormModel(int id)
+            => this.data
+                .Workouts
+                .Where(x => x.Id == id)
+                .ProjectTo<WorkoutFormModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefault();
 
         public IEnumerable<SportViewModel> GetSports()

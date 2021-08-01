@@ -9,9 +9,13 @@
     {
         void Create(string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, string userId, int minutes, string content);
 
+        bool Edit(int id, string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, int minutes, string content);
+
         WorkoutsQueryModel Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage);
 
         WorkoutDetailsServiceModel Details(int id);
+
+        public WorkoutFormModel EditFormModel(int id);
 
         IEnumerable<SportViewModel> GetSports();
 

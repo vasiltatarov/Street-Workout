@@ -5,8 +5,10 @@
 
     using static Common.DataConstants;
 
-    public class CreateWorkoutFormModel
+    public class WorkoutFormModel
     {
+        public int Id { get; set; }
+
         [Required]
         [StringLength(WorkoutTitleMaxLength, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = WorkoutTitleMinLength)]
         public string Title { get; set; }
