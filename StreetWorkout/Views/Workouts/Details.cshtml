@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9 mb40">
-            @if (this.User.IsInRole(WebConstants.AdministratorRoleName))
+            @if (this.User.IsInRole(WebConstants.AdministratorRoleName) || this.User.Identity.Name == this.Model.UserUsername)
             {
                 <div class="mb-1">
                     <a asp-area="Administration" asp-controller="Workouts" asp-action="Edit" asp-route-id="@this.Model.Id" class="btn btn-primary text-white">

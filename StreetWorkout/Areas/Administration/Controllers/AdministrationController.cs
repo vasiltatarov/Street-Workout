@@ -5,7 +5,7 @@
 
     using static WebConstants;
 
-    [Authorize(Roles = AdministratorRoleName)]
+    [Authorize]
     [Area(AreaName)]
     public class AdministrationController : Controller
     {

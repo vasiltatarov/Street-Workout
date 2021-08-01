@@ -197,6 +197,11 @@
                 .ProjectTo<BodyPartInCreateWorkoutViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
+        public bool IsUserOwnerCreator(string userId, int workoutId)
+            => this.data
+                .Workouts
+                .Any(x => x.Id == workoutId && x.UserId == userId);
+
         public bool IsValidSportId(int id)
             => this.data.Sports.Any(x => x.Id == id);
 

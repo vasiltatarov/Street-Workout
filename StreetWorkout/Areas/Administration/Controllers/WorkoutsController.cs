@@ -1,4 +1,6 @@
-﻿namespace StreetWorkout.Areas.Administration.Controllers
+﻿using StreetWorkout.Infrastructure;
+
+namespace StreetWorkout.Areas.Administration.Controllers
 {
     using System;
     using Microsoft.AspNetCore.Mvc;
@@ -15,6 +17,11 @@
 
         public IActionResult Edit(int id)
         {
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserOwnerCreator(this.User.GetId(), id))
+            {
+                return this.Unauthorized();
+            }
+
             var model = this.workouts.EditFormModel(id);
 
             if (model == null)
@@ -31,6 +38,11 @@
         [HttpPost]
         public IActionResult Edit(WorkoutFormModel model)
         {
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserOwnerCreator(this.User.GetId(), model.Id))
+            {
+                return this.Unauthorized();
+            }
+
             if (!Enum.IsDefined(typeof(DifficultLevel), model.DifficultLevel))
             {
                 this.ModelState.AddModelError(nameof(model.DifficultLevel), "Invalid difficult level.");
@@ -60,6 +72,11 @@
 
         public IActionResult Delete(int id)
         {
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserOwnerCreator(this.User.GetId(), id))
+            {
+                return this.Unauthorized();
+            }
+
             var isDeleted = this.workouts.Delete(id);
 
             if (!isDeleted)
