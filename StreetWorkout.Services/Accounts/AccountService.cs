@@ -90,7 +90,7 @@
                                 TrainingFrequency = ud.TrainingFrequency.Name,
                                 Weight = ud.Weight,
                                 Height = ud.Height,
-                                Description = ud.Description,   
+                                Description = ud.Description,
                             })
                             .FirstOrDefault(),
                 })
