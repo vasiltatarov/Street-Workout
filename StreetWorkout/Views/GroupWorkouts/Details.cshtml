@@ -8,11 +8,22 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9 mb40">
+            @if (this.User.IsInRole(WebConstants.AdministratorRoleName) || this.User.Identity.Name == this.Model.TrainerUsername)
+            {
+                <div class="mb-1">
+                    <a asp-area="Administration" asp-controller="GroupWorkouts" asp-action="Edit" asp-route-id="@this.Model.Id" class="btn btn-primary text-white">
+                        Edit
+                    </a>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete">
+                        Delete
+                    </button>
+                </div>
+            }
             <article>
                 <img src="@this.Model.ImageUrl" alt="" class="img-fluid mb30">
                 <div class="post-content">
                     <h3 class="text-center">@this.ViewData["Title"]</h3>
-                    <hr />
+                    <hr/>
                     <ul class="post-meta list-inline">
                         <li class="list-inline-item">
                             <i class="fas fa-user-circle"></i>
@@ -34,9 +45,9 @@
                             <i class="fas fa-clock"></i> <a href="javascript:void(0)">@this.Model.PricePerPerson BGN</a>
                         </li>
                     </ul>
-                    <hr />
+                    <hr/>
                     <p>Enjoy with training "<b>@this.Model.Title</b>" On <b>@this.Model.StartOn.ToString("D")</b> (<b>@this.Model.StartOn.DayOfWeek</b>) from <b>@this.Model.StartOn.TimeOfDay.ToString("hh':'mm")</b> h, with trainer <b>@this.Model.TrainerUsername</b>. In <b>@this.Model.Address</b>.</p>
-                    <hr />
+                    <hr/>
                     <h3 class="text-center">Content</h3>
                     <div>
                         @Html.Raw(this.Model.Content)
@@ -44,7 +55,7 @@
                     <hr class="mb40">
                     <h4 class="mb40 text-uppercase font500">About Author</h4>
                     <div class="media mb40">
-                        <img src="@this.Model.TrainerImageUrl" class="d-flex mr-3 img-fluid rounded-circle author-img" alt="@this.Model.TrainerUsername" />
+                        <img src="@this.Model.TrainerImageUrl" class="d-flex mr-3 img-fluid rounded-circle author-img" alt="@this.Model.TrainerUsername"/>
                         <div class="media-body">
                             <h5 class="mt-0"><b>@this.Model.TrainerUsername</b></h5> @this.Model.TrainerDescription
                         </div>
@@ -146,6 +157,28 @@
                         <button type="submit" class="btn btn-primary">Buy Ticket</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete @this.Model.Title ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this workout?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a asp-area="Administration" asp-controller="GroupWorkouts" asp-action="Delete" asp-route-id="@this.Model.Id" class="btn btn-primary text-white">
+                    Delete
+                </a>
             </div>
         </div>
     </div>

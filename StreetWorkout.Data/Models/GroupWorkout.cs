@@ -40,6 +40,8 @@ namespace StreetWorkout.Data.Models
 
         public DateTime CreatedOn { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public IEnumerable<UserWorkoutPayment> UserWorkoutPayments { get; set; } = new HashSet<UserWorkoutPayment>();
     }
 }

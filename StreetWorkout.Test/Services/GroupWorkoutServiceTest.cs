@@ -25,7 +25,9 @@
             });
             data.SaveChanges();
 
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             var result = accountService.IsUserTrainer(userId);
@@ -40,7 +42,8 @@
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             var result = accountService.IsUserTrainer(userId);
@@ -55,7 +58,9 @@
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             accountService.Create(title, sportId, address, DateTime.Now, DateTime.Now, maximumParticipants, pricePerPerson, trainerId, content);
@@ -90,7 +95,9 @@
             });
             data.SaveChanges();
 
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             var result = accountService.AvailableTickets(groupWorkoutId);
@@ -126,7 +133,9 @@
             });
             data.SaveChanges();
 
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             var result = accountService.AvailableTickets(groupWorkoutId);
@@ -162,7 +171,9 @@
             });
             data.SaveChanges();
 
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             var result = accountService.AvailableTickets(groupWorkoutId);
@@ -177,7 +188,9 @@
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             accountService.BuyTicket(userId, groupWorkoutId, fullName, phoneNumber, card, boughtTickets);
@@ -214,7 +227,9 @@
             });
             data.SaveChanges();
 
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             var result = accountService.Details(groupWorkoutId);
@@ -234,7 +249,9 @@
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             var result = accountService.Details(groupWorkoutId);
@@ -265,7 +282,9 @@
             }));
             data.SaveChanges();
 
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             var result = accountService.All(currentPage, userId);
@@ -302,7 +321,9 @@
             }));
             data.SaveChanges();
 
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             var result = accountService.All(currentPage, userId);
@@ -331,7 +352,9 @@
             });
             data.SaveChanges();
 
-            var accountService = new GroupWorkoutService(data);
+            var mapper = MapperMock.Instance;
+
+            var accountService = new GroupWorkoutService(data, mapper);
 
             // Act
             var result = accountService.All(currentPage, userId);

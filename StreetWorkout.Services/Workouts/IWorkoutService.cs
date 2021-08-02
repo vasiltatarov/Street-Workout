@@ -21,7 +21,7 @@
 
         IEnumerable<BodyPartInCreateWorkoutViewModel> GetBodyParts();
 
-        bool IsUserOwnerCreator(string userId, int workoutId);
+        bool IsUserCreator(string userId, int workoutId);
 
         bool IsValidSportId(int id);
 

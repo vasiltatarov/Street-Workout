@@ -2,9 +2,10 @@
 {
     using AutoMapper;
     using Data.Models;
+    using Services.Homes.Models;
     using ViewModels.Workouts;
     using ViewModels.Accounts;
-    using Services.Homes.Models;
+    using ViewModels.GroupWorkouts;
 
     public class MappingProfile : Profile
     {
@@ -19,6 +20,7 @@
             this.CreateMap<BodyPart, BodyPartInCreateWorkoutViewModel>();
             this.CreateMap<Sport, SportViewModel>();
             this.CreateMap<Workout, WorkoutFormModel>();
+            this.CreateMap<GroupWorkout, GroupWorkoutFormModel>();
         }
     }
 }

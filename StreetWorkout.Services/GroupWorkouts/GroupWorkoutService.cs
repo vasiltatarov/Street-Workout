@@ -2,19 +2,26 @@
 {
     using System;
     using System.Linq;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using Data;
     using Data.Models;
     using Data.Models.Enums;
     using Workouts.Models;
     using Models;
+    using StreetWorkout.ViewModels.GroupWorkouts;
 
     public class GroupWorkoutService : IGroupWorkoutService
     {
         private readonly StreetWorkoutDbContext data;
+        private readonly IMapper mapper;
 
-        public GroupWorkoutService(StreetWorkoutDbContext data)
-            => this.data = data;
+        public GroupWorkoutService(StreetWorkoutDbContext data, IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
         public bool IsUserTrainer(string userId)
         {
@@ -27,6 +34,11 @@
 
             return user.UserRole == UserRole.Trainer;
         }
+
+        public bool IsUserCreator(string userId, int groupWorkoutId)
+            => this.data
+                .GroupWorkouts
+                .Any(x => x.TrainerId == userId && x.Id == groupWorkoutId);
 
         public void Create(string title, int sportId, string address, DateTime startOn, DateTime endOn, byte maximumParticipants, byte pricePerPerson, string trainerId, string content)
         {
@@ -45,6 +57,43 @@
             };
             this.data.GroupWorkouts.Add(groupWorkout);
             this.data.SaveChanges();
+        }
+
+        public bool Edit(int id, string title, int sportId, string address, DateTime startOn, DateTime endOn, byte maximumParticipants, byte pricePerPerson, string content)
+        {
+            var groupWorkout = this.data.GroupWorkouts.FirstOrDefault(x => x.Id == id);
+
+            if (groupWorkout == null)
+            {
+                return false;
+            }
+
+            groupWorkout.Title = title;
+            groupWorkout.SportId = sportId;
+            groupWorkout.Address = address;
+            groupWorkout.StartOn = startOn;
+            groupWorkout.EndOn = endOn;
+            groupWorkout.MaximumParticipants = maximumParticipants;
+            groupWorkout.PricePerPerson = pricePerPerson;
+            groupWorkout.Content = content;
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+        public bool Delete(int id)
+        {
+            var groupWorkout = this.data.GroupWorkouts.FirstOrDefault(x => x.Id == id);
+
+            if (groupWorkout == null)
+            {
+                return false;
+            }
+
+            groupWorkout.IsDeleted = true;
+            this.data.SaveChanges();
+
+            return true;
         }
 
         public byte AvailableTickets(int groupWorkoutId)
@@ -84,7 +133,9 @@
 
         public GroupWorkoutsQueryModel All(int currentPage, string userId)
         {
-            var workoutsQuery = this.data.GroupWorkouts.AsQueryable();
+            var workoutsQuery = this.data.GroupWorkouts
+                .Where(x => !x.IsDeleted)
+                .AsQueryable();
 
             var groupWorkouts = workoutsQuery
                 .Skip((currentPage - 1) * GroupWorkoutsQueryModel.WorkoutsPerPage)
@@ -149,6 +200,13 @@
                         })
                         .ToList(),
                 })
+                .FirstOrDefault();
+
+        public GroupWorkoutFormModel EditFormModel(int id)
+            => this.data
+                .GroupWorkouts
+                .Where(x => x.Id == id)
+                .ProjectTo<GroupWorkoutFormModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefault();
 
         public static string GetImageBySport(string sport)

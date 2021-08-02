@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StreetWorkout.Data;
 
 namespace StreetWorkout.Data.Migrations
 {
     [DbContext(typeof(StreetWorkoutDbContext))]
-    partial class StreetWorkoutDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210802102503_AddIsDeletedPropertyOnGroupWorkout")]
+    partial class AddIsDeletedPropertyOnGroupWorkout
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

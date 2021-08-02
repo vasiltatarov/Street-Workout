@@ -10,6 +10,8 @@
 
     public class GroupWorkoutFormModel
     {
+        public int Id { get; set; }
+
         [Required]
         [StringLength(TitleMaxLength, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = TitleMinLength)]
         public string Title { get; set; }

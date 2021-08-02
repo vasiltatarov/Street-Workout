@@ -16,7 +16,7 @@
 
         public IActionResult Edit(int id)
         {
-            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserOwnerCreator(this.User.GetId(), id))
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserCreator(this.User.GetId(), id))
             {
                 return this.Unauthorized();
             }
@@ -37,7 +37,7 @@
         [HttpPost]
         public IActionResult Edit(WorkoutFormModel model)
         {
-            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserOwnerCreator(this.User.GetId(), model.Id))
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserCreator(this.User.GetId(), model.Id))
             {
                 return this.Unauthorized();
             }
@@ -71,7 +71,7 @@
 
         public IActionResult Delete(int id)
         {
-            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserOwnerCreator(this.User.GetId(), id))
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserCreator(this.User.GetId(), id))
             {
                 return this.Unauthorized();
             }
