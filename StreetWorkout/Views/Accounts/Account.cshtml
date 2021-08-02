@@ -43,7 +43,13 @@
                     @{
                         var isStarChecked = (int)Math.Floor(Model.VotesAverageValue);
                     }
-                    @if (this.Model.IsTrainer)
+                    @if (this.User.Identity.Name == this.Model.Username)
+                    {
+                        <br />
+                        <p>Star Rating:</p>
+                        <p>Note: You cannot rate yourself!</p>
+                    }
+                    else if (this.Model.IsTrainer)
                     {
                         <br />
                         <p>Star Rating:</p>
