@@ -4,6 +4,12 @@ ASP .NET Core MVC application designed to help people who are active in all spor
 # Project Introduction
 StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (April-June 2021). <br /> The website is application for people who are active in the sports.
 
+# Note
+ConnectionStrings:
+* MacOs - Data Source=127.0.0.1,1433;Initial Catalog=StreetWorkout;User ID=sa;Password=<YourStrong@Passw0rd>;
+* Windows - Server=.;Database=StreetWorkout;Trusted_Connection=True;MultipleActiveResultSets=true
+
+
 # Built With
 * ASP.NET Core 5 MVC
 * ASP.NET CORE view components
