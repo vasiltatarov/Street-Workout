@@ -21,6 +21,25 @@ StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (Apri
 * Font Awesome Icons
 * TinyMCE
 
+# Functionality
+* Users Registration.
+* Ability to View, Create, Read Publications.
+* Ability to Comment, like, save and print publications.
+* Ability to Edit and Delete publications (Only for the creator).
+* Ability to Follow users, as well as be followed by other users.
+* Ability to Filter publications by category and search by Title.
+* Chat room allowing users to exchange messages.
+* Cache Data 'Memory Cache' (see below in HomePage) to reduce database queries.
+* Interactive, flexible UX (User Experience)
+
+# Quick Start
+
+* Administrator User - seeded by default and you can use it without making new registration if you want.
+```javascript
+UserName = Vasilkovski
+Password = vasko123
+```
+
 # Database Diagram
 
 ![](img/ServicesTest.jpg)
