@@ -9,8 +9,8 @@
 
         public bool IsAccountCompleted { get; set; }
 
-        public List<UserIndexServiceModel> Users { get; set; }
+        public IEnumerable<UserIndexServiceModel> Users { get; set; }
 
-        public IEnumerable<WorkoutServiceModel> Workouts { get; set; }
+        public IEnumerable<WorkoutServiceModel> LatestWorkouts { get; set; }
     }
 }

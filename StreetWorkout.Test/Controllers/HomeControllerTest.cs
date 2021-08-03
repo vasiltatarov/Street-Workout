@@ -49,7 +49,7 @@
                     {
                         Assert.False(model.IsAccountCompleted);
                         Assert.True(model.IsTrainer);
-                        Assert.Equal(3, model.Workouts.Count());
+                        Assert.Equal(3, model.LatestWorkouts.Count());
                         Assert.Empty(model.Users);
                     }));
 

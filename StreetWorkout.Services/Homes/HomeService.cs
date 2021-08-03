@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Collections.Generic;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
@@ -30,29 +31,33 @@
             {
                 IsAccountCompleted = user.IsAccountCompleted,
                 IsTrainer = user.UserRole == UserRole.Trainer,
-                Users = this.data
-                    .UserDatas
-                    .OrderByDescending(x => Guid.NewGuid())
-                    .Take(3)
-                    .ProjectTo<UserIndexServiceModel>(this.mapper.ConfigurationProvider)
-                    .ToList(),
-                Workouts = this.data
-                    .Workouts
-                    .OrderByDescending(x => Guid.NewGuid())
-                    .Take(3)
-                    .Select(x => new WorkoutServiceModel
-                    {
-                        Id = x.Id,
-                        Title = x.Title,
-                        Sport = x.Sport.Name,
-                        DifficultLevel = x.DifficultLevel.ToString(),
-                        BodyPart = x.BodyPart.Name,
-                        ImageUrl = GetImage(x.BodyPart.Name),
-                        Minutes = x.Minutes,
-                    })
-                    .ToList(),
             };
         }
+
+        public IEnumerable<WorkoutServiceModel> Workouts()
+            => this.data
+                .Workouts
+                .OrderByDescending(x => x.Id)
+                .Take(3)
+                .Select(x => new WorkoutServiceModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Sport = x.Sport.Name,
+                    DifficultLevel = x.DifficultLevel.ToString(),
+                    BodyPart = x.BodyPart.Name,
+                    ImageUrl = GetImage(x.BodyPart.Name),
+                    Minutes = x.Minutes,
+                })
+                .ToList();
+
+        public IEnumerable<UserIndexServiceModel> Users()
+            => this.data
+                .UserDatas
+                .OrderByDescending(x => Guid.NewGuid())
+                .Take(3)
+                .ProjectTo<UserIndexServiceModel>(this.mapper.ConfigurationProvider)
+                .ToList();
 
         private static string GetImage(string bodyPart)
             => bodyPart switch
