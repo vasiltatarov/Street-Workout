@@ -1,3 +1,6 @@
+#  Street-Workout
+ASP .NET Core MVC application designed to help people who are active in all sports.
+
 # Project Introduction
 StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (April-June 2021). <br /> The website is application for people who are active in the sports.
 
@@ -12,14 +15,36 @@ StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (Apri
 * jQuery
 * Moq
 * XUnit
+* Shouldly
+* [MyTested.AspNetCore.Mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)
 * Bootstrap
 * Font Awesome Icons
+* TinyMCE
 
-#  Street-Workout
+# Database Diagram
 
-ASP .NET Core MVC Application with a purpose to be a fitness app.
+![](img/ServicesTest.jpg)
 
-Steps to create a similar web application from scratch:
+# Test
+
+### Libraries used for testing:
+
+* XUnit
+* Moq
+* [MyTested.AspNetCore.Mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)
+* Shouldly
+
+---
+
+* Services Test Coverage 100%
+
+![](img/ServicesTest.jpg)
+
+* Controllers Test Coverage 100%
+
+![](img/ServicesTest.jpg)
+
+# Steps to create a similar web application from scratch:
 
 1. Create and clean project.
 2. Introduced data project and configure Database in it.
@@ -35,18 +60,9 @@ Steps to create a similar web application from scratch:
 12. Implemented training creation.
 13. Implemented group workouts, visualization and creation.
 14. Implemented body calculator, which calculates how many calories you need per day.
+15. Introduced Administartor area.
+16. Cover services with unit tests.
+17. Cover Controlles with integration tests.
 
 Potential Tasks:
 - Use Moment.js when visualized dates.
-- Introduced Admin area.
-- Write Unit, Integration, System... Tests.
-
-# Database Diagram
-
-
-
-# Test
-
-* Services Test Coverage 100%
-
-![](img/ServicesTest.jpg)
