@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Collections.Generic;
+    using Shouldly;
     using Xunit;
     using MyTested.AspNetCore.Mvc;
 
@@ -107,13 +108,71 @@
                     .WithModelOfType<AccountFormModel>()
                     .Passing(data =>
                     {
-                        Assert.NotNull(data);
-                        Assert.Null(data.Description);
-                        Assert.Equal(0, data.GoalId);
-                        Assert.Equal(0, data.SportId);
-                        Assert.Equal(0, data.Weight);
-                        Assert.Equal(0, data.Height);
-                        Assert.Equal(2, data.Sports.Count());
+                        data.ShouldNotBeNull();
+                        data.Description.ShouldBeNull();
+                        data.GoalId.ShouldBe(0);
+                        data.SportId.ShouldBe(0);
+                        data.Weight.ShouldBe(0);
+                        data.Height.ShouldBe(0);
+                        data.Sports.Count().ShouldBe(2);
                     }));
+
+        [Fact]
+        public void CompleteAccountShouldReturnRedirectToActionAfterCompleteAccountCorrectAndShouldBeAllowedOnlyForPostRequest()
+            => MyController<AccountsController>
+                .Instance(controller => controller
+                    .WithUser(user => user
+                        .WithIdentifier("vs"))
+                    .WithData(data => data
+                        .WithEntities(new ApplicationUser
+                        {
+                            Id = "vs"
+                        })
+                        .WithEntities(new Goal
+                        {
+                            Name = "as"
+                        })
+                        .WithEntities(new Sport
+                        {
+                            Name = "ads"
+                        })
+                        .WithEntities(new TrainingFrequency()
+                        {
+                            Name = "ads"
+                        })))
+                .Calling(c => c.CompleteAccount(new AccountFormModel
+                {
+                    GoalId = 1,
+                    SportId = 1,
+                    TrainingFrequencyId = 1,
+                    Description = "asdadasasddasasdsd",
+                    Height = 123,
+                    Weight = 56,
+                }))
+                .ShouldHave()
+                .ActionAttributes(attributes => attributes
+                    .RestrictingForHttpMethod(System.Net.Http.HttpMethod.Post))
+                .AndAlso()
+                .ShouldReturn()
+                .RedirectToAction("Index", "Home");
+
+        [Fact]
+        public void CompleteAccountShouldRedirectToActionAfterTryToCompleteAccountWhichIsAlreadyCompletedAndShouldBeAllowedOnlyForPostRequest()
+            => MyController<AccountsController>
+                .Instance(controller => controller
+                    .WithUser()
+                    .WithData(data => data
+                        .WithEntities(new ApplicationUser
+                        {
+                            Id = "TestId",
+                            IsAccountCompleted = true,
+                        })))
+                .Calling(c => c.CompleteAccount(With.Default<AccountFormModel>()))
+                .ShouldHave()
+                .ActionAttributes(attributes => attributes
+                    .RestrictingForHttpMethod(System.Net.Http.HttpMethod.Post))
+                .AndAlso()
+                .ShouldReturn()
+                .RedirectToAction("Index", "Home");
     }
 }
