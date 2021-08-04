@@ -101,6 +101,9 @@ if (latestWorkouts == null)
 
 Potential Tasks:
 - Use Moment.js when visualized dates.
+- Add documentation about project architecture.
+- Add documentation about best practices and high quality code.
+- Implement a chat where all registered users can exchange messages.
 
 
 # Note
