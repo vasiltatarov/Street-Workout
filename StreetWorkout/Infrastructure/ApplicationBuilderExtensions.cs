@@ -35,7 +35,33 @@
 
             SeedWorkouts(services);
 
+            SeedSupplementCategories(services);
+
             return app;
+        }
+
+        private static void SeedSupplementCategories(IServiceProvider services)
+        {
+            var data = services.GetRequiredService<StreetWorkoutDbContext>();
+
+            if (data.SupplementCategories.Any())
+            {
+                return;
+            }
+
+            data.SupplementCategories.AddRange(new SupplementCategory[]
+            {
+                new () { Name = "Pre Workout" },
+                new () { Name = "Post Workout" },
+                new () { Name = "Intra Workout" },
+                new () { Name = "Amino" },
+                new () { Name = "Creatine" },
+                new () { Name = "Protein" },
+                new () { Name = "Gainer" },
+                new () { Name = "Vitamins" },
+                new () { Name = "Hormone-Stimulating" },
+            });
+            data.SaveChanges();
         }
 
         private static void CompleteUserAdministratorAccount(IServiceProvider services)
