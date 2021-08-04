@@ -24,5 +24,7 @@
         public string Content { get; set; }
 
         public decimal Price { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
