@@ -1,0 +1,10 @@
+﻿@{
+    this.ViewData["Title"] = "Supplements";
+}
+
+@if (this.User.IsInRole(WebConstants.AdministratorRoleName))
+{
+    <div class="text-center">
+        <a asp-area="" asp-controller="Supplements" asp-action="Create" class="btn btn-info text-white">Create Supplement</a>
+    </div>
+}

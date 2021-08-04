@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Supplements\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Supplements\" />
+  </ItemGroup>
 </Project>
