@@ -4,12 +4,6 @@ ASP .NET Core MVC application designed to help people who are active in all spor
 # Project Introduction
 StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (April-June 2021). <br /> The website is application for people who are active in the sports.
 
-# Note
-ConnectionStrings:
-* MacOs - Data Source=127.0.0.1,1433;Initial Catalog=StreetWorkout;User ID=sa;Password=<YourStrong@Passw0rd>;
-* Windows - Server=.;Database=StreetWorkout;Trusted_Connection=True;MultipleActiveResultSets=true
-
-
 # Built With
 * ASP.NET Core 5 MVC
 * ASP.NET CORE view components
@@ -37,13 +31,29 @@ ConnectionStrings:
 * Chat room allowing users to exchange messages.
 * Cache Data 'Memory Cache' (see below in HomePage) to reduce database queries.
 * Interactive, flexible UX (User Experience)
+* Used Cache in home page
 
-# Quick Start
+# Quick Start && Implementation
 
 * Administrator User - seeded by default and you can use it without making new registration if you want.
 ```javascript
 UserName = Vasilkovski
 Password = vasko123
+```
+
+* Cache - The latest workouts/users on the home page are cached with the purpose of reducing requests to the database.
+
+```javascript
+var latestWorkouts = this.cache.Get<IEnumerable<WorkoutServiceModel>>(LatestWorkoutsCacheKey);
+if (latestWorkouts == null)
+{
+    latestWorkouts = this.homeService.Workouts();
+
+    var cacheOptions = new MemoryCacheEntryOptions()
+        .SetAbsoluteExpiration(TimeSpan.FromMinutes(10));
+
+    this.cache.Set(LatestWorkoutsCacheKey, latestWorkouts, cacheOptions);
+}
 ```
 
 # Database Diagram
@@ -91,3 +101,9 @@ Password = vasko123
 
 Potential Tasks:
 - Use Moment.js when visualized dates.
+
+
+# Note
+ConnectionStrings:
+* MacOs - Data Source=127.0.0.1,1433;Initial Catalog=StreetWorkout;User ID=sa;Password=<YourStrong@Passw0rd>;
+* Windows - Server=.;Database=StreetWorkout;Trusted_Connection=True;MultipleActiveResultSets=true
