@@ -45,5 +45,15 @@
 
             public const int PricePerPersonMaxValue = 100;
         }
+
+        public class SupplementConstants
+        {
+            public const int NameMaxLength = 80;
+        }
+
+        public class SupplementCategoryConstants
+        {
+            public const int SupplementCategoryMaxLength = 30;
+        }
     }
 }

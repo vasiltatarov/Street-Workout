@@ -34,6 +34,10 @@
 
         public DbSet<UserWorkoutPayment> UserWorkoutPayments { get; set; }
 
+        public DbSet<Supplement> Supplements { get; set; }
+
+        public DbSet<SupplementCategory> SupplementCategories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
@@ -118,6 +122,13 @@
                 .HasOne(x => x.GroupWorkout)
                 .WithMany(x => x.UserWorkoutPayments)
                 .HasForeignKey(x => x.GroupWorkoutId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Supplement>()
+                .HasOne(x => x.Category)
+                .WithMany(x => x.Supplements)
+                .HasForeignKey(x => x.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
