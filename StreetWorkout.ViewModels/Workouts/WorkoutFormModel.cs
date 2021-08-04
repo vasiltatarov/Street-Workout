@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using static Common.DataConstants;
+    using static ViewModelConstants.WorkoutFormModelConstants;
 
     public class WorkoutFormModel
     {

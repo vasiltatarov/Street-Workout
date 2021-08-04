@@ -5,7 +5,7 @@ namespace StreetWorkout.Data.Models
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using static Common.GroupWorkoutConstants;
+    using static DataConstants.GroupWorkoutConstants;
 
     public class GroupWorkout
     {

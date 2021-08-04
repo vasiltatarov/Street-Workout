@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using Workouts;
 
-    using static Common.DataConstants;
+    using static ViewModelConstants.AccountFormModelConstants;
 
     public class AccountFormModel
     {

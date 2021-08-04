@@ -6,7 +6,7 @@
 
     using Workouts;
 
-    using static Common.GroupWorkoutConstants;
+    using static ViewModelConstants.GroupWorkoutConstants;
 
     public class GroupWorkoutFormModel
     {

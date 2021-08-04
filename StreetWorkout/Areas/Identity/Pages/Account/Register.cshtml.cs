@@ -20,7 +20,7 @@ namespace StreetWorkout.Areas.Identity.Pages.Account
     using Data.Models;
     using Data;
 
-    using static Common.DataConstants;
+    using static Data.DataConstants;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
