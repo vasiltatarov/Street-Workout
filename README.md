@@ -104,6 +104,7 @@ Potential Tasks:
 - Add documentation about project architecture.
 - Add documentation about best practices and high quality code.
 - Implement a chat where all registered users can exchange messages.
+- Implement Administration on SupplementCategories, Sports, BodyParts, Goals ... 
 
 
 # Note
