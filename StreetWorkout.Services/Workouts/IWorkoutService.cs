@@ -19,7 +19,7 @@
 
         IEnumerable<SportViewModel> GetSports();
 
-        IEnumerable<BodyPartInCreateWorkoutViewModel> GetBodyParts();
+        IEnumerable<BodyPartViewModel> GetBodyParts();
 
         bool IsUserCreator(string userId, int workoutId);
 

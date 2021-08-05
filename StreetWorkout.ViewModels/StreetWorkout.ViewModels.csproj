@@ -7,7 +7,4 @@
   <ItemGroup>
     <None Remove="Supplements\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Supplements\" />
-  </ItemGroup>
 </Project>

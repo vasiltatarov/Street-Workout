@@ -30,6 +30,6 @@
 
         public IEnumerable<SportViewModel> Sports { get; set; }
 
-        public IEnumerable<BodyPartInCreateWorkoutViewModel> BodyParts { get; set; }
+        public IEnumerable<BodyPartViewModel> BodyParts { get; set; }
     }
 }

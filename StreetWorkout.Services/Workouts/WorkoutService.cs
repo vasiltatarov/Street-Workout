@@ -192,9 +192,9 @@
                 .ProjectTo<SportViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
-        public IEnumerable<BodyPartInCreateWorkoutViewModel> GetBodyParts()
+        public IEnumerable<BodyPartViewModel> GetBodyParts()
             => this.data.BodyParts
-                .ProjectTo<BodyPartInCreateWorkoutViewModel>(this.mapper.ConfigurationProvider)
+                .ProjectTo<BodyPartViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
         public bool IsUserCreator(string userId, int workoutId)

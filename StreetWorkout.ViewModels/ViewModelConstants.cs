@@ -43,5 +43,19 @@
             public const int WorkoutTitleMinLength = 10;
             public const int WorkoutTitleMaxLength = 200;
         }
+
+        public class SupplementFormModelConstants
+        {
+            public const int NameMinLength = 5;
+            public const int NameMaxLength = 80;
+
+            public const int PriceMinValue = 5;
+            public const int PriceMaxValue = 250;
+
+            public const int ContentMinLength = 5;
+
+            public const int QuantityMinValue = 200;
+            public const int QuantityMaxValue = 7000;
+        }
     }
 }

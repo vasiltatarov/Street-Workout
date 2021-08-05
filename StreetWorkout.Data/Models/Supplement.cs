@@ -25,6 +25,8 @@
 
         public decimal Price { get; set; }
 
+        public short Quantity { get; set; }
+
         public bool IsDeleted { get; set; }
     }
 }
