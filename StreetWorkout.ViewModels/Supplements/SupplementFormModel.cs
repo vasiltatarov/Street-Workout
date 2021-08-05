@@ -19,9 +19,11 @@
         [MinLength(ContentMinLength)]
         public string Content { get; set; }
 
+        [Display(Name = "Price in BGN")]
         [Range(PriceMinValue, PriceMaxValue)]
         public decimal Price { get; set; }
 
+        [Display(Name = "Quantity in Grams")]
         [Range(QuantityMinValue, QuantityMaxValue)]
         public short Quantity { get; set; }
 

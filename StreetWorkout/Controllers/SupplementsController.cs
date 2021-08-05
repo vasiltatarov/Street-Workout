@@ -5,6 +5,7 @@
 
     using ViewModels.Supplements;
     using Services.Supplements;
+    using StreetWorkout.Services.Supplements.Models;
 
     using static WebConstants;
 
@@ -16,10 +17,8 @@
         public SupplementsController(ISupplementService supplements)
             => this.supplements = supplements;
 
-        public IActionResult All()
-        {
-            return this.View();
-        }
+        public IActionResult All([FromQuery]SupplementsQueryModel query)
+            => this.View(this.supplements.All(query.CurrentPage));
 
         [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Create()

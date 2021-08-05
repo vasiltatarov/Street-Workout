@@ -13,4 +13,10 @@
     <ProjectReference Include="..\StreetWorkout.ViewModels\StreetWorkout.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Supplements\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Supplements\Models\" />
+  </ItemGroup>
 </Project>

@@ -1,10 +1,40 @@
-﻿@{
+﻿@model SupplementsQueryModel
+@{
     this.ViewData["Title"] = "Supplements";
 }
 
-@if (this.User.IsInRole(WebConstants.AdministratorRoleName))
-{
-    <div class="text-center">
-        <a asp-area="" asp-controller="Supplements" asp-action="Create" class="btn btn-info text-white">Create Supplement</a>
+<link rel="stylesheet" href="~/css/supplements.css" asp-append-version="true">
+
+<section class="dark">
+    <div class="container py-4">
+        @if (this.User.IsInRole(WebConstants.AdministratorRoleName))
+        {
+            <div class="text-center">
+                <a asp-area="" asp-controller="Supplements" asp-action="Create" class="btn btn-info text-white">Create Supplement</a>
+            </div>
+        }
+        <h1 class="h1 text-center" id="pageHeaderTitle">@this.ViewData["Title"]</h1>
+
+        @foreach (var supplement in this.Model.Supplements)
+        {
+            <hr class="bg-danger" />
+            <article class="postcard dark blue">
+                <a class="postcard__img_link" href="javascript:void(0)">
+                    <img class="postcard__img supplement-img" src="@supplement.ImageUrl" alt="Image Title" />
+                </a>
+                <div class="postcard__text">
+                    <h1 class="postcard__title blue"><a href="javascript:void(0)">@supplement.Name</a></h1>
+                    <span class="badge badge-success mb-2">@supplement.Category</span>
+                    <div class="postcard__bar"></div>
+                    <div class="postcard__preview-txt">@supplement.ShortContent ...</div>
+                    <br />
+                    <ul class="postcard__tagbox">
+                        <li class="tag__item"><i class="fas fa-tag mr-2"></i>Price: @supplement.Price BGN</li>
+                        <li class="tag__item"><i class="fas fa-clock mr-2"></i>Quantity: @supplement.Quantity grams</li>
+                    </ul>
+                    <a class="btn btn-primary">View More</a>
+                </div>
+            </article>
+        }
     </div>
-}
+</section>
