@@ -29,8 +29,8 @@
                     <div class="postcard__preview-txt">@supplement.ShortContent ...</div>
                     <br />
                     <ul class="postcard__tagbox">
-                        <li class="tag__item"><i class="fas fa-tag mr-2"></i>Price: @supplement.Price BGN</li>
-                        <li class="tag__item"><i class="fas fa-clock mr-2"></i>Quantity: @supplement.Quantity grams</li>
+                        <li class="tag__item"><i class="fas fa-dollar-sign mr-2"></i>Price: @supplement.Price BGN</li>
+                        <li class="tag__item"><i class="fas fa-flask mr-2"></i>Quantity: @supplement.Quantity grams / tabs</li>
                     </ul>
                     <a class="btn btn-primary">View More</a>
                 </div>
@@ -38,3 +38,86 @@
         }
     </div>
 </section>
+
+<hr />
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+    var maxPage = (int)Math.Ceiling((double)Model.TotalSupplements / SupplementsQueryModel.supplementsPerPage);
+}
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : string.Empty)">
+            <a class="page-link"
+               asp-controller="Supplements"
+               asp-action="All"
+               asp-route-currentPage="@previousPage">
+                Previous
+            </a>
+        </li>
+        @if ((Model.CurrentPage - 1) > 1)
+        {
+            <li class="page-item">
+                <a class="page-link"
+                   asp-controller="Supplements"
+                   asp-action="All"
+                   asp-route-currentPage="@(Model.CurrentPage - 2)">
+                    @(Model.CurrentPage - 2)
+                </a>
+            </li>
+        }
+        @if (Model.CurrentPage > 1)
+        {
+            <li class="page-item">
+                <a class="page-link"
+                   asp-controller="Supplements"
+                   asp-action="All"
+                   asp-route-currentPage="@(Model.CurrentPage - 1)">
+                    @(Model.CurrentPage - 1)
+                </a>
+            </li>
+        }
+        <li class="page-item active disabled">
+            <a class="page-link"
+               asp-controller="Supplements"
+               asp-action="All"
+               asp-route-currentPage="@Model.CurrentPage">
+                @Model.CurrentPage
+            </a>
+        </li>
+        @if (Model.CurrentPage != maxPage)
+        {
+            <li class="page-item @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)">
+                <a class="page-link"
+                   asp-controller="Supplements"
+                   asp-action="All"
+                   asp-route-currentPage="@(Model.CurrentPage + 1)">
+                    @(Model.CurrentPage + 1)
+                </a>
+            </li>
+        }
+        @if ((Model.CurrentPage + 1) < maxPage)
+        {
+            <li class="page-item @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)">
+                <a class="page-link"
+                   asp-controller="Supplements"
+                   asp-action="All"
+                   asp-route-currentPage="@(Model.CurrentPage + 2)">
+                    @(Model.CurrentPage + 2)
+                </a>
+            </li>
+        }
+        <li class="page-item @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)">
+            <a class="page-link"
+               asp-controller="Supplements"
+               asp-action="All"
+               asp-route-currentPage="@(Model.CurrentPage + 1)">
+                Next
+            </a>
+        </li>
+    </ul>
+</nav>
