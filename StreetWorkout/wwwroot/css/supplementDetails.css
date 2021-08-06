@@ -1,0 +1,52 @@
+﻿
+
+    .profil .yacht-info__list li {
+        width: 25%;
+    }
+
+.olanaklar-kutu {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    overflow: hidden;
+    float: left;
+    width: 100%;
+    margin: 15px 0px;
+}
+
+.olanaklar {
+    float: left;
+    width: 100%;
+    position: relative;
+    padding: 25px 30px 30px;
+}
+
+.margin-top--22 {
+    margin-top: -22px;
+}
+
+.olanaklar-kutu h4 {
+    color: #FF9800;
+}
+
+.yacht-info__list img {
+    width: 20px;
+    padding-right: 5px;
+}
+
+.yacht-info__list {
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+}
+
+    .yacht-info__list li {
+        padding: 6px 0;
+        font-size: 15px;
+        display: table;
+        height: 100%;
+        line-height: 21px;
+        float: left;
+        width: 50%;
+        margin-bottom: 5px;
+    }

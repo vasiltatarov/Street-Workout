@@ -15,7 +15,9 @@
         {
             // From Services
             this.CreateMap<UserData, UserIndexServiceModel>();
-            this.CreateMap<Supplement, SupplementServiceModel>();
+            this.CreateMap<Supplement, SupplementServiceModel>()
+                .ForMember(x => x.Category,
+                y => y.MapFrom(x => x.Category.Name));
 
             // From View Models
             this.CreateMap<Sport, SportViewModel>();
