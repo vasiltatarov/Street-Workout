@@ -104,7 +104,11 @@ Potential Tasks:
 - Add documentation about project architecture.
 - Add documentation about best practices and high quality code.
 - Implement a chat where all registered users can exchange messages.
-- Implement Administration on SupplementCategories, Sports, BodyParts, Goals ... 
+- Implement Administration on SupplementCategories, Sports, BodyParts, Goals ...
+- Fix Footer.
+- Use TempData for success message after added new entity.
+- Impelement searching in supplements.
+- Add latest supplements in home page.
 
 
 # Note
