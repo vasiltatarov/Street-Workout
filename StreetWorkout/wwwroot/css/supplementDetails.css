@@ -1,8 +1,16 @@
-﻿
+﻿.suppl-details-img {
+    width: 100%;
+    height: 300px;
+}
 
-    .profil .yacht-info__list li {
-        width: 25%;
-    }
+.tests {
+    display: grid;
+    background-image: -webkit-linear-gradient(0deg, #FF9800 0%, #F44336 100%);
+}
+
+.profil .yacht-info__list li {
+    width: 25%;
+}
 
 .olanaklar-kutu {
     background: #fff;
