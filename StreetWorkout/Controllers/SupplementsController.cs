@@ -5,7 +5,7 @@
 
     using ViewModels.Supplements;
     using Services.Supplements;
-    using StreetWorkout.Services.Supplements.Models;
+    using Services.Supplements.Models;
 
     using static WebConstants;
 
@@ -46,5 +46,8 @@
 
             return this.RedirectToAction("All");
         }
+
+        public IActionResult Details(int id)
+            => this.View(this.supplements.Details(id));
     }
 }

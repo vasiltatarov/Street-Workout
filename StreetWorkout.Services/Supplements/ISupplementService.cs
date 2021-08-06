@@ -1,7 +1,7 @@
 ﻿namespace StreetWorkout.Services.Supplements
 {
     using System.Collections.Generic;
-    using StreetWorkout.Services.Supplements.Models;
+    using Models;
     using StreetWorkout.ViewModels.Supplements;
 
     public interface ISupplementService
@@ -11,6 +11,8 @@
         IEnumerable<SupplementCategoryViewModel> GetSupplementCategories();
 
         SupplementsQueryModel All(int currentPage);
+
+        SupplementServiceModel Details(int id);
 
         bool IsValidCategoryId(int id);
     }

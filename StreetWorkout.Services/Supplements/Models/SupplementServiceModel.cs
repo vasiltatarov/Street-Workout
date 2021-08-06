@@ -10,7 +10,7 @@
 
         public string ImageUrl { get; set; }
 
-        public string ShortContent { get; set; }
+        public string Content { get; set; }
 
         public decimal Price { get; set; }
 

@@ -1,19 +1,25 @@
 ﻿namespace StreetWorkout.Services.Supplements
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using System.Linq;
     using System.Collections.Generic;
 
     using StreetWorkout.ViewModels.Supplements;
-    using StreetWorkout.Services.Supplements.Models;
+    using Models;
     using Data;
     using Data.Models;
 
     public class SupplementService : ISupplementService
     {
         private readonly StreetWorkoutDbContext data;
+        private readonly IMapper mapper;
 
-        public SupplementService(StreetWorkoutDbContext data)
-            => this.data = data;
+        public SupplementService(StreetWorkoutDbContext data, IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
         public SupplementsQueryModel All(int currentPage)
         {
@@ -31,7 +37,7 @@
                     Name = x.Name,
                     Category = x.Category.Name,
                     ImageUrl = x.ImageUrl,
-                    ShortContent = x.Content.Substring(0, 300),
+                    Content = x.Content.Substring(0, 300),
                     Price = x.Price,
                     Quantity = x.Quantity,
                 })
@@ -44,6 +50,13 @@
                  TotalSupplements = supplementsQuery.Count(),
             };
         }
+
+        public SupplementServiceModel Details(int id)
+            => this.data
+                .Supplements
+                .Where(x => x.Id == id)
+                .ProjectTo<SupplementServiceModel>(this.mapper.ConfigurationProvider)
+                .FirstOrDefault();
 
         public void Create(string name, int categoryId, string imageUrl, string content, decimal price, short quantity)
         {
@@ -63,11 +76,7 @@
 
         public IEnumerable<SupplementCategoryViewModel> GetSupplementCategories()
             => this.data.SupplementCategories
-                .Select(x => new SupplementCategoryViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                })
+                .ProjectTo<SupplementCategoryViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
         public bool IsValidCategoryId(int id)

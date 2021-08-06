@@ -23,16 +23,18 @@
                     <img class="postcard__img supplement-img" src="@supplement.ImageUrl" alt="Image Title" />
                 </a>
                 <div class="postcard__text">
-                    <h1 class="postcard__title blue"><a href="javascript:void(0)">@supplement.Name</a></h1>
+                    <h1 class="postcard__title blue">
+                        <a asp-area="" asp-controller="Supplements" asp-action="Details" asp-route-id="@supplement.Id">@supplement.Name</a>
+                    </h1>
                     <span class="badge badge-success mb-2">@supplement.Category</span>
                     <div class="postcard__bar"></div>
-                    <div class="postcard__preview-txt">@supplement.ShortContent ...</div>
+                    <div class="postcard__preview-txt">@supplement.Content ...</div>
                     <br />
                     <ul class="postcard__tagbox">
                         <li class="tag__item"><i class="fas fa-dollar-sign mr-2"></i>Price: @supplement.Price BGN</li>
                         <li class="tag__item"><i class="fas fa-flask mr-2"></i>Quantity: @supplement.Quantity grams / tabs</li>
                     </ul>
-                    <a class="btn btn-primary">View More</a>
+                    <a asp-area="" asp-controller="Supplements" asp-action="Details" asp-route-id="@supplement.Id" class="btn btn-primary float-right">View More</a>
                 </div>
             </article>
         }
