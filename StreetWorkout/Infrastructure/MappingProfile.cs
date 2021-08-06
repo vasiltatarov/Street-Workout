@@ -1,13 +1,13 @@
 ﻿namespace StreetWorkout.Infrastructure
 {
     using AutoMapper;
-    using Data.Models;
     using Services.Homes.Models;
     using Services.Supplements.Models;
     using ViewModels.Workouts;
     using ViewModels.Accounts;
     using ViewModels.GroupWorkouts;
     using ViewModels.Supplements;
+    using StreetWorkout.Data.Models;
 
     public class MappingProfile : Profile
     {
