@@ -1,4 +1,6 @@
-﻿namespace StreetWorkout.Infrastructure
+﻿using System;
+
+namespace StreetWorkout.Infrastructure
 {
     using AutoMapper;
     using Services.Homes.Models;
@@ -14,7 +16,13 @@
         public MappingProfile()
         {
             // From Services
-            this.CreateMap<UserData, UserIndexServiceModel>();
+            this.CreateMap<UserData, UserIndexServiceModel>()
+                .ForMember(x => x.Country,
+                    y => y.MapFrom(x => x.User.Country.Name))
+                .ForMember(x => x.Gender,
+                    y => y.MapFrom(x => x.User.Gender))
+                .ForMember(x => x.Age,
+                    y => y.MapFrom(x => DateTime.Now.Year - x.User.DateOfBirth.Year));
             this.CreateMap<Supplement, SupplementServiceModel>()
                 .ForMember(x => x.Category,
                 y => y.MapFrom(x => x.Category.Name));

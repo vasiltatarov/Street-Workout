@@ -12,6 +12,10 @@
     height: 200px;
 }
 
+.card-home-height {
+    height: 500px;
+}
+
 /*from Trainers All.cshtml*/
 .img-trainer {
     width: 100%;

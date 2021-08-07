@@ -32,7 +32,6 @@
     </div>
 }
 <br />
-<br />
 <div class="features">
     <div class="container">
         <div class="row">
@@ -60,7 +59,37 @@
         </div>
     </div>
 </div>
-<br />
+<div class="blog-posts">
+    <div class="text-center">
+        <h2>Latest Supplements</h2>
+        <br />
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach (var supplement in Model.LatestSupplements)
+            {
+                <div class="col-sm-6 col-md-4 mb-4">
+                    <div class="component">
+                        <div class="card card-home-height">
+                            <div class="card-header">
+                                <img class="card-img card-home-img" src="@supplement.ImageUrl" alt="@supplement.Name">
+                            </div>
+                            <div class="card-body">
+                                <span class="badge badge-success mb-2">@supplement.Category</span>
+                                <h4 class="card-title">@supplement.Name</h4>
+                                <p class="card-text">Price: <b>@supplement.Price BGN</b></p>
+                                <p class="card-text">Quantity: <b>@((supplement.Quantity / 1000.0).ToString("F3")) kg</b></p>
+                            </div>
+                            <div class="card-footer">
+                                <a asp-controller="Supplements" asp-action="Details" asp-route-id="@supplement.Id" class="btn btn-primary">View More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 <br />
 <div class="blog-posts">
     <div class="text-center">
@@ -73,9 +102,9 @@
             {
                 <div class="col-sm-6 col-md-4 mb-4">
                     <div class="component">
-                        <div class="card">
+                        <div class="card card-home-height">
                             <div class="card-header">
-                                <img class="card-img card-home-img" src="@workout.ImageUrl" alt="dog">
+                                <img class="card-img card-home-img" src="@workout.ImageUrl" alt="@workout.Title">
                             </div>
                             <div class="card-body">
                                 <span class="badge badge-success mb-2">@workout.Sport</span>
@@ -153,13 +182,16 @@
     {
         <div class="col-md-4">
             <div class="component">
-                <div class="card">
+                <div class="card card-home-height">
                     <div class="card-header">
                         <img class="card-img card-home-img" src="@user.UserImageUrl" alt="@user.UserUserName">
                     </div>
                     <div class="card-body">
                         <span class="badge badge-warning mb-2">@user.SportName</span>
                         <h4 class="card-title">@user.UserUserName</h4>
+                        <p class="card-text">Country: <b>@user.Country</b></p>
+                        <p class="card-text">Gender: <b>@user.Gender</b></p>
+                        <p class="card-text">Age: <b>@user.Age Years</b></p>
                     </div>
                     <div class="card-footer">
                         <a asp-controller="Accounts" asp-action="Account" asp-route-username="@user.UserUserName" class="btn btn-primary">View More</a>
