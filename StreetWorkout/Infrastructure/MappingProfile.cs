@@ -7,7 +7,7 @@
     using ViewModels.Accounts;
     using ViewModels.GroupWorkouts;
     using ViewModels.Supplements;
-    using StreetWorkout.Data.Models;
+    using Data.Models;
 
     public class MappingProfile : Profile
     {
@@ -27,6 +27,8 @@
             this.CreateMap<Workout, WorkoutFormModel>();
             this.CreateMap<GroupWorkout, GroupWorkoutFormModel>();
             this.CreateMap<SupplementCategory, SupplementCategoryViewModel>();
+            this.CreateMap<Supplement, SupplementFormModel>();
+
         }
     }
 }

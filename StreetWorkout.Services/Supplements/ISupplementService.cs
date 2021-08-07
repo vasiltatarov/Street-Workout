@@ -14,6 +14,10 @@
 
         SupplementServiceModel Details(int id);
 
+        SupplementFormModel EditForModel(int id);
+
+        bool Edit(int id, string name, int categoryId, string imageUrl, string content, decimal price, short quantity);
+
         bool IsValidCategoryId(int id);
     }
 }

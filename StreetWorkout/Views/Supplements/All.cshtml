@@ -10,7 +10,7 @@
         @if (this.User.IsInRole(WebConstants.AdministratorRoleName))
         {
             <div class="text-center">
-                <a asp-area="" asp-controller="Supplements" asp-action="Create" class="btn btn-info text-white">Create Supplement</a>
+                <a asp-area="Administration" asp-controller="Supplements" asp-action="Create" class="btn btn-info text-white">Create Supplement</a>
             </div>
         }
         <h1 class="h1 text-center" id="pageHeaderTitle">@this.ViewData["Title"]</h1>

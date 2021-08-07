@@ -58,6 +58,34 @@
                 .ProjectTo<SupplementServiceModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefault();
 
+        public SupplementFormModel EditForModel(int id)
+            => this.data
+                .Supplements
+                .Where(x => x.Id == id)
+                .ProjectTo<SupplementFormModel>(this.mapper.ConfigurationProvider)
+                .FirstOrDefault();
+
+        public bool Edit(int id, string name, int categoryId, string imageUrl, string content, decimal price, short quantity)
+        {
+            var supplement = this.data.Supplements.FirstOrDefault(x => x.Id == id);
+
+            if (supplement == null)
+            {
+                return false;
+            }
+
+            supplement.Name = name;
+            supplement.CategoryId = categoryId;
+            supplement.ImageUrl = imageUrl;
+            supplement.Content = content;
+            supplement.Price = price;
+            supplement.Quantity = quantity;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
         public void Create(string name, int categoryId, string imageUrl, string content, decimal price, short quantity)
         {
             var supplement = new Supplement

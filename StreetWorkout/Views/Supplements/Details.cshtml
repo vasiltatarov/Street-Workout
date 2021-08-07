@@ -4,8 +4,27 @@
 }
 
 <link rel="stylesheet" href="~/css/supplementDetails.css" asp-append-version="true">
+
+@{
+    var message = (string)this.TempData[WebConstants.TempDataMessageKeys.EditedSuccessfully];
+    if (message != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <i class="fa fa-check"></i>
+            <strong>Yay!</strong> @message
+        </div>
+    }
+}
+
 <div class="row">
     <div class="col-md-8">
+        <div class="text-white text-center">
+            <a asp-area="Administration" asp-controller="Supplements" asp-action="Edit" asp-route-id="@this.Model.Id" class="btn btn-info">Edit</a>
+            <a class="btn btn-danger">Delete</a>
+        </div>
         <div class="olanaklar-kutu">
             <div class="olanaklar">
                 <h4 class="pb-3">@this.Model.Name</h4>
