@@ -29,9 +29,10 @@ StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (Apri
 * Ability to Follow users, as well as be followed by other users.
 * Ability to Filter publications by category and search by Title.
 * Chat room allowing users to exchange messages.
-* Cache Data 'Memory Cache' (see below in HomePage) to reduce database queries.
+* Cache Data 'Memory Cache' (see below) to reduce database queries.
 * Interactive, flexible UX (User Experience)
 * Used Cache in home page
+* Page about Supplements with Create, Edit and Delete actions only for administrator. 
 
 # Quick Start && Implementation
 
@@ -98,6 +99,8 @@ if (latestWorkouts == null)
 15. Introduced Administartor area.
 16. Cover services with unit tests.
 17. Cover Controlles with integration tests.
+18. Implemented page for supplements with Create, Edit and Delete actions.
+19. Removed 'this' from all views.
 
 Potential Tasks:
 - Use Moment.js when visualized dates.
@@ -109,7 +112,7 @@ Potential Tasks:
 - Use TempData for success message after added new entity.
 - Impelement searching in supplements.
 - Add latest supplements in home page.
-- Remove 'this' from all the views.
+- Test Routing and Logic of the controllers.
 
 
 # Note
