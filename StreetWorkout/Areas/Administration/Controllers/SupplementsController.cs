@@ -85,9 +85,23 @@
                 return this.BadRequest();
             }
 
-            this.TempData[EditedSuccessfully] = "You Edited " + model.Name + " Successfully.";
+            this.TempData[EditKey] = string.Format(EditMessage, model.Name);
 
             return this.RedirectToAction("Details", "Supplements", new { area = "", Id = id });
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var isDeleted = this.supplements.Delete(id);
+
+            if (!isDeleted)
+            {
+                return this.BadRequest();
+            }
+
+            this.TempData[DeleteKey] = string.Format(DeleteMessage, "Supplement");
+
+            return this.RedirectToAction("All", "Supplements", new { area = "" });
         }
     }
 }

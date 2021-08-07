@@ -8,7 +8,11 @@
 
         public class TempDataMessageKeys
         {
-            public const string EditedSuccessfully = "EditedSuccessfully";
+            public const string EditKey = "EditKey";
+            public const string EditMessage = "You Edited {0} Successfully.";
+
+            public const string DeleteKey = "DeleteKey";
+            public const string DeleteMessage = "You Deleted {0} Successfully.";
         }
     }
 }

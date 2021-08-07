@@ -86,6 +86,22 @@
             return true;
         }
 
+        public bool Delete(int id)
+        {
+            var supplement = this.data.Supplements.FirstOrDefault(x => x.Id == id);
+
+            if (supplement == null)
+            {
+                return false;
+            }
+
+            supplement.IsDeleted = true;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
         public void Create(string name, int categoryId, string imageUrl, string content, decimal price, short quantity)
         {
             var supplement = new Supplement

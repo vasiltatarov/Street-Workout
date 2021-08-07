@@ -18,6 +18,8 @@
 
         bool Edit(int id, string name, int categoryId, string imageUrl, string content, decimal price, short quantity);
 
+        bool Delete(int id);
+
         bool IsValidCategoryId(int id);
     }
 }
