@@ -36,11 +36,12 @@ StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (Apri
 
 # Project Architecture
 * I use simple project architecture consisting of 5 projects.
-    1. StreetWorkout - ASP .NET Core Web App MVC.
-    2. StreetWorkout.Data - Class Library, holding DBContext, Migrations and DB-Models.
-    3. StreetWorkout.Services - Class Library, holding Services and Service Models.
-    4. StreetWorkout.ViewModels - Class Library, holding View Models.
-    5. StreetWorkout.Test - XUnit Test Project, holding Service and Controllers Tests.
+
+1. StreetWorkout - ASP .NET Core Web App MVC.
+2. StreetWorkout.Data - Class Library, holding DBContext, Migrations and DB-Models.
+3. StreetWorkout.Services - Class Library, holding Services and Service Models.
+4. StreetWorkout.ViewModels - Class Library, holding View Models.
+5. StreetWorkout.Test - XUnit Test Project, holding Service and Controllers Tests.
 
 ![](img/ProjectArchitecture.jpg)
 
