@@ -101,6 +101,8 @@ if (latestWorkouts == null)
 17. Cover Controlles with integration tests.
 18. Implemented page for supplements with Create, Edit and Delete actions.
 19. Removed 'this' from all views.
+20. Use TempData for messages after adding, editing and deleting new entity.
+21. Impelemented searching of supplements.
 
 Potential Tasks:
 - Use Moment.js when visualized dates.
@@ -109,8 +111,6 @@ Potential Tasks:
 - Implement a chat where all registered users can exchange messages.
 - Implement Administration on SupplementCategories, Sports, BodyParts, Goals ...
 - Fix Footer.
-- Use TempData for success message after added new entity.
-- Impelement searching in supplements.
 - Add latest supplements in home page.
 - Test Routing and Logic of the controllers.
 
