@@ -114,17 +114,16 @@ if (latestWorkouts == null)
 19. Removed 'this' from all views.
 20. Use TempData for messages after adding, editing and deleting new entity.
 21. Impelemented searching of supplements.
+22. Added documentation about project architecture.
+23. Fixed footer.
 
 Potential Tasks:
 - Use Moment.js when visualized dates.
-- Add documentation about project architecture.
 - Add documentation about best practices and high quality code.
 - Implement a chat where all registered users can exchange messages.
 - Implement Administration on SupplementCategories, Sports, BodyParts, Goals ...
-- Fix Footer.
 - Add latest supplements in home page.
 - Test Routing and Logic of the controllers.
-
 
 # Note
 ConnectionStrings:
