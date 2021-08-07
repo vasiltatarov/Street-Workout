@@ -2,7 +2,7 @@
 ASP .NET Core MVC application designed to help people who are active in all sports.
 
 # Project Introduction
-StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (April-June 2021). <br /> The website is application for people who are active in the sports.
+StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (April-June 2021). <br /> The website is application for people who are active in the sports. The Project follow the best practices for Object Oriented design and high-quality code for the Web application.
 
 # Built With
 * ASP.NET Core 5 MVC
@@ -116,13 +116,13 @@ if (latestWorkouts == null)
 21. Impelemented searching of supplements.
 22. Added documentation about project architecture.
 23. Fixed footer.
+24. Listed latest supplements at home page.
+25. Added documentation about best practices and high quality code.
 
 Potential Tasks:
-- Use Moment.js when visualized dates.
-- Add documentation about best practices and high quality code.
+- Use Moment.js when visualized dates and time.
 - Implement a chat where all registered users can exchange messages.
 - Implement Administration on SupplementCategories, Sports, BodyParts, Goals ...
-- Add latest supplements in home page.
 - Test Routing and Logic of the controllers.
 
 # Note
