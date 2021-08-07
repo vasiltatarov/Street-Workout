@@ -109,6 +109,7 @@ Potential Tasks:
 - Use TempData for success message after added new entity.
 - Impelement searching in supplements.
 - Add latest supplements in home page.
+- Remove 'this' from all the views.
 
 
 # Note
