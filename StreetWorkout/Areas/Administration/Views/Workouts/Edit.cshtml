@@ -1,13 +1,13 @@
 ﻿@using StreetWorkout.Data.Models.Enums
 @model WorkoutFormModel
 @{
-    this.ViewData["Title"] = "Edit " + this.Model.Title;
+    ViewData["Title"] = "Edit " + Model.Title;
 }
 
 <div class="container">
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-10 offset-xl-1 col-xl-10">
-            <h1 class="text-center">@this.ViewData["Title"]</h1>
+            <h1 class="text-center">@ViewData["Title"]</h1>
             <form method="post">
                 <div class="form-group">
                     <label asp-for="Title"></label>
@@ -57,7 +57,7 @@
                     <span asp-validation-for="Minutes" class="text-danger small"></span>
                 </div>
                 <input type="submit" class="btn btn-success" value="Edit" />
-                <a asp-area="" asp-controller="Workouts" asp-action="Details" asp-route-id="@this.Model.Id" class="btn btn-info">Back to Workout</a>
+                <a asp-area="" asp-controller="Workouts" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">Back to Workout</a>
             </form>
         </div>
     </div>

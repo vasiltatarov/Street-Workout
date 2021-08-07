@@ -1,6 +1,5 @@
 ﻿namespace StreetWorkout.Areas.Administration.Controllers
 {
-    using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
@@ -14,13 +13,9 @@
     public class SupplementsController : AdministrationController
     {
         private readonly ISupplementService supplements;
-        private readonly IMapper mapper;
 
-        public SupplementsController(ISupplementService supplements, IMapper mapper)
-        {
-            this.supplements = supplements;
-            this.mapper = mapper;
-        }
+        public SupplementsController(ISupplementService supplements)
+            => this.supplements = supplements;
 
         public IActionResult Create()
             => this.View(new SupplementFormModel

@@ -1,12 +1,12 @@
 ﻿@model SupplementFormModel
 @{
-    this.ViewData["Title"] = "Create Supplement";
+    ViewData["Title"] = "Create Supplement";
 }
 
 <div class="container">
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-10 offset-xl-1 col-xl-10">
-            <h1 class="text-center">@this.ViewData["Title"]</h1>
+            <h1 class="text-center">@ViewData["Title"]</h1>
             <form method="post">
                 <div class="form-group">
                     <label asp-for="Name"></label>
@@ -17,7 +17,7 @@
                     <label asp-for="CategoryId"></label>
                     <select asp-for="CategoryId" class="form-control">
                         <option value="0">--- Select Category ---</option>
-                        @foreach (var category in this.Model.Categories)
+                        @foreach (var category in Model.Categories)
                         {
                             <option value="@category.Id">@category.Name</option>
                         }
@@ -44,7 +44,7 @@
                     <input asp-for="Quantity" class="form-control" placeholder="Weight in Grams." />
                     <span asp-validation-for="Quantity" class="text-danger small"></span>
                 </div>
-                <input type="submit" class="btn btn-info" value="@this.ViewData["Title"]" />
+                <input type="submit" class="btn btn-info" value="@ViewData["Title"]" />
             </form>
         </div>
     </div>
