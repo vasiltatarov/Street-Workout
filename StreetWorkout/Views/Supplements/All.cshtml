@@ -27,7 +27,38 @@
                 <a asp-area="Administration" asp-controller="Supplements" asp-action="Create" class="btn btn-info text-white">Create Supplement</a>
             </div>
         }
-        <h1 class="h1 text-center" id="pageHeaderTitle">@ViewData["Title"]</h1>
+        <h1 class="h1 text-center text-white" id="pageHeaderTitle">@ViewData["Title"]</h1>
+
+        <form class="text-white">
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label asp-for="SearchTerms"></label>
+                    <input asp-for="SearchTerms" class="form-control" placeholder="Search by Name or Content.">
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="CategoryId"></label>
+                    <select asp-for="CategoryId" class="form-control">
+                        <option value="">All</option>
+                        @foreach (var category in Model.Categories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="offset-5">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+
+        @{
+            var message = TempData[WebConstants.TempDataMessageKeys.NotFoundSupplementsKey];
+            if (message != null)
+            {
+                <br />
+                <h1 class="text-center text-danger">@message</h1>
+            }
+        }
 
         @foreach (var supplement in Model.Supplements)
         {
@@ -62,7 +93,7 @@
     {
         previousPage = 1;
     }
-    var maxPage = (int)Math.Ceiling((double)Model.TotalSupplements / SupplementsQueryModel.supplementsPerPage);
+    var maxPage = (int)Math.Ceiling((double)Model.TotalSupplements / SupplementsQueryModel.SupplementsPerPage);
 }
 
 <nav aria-label="Page navigation example">
@@ -71,7 +102,9 @@
             <a class="page-link"
                asp-controller="Supplements"
                asp-action="All"
-               asp-route-currentPage="@previousPage">
+               asp-route-currentPage="@previousPage"
+               asp-route-searchTerms="@Model.SearchTerms"
+               asp-route-categoryId="@Model.CategoryId">
                 Previous
             </a>
         </li>
@@ -81,7 +114,9 @@
                 <a class="page-link"
                    asp-controller="Supplements"
                    asp-action="All"
-                   asp-route-currentPage="@(Model.CurrentPage - 2)">
+                   asp-route-currentPage="@(Model.CurrentPage - 2)"
+                   asp-route-searchTerms="@Model.SearchTerms"
+                   asp-route-categoryId="@Model.CategoryId">
                     @(Model.CurrentPage - 2)
                 </a>
             </li>
@@ -92,7 +127,9 @@
                 <a class="page-link"
                    asp-controller="Supplements"
                    asp-action="All"
-                   asp-route-currentPage="@(Model.CurrentPage - 1)">
+                   asp-route-currentPage="@(Model.CurrentPage - 1)"
+                   asp-route-searchTerms="@Model.SearchTerms"
+                   asp-route-categoryId="@Model.CategoryId">
                     @(Model.CurrentPage - 1)
                 </a>
             </li>
@@ -101,7 +138,9 @@
             <a class="page-link"
                asp-controller="Supplements"
                asp-action="All"
-               asp-route-currentPage="@Model.CurrentPage">
+               asp-route-currentPage="@Model.CurrentPage"
+               asp-route-searchTerms="@Model.SearchTerms"
+               asp-route-categoryId="@Model.CategoryId">
                 @Model.CurrentPage
             </a>
         </li>
@@ -111,7 +150,9 @@
                 <a class="page-link"
                    asp-controller="Supplements"
                    asp-action="All"
-                   asp-route-currentPage="@(Model.CurrentPage + 1)">
+                   asp-route-currentPage="@(Model.CurrentPage + 1)"
+                   asp-route-searchTerms="@Model.SearchTerms"
+                   asp-route-categoryId="@Model.CategoryId">
                     @(Model.CurrentPage + 1)
                 </a>
             </li>
@@ -131,7 +172,9 @@
             <a class="page-link"
                asp-controller="Supplements"
                asp-action="All"
-               asp-route-currentPage="@(Model.CurrentPage + 1)">
+               asp-route-currentPage="@(Model.CurrentPage + 1)"
+               asp-route-searchTerms="@Model.SearchTerms"
+               asp-route-categoryId="@Model.CategoryId">
                 Next
             </a>
         </li>

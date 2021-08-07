@@ -21,16 +21,33 @@
             this.mapper = mapper;
         }
 
-        public SupplementsQueryModel All(int currentPage)
+        public SupplementsQueryModel All(int currentPage, string searchTerms, int categoryId)
         {
             var supplementsQuery = this.data
                 .Supplements
                 .Where(x => !x.IsDeleted)
                 .AsQueryable();
 
+            if (categoryId != 0)
+            {
+                supplementsQuery = supplementsQuery
+                    .Where(x => x.CategoryId == categoryId)
+                    .AsQueryable();
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchTerms))
+            {
+                var searchTermsToLower = searchTerms.ToLower();
+
+                supplementsQuery = supplementsQuery
+                    .Where(x => x.Name.ToLower().Contains(searchTermsToLower)
+                                || x.Content.ToLower().Contains(searchTermsToLower))
+                    .AsQueryable();
+            }
+
             var supplements = supplementsQuery
-                .Skip((currentPage - 1) * SupplementsQueryModel.supplementsPerPage)
-                .Take(SupplementsQueryModel.supplementsPerPage)
+                .Skip((currentPage - 1) * SupplementsQueryModel.SupplementsPerPage)
+                .Take(SupplementsQueryModel.SupplementsPerPage)
                 .Select(x => new SupplementServiceModel
                 {
                     Id = x.Id,
@@ -48,6 +65,9 @@
                  CurrentPage = currentPage,
                  Supplements = supplements,
                  TotalSupplements = supplementsQuery.Count(),
+                 Categories = this.GetSupplementCategories(),
+                 CategoryId = categoryId,
+                 SearchTerms = searchTerms,
             };
         }
 

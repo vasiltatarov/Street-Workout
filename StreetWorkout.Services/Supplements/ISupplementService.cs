@@ -10,7 +10,7 @@
 
         IEnumerable<SupplementCategoryViewModel> GetSupplementCategories();
 
-        SupplementsQueryModel All(int currentPage);
+        SupplementsQueryModel All(int currentPage, string searchTerms, int categoryId);
 
         SupplementServiceModel Details(int id);
 

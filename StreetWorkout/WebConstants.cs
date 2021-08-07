@@ -13,6 +13,9 @@
 
             public const string DeleteKey = "DeleteKey";
             public const string DeleteMessage = "You Deleted {0} Successfully.";
+
+            public const string NotFoundSupplementsKey = "NotFoundSupplements";
+            public const string NotFoundSupplementsMessage = "Not Found Supplement with given searched criteria.";
         }
     }
 }
