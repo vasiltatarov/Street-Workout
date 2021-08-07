@@ -7,9 +7,9 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-6">
-                <h1 class="display-4">Welcome <br> @(this.Model.IsTrainer ? "Trainer" : "Enthusiast").</h1>
+                <h1 class="display-4">Welcome <br> @(Model.IsTrainer ? "Trainer" : "Enthusiast").</h1>
                 <p class="lead my-4">
-                    @(this.Model.IsAccountCompleted ? "Your account is fully completed." : "Your account is not completed. Please complete your account to use all of the functionality of the website.")
+                    @(Model.IsAccountCompleted ? "Your account is fully completed." : "Your account is not completed. Please complete your account to use all of the functionality of the website.")
                     <br> Enjoy yourself with us ...
                     <br /> And move your body to the next level because, the movements are healthy.
                 </p>
@@ -22,7 +22,7 @@
         </div>
     </div>
 </div>
-@if (!this.Model.IsAccountCompleted)
+@if (!Model.IsAccountCompleted)
 {
     <br />
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -69,7 +69,7 @@
     </div>
     <div class="container">
         <div class="row">
-            @foreach (var workout in this.Model.LatestWorkouts)
+            @foreach (var workout in Model.LatestWorkouts)
             {
                 <div class="col-sm-6 col-md-4 mb-4">
                     <div class="component">
@@ -149,7 +149,7 @@
 <h2 class="text-center">Latest Register Users</h2>
 <br />
 <div class="row">
-    @foreach (var user in this.Model.Users)
+    @foreach (var user in Model.Users)
     {
         <div class="col-md-4">
             <div class="component">

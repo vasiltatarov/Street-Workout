@@ -1,12 +1,12 @@
 ﻿@model SupplementServiceModel
 @{
-    this.ViewData["Title"] = this.Model.Name;
+    ViewData["Title"] = Model.Name;
 }
 
 <link rel="stylesheet" href="~/css/supplementDetails.css" asp-append-version="true">
 
 @{
-    var message = this.TempData[WebConstants.TempDataMessageKeys.EditKey];
+    var message = TempData[WebConstants.TempDataMessageKeys.EditKey];
     if (message != null)
     {
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -22,38 +22,38 @@
 <div class="row">
     <div class="col-md-8">
         <div class="text-white text-center">
-            <a asp-area="Administration" asp-controller="Supplements" asp-action="Edit" asp-route-id="@this.Model.Id" class="btn btn-info">Edit</a>
+            <a asp-area="Administration" asp-controller="Supplements" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info">Edit</a>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteSupplement">Delete</button>
         </div>
         <div class="olanaklar-kutu">
             <div class="olanaklar">
-                <h4 class="pb-3">@this.Model.Name</h4>
+                <h4 class="pb-3">@Model.Name</h4>
                 <ul class="yacht-info__list ">
                     <li>
                         <h2>Price - </h2>
                     </li>
                     <li>
-                        <h2>@this.Model.Price BGN</h2>
+                        <h2>@Model.Price BGN</h2>
                     </li>
                     <li>
                         <h2>Quantity -</h2>
                     </li>
                     <li>
-                        <h2>@((this.Model.Quantity / 1000.0).ToString("F3")) kg</h2>
+                        <h2>@((Model.Quantity / 1000.0).ToString("F3")) kg</h2>
                     </li>
                 </ul>
             </div>
             <div class="olanaklar margin-top--22">
                 <h4 class="pb-3">Content</h4>
-                <p>@Html.Raw(this.Model.Content)</p>
+                <p>@Html.Raw(Model.Content)</p>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card"></div>
-        <img class="suppl-details-img" src="@this.Model.ImageUrl" alt="@this.Model.Name" />
+        <img class="suppl-details-img" src="@Model.ImageUrl" alt="@Model.Name" />
         <div class="card-body text-center ">
-            <h2 class="text-center">@this.Model.Category</h2>
+            <h2 class="text-center">@Model.Category</h2>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <a href="#" class=" tests text-uppercase text-center">Buy</a>
         </div>
@@ -64,7 +64,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete @this.Model.Name ?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete @Model.Name ?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -74,7 +74,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a asp-area="Administration" asp-controller="Supplements" asp-action="Delete" asp-route-id="@this.Model.Id" class="btn btn-danger">Delete</a>
+                <a asp-area="Administration" asp-controller="Supplements" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>

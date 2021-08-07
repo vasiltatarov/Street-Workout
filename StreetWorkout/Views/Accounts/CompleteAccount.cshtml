@@ -1,12 +1,12 @@
 ﻿@model AccountFormModel
 @{
-    this.ViewData["Title"] = "Complete Account";
+    ViewData["Title"] = "Complete Account";
 }
 
 <div class="container">
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
-            <h1 class="text-center">@this.ViewData["Title"]</h1>
+            <h1 class="text-center">@ViewData["Title"]</h1>
             <form method="post">
                 <div class="form-group">
                     <label asp-for="SportId"></label>

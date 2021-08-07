@@ -1,6 +1,6 @@
 ﻿@model GroupWorkoutDetailsModel
 @{
-    this.ViewData["Title"] = this.Model.Title;
+    ViewData["Title"] = Model.Title;
 }
 
 <link href="~/css/details.css" rel="stylesheet" asp-append-version="true" />
@@ -8,10 +8,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9 mb40">
-            @if (this.User.IsInRole(WebConstants.AdministratorRoleName) || this.User.Identity.Name == this.Model.TrainerUsername)
+            @if (User.IsInRole(WebConstants.AdministratorRoleName) || User.Identity.Name == Model.TrainerUsername)
             {
                 <div class="mb-1">
-                    <a asp-area="Administration" asp-controller="GroupWorkouts" asp-action="Edit" asp-route-id="@this.Model.Id" class="btn btn-primary text-white">
+                    <a asp-area="Administration" asp-controller="GroupWorkouts" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary text-white">
                         Edit
                     </a>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete">
@@ -20,44 +20,44 @@
                 </div>
             }
             <article>
-                <img src="@this.Model.ImageUrl" alt="" class="img-fluid mb30">
+                <img src="@Model.ImageUrl" alt="" class="img-fluid mb30">
                 <div class="post-content">
-                    <h3 class="text-center">@this.ViewData["Title"]</h3>
+                    <h3 class="text-center">@ViewData["Title"]</h3>
                     <hr/>
                     <ul class="post-meta list-inline">
                         <li class="list-inline-item">
                             <i class="fas fa-user-circle"></i>
-                            <a asp-controller="Accounts" asp-action="Account" asp-route-username="@this.Model.TrainerUsername">@this.Model.TrainerUsername</a>
+                            <a asp-controller="Accounts" asp-action="Account" asp-route-username="@Model.TrainerUsername">@Model.TrainerUsername</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="far fa-calendar-alt"></i> <a href="javascript:void(0)">@this.Model.CreatedOn</a>
+                            <i class="far fa-calendar-alt"></i> <a href="javascript:void(0)">@Model.CreatedOn</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fas fa-dumbbell"></i> <a href="javascript:void(0)">@this.Model.Sport</a>
+                            <i class="fas fa-dumbbell"></i> <a href="javascript:void(0)">@Model.Sport</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fas fa-tags"></i> <a href="javascript:void(0)">@this.Model.Address</a>
+                            <i class="fas fa-tags"></i> <a href="javascript:void(0)">@Model.Address</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fas fa-child"></i> <a href="javascript:void(0)">@this.Model.MaximumParticipants</a>
+                            <i class="fas fa-child"></i> <a href="javascript:void(0)">@Model.MaximumParticipants</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fas fa-clock"></i> <a href="javascript:void(0)">@this.Model.PricePerPerson BGN</a>
+                            <i class="fas fa-clock"></i> <a href="javascript:void(0)">@Model.PricePerPerson BGN</a>
                         </li>
                     </ul>
                     <hr/>
-                    <p>Enjoy with training "<b>@this.Model.Title</b>" On <b>@this.Model.StartOn.ToString("D")</b> (<b>@this.Model.StartOn.DayOfWeek</b>) from <b>@this.Model.StartOn.TimeOfDay.ToString("hh':'mm")</b> h, with trainer <b>@this.Model.TrainerUsername</b>. In <b>@this.Model.Address</b>.</p>
+                    <p>Enjoy with training "<b>@Model.Title</b>" On <b>@Model.StartOn.ToString("D")</b> (<b>@Model.StartOn.DayOfWeek</b>) from <b>@Model.StartOn.TimeOfDay.ToString("hh':'mm")</b> h, with trainer <b>@Model.TrainerUsername</b>. In <b>@Model.Address</b>.</p>
                     <hr/>
                     <h3 class="text-center">Content</h3>
                     <div>
-                        @Html.Raw(this.Model.Content)
+                        @Html.Raw(Model.Content)
                     </div>
                     <hr class="mb40">
                     <h4 class="mb40 text-uppercase font500">About Author</h4>
                     <div class="media mb40">
-                        <img src="@this.Model.TrainerImageUrl" class="d-flex mr-3 img-fluid rounded-circle author-img" alt="@this.Model.TrainerUsername"/>
+                        <img src="@Model.TrainerImageUrl" class="d-flex mr-3 img-fluid rounded-circle author-img" alt="@Model.TrainerUsername"/>
                         <div class="media-body">
-                            <h5 class="mt-0"><b>@this.Model.TrainerUsername</b></h5> @this.Model.TrainerDescription
+                            <h5 class="mt-0"><b>@Model.TrainerUsername</b></h5> @Model.TrainerDescription
                         </div>
                     </div>
                 </div>
@@ -84,15 +84,15 @@
                     </li>
                     <li>
                         <h4 class="sidebar-title">Duration:</h4>
-                        <a href="javascript:void(0)">@((this.Model.EndOn - this.Model.StartOn).ToString("hh':'mm")) h</a>
+                        <a href="javascript:void(0)">@((Model.EndOn - Model.StartOn).ToString("hh':'mm")) h</a>
                         <br />
                     </li>
                 </ul>
             </div>
-            @if (this.Model.StartOn >= DateTime.UtcNow)
+            @if (Model.StartOn >= DateTime.UtcNow)
             {
-                <h4 class="sidebar-title">Free Places: <span id="available-tickets">@this.Model.AvailableTickets</span></h4>
-                <h4 class="sidebar-title">Bought Tickets: <span id="bought-tickets">@(this.Model.MaximumParticipants - this.Model.AvailableTickets)</span></h4>
+                <h4 class="sidebar-title">Free Places: <span id="available-tickets">@Model.AvailableTickets</span></h4>
+                <h4 class="sidebar-title">Bought Tickets: <span id="bought-tickets">@(Model.MaximumParticipants - Model.AvailableTickets)</span></h4>
                 <br />
                 <div class="mb40">
                     <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-block text-white">Buy Ticket</button>
@@ -107,7 +107,7 @@
                 <br/>
                 <h4 class="sidebar-title">Latest Workouts</h4>
                 <ul class="list-unstyled">
-                    @foreach (var workout in this.Model.LatestWorkouts)
+                    @foreach (var workout in Model.LatestWorkouts)
                     {
                         <li class="media mb-4">
                             <img class="d-flex mr-3 img-fluid latest-workout-img" width="64" src="@workout.ImageUrl" alt="Generic placeholder image">
@@ -134,7 +134,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>@this.Model.AvailableTickets Tickets Left</p>
+                <p>@Model.AvailableTickets Tickets Left</p>
                 <form id="buy-ticket" method="post">
                     <div class="form-group">
                         <label class="col-form-label">Full Name</label>
@@ -166,7 +166,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete @this.Model.Title ?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete @Model.Title ?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -176,7 +176,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a asp-area="Administration" asp-controller="GroupWorkouts" asp-action="Delete" asp-route-id="@this.Model.Id" class="btn btn-primary text-white">
+                <a asp-area="Administration" asp-controller="GroupWorkouts" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary text-white">
                     Delete
                 </a>
             </div>
@@ -189,7 +189,7 @@
         $('#buy-ticket').submit(ev => {
             ev.preventDefault();
 
-            var groupWorkoutId = @this.Model.Id;
+            var groupWorkoutId = @Model.Id;
             var fullName = $('#buy-ticket').find('input[name="fullName"]').val();
             var phoneNumber = $('#buy-ticket').find('input[name="phoneNumber"]').val();
             var card = $('#buy-ticket').find('input[name="card"]').val();
@@ -199,7 +199,7 @@
 
             var data = { groupWorkoutId: groupWorkoutId, fullName: fullName, phoneNumber: phoneNumber, card: card, boughtTickets: boughtTickets };
 
-            var maximumParticipants = @this.Model.MaximumParticipants;
+            var maximumParticipants = @Model.MaximumParticipants;
 
             $.ajax({
                 type: 'POST',
@@ -208,7 +208,7 @@
                 headers: {
                     'X-CSRF-TOKEN': antiForgeryToken
                 },
-                success: function (data) {
+                success: function(data) {
                     var availableTickets = data.availableTickets;
                     var boughtTickets = maximumParticipants - availableTickets;
 

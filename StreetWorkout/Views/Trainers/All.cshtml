@@ -1,6 +1,6 @@
 ﻿@model AllTrainersViewModel
 @{
-    this.ViewData["Title"] = "Trainers";
+    ViewData["Title"] = "Trainers";
 }
 
 <div class="container">
@@ -13,7 +13,7 @@
     </div>
 
     <div class="row">
-        @foreach (var trainer in this.Model.Trainers)
+        @foreach (var trainer in Model.Trainers)
         {
             var isStarChecked = (int)Math.Floor(trainer.VotesAverageValue);
             <div class="col-sm-6 col-md-4 mb-4">
@@ -43,7 +43,7 @@
     <hr />
 
     @{
-        var previousPage = this.Model.CurrentPage - 1;
+        var previousPage = Model.CurrentPage - 1;
         if (previousPage < 1)
         {
             previousPage = 1;

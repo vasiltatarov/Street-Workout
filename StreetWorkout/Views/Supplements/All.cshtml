@@ -1,12 +1,12 @@
 ﻿@model SupplementsQueryModel
 @{
-    this.ViewData["Title"] = "Supplements";
+    ViewData["Title"] = "Supplements";
 }
 
 <link rel="stylesheet" href="~/css/supplements.css" asp-append-version="true">
 
 @{
-    var deleteMessage = this.TempData[WebConstants.TempDataMessageKeys.DeleteKey];
+    var deleteMessage = TempData[WebConstants.TempDataMessageKeys.DeleteKey];
     if (deleteMessage != null)
     {
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -21,15 +21,15 @@
 
 <section class="dark">
     <div class="container py-4">
-        @if (this.User.IsInRole(WebConstants.AdministratorRoleName))
+        @if (User.IsInRole(WebConstants.AdministratorRoleName))
         {
             <div class="text-center">
                 <a asp-area="Administration" asp-controller="Supplements" asp-action="Create" class="btn btn-info text-white">Create Supplement</a>
             </div>
         }
-        <h1 class="h1 text-center" id="pageHeaderTitle">@this.ViewData["Title"]</h1>
+        <h1 class="h1 text-center" id="pageHeaderTitle">@ViewData["Title"]</h1>
 
-        @foreach (var supplement in this.Model.Supplements)
+        @foreach (var supplement in Model.Supplements)
         {
             <hr class="bg-danger" />
             <article class="postcard dark blue">

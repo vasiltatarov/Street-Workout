@@ -1,13 +1,13 @@
 ﻿@model AccountViewModel
 @{
-    this.ViewData["Title"] = this.Model.Username;
+    ViewData["Title"] = Model.Username;
 }
 
 <link href="~/css/account.css" rel="stylesheet" asp-append-version="true" />
 
-@if (this.User.Identity.Name == this.Model.Username)
+@if (User.Identity.Name == Model.Username)
 {
-    @if (this.Model.IsAccountComplete)
+    @if (Model.IsAccountComplete)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -32,24 +32,24 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="@this.Model.ImageUrl" alt="" />
+                    <img src="@Model.ImageUrl" alt="" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        @this.Model.Username
+                        @Model.Username
                     </h5>
                     @{
                         var isStarChecked = (int)Math.Floor(Model.VotesAverageValue);
                     }
-                    @if (this.User.Identity.Name == this.Model.Username)
+                    @if (User.Identity.Name == Model.Username)
                     {
                         <br />
                         <p>Star Rating:</p>
                         <p>Note: You cannot rate yourself!</p>
                     }
-                    else if (this.Model.IsTrainer)
+                    else if (Model.IsTrainer)
                     {
                         <br />
                         <p>Star Rating:</p>
@@ -95,7 +95,7 @@
                                 <label>Title</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@(this.Model.IsTrainer ? "Trainer" : "Enthusiast")</p>
+                                <p>@(Model.IsTrainer ? "Trainer" : "Enthusiast")</p>
                             </div>
                         </div>
                         <div class="row">
@@ -103,7 +103,7 @@
                                 <label>Country</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@this.Model.Country</p>
+                                <p>@Model.Country</p>
                             </div>
                         </div>
                         <div class="row">
@@ -111,7 +111,7 @@
                                 <label>City</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@this.Model.City</p>
+                                <p>@Model.City</p>
                             </div>
                         </div>
                         <div class="row">
@@ -119,7 +119,7 @@
                                 <label>Gender</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@this.Model.Gender</p>
+                                <p>@Model.Gender</p>
                             </div>
                         </div>
                         <div class="row">
@@ -127,19 +127,19 @@
                                 <label>Age</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@this.Model.Age</p>
+                                <p>@Model.Age</p>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        @if (this.Model.Data != null)
+                        @if (Model.Data != null)
                         {
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Sport</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>@this.Model.Data.Sport</p>
+                                    <p>@Model.Data.Sport</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -147,7 +147,7 @@
                                     <label>Goal</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>@this.Model.Data.Goal</p>
+                                    <p>@Model.Data.Goal</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -155,7 +155,7 @@
                                     <label>Training Frequency</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>@this.Model.Data.TrainingFrequency</p>
+                                    <p>@Model.Data.TrainingFrequency</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -163,7 +163,7 @@
                                     <label>Weight</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>@this.Model.Data.Weight</p>
+                                    <p>@Model.Data.Weight</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -171,7 +171,7 @@
                                     <label>Height</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>@this.Model.Data.Height</p>
+                                    <p>@Model.Data.Height</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -179,7 +179,7 @@
                                     <label>Description</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>@this.Model.Data.Description</p>
+                                    <p>@Model.Data.Description</p>
                                 </div>
                             </div>
                         }
