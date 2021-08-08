@@ -1,4 +1,6 @@
-﻿namespace StreetWorkout.Test.Mocks
+﻿using StreetWorkout.Data;
+
+namespace StreetWorkout.Test.Mocks
 {
     using System;
     using Microsoft.EntityFrameworkCore;

@@ -1,7 +1,7 @@
 ﻿namespace StreetWorkout.Test.Services
 {
     using Xunit;
-    using Data.Models.Enums;
+    using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Services.BodyCalculators;
 
     public class BodyCalculatorServiceTest

@@ -3,8 +3,8 @@
     using Xunit;
     using System.Linq;
 
-    using Data.Models;
-    using Data.Models.Enums;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Services.Trainings;
     using Mocks;
     using ViewModels.Trainers;

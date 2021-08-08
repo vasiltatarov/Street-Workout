@@ -120,7 +120,6 @@ if (latestWorkouts == null)
 25. Added documentation about best practices and high quality code.
 
 Potential Tasks:
-- Use Moment.js when visualized dates and time.
 - Implement a chat where all registered users can exchange messages.
 - Implement Administration on SupplementCategories, Sports, BodyParts, Goals ...
 - Test Routing and Logic of the controllers.

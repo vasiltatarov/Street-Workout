@@ -3,9 +3,9 @@
     using System.Linq;
     using Xunit;
 
-    using Data;
-    using Data.Models;
-    using Data.Models.Enums;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Services.Statistics;
     using StreetWorkout.Services.Statistics.Models;
     using Mocks;

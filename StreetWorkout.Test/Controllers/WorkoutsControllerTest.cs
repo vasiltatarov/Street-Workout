@@ -5,7 +5,7 @@
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
 
-    using Data.Models;
+    using StreetWorkout.Data.Models;
     using StreetWorkout.Controllers;
     using StreetWorkout.Services.Workouts.Models;
     using ViewModels.Workouts;

@@ -2,10 +2,10 @@
 {
     using Xunit;
     using Mocks;
-    
-    using Data;
-    using Data.Models;
-    using Data.Models.Enums;
+
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Services.Homes;
     using StreetWorkout.Services.Homes.Models;
 

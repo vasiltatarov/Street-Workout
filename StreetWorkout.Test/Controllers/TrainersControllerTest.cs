@@ -4,8 +4,8 @@
     using Shouldly;
     using MyTested.AspNetCore.Mvc;
     using StreetWorkout.Controllers;
-    using Data.Models;
-    using Data.Models.Enums;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Data.Models.Enums;
     using ViewModels.Trainers;
 
     public class TrainersControllerTest

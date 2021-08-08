@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using Xunit;
     using MyTested.AspNetCore.Mvc;
-    using Data.Models;
-    using Data.Models.Enums;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Controllers;
     using StreetWorkout.Services.Homes.Models;
     using ViewModels;

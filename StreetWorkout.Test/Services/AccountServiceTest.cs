@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using Xunit;
-    using Data.Models;
+    using StreetWorkout.Data.Models;
     using StreetWorkout.Services.Accounts;
     using ViewModels.Accounts;
     using Mocks;
