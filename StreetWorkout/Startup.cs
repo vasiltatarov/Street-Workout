@@ -1,3 +1,5 @@
+using StreetWorkout.Controllers;
+
 namespace StreetWorkout
 {
     using Microsoft.AspNetCore.Mvc;
@@ -106,6 +108,16 @@ namespace StreetWorkout
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapDefaultAreRoute();
+
+                    endpoints.MapControllerRoute(
+                        "User Account",
+                        "/Accounts/Account/{username}",
+                        defaults: new
+                        {
+                            controller = typeof(AccountsController).GetControllerName(),
+                            action = nameof(AccountsController.Account)
+                        });
+
                     endpoints.MapDefaultControllerRoute();
                     endpoints.MapRazorPages();
                 });
