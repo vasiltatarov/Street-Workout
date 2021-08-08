@@ -73,7 +73,7 @@ if (latestWorkouts == null)
 ![](img/ServicesTest.jpg)
 
 # Test
-
+## Writed Tests - 127
 ### Libraries used for testing:
 
 * XUnit
@@ -89,7 +89,7 @@ if (latestWorkouts == null)
 
 * Controllers Test Coverage 100%
 
-![](img/ServicesTest.jpg)
+![](img/ControllersTests.jpg)
 
 # Steps to create a similar web application from scratch:
 
@@ -118,11 +118,11 @@ if (latestWorkouts == null)
 23. Fixed footer.
 24. Listed latest supplements at home page.
 25. Added documentation about best practices and high quality code.
+26. Test Routing and Logic of the controllers.
 
 Potential Tasks:
 - Implement a chat where all registered users can exchange messages.
 - Implement Administration on SupplementCategories, Sports, BodyParts, Goals ...
-- Test Routing and Logic of the controllers.
 
 # Note
 ConnectionStrings:
