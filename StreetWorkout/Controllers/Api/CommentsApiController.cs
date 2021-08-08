@@ -15,7 +15,14 @@
             => this.comments = comments;
 
         [HttpPost]
-        public CommentResponseModel Add(CommentInputModel input)
-            => this.comments.Add(input.Content, this.User.GetId(), input.WorkoutId);
+        public ActionResult<CommentResponseModel> Add(CommentInputModel input)
+        {
+            if (!this.comments.IsValidWorkoutId(input.WorkoutId))
+            {
+                return this.BadRequest();
+            }
+
+            return this.comments.Add(input.Content, this.User.GetId(), input.WorkoutId);
+        }
     }
 }

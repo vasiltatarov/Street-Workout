@@ -1,6 +1,11 @@
 ﻿namespace StreetWorkout.Test.Controllers.Api
 {
+    using System.Linq;
+    using MyTested.AspNetCore.Mvc;
+    using Shouldly;
     using Xunit;
+
+    using StreetWorkout.Data.Models;
     using StreetWorkout.Controllers.Api;
     using StreetWorkout.Services.Statistics.Models;
     using StreetWorkout.Test.Mocks.Services;
@@ -24,5 +29,22 @@
             Assert.Equal(10, result.TotalEnthusiasts);
             Assert.Equal(20, result.TotalWorkouts);
         }
+
+        [Fact]
+        public void GetStatisticsShouldReturnCorrectTotalStatistics()
+            => MyController<StatisticsApiController>
+                .Instance()
+                .WithUser()
+                .WithData(data => data
+                    .WithEntities(
+                        Enumerable.Range(1, 5)
+                        .Select(x => new Workout())))
+                .Calling(c => c.GetStatistics())
+                .ShouldReturn()
+                .ResultOfType<StatisticsModel>(result => result
+                    .Passing(data =>
+                {
+                    data.TotalWorkouts.ShouldBe(5);
+                }));
     }
 }

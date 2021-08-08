@@ -1,4 +1,6 @@
-﻿namespace StreetWorkout.Services.Comments
+﻿using System.Linq;
+
+namespace StreetWorkout.Services.Comments
 {
     using System;
     using Data;
@@ -34,5 +36,9 @@
                 Content = content,
             };
         }
+
+        public bool IsValidWorkoutId(int id)
+            => this.data.Workouts
+                .Any(x => x.Id == id);
     }
 }

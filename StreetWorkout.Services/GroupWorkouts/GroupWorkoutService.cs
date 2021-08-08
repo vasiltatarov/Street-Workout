@@ -153,12 +153,14 @@
                 })
                 .ToList();
 
+            var totalGroupWorkouts = workoutsQuery.Count();
+
             return new GroupWorkoutsQueryModel
             {
                 IsUserTrainer = this.IsUserTrainer(userId),
                 CurrentPage = currentPage,
                 GroupWorkouts = groupWorkouts,
-                TotalGroupWorkouts = groupWorkouts.Count,
+                TotalGroupWorkouts = totalGroupWorkouts,
             };
         }
 
