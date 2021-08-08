@@ -1,5 +1,3 @@
-using StreetWorkout.Controllers;
-
 namespace StreetWorkout
 {
     using Microsoft.AspNetCore.Mvc;
@@ -24,6 +22,7 @@ namespace StreetWorkout
     using Services.GroupWorkouts;
     using Services.BodyCalculators;
     using Services.Supplements;
+    using Controllers;
 
     public class Startup
     {
@@ -108,6 +107,15 @@ namespace StreetWorkout
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapDefaultAreRoute();
+
+                    endpoints.MapControllerRoute(
+                        "Workout Details",
+                        "/Workouts/Details/{id}/{information}",
+                        defaults: new
+                        {
+                            controller = typeof(WorkoutsController).GetControllerName(),
+                            action = nameof(WorkoutsController.Details),
+                        });
 
                     endpoints.MapControllerRoute(
                         "User Account",

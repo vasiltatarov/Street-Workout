@@ -22,8 +22,20 @@
         public IActionResult All([FromQuery]WorkoutsQueryModel query)
             => this.View(this.workouts.Workouts(this.User.GetId(), query.Sport, query.BodyPart, query.SearchTerms, query.CurrentPage));
 
-        public IActionResult Details(int id)
-            => this.View(this.workouts.Details(id));
+        public IActionResult Details(int id, string information)
+        {
+            var workout = this.workouts.Details(id);
+
+            var informationDecode = System.Web.HttpUtility.UrlDecode(information);
+            var workoutInformationDecode = System.Web.HttpUtility.UrlDecode(workout.GetInformation());
+
+            if (informationDecode != workoutInformationDecode)
+            {
+                return this.BadRequest();
+            }
+
+            return this.View(workout);
+        }
 
         public IActionResult Create()
             => this.View(new WorkoutFormModel

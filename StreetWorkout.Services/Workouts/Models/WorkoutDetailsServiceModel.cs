@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class WorkoutDetailsServiceModel
+    public class WorkoutDetailsServiceModel : IWorkoutModel
     {
         public int Id { get; set; }
 

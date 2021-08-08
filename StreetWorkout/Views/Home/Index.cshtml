@@ -1,4 +1,5 @@
-﻿@model IndexServiceModel
+﻿@using StreetWorkout.Infrastructure
+@model IndexServiceModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -114,7 +115,13 @@
                                 <p class="card-text">Difficult: <b>@workout.DifficultLevel</b></p>
                             </div>
                             <div class="card-footer">
-                                <a asp-controller="Workouts" asp-action="Details" asp-route-id="@workout.Id" class="btn btn-primary">View More</a>
+                                <a asp-controller="Workouts"
+                                   asp-action="Details"
+                                   asp-route-id="@workout.Id"
+                                   asp-route-information="@workout.GetInformation()"
+                                   class="btn btn-primary">
+                                    View More
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 ﻿namespace StreetWorkout.Services.Workouts.Models
 {
-    public class WorkoutServiceModel
+    public class WorkoutServiceModel : IWorkoutModel
     {
         public int Id { get; set; }
 
