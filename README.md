@@ -119,10 +119,10 @@ if (latestWorkouts == null)
 24. Listed latest supplements at home page.
 25. Added documentation about best practices and high quality code.
 26. Test Routing and Logic of the controllers.
+27. Implemented Administration on Supplement Categories.
 
 Potential Tasks:
 - Implement a chat where all registered users can exchange messages.
-- Implement Administration on SupplementCategories, Sports, BodyParts, Goals ...
 
 # Note
 ConnectionStrings:
