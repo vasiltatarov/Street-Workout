@@ -1,23 +1,17 @@
 ﻿@model SupplementsQueryModel
 @{
     ViewData["Title"] = "Supplements";
+
+    var deleteMessage = TempData[WebConstants.TempDataMessageKeys.DeleteKey];
+
+    if (deleteMessage != null)
+    {
+        <partial name="_DeleteMessagePartial" model="deleteMessage" />
+    }
 }
 
 <link rel="stylesheet" href="~/css/supplements.css" asp-append-version="true">
 
-@{
-    var deleteMessage = TempData[WebConstants.TempDataMessageKeys.DeleteKey];
-    if (deleteMessage != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-            <i class="fa fa-exclamation-circle"></i>
-            <strong>Deleted!</strong> @deleteMessage
-        </div>
-    }
-}
 
 <section class="dark">
     <div class="container py-4">

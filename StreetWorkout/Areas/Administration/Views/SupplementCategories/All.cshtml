@@ -6,7 +6,14 @@
 
     if (editMessage != null)
     {
-        <partial name="_EditMessagePartial" model="@editMessage" />
+        <partial name="_EditMessagePartial" model="editMessage" />
+    }
+
+    var deleteMessage = TempData[WebConstants.TempDataMessageKeys.DeleteKey];
+
+    if (deleteMessage != null)
+    {
+        <partial name="_DeleteMessagePartial" model="deleteMessage"/>
     }
 }
 
