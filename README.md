@@ -124,6 +124,7 @@ if (latestWorkouts == null)
 
 Potential Tasks:
 - Implement a chat where all registered users can exchange messages.
+- Add Partial views where appropriate.
 
 # Note
 ConnectionStrings:
