@@ -25,9 +25,16 @@
                         <a class="btn btn-warning ml-2">Edit</a>
                         <a asp-area="Administration"
                            asp-controller="SupplementCategories"
+                           asp-action="Restore"
+                           asp-route-id="@categoy.Id"
+                           class="btn btn-success ml-2">
+                            Restore
+                        </a>
+                        <a asp-area="Administration"
+                           asp-controller="SupplementCategories"
                            asp-action="Delete"
                            asp-route-id="@categoy.Id"
-                           class="btn btn-danger">
+                           class="btn btn-danger ml-2">
                             Delete
                         </a>
                     </div>

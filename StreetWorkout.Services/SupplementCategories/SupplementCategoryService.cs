@@ -39,5 +39,25 @@
 
             return true;
         }
+
+        public bool Restore(int id)
+        {
+            var supplementCategory = this.data.SupplementCategories.FirstOrDefault(x => x.Id == id);
+
+            if (supplementCategory == null)
+            {
+                return false;
+            }
+
+            if (!supplementCategory.IsDeleted)
+            {
+                return true;
+            }
+
+            supplementCategory.IsDeleted = false;
+            this.data.SaveChanges();
+
+            return true;
+        }
     }
 }

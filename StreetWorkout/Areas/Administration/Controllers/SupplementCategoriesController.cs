@@ -29,5 +29,15 @@
 
             return this.RedirectToAction("All");
         }
+
+        public IActionResult Restore(int id)
+        {
+            if (!this.supplementCategories.Restore(id))
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction("All");
+        }
     }
 }

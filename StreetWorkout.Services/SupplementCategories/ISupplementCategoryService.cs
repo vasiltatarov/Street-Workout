@@ -8,5 +8,7 @@
         IEnumerable<SupplementCategoryServiceModel> GetAll();
 
         bool Delete(int id);
+
+        bool Restore(int id);
     }
 }
