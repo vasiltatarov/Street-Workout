@@ -3,19 +3,31 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
-    using Services.Supplements;
+    using Services.SupplementCategories;
 
     using static WebConstants;
 
     [Authorize(Roles = AdministratorRoleName)]
     public class SupplementCategoriesController : AdministrationController
     {
-        private readonly ISupplementService supplements;
+        private readonly ISupplementCategoryService supplementCategories;
 
-        public SupplementCategoriesController(ISupplementService supplements)
-            => this.supplements = supplements;
+        public SupplementCategoriesController(ISupplementCategoryService supplementCategories)
+        {
+            this.supplementCategories = supplementCategories;
+        }
 
         public IActionResult All()
-            => this.View(this.supplements.GetSupplementCategories());
+            => this.View(this.supplementCategories.GetAll());
+
+        public IActionResult Delete(int id)
+        {
+            if (!this.supplementCategories.Delete(id))
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction("All");
+        }
     }
 }

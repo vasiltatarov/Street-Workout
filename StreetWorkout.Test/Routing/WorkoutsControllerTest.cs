@@ -20,7 +20,7 @@
             => MyRouting
                 .Configuration()
                 .ShouldMap("/Workouts/Details/1")
-                .To<WorkoutsController>(c => c.Details(1));
+                .To<WorkoutsController>(c => c.Details(1, string.Empty));
 
         [Fact]
         public void CreateShouldBeMapped()

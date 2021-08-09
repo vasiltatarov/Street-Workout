@@ -139,7 +139,9 @@
         }
 
         public IEnumerable<SupplementCategoryViewModel> GetSupplementCategories()
-            => this.data.SupplementCategories
+            => this.data
+                .SupplementCategories
+                .Where(x => !x.IsDeleted)
                 .ProjectTo<SupplementCategoryViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 

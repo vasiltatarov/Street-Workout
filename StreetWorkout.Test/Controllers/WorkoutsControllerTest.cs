@@ -75,7 +75,7 @@
                             Sport = new Sport(),
                             BodyPart = new BodyPart(),
                         })))
-                .Calling(c => c.Details(workoutId))
+                .Calling(c => c.Details(workoutId, string.Empty))
                 .ShouldReturn()
                 .View(view => view
                     .WithModelOfType<WorkoutDetailsServiceModel>()
@@ -97,7 +97,7 @@
                         {
                             Id = userId,
                         })))
-                .Calling(c => c.Details(workoutId))
+                .Calling(c => c.Details(workoutId, string.Empty))
                 .ShouldReturn()
                 .View();
 

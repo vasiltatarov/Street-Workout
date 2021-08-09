@@ -1,10 +1,10 @@
-﻿using System;
-
-namespace StreetWorkout.Infrastructure
+﻿namespace StreetWorkout.Infrastructure
 {
+    using System;
     using AutoMapper;
     using Services.Homes.Models;
     using Services.Supplements.Models;
+    using Services.SupplementCategories.Models;
     using ViewModels.Workouts;
     using ViewModels.Accounts;
     using ViewModels.GroupWorkouts;
@@ -26,6 +26,7 @@ namespace StreetWorkout.Infrastructure
             this.CreateMap<Supplement, SupplementServiceModel>()
                 .ForMember(x => x.Category,
                 y => y.MapFrom(x => x.Category.Name));
+            this.CreateMap<SupplementCategory, SupplementCategoryServiceModel>();
 
             // From View Models
             this.CreateMap<Sport, SportViewModel>();

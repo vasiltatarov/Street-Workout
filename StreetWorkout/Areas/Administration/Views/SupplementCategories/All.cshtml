@@ -1,7 +1,6 @@
-﻿@model IEnumerable<SupplementCategoryViewModel>
+﻿@model IEnumerable<SupplementCategoryServiceModel>
 @{
     ViewData["Title"] = "Supplements Categories Administration";
-    var isDeleted = false;
 }
 
 <h1 class="text-center">Supplements Categories</h1>
@@ -20,11 +19,17 @@
             <tr>
                 <th scope="row">@categoy.Id</th>
                 <td>@categoy.Name</td>
-                <td>@Html.DisplayFor(modelItem => isDeleted)</td>
+                <td>@Html.DisplayFor(modelItem => @categoy.IsDeleted)</td>
                 <td>
                     <div class="text-white float-right">
                         <a class="btn btn-warning ml-2">Edit</a>
-                        <a class="btn btn-danger">Delete</a>
+                        <a asp-area="Administration"
+                           asp-controller="SupplementCategories"
+                           asp-action="Delete"
+                           asp-route-id="@categoy.Id"
+                           class="btn btn-danger">
+                            Delete
+                        </a>
                     </div>
                 </td>
             </tr>

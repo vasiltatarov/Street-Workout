@@ -13,6 +13,8 @@
         [MaxLength(SupplementCategoryMaxLength)]
         public string Name { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public IEnumerable<Supplement> Supplements { get; set; }
     }
 }
