@@ -4,6 +4,7 @@
     using Microsoft.EntityFrameworkCore;
 
     using Models;
+    using Configurations;
 
     public class StreetWorkoutDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -40,96 +41,13 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder
-                .Entity<ApplicationUser>()
-                .HasOne(x => x.Country)
-                .WithMany(x => x.Users)
-                .HasForeignKey(x => x.CountryId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<UserData>()
-                .HasOne(x => x.Sport)
-                .WithMany()
-                .HasForeignKey(x => x.SportId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<UserData>()
-                .HasOne(x => x.Goal)
-                .WithMany()
-                .HasForeignKey(x => x.GoalId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<UserData>()
-                .HasOne(x => x.TrainingFrequency)
-                .WithMany()
-                .HasForeignKey(x => x.TrainingFrequencyId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Workout>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.Workouts)
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Workout>()
-                .HasOne(x => x.Sport)
-                .WithMany(x => x.Workouts)
-                .HasForeignKey(x => x.SportId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Workout>()
-                .HasOne(x => x.BodyPart)
-                .WithMany(x => x.Workouts)
-                .HasForeignKey(x => x.BodyPartId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Vote>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.Votes)
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<GroupWorkout>()
-                .HasOne(x => x.Sport)
-                .WithMany(x => x.GroupWorkouts)
-                .HasForeignKey(x => x.SportId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<GroupWorkout>()
-                .HasOne(x => x.Trainer)
-                .WithMany(x => x.GroupWorkouts)
-                .HasForeignKey(x => x.TrainerId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<UserWorkoutPayment>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.UserWorkoutPayments)
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<UserWorkoutPayment>()
-                .HasOne(x => x.GroupWorkout)
-                .WithMany(x => x.UserWorkoutPayments)
-                .HasForeignKey(x => x.GroupWorkoutId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Supplement>()
-                .HasOne(x => x.Category)
-                .WithMany(x => x.Supplements)
-                .HasForeignKey(x => x.CategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new UserDataConfiguration());
+            builder.ApplyConfiguration(new WorkoutConfiguration());
+            builder.ApplyConfiguration(new VoteConfiguration());
+            builder.ApplyConfiguration(new GroupWorkoutConfiguration());
+            builder.ApplyConfiguration(new UserWorkoutPaymentConfiguration());
+            builder.ApplyConfiguration(new SupplementConfiguration());
 
             base.OnModelCreating(builder);
         }

@@ -27,9 +27,10 @@
             var workout = this.workouts.Details(id);
 
             var informationDecode = System.Web.HttpUtility.UrlDecode(information);
-            var workoutInformationDecode = System.Web.HttpUtility.UrlDecode(workout.GetInformation());
 
-            if (informationDecode != workoutInformationDecode)
+            if (!informationDecode.Contains(workout.Title) &&
+                !information.Contains(workout.Title) &&
+                !informationDecode.Contains(workout.Sport))
             {
                 return this.BadRequest();
             }

@@ -57,7 +57,7 @@
                     <span asp-validation-for="Minutes" class="text-danger small"></span>
                 </div>
                 <input type="submit" class="btn btn-success" value="Edit" />
-                <a asp-area="" asp-controller="Workouts" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">Back to Workout</a>
+                <a asp-area="" asp-controller="Workouts" asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.Title" class="btn btn-info">Back to Workout</a>
             </form>
         </div>
     </div>

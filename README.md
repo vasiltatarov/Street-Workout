@@ -121,11 +121,11 @@ if (latestWorkouts == null)
 25. Added documentation about best practices and high quality code.
 26. Test Routing and Logic of the controllers.
 27. Implemented Administration on Supplement Categories.
+28. Added Partial views where appropriate.
+29. Separated OnModelCreating Configurations from DbContext.
 
 Potential Tasks:
 - Implement a chat where all registered users can exchange messages.
-- Add Partial views where appropriate.
-- Separate OnModelCreating Configurations from DbContext.
 
 # Note
 ConnectionStrings:

@@ -1,6 +1,12 @@
 ﻿@model WorkoutDetailsServiceModel
 @{
     ViewData["Title"] = Model.Title;
+
+    var editMessage = TempData[WebConstants.TempDataMessageKeys.EditKey];
+    if (editMessage != null)
+    {
+        <partial name="_EditMessagePartial" model="editMessage"/>
+    }
 }
 
 <link href="~/css/details.css" rel="stylesheet" asp-append-version="true" />

@@ -7,6 +7,8 @@
     using Data.Models.Enums;
     using Infrastructure;
 
+    using static WebConstants.TempDataMessageKeys;
+
     public class WorkoutsController : AdministrationController
     {
         private readonly IWorkoutService workouts;
@@ -66,7 +68,9 @@
 
             this.workouts.Edit(model.Id, model.Title, model.SportId , (DifficultLevel)model.DifficultLevel, model.BodyPartId, model.Minutes, model.Content);
 
-            return this.RedirectToAction("Details", "Workouts", new { area = "", Id = model.Id });
+            this.TempData[EditKey] = string.Format(EditMessage, model.Title);
+
+            return this.RedirectToAction("Details", "Workouts", new { area = "", Id = model.Id, information = model.Title });
         }
 
         public IActionResult Delete(int id)
