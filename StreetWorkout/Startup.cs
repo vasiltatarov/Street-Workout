@@ -108,26 +108,8 @@ namespace StreetWorkout
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
-                    endpoints.MapDefaultAreRoute();
-
-                    endpoints.MapControllerRoute(
-                        "Workout Details",
-                        "/Workouts/Details/{id}/{information}",
-                        defaults: new
-                        {
-                            controller = typeof(WorkoutsController).GetControllerName(),
-                            action = nameof(WorkoutsController.Details),
-                        });
-
-                    endpoints.MapControllerRoute(
-                        "User Account",
-                        "/Accounts/Account/{username}",
-                        defaults: new
-                        {
-                            controller = typeof(AccountsController).GetControllerName(),
-                            action = nameof(AccountsController.Account)
-                        });
-
+                    endpoints.MapDefaultAreaRoute();
+                    endpoints.MapDefaultRoutes();
                     endpoints.MapDefaultControllerRoute();
                     endpoints.MapRazorPages();
                 });
