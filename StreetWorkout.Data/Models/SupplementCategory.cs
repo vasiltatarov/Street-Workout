@@ -10,7 +10,7 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(SupplementCategoryMaxLength)]
+        [MaxLength(SupplementCategoryNameMaxLength)]
         public string Name { get; set; }
 
         public bool IsDeleted { get; set; }

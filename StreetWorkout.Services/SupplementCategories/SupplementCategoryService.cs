@@ -59,5 +59,27 @@
 
             return true;
         }
+
+        public bool Edit(int id, string name)
+        {
+            var supplementCategory = this.data.SupplementCategories.FirstOrDefault(x => x.Id == id);
+
+            if (supplementCategory == null)
+            {
+                return false;
+            }
+
+            supplementCategory.Name = name;
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+        public SupplementCategoryEditServiceModel GetSupplementCategoryEditModel(int id)
+            => this.data
+                .SupplementCategories
+                .Where(x => x.Id == id)
+                .ProjectTo<SupplementCategoryEditServiceModel>(this.mapper.ConfigurationProvider)
+                .FirstOrDefault();
     }
 }

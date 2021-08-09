@@ -22,7 +22,13 @@
                 <td>@Html.DisplayFor(modelItem => @categoy.IsDeleted)</td>
                 <td>
                     <div class="text-white float-right">
-                        <a class="btn btn-warning ml-2">Edit</a>
+                        <a asp-area="Administration"
+                           asp-controller="SupplementCategories"
+                           asp-action="Edit"
+                           asp-route-id="@categoy.Id"
+                           class="btn btn-warning ml-2">
+                            Edit
+                        </a>
                         <a asp-area="Administration"
                            asp-controller="SupplementCategories"
                            asp-action="Restore"

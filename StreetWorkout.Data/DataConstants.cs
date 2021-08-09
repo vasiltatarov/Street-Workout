@@ -53,7 +53,7 @@
 
         public class SupplementCategoryConstants
         {
-            public const int SupplementCategoryMaxLength = 30;
+            public const int SupplementCategoryNameMaxLength = 30;
         }
     }
 }

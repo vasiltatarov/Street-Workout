@@ -10,5 +10,9 @@
         bool Delete(int id);
 
         bool Restore(int id);
+
+        bool Edit(int id, string name);
+
+        SupplementCategoryEditServiceModel GetSupplementCategoryEditModel(int id);
     }
 }

@@ -27,6 +27,7 @@
                 .ForMember(x => x.Category,
                 y => y.MapFrom(x => x.Category.Name));
             this.CreateMap<SupplementCategory, SupplementCategoryServiceModel>();
+            this.CreateMap<SupplementCategory, SupplementCategoryEditServiceModel>();
 
             // From View Models
             this.CreateMap<Sport, SportViewModel>();
