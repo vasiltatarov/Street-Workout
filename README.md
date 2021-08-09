@@ -70,7 +70,7 @@ if (latestWorkouts == null)
 
 # Database Diagram
 
-![](img/ServicesTest.jpg)
+![](img/DbDiagram.jpg)
 
 # Test
 ## Writed Tests - 127
