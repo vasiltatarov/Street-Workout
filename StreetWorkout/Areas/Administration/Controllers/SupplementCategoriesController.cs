@@ -39,6 +39,8 @@
                 return this.BadRequest();
             }
 
+            this.TempData[RestoreKey] = string.Format(RestoreMessage, "Supplement Category");
+
             return this.RedirectToAction("All");
         }
 

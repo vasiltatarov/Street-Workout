@@ -3,17 +3,21 @@
     ViewData["Title"] = "Supplements Categories Administration";
 
     var editMessage = TempData[WebConstants.TempDataMessageKeys.EditKey];
-
     if (editMessage != null)
     {
         <partial name="_EditMessagePartial" model="editMessage" />
     }
 
     var deleteMessage = TempData[WebConstants.TempDataMessageKeys.DeleteKey];
-
     if (deleteMessage != null)
     {
         <partial name="_DeleteMessagePartial" model="deleteMessage"/>
+    }
+
+    var restoreMessage = TempData[WebConstants.TempDataMessageKeys.RestoreKey];
+    if (restoreMessage != null)
+    {
+        <partial name="_RestoreMessagePartial" model="restoreMessage"/>
     }
 }
 

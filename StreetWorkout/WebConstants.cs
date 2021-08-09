@@ -16,6 +16,9 @@
 
             public const string NotFoundSupplementsKey = "NotFoundSupplements";
             public const string NotFoundSupplementsMessage = "Not Found Supplement with given searched criteria.";
+
+            public const string RestoreKey = "RestoreKey";
+            public const string RestoreMessage = "You Restored {0} Successfully.";
         }
     }
 }
