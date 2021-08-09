@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SupplementCategoryViewModel>
+@{
+    ViewData["Title"] = "Supplements Categories Administration";
+    var isDeleted = false;
+}
+
+<h1 class="text-center">Supplements Categories</h1>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Is Deleted</th>
+            <th scope="col">Modify</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var categoy in Model)
+        {
+            <tr>
+                <th scope="row">@categoy.Id</th>
+                <td>@categoy.Name</td>
+                <td>@Html.DisplayFor(modelItem => isDeleted)</td>
+                <td>
+                    <div class="text-white float-right">
+                        <a class="btn btn-warning ml-2">Edit</a>
+                        <a class="btn btn-danger">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
