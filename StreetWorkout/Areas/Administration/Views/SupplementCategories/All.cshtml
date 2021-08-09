@@ -1,6 +1,13 @@
 ﻿@model IEnumerable<SupplementCategoryServiceModel>
 @{
     ViewData["Title"] = "Supplements Categories Administration";
+
+    var editMessage = TempData[WebConstants.TempDataMessageKeys.EditKey];
+
+    if (editMessage != null)
+    {
+        <partial name="_EditMessagePartial" model="@editMessage" />
+    }
 }
 
 <h1 class="text-center">Supplements Categories</h1>

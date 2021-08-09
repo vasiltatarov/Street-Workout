@@ -7,6 +7,7 @@
     using Services.SupplementCategories.Models;
 
     using static WebConstants;
+    using static WebConstants.TempDataMessageKeys;
 
     [Authorize(Roles = AdministratorRoleName)]
     public class SupplementCategoriesController : AdministrationController
@@ -25,6 +26,8 @@
             {
                 return this.BadRequest();
             }
+
+            this.TempData[DeleteKey] = string.Format(DeleteMessage, "Supplement Category");
 
             return this.RedirectToAction("All");
         }
@@ -54,6 +57,8 @@
             {
                 return this.BadRequest();
             }
+
+            this.TempData[EditKey] = string.Format(EditMessage, model.Name);
 
             return this.RedirectToAction("All");
         }

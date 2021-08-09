@@ -1,23 +1,15 @@
 ﻿@model SupplementServiceModel
 @{
     ViewData["Title"] = Model.Name;
+
+    var editMessage = TempData[WebConstants.TempDataMessageKeys.EditKey];
+    if (editMessage != null)
+    {
+        <partial name="_EditMessagePartial" model="@editMessage"/>
+    }
 }
 
 <link rel="stylesheet" href="~/css/supplementDetails.css" asp-append-version="true">
-
-@{
-    var message = TempData[WebConstants.TempDataMessageKeys.EditKey];
-    if (message != null)
-    {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-            <i class="fa fa-warning"></i>
-            <strong>Edited!</strong> @message
-        </div>
-    }
-}
 
 <div class="row">
     <div class="col-md-8">
