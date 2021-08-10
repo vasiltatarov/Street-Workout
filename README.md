@@ -134,10 +134,10 @@ if (latestWorkouts == null)
 27. Implemented Administration on Supplement Categories.
 28. Added Partial views where appropriate.
 29. Separated OnModelCreating Configurations from DbContext.
+30. Fixed UI of the administration page.
 
 Potential Tasks:
 - Implement a chat where all registered users can exchange messages.
-- Fix UI of the administration page.
 - Implement user payments administration.
 - Add DataTables.
 

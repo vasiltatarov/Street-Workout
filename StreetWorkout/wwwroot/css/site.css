@@ -31,3 +31,8 @@
 .workout-img {
     height: 200px;
 }
+
+/*from Admin Home Index.cshtml*/
+.card-radius {
+    border-radius: 20px;
+}
