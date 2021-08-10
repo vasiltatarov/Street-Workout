@@ -135,10 +135,10 @@ if (latestWorkouts == null)
 28. Added Partial views where appropriate.
 29. Separated OnModelCreating Configurations from DbContext.
 30. Fixed UI of the administration page.
+31. Implemented user payments statistics administration.
 
 Potential Tasks:
 - Implement a chat where all registered users can exchange messages.
-- Implement user payments administration.
 - Add DataTables.
 
 # Note

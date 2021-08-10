@@ -34,7 +34,9 @@
                 .ForMember(x => x.User,
                     y => y.MapFrom(x => x.User.UserName))
                 .ForMember(x => x.GroupWorkout,
-                    y => y.MapFrom(x => x.GroupWorkout.Title));
+                    y => y.MapFrom(x => x.GroupWorkout.Title))
+                .ForMember(x => x.TicketPrice,
+                    y => y.MapFrom(x => x.GroupWorkout.PricePerPerson));
 
             // From View Models
             this.CreateMap<Sport, SportViewModel>();

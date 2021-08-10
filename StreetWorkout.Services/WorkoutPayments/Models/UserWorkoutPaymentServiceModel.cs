@@ -19,5 +19,7 @@
         public byte BoughtTickets { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public byte TicketPrice { get; set; }
     }
 }

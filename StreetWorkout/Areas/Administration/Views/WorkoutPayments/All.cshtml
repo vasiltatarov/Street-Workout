@@ -1,8 +1,40 @@
 ﻿@model IEnumerable<UserWorkoutPaymentServiceModel>
 @{
     ViewData["Title"] = "User Workout Payments Administration";
+
+    var distinctGroupWorkouts = Model
+        .GroupBy(x => x.GroupWorkout)
+        .Select(x => x.Last())
+        .ToList();
 }
 
+<h1 class="text-center">Payments Statistics Per Workout</h1>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Group Workout</th>
+            <th scope="col">Ticket Price</th>
+            <th scope="col">Bought Tickets</th>
+            <th scope="col">Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payment in distinctGroupWorkouts)
+        {
+            var boughtTickets = Model.Where(x => x.GroupWorkout == payment.GroupWorkout)
+                .Sum(x => x.BoughtTickets);
+            var ticketPrice = payment.TicketPrice;
+            var totalPrice = boughtTickets * ticketPrice;
+            <tr>
+                <td>@payment.GroupWorkout</td>
+                <td>@ticketPrice BGN</td>
+                <td>@boughtTickets</td>
+                <td>@totalPrice BGN</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
 <h1 class="text-center">Workout Payments</h1>
 <table class="table table-bordered table-striped table-hover">
     <thead>
