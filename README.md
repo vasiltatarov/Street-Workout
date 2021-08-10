@@ -25,25 +25,26 @@ StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (Apri
 # Functionality
 * Users Registration.
 * Ability to registers in two roles, Trainer or Enthusiast.
+* Every registered user has the opportunity to complete their account. This means to fill additional fields with data about them. Data like Training Frequency, Weight, Height...
+* If user not completed their account they cannot use the full functionality of the application.
 1. Trainers have the ability to create Workout, Group Workout also trainers can be Rated. They can also Edit or Delete their own workouts, group Workouts.
 2. Both trainers and enthusiasts can.
 
     - View Workouts, Group Workouts and Supplements.
     - Rate the trainers.
+    - Not rate themselves.
     - Use the Body Calculator. 
     - View trainers and the account of every registered user.
     - Comment on the workouts.
     - Buy tickets for group workouts.
-* Ability to View, Create, Read Publications.
-* Ability to Comment, like, save and print publications.
-* Ability to Edit and Delete publications (Only for the creator).
-* Ability to Follow users, as well as be followed by other users.
-* Ability to Filter publications by category and search by Title.
-* Chat room allowing users to exchange messages.
+* The system has a seeded administrator which can do everything like Both trainers and enthusiasts.
+* The administrator can also Create, Edit or Delete everything in the application.
+* Page about Workouts, that every registered user can view workout details, search by different criteria and learn interesting things.
+* Page about Group Workouts with the same functionality as Workouts page.
+* Page about Supplements with Create, Edit and Delete actions only for administrator.
+* Page about Body Calculator with functionality to calculate how many calories you need per day to maintains your body weight, gain weight or lose weight.
 * Cache Data 'Memory Cache' (see below) to reduce database queries.
 * Interactive, flexible UX (User Experience)
-* Used Cache in home page
-* Page about Supplements with Create, Edit and Delete actions only for administrator. 
 
 # Project Architecture
 * I use simple project architecture consisting of 5 projects.
