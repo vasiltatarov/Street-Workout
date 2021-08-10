@@ -24,6 +24,16 @@ StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (Apri
 
 # Functionality
 * Users Registration.
+* Ability to registers in two roles, Trainer or Enthusiast.
+1. Trainers have the ability to create Workout, Group Workout also trainers can be Rated. They can also Edit or Delete their own workouts, group Workouts.
+2. Both trainers and enthusiasts can.
+
+    - View Workouts, Group Workouts and Supplements.
+    - Rate the trainers.
+    - Use the Body Calculator. 
+    - View trainers and the account of every registered user.
+    - Comment on the workouts.
+    - Buy tickets for group workouts.
 * Ability to View, Create, Read Publications.
 * Ability to Comment, like, save and print publications.
 * Ability to Edit and Delete publications (Only for the creator).
