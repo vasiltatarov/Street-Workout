@@ -137,6 +137,9 @@ if (latestWorkouts == null)
 
 Potential Tasks:
 - Implement a chat where all registered users can exchange messages.
+- Fix UI of the administration page.
+- Implement user payments administration.
+- Add DataTables.
 
 # Note
 ConnectionStrings:
