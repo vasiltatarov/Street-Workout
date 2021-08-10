@@ -1,0 +1,35 @@
+﻿@model IEnumerable<UserWorkoutPaymentServiceModel>
+@{
+    ViewData["Title"] = "User Workout Payments Administration";
+}
+
+<h1 class="text-center">Workout Payments</h1>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">User</th>
+            <th scope="col">Group Workout</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Card</th>
+            <th scope="col">Tickets</th>
+            <th scope="col">On</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payment in Model)
+        {
+            <tr>
+                <th scope="row">@payment.Id</th>
+                <td>@payment.User</td>
+                <td>@payment.GroupWorkout</td>
+                <td>@payment.FullName</td>
+                <td>@payment.PhoneNumber</td>
+                <td>@payment.Card</td>
+                <td>@payment.BoughtTickets</td>
+                <td>@payment.CreatedOn</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -2,14 +2,16 @@
 {
     using System;
     using AutoMapper;
+
+    using Data.Models;
     using Services.Homes.Models;
     using Services.Supplements.Models;
     using Services.SupplementCategories.Models;
+    using Services.WorkoutPayments.Models;
     using ViewModels.Workouts;
     using ViewModels.Accounts;
     using ViewModels.GroupWorkouts;
     using ViewModels.Supplements;
-    using Data.Models;
 
     public class MappingProfile : Profile
     {
@@ -28,6 +30,11 @@
                 y => y.MapFrom(x => x.Category.Name));
             this.CreateMap<SupplementCategory, SupplementCategoryServiceModel>();
             this.CreateMap<SupplementCategory, SupplementCategoryEditServiceModel>();
+            this.CreateMap<UserWorkoutPayment, UserWorkoutPaymentServiceModel>()
+                .ForMember(x => x.User,
+                    y => y.MapFrom(x => x.User.UserName))
+                .ForMember(x => x.GroupWorkout,
+                    y => y.MapFrom(x => x.GroupWorkout.Title));
 
             // From View Models
             this.CreateMap<Sport, SportViewModel>();

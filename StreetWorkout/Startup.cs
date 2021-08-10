@@ -3,27 +3,27 @@ namespace StreetWorkout
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Microsoft.AspNetCore.Identity;
 
     using Data;
     using Data.Models;
     using Infrastructure;
     using Services.Accounts;
+    using Services.BodyCalculators;
+    using Services.Comments;
+    using Services.GroupWorkouts;
     using Services.Homes;
     using Services.Trainings;
     using Services.Statistics;
-    using Services.Comments;
-    using Services.Workouts;
     using Services.Votes;
-    using Services.GroupWorkouts;
-    using Services.BodyCalculators;
     using Services.Supplements;
     using Services.SupplementCategories;
-    using Controllers;
+    using Services.Workouts;
+    using Services.WorkoutPayments;
 
     public class Startup
     {
@@ -81,6 +81,7 @@ namespace StreetWorkout
             services.AddTransient<IBodyCalculatorService, BodyCalculatorService>();
             services.AddTransient<ISupplementService, SupplementService>();
             services.AddTransient<ISupplementCategoryService, SupplementCategoryService>();
+            services.AddTransient<IWorkoutPaymentService, WorkoutPaymentService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
