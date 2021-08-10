@@ -1,5 +1,4 @@
-﻿@using StreetWorkout.Infrastructure
-@model IndexServiceModel
+﻿@model IndexServiceModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -98,36 +97,7 @@
         <br />
     </div>
     <div class="container">
-        <div class="row">
-            @foreach (var workout in Model.LatestWorkouts)
-            {
-                <div class="col-sm-6 col-md-4 mb-4">
-                    <div class="component">
-                        <div class="card card-home-height">
-                            <div class="card-header">
-                                <img class="card-img card-home-img" src="@workout.ImageUrl" alt="@workout.Title">
-                            </div>
-                            <div class="card-body">
-                                <span class="badge badge-success mb-2">@workout.Sport</span>
-                                <span class="badge badge-warning mb-2">@workout.Minutes Minutes</span>
-                                <h4 class="card-title">@workout.Title</h4>
-                                <p class="card-text">Body Part: <b>@workout.BodyPart</b></p>
-                                <p class="card-text">Difficult: <b>@workout.DifficultLevel</b></p>
-                            </div>
-                            <div class="card-footer">
-                                <a asp-controller="Workouts"
-                                   asp-action="Details"
-                                   asp-route-id="@workout.Id"
-                                   asp-route-information="@workout.GetInformation()"
-                                   class="btn btn-primary">
-                                    View More
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
+        <partial name="_WorkoutsPartial" model="Model.LatestWorkouts" />
     </div>
 </div>
 <br />
