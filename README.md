@@ -20,6 +20,7 @@ StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (Apri
 * Bootstrap
 * Font Awesome Icons
 * TinyMCE
+* DataTables
 * Lazy Kit (Bootstrap 4)
 
 # Functionality
@@ -136,10 +137,10 @@ if (latestWorkouts == null)
 29. Separated OnModelCreating Configurations from DbContext.
 30. Fixed UI of the administration page.
 31. Implemented user payments statistics administration.
+32. Introduced DataTables JS library.
 
 Potential Tasks:
 - Implement a chat where all registered users can exchange messages.
-- Add DataTables.
 
 # Note
 ConnectionStrings:
