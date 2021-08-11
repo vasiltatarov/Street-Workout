@@ -8,8 +8,10 @@
         .ToList();
 }
 
+<link href="~/lib/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" asp-append-version="true" />
+
 <h1 class="text-center">Payments Statistics Per Workout</h1>
-<table class="table table-bordered table-striped table-hover">
+<table id="stats" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th scope="col">Group Workout</th>
@@ -36,7 +38,8 @@
 </table>
 <br />
 <h1 class="text-center">Workout Payments</h1>
-<table class="table table-bordered table-striped table-hover">
+
+<table id="payments" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th scope="col">Id</th>
@@ -65,3 +68,13 @@
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="~/lib/datatables/media/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $('#payments').DataTable();
+            $('#stats').DataTable();
+        });
+    </script>
+}
