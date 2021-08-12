@@ -1,7 +1,9 @@
 ﻿namespace StreetWorkout.Test.Services
 {
     using System.Linq;
+    using System.Threading.Tasks;
     using Xunit;
+
     using StreetWorkout.Data.Models;
     using StreetWorkout.Services.Accounts;
     using ViewModels.Accounts;
@@ -11,7 +13,7 @@
     {
         [Theory]
         [InlineData("vs1")]
-        public void IsUserAccountCompleteShouldReturnTrueWhenUserAccountIsCompleted(string userId)
+        public async Task IsUserAccountCompleteShouldReturnTrueWhenUserAccountIsCompleted(string userId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -26,7 +28,7 @@
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.IsUserAccountComplete(userId);
+            var result = await accountService.IsUserAccountComplete(userId);
 
             // Assert
             Assert.True(result);
@@ -34,7 +36,7 @@
 
         [Theory]
         [InlineData("vs1")]
-        public void IsUserAccountCompleteShouldReturnFalseWhenUserAccountIsNotCompleted(string userId)
+        public async Task IsUserAccountCompleteShouldReturnFalseWhenUserAccountIsNotCompleted(string userId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -48,7 +50,25 @@
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.IsUserAccountComplete(userId);
+            var result = await accountService.IsUserAccountComplete(userId);
+
+            // Assert
+            Assert.False(result);
+        }
+
+
+        [Theory]
+        [InlineData("vs1")]
+        public async Task IsUserAccountCompleteShouldReturnFalseWhenUserNotExist(string userId)
+        {
+            // Arrange
+            var data = DatabaseMock.Instance;
+            var mapper = MapperMock.Instance;
+
+            var accountService = new AccountService(data, mapper);
+
+            // Act
+            var result = await accountService.IsUserAccountComplete(userId);
 
             // Assert
             Assert.False(result);
@@ -223,24 +243,24 @@
 
         [Theory]
         [InlineData("vs1", 1, 1, 1, 80, 180, "hiiii test")]
-        public void CompleteAccountShouldAddUserDataAndChangeIsAccountCompletedOnTrue(string userId, int sportId, int goalId, int trainingFrequency, int weight, int height,
+        public async Task CompleteAccountShouldAddUserDataAndChangeIsAccountCompletedOnTrue(string userId, int sportId, int goalId, int trainingFrequency, int weight, int height,
             string description)
         {
             // Arrange
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
             
-            data.Users.Add(new ApplicationUser()
+            await data.Users.AddAsync(new ApplicationUser()
             {
                 Id = userId,
             });
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var accountService = new AccountService(data, mapper);
 
             // Act
-            accountService.CompleteAccount(userId, sportId, goalId, trainingFrequency, weight, height, description);
-            var user = data.Users.Find(userId);
+            await accountService.CompleteAccount(userId, sportId, goalId, trainingFrequency, weight, height, description);
+            var user = await data.Users.FindAsync(userId);
 
             // Assert
             Assert.Equal(1, data.Users.Count());

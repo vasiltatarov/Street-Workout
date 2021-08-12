@@ -1,5 +1,6 @@
 ﻿namespace StreetWorkout.Controllers
 {
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -18,8 +19,8 @@
         public IActionResult Account(string username)
             => this.View(this.accountService.GetAccount(username));
 
-        public IActionResult CompleteAccount()
-            => this.IsAccountComplete()
+        public async Task<IActionResult> CompleteAccount()
+            => await this.IsAccountComplete()
                 ? this.RedirectToAction("Index", "Home")
                 : this.View(new AccountFormModel
                 {
@@ -29,11 +30,11 @@
                 });
 
         [HttpPost]
-        public IActionResult CompleteAccount(AccountFormModel data)
+        public async Task<IActionResult> CompleteAccount(AccountFormModel data)
         {
             var userId = this.User.GetId();
 
-            if (this.IsAccountComplete() || this.accountService.IsUserDataExists(userId))
+            if (await this.IsAccountComplete() || this.accountService.IsUserDataExists(userId))
             {
                 return this.RedirectToAction("Index", "Home");
             }
@@ -62,12 +63,12 @@
                 return this.View(data);
             }
 
-            this.accountService.CompleteAccount(userId, data.SportId, data.GoalId, data.TrainingFrequencyId, data.Weight, data.Height, data.Description);
+            await this.accountService.CompleteAccount(userId, data.SportId, data.GoalId, data.TrainingFrequencyId, data.Weight, data.Height, data.Description);
 
             return this.RedirectToAction("Index", "Home");
         }
 
-        private bool IsAccountComplete()
-            => this.accountService.IsUserAccountComplete(this.User.GetId());
+        private async Task<bool> IsAccountComplete()
+            => await this.accountService.IsUserAccountComplete(this.User.GetId());
     }
 }

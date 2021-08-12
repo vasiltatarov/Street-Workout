@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
@@ -24,8 +25,12 @@
             this.mapper = mapper;
         }
 
-        public bool IsUserAccountComplete(string userId)
-            => this.data.Users.Find(userId).IsAccountCompleted;
+        public async Task<bool> IsUserAccountComplete(string userId)
+        {
+            var user = await this.data.Users.FindAsync(userId);
+
+            return user?.IsAccountCompleted ?? false;
+        }
 
         public bool IsUserDataExists(string userId)
             => this.data.UserDatas.Any(x => x.UserId == userId);
@@ -39,10 +44,10 @@
         public bool IsValidTrainingFrequencyId(int id)
             => this.data.TrainingFrequencies.Any(x => x.Id == id);
 
-        public void CompleteAccount(string userId, int sportId, int goalId, int trainingFrequency, int weight, int height,
+        public async Task CompleteAccount(string userId, int sportId, int goalId, int trainingFrequency, int weight, int height,
             string description)
         {
-            var userData = new UserData
+            await this.data.UserDatas.AddAsync(new UserData
             {
                 UserId = userId,
                 SportId = sportId,
@@ -51,14 +56,12 @@
                 Weight = weight,
                 Height = height,
                 Description = description,
-            };
+            });
 
-            this.data.UserDatas.Add(userData);
-
-            var user = this.data.Users.Find(userId);
+            var user = await this.data.Users.FindAsync(userId);
             user.IsAccountCompleted = true;
-
-            this.data.SaveChanges();
+            
+            await this.data.SaveChangesAsync();
         }
 
         public AccountViewModel GetAccount(string username)
