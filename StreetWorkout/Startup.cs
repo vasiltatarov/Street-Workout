@@ -1,5 +1,3 @@
-using StreetWorkout.Hubs;
-
 namespace StreetWorkout
 {
     using Microsoft.AspNetCore.Mvc;
@@ -13,6 +11,7 @@ namespace StreetWorkout
 
     using Data;
     using Data.Models;
+    using Hubs;
     using Infrastructure;
     using Services.Accounts;
     using Services.BodyCalculators;
@@ -26,6 +25,7 @@ namespace StreetWorkout
     using Services.SupplementCategories;
     using Services.Workouts;
     using Services.WorkoutPayments;
+    using Services.Chat;
 
     public class Startup
     {
@@ -85,6 +85,7 @@ namespace StreetWorkout
             services.AddTransient<ISupplementService, SupplementService>();
             services.AddTransient<ISupplementCategoryService, SupplementCategoryService>();
             services.AddTransient<IWorkoutPaymentService, WorkoutPaymentService>();
+            services.AddTransient<IChatService, ChatService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

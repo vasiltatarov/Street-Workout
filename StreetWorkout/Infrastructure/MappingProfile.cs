@@ -12,6 +12,7 @@
     using ViewModels.Accounts;
     using ViewModels.GroupWorkouts;
     using ViewModels.Supplements;
+    using ViewModels.Chat;
 
     public class MappingProfile : Profile
     {
@@ -47,7 +48,11 @@
             this.CreateMap<GroupWorkout, GroupWorkoutFormModel>();
             this.CreateMap<SupplementCategory, SupplementCategoryViewModel>();
             this.CreateMap<Supplement, SupplementFormModel>();
-
+            this.CreateMap<ChatMessage, Message>()
+                .ForMember(x => x.Username,
+                    y => y.MapFrom(x => x.User.UserName))
+                .ForMember(x => x.UserImageUrl,
+                    y => y.MapFrom(x => x.User.ImageUrl));
         }
     }
 }

@@ -39,6 +39,8 @@
 
         public DbSet<SupplementCategory> SupplementCategories { get; set; }
 
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
@@ -48,6 +50,7 @@
             builder.ApplyConfiguration(new GroupWorkoutConfiguration());
             builder.ApplyConfiguration(new UserWorkoutPaymentConfiguration());
             builder.ApplyConfiguration(new SupplementConfiguration());
+            builder.ApplyConfiguration(new ChatMessageConfiguration());
 
             base.OnModelCreating(builder);
         }

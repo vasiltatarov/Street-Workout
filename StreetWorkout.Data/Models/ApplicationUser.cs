@@ -36,5 +36,7 @@ namespace StreetWorkout.Data.Models
         public IEnumerable<GroupWorkout> GroupWorkouts { get; set; } = new HashSet<GroupWorkout>();
 
         public IEnumerable<UserWorkoutPayment> UserWorkoutPayments { get; set; } = new HashSet<UserWorkoutPayment>();
+
+        public IEnumerable<ChatMessage> ChatMessages { get; set; } = new HashSet<ChatMessage>();
     }
 }

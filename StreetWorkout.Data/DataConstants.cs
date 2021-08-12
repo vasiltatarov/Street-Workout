@@ -55,5 +55,9 @@
         {
             public const int SupplementCategoryNameMaxLength = 30;
         }
+        public class ChatMessageConstants
+        {
+            public const int TextMaxLength = 300;
+        }
     }
 }

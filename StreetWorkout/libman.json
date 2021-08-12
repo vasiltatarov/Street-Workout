@@ -63,7 +63,7 @@
       ]
     },
     {
-      "library": "moment@2.24.0",
+      "library": "moment@latest",
       "destination": "wwwroot/lib/moment/",
       "files": [
         "min/moment-with-locales.min.js"

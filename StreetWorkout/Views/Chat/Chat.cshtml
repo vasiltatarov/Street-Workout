@@ -1,5 +1,10 @@
-﻿@{
+﻿@model IEnumerable<Message>
+@{
     ViewData["Title"] = "Chat Room";
+    var groupedMessages = Model
+        .GroupBy(x => x.Username)
+        .Select(x => x.Last())
+        .ToList();
 }
 
 <div class="container">
@@ -13,49 +18,45 @@
                     </div>
                 </div>
                 <div class="inbox_chat">
-                    @*@foreach (var message in Model.Messages
-                            .GroupBy(x => x.UserUserName)
-                            .Select(x => x.Last())
-                            .ToList()
-                        )
-                         {
-                             <div class="chat_list">
-                                 <div class="chat_people">
-                                     <div class="chat_img">
-                                         <img class="rounded-circle" src="~/uploads/@message.UserImagePath" alt="sunil">
-                                     </div>
-                                     <div class="chat_ib">
-                                         <h5>
-                                             @message.UserUserName
-                                             <span class="chat_date">
-                                                 <time datetime="@message.CreatedOn.ToString("O")"></time>
-                                             </span>
-                                         </h5>
-                                         <p>@message.Text</p>
-                                     </div>
-                                 </div>
-                             </div>
-                         }*@
+                    @foreach (var message in groupedMessages)
+                    {
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_img">
+                                    <img class="rounded-circle" src="@message.UserImageUrl" alt="@message.Username">
+                                </div>
+                                <div class="chat_ib">
+                                    <h5>
+                                        @message.Username
+                                        <span class="chat_date">
+                                            <time>@message.CreatedOn.ToLocalTime()</time>
+                                        </span>
+                                    </h5>
+                                    <p>@message.Text</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="mesgs">
                 <div id="messagesList" class="msg_history messages">
-                    @*@foreach (var message in Model.Messages)
-                        {
-                            <br />
-                            <div class="incoming_msg">
-                                <div class="incoming_msg_img">
-                                    <img class="rounded-circle" src="~/uploads/@message.UserImagePath" alt="" />
-                                </div>
-                                <div class="received_msg">
-                                    <div class="received_withd_msg">
-                                        <p>@message.Text</p>
-                                        <span class="text-danger">@message.UserUserName</span>:
-                                        <time datetime="@message.CreatedOn.ToString("O")"></time>
-                                    </div>
+                    @foreach (var message in Model)
+                    {
+                        <br />
+                        <div class="incoming_msg">
+                            <div class="incoming_msg_img">
+                                <img class="rounded-circle" src="@message.UserImageUrl" alt="@message.Username" />
+                            </div>
+                            <div class="received_msg">
+                                <div class="received_withd_msg">
+                                    <p>@message.Text</p>
+                                    <span class="text-danger">@message.Username</span>:
+                                    <time>@message.CreatedOn.ToLocalTime()</time>
                                 </div>
                             </div>
-                        }*@
+                        </div>
+                    }
                 </div>
                 <div class="type_msg">
                     <div id="message-holder" class="input_msg_write">
@@ -83,15 +84,15 @@
                 var chatInfo = `
 <br />
 <div class="incoming_msg">
-    <div class="incoming_msg_img">
-        <img class="rounded-circle" src="${message.userImageUrl}" alt="" />
-    </div>
-    <div class="received_msg">
-        <div class="received_withd_msg">
-            <p>${message.text}</p>
-            <span style="color: red">${message.username}</span>: ${moment().format('llll')}
+        <div class="incoming_msg_img">
+            <img class="rounded-circle" src="${message.userImageUrl}" alt="" />
         </div>
-    </div>
+        <div class="received_msg">
+            <div class="received_withd_msg">
+                <p>${message.text}</p>
+                <span style="color: red">${message.username}</span>: ${moment().format('DD.MM.yyyy HH:mm:ss')}
+            </div>
+        </div>
 </div>`;
                 $("#messagesList").append(chatInfo);
                 $(".messages").animate({ scrollTop: "99999" }, "fast");

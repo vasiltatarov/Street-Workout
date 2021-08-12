@@ -7,20 +7,34 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
 
-    using ViewModels.Chat;
     using Data.Models;
+    using ViewModels.Chat;
+    using Services.Chat;
 
     [Authorize]
     public class ChatHub : Hub
     {
-        private readonly UserManager<ApplicationUser> userManager;
+        private const int MessageMinLength = 2;
+        private const int MessageMaxLength = 300;
 
-        public ChatHub(UserManager<ApplicationUser> userManager)
-            => this.userManager = userManager;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IChatService chat;
+
+        public ChatHub(UserManager<ApplicationUser> userManager, IChatService chat)
+        {
+            this.userManager = userManager;
+            this.chat = chat;
+        }
 
         public async Task Send(string message)
         {
+            if (message.Length < MessageMinLength || message.Length > MessageMaxLength)
+            {
+                return;
+            }
+
             var user = await this.userManager.GetUserAsync(this.Context.User);
+            await this.chat.Create(message, user.Id);
 
             await this.Clients.All.SendAsync(
                 "NewMessage",

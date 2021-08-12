@@ -139,6 +139,7 @@ if (latestWorkouts == null)
 31. Implemented user payments statistics administration.
 32. Introduced DataTables JS library.
 33. Implemented a chat where all registered users can exchange messages in real time (using SignalR).
+34. Added Momment.JS client library.
 
 Potential Tasks:
 - Add async and await.
