@@ -21,6 +21,7 @@ StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (Apri
 * Font Awesome Icons
 * TinyMCE
 * DataTables
+* Moment.JS
 * Lazy Kit (Bootstrap 4)
 
 # Functionality
