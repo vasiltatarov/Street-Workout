@@ -1,5 +1,6 @@
 ﻿namespace StreetWorkout.Controllers
 {
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Chat;
@@ -12,7 +13,7 @@
         public ChatController(IChatService chat)
             => this.chat = chat;
 
-        public IActionResult Chat()
-            => this.View(this.chat.GetMessages());
+        public async Task<IActionResult> Chat()
+            => this.View(await this.chat.GetMessages());
     }
 }

@@ -8,6 +8,6 @@
     {
         Task Create(string text, string userId);
 
-        IEnumerable<Message> GetMessages();
+        Task<IEnumerable<Message>> GetMessages();
     }
 }

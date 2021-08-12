@@ -1,12 +1,12 @@
 ﻿namespace StreetWorkout.Services.Chat
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Microsoft.EntityFrameworkCore;
 
     using Data;
     using Data.Models;
@@ -34,10 +34,10 @@
             await this.data.SaveChangesAsync();
         }
 
-        public IEnumerable<Message> GetMessages()
-            => this.data
+        public async Task<IEnumerable<Message>> GetMessages()
+            => await this.data
                 .ChatMessages
                 .ProjectTo<Message>(this.mapper.ConfigurationProvider)
-                .ToList();
+                .ToListAsync();
     }
 }
