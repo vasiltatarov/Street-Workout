@@ -295,7 +295,7 @@
             Assert.NotNull(result);
             Assert.True(user.UserRole == UserRole.Trainer);
             Assert.Equal(currentPage, result.CurrentPage);
-            Assert.Equal(9, result.TotalGroupWorkouts);
+            Assert.Equal(10, result.TotalGroupWorkouts);
             Assert.Equal(9, result.GroupWorkouts.Count());
         }
 
@@ -334,7 +334,7 @@
             Assert.NotNull(result);
             Assert.True(user.UserRole == UserRole.Trainer);
             Assert.Equal(currentPage, result.CurrentPage);
-            Assert.Equal(1, result.TotalGroupWorkouts);
+            Assert.Equal(10, result.TotalGroupWorkouts);
             Assert.Single(result.GroupWorkouts);
         }
 

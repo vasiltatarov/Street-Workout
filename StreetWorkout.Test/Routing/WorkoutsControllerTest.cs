@@ -19,8 +19,8 @@
         public void DetailsShouldBeMapped()
             => MyRouting
                 .Configuration()
-                .ShouldMap("/Workouts/Details/1")
-                .To<WorkoutsController>(c => c.Details(1, string.Empty));
+                .ShouldMap("/Workouts/Details/1/information")
+                .To<WorkoutsController>(c => c.Details(1, "information"));
 
         [Fact]
         public void CreateShouldBeMapped()

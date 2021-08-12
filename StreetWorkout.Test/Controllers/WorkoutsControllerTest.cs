@@ -58,8 +58,8 @@
                     }));
 
         [Theory]
-        [InlineData("TestId", "title", 1)]
-        public void DetailsShouldReturnViewWithWorkoutDetailsServiceModel(string userId, string title, int workoutId)
+        [InlineData("TestId", "title", 1, "sportTest")]
+        public void DetailsShouldReturnViewWithWorkoutDetailsServiceModel(string userId, string title, int workoutId, string information)
             => MyController<WorkoutsController>
                 .Instance(controller => controller
                     .WithUser()
@@ -72,10 +72,10 @@
                         {
                             Title = title,
                             UserId = userId,
-                            Sport = new Sport(),
+                            Sport = new Sport { Name = information },
                             BodyPart = new BodyPart(),
                         })))
-                .Calling(c => c.Details(workoutId, string.Empty))
+                .Calling(c => c.Details(workoutId, information))
                 .ShouldReturn()
                 .View(view => view
                     .WithModelOfType<WorkoutDetailsServiceModel>()
@@ -88,7 +88,7 @@
 
         [Theory]
         [InlineData("TestId", 1)]
-        public void DetailsShouldReturnViewWithNullWhenWorkoutWithGivenIdNotExistInDatabase(string userId, int workoutId)
+        public void DetailsShouldReturnBadRequestWhenWorkoutWithGivenIdNotExistInDatabase(string userId, int workoutId)
             => MyController<WorkoutsController>
                 .Instance(controller => controller
                     .WithUser()
@@ -99,7 +99,7 @@
                         })))
                 .Calling(c => c.Details(workoutId, string.Empty))
                 .ShouldReturn()
-                .View();
+                .BadRequest();
 
         [Fact]
         public void CreateShouldReturnViewWithWorkoutFormModel()

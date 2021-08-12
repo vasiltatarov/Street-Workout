@@ -26,6 +26,11 @@
         {
             var workout = this.workouts.Details(id);
 
+            if (workout == null)
+            {
+                return this.BadRequest();
+            }
+
             var informationDecode = System.Web.HttpUtility.UrlDecode(information);
 
             if (!informationDecode.Contains(workout.Title) &&
