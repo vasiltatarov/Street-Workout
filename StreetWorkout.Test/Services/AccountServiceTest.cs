@@ -76,25 +76,25 @@
 
         [Theory]
         [InlineData("vs1")]
-        public void IsUserDataExistsShouldReturnTrueWhenUserDataForGivenUserExist(string userId)
+        public async Task IsUserDataExistsShouldReturnTrueWhenUserDataForGivenUserExist(string userId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
 
-            data.UserDatas.Add(new UserData()
+            await data.UserDatas.AddAsync(new UserData()
             {
                 User = new ApplicationUser
                 {
                     Id = userId,
                 }
             });
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.IsUserDataExists(userId);
+            var result = await accountService.IsUserDataExists(userId);
 
             // Assert
             Assert.True(result);
@@ -103,7 +103,7 @@
         [Theory]
         [InlineData("vs1")]
 
-        public void IsUserDataExistsShouldReturnFalseWhenUserDataForGivenUserNotExist(string userId)
+        public async Task IsUserDataExistsShouldReturnFalseWhenUserDataForGivenUserNotExist(string userId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -112,7 +112,7 @@
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.IsUserDataExists(userId);
+            var result = await accountService.IsUserDataExists(userId);
 
             // Assert
             Assert.False(result);
@@ -120,23 +120,23 @@
 
         [Theory]
         [InlineData(2)]
-        public void IsValidSportIdShouldReturnTrueWhenSportExist(int sportId)
+        public async Task IsValidSportIdShouldReturnTrueWhenSportExist(int sportId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
 
-            data.Sports.Add(new Sport
+            await data.Sports.AddAsync(new Sport
             {
                 Id = sportId,
                 Name = "test",
             });
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.IsValidSportId(sportId);
+            var result = await accountService.IsValidSportId(sportId);
 
             // Assert
             Assert.True(result);
@@ -144,7 +144,7 @@
 
         [Theory]
         [InlineData(2)]
-        public void IsValidSportIdShouldReturnFalseWhenSportNotExist(int sportId)
+        public async Task IsValidSportIdShouldReturnFalseWhenSportNotExist(int sportId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -153,7 +153,7 @@
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.IsValidSportId(sportId);
+            var result = await accountService.IsValidSportId(sportId);
 
             // Assert
             Assert.False(result);
@@ -161,23 +161,23 @@
 
         [Theory]
         [InlineData(2)]
-        public void IsValidGoalIdShouldReturnTrueWhenSportExist(int goalId)
+        public async Task IsValidGoalIdShouldReturnTrueWhenSportExist(int goalId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
 
-            data.Goals.Add(new Goal()
+            await data.Goals.AddAsync(new Goal()
             {
                 Id = goalId,
                 Name = "test",
             });
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.IsValidGoalId(goalId);
+            var result = await accountService.IsValidGoalId(goalId);
 
             // Assert
             Assert.True(result);
@@ -185,7 +185,7 @@
 
         [Theory]
         [InlineData(2)]
-        public void IsValidGoalIdShouldReturnFalseWhenSportNotExist(int goalId)
+        public async Task IsValidGoalIdShouldReturnFalseWhenSportNotExist(int goalId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -194,7 +194,7 @@
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.IsValidGoalId(goalId);
+            var result = await accountService.IsValidGoalId(goalId);
 
             // Assert
             Assert.False(result);
@@ -202,23 +202,23 @@
 
         [Theory]
         [InlineData(2)]
-        public void IsValidTrainingFrequencyIdShouldReturnTrueWhenSportExist(int trainingFrequencyId)
+        public async Task IsValidTrainingFrequencyIdShouldReturnTrueWhenSportExist(int trainingFrequencyId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
 
-            data.TrainingFrequencies.Add(new TrainingFrequency
+            await data.TrainingFrequencies.AddAsync(new TrainingFrequency
             {
                 Id = trainingFrequencyId,
                 Name = "test",
             });
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.IsValidTrainingFrequencyId(trainingFrequencyId);
+            var result = await accountService.IsValidTrainingFrequencyId(trainingFrequencyId);
 
             // Assert
             Assert.True(result);
@@ -226,7 +226,7 @@
 
         [Theory]
         [InlineData(2)]
-        public void IsValidTrainingFrequencyIdShouldReturnFalseWhenSportNotExist(int trainingFrequencyId)
+        public async Task IsValidTrainingFrequencyIdShouldReturnFalseWhenSportNotExist(int trainingFrequencyId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -235,7 +235,7 @@
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.IsValidTrainingFrequencyId(trainingFrequencyId);
+            var result = await accountService.IsValidTrainingFrequencyId(trainingFrequencyId);
 
             // Assert
             Assert.False(result);
@@ -249,7 +249,7 @@
             // Arrange
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
-            
+
             await data.Users.AddAsync(new ApplicationUser()
             {
                 Id = userId,
@@ -270,13 +270,13 @@
 
         [Theory]
         [InlineData("vasko", "Kirkovo")]
-        public void GetAccountShouldReturnCorrectAccountViewModelWithDataForGivenUsername(string username, string country)
+        public async Task GetAccountShouldReturnCorrectAccountViewModelWithDataForGivenUsername(string username, string country)
         {
             // Arrange
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
 
-            data.Users.Add(new ApplicationUser()
+            await data.Users.AddAsync(new ApplicationUser()
             {
                 UserName = username,
                 Country = new Country
@@ -284,12 +284,12 @@
                     Name = country,
                 },
             });
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.GetAccount(username);
+            var result = await accountService.GetAccount(username);
 
             // Assert
             Assert.IsType<AccountViewModel>(result);
@@ -298,27 +298,27 @@
             Assert.Equal(username, result.Username);
         }
 
-        [Fact]    
-        public void GetSportsInAccountFormModelShouldReturnCorrectNoTEmptyCollectionOfSports()
+        [Fact]
+        public async Task GetSportsInAccountFormModelShouldReturnCorrectNoTEmptyCollectionOfSports()
         {
             // Arrange
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
 
-            data.Sports.AddRange(Enumerable.Range(1, 10).Select(x => new Sport()));
-            data.SaveChanges();
+            await data.Sports.AddRangeAsync(Enumerable.Range(1, 10).Select(x => new Sport()));
+            await data.SaveChangesAsync();
 
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.GetSportsInAccountFormModel();
+            var result = await accountService.GetSportsInAccountFormModel();
 
             // Assert
             Assert.Equal(10, result.Count());
         }
 
         [Fact]
-        public void GetSportsInAccountFormModelShouldReturnEmptyCollectionOfSports()
+        public async Task GetSportsInAccountFormModelShouldReturnEmptyCollectionOfSports()
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -327,33 +327,33 @@
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.GetSportsInAccountFormModel();
+            var result = await accountService.GetSportsInAccountFormModel();
 
             // Assert
             Assert.Empty(result);
         }
 
         [Fact]
-        public void GetGoalsInAccountFormModelShouldReturnCorrectNoTEmptyCollectionOfSports()
+        public async Task GetGoalsInAccountFormModelShouldReturnCorrectNoTEmptyCollectionOfSports()
         {
             // Arrange
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
 
-            data.Goals.AddRange(Enumerable.Range(1, 10).Select(x => new Goal()));
-            data.SaveChanges();
+            await data.Goals.AddRangeAsync(Enumerable.Range(1, 10).Select(x => new Goal()));
+            await data.SaveChangesAsync();
 
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.GetGoalsInAccountFormModel();
+            var result = await accountService.GetGoalsInAccountFormModel();
 
             // Assert
             Assert.Equal(10, result.Count());
         }
 
         [Fact]
-        public void GetGoalsInAccountFormModelShouldReturnEmptyCollectionOfSports()
+        public async Task GetGoalsInAccountFormModelShouldReturnEmptyCollectionOfSports()
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -362,33 +362,33 @@
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.GetGoalsInAccountFormModel();
+            var result = await accountService.GetGoalsInAccountFormModel();
 
             // Assert
             Assert.Empty(result);
         }
 
         [Fact]
-        public void GetTrainingFrequenciesInAccountFormModelShouldReturnCorrectNoTEmptyCollectionOfSports()
+        public async Task GetTrainingFrequenciesInAccountFormModelShouldReturnCorrectNoTEmptyCollectionOfSports()
         {
             // Arrange
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
 
-            data.TrainingFrequencies.AddRange(Enumerable.Range(1, 10).Select(x => new TrainingFrequency()));
-            data.SaveChanges();
+            await data.TrainingFrequencies.AddRangeAsync(Enumerable.Range(1, 10).Select(x => new TrainingFrequency()));
+            await data.SaveChangesAsync();
 
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.GetTrainingFrequenciesInAccountFormModel();
+            var result = await accountService.GetTrainingFrequenciesInAccountFormModel();
 
             // Assert
             Assert.Equal(10, result.Count());
         }
 
         [Fact]
-        public void GetTrainingFrequenciesInAccountFormModelShouldReturnEmptyCollectionOfSports()
+        public async Task GetTrainingFrequenciesInAccountFormModelShouldReturnEmptyCollectionOfSports()
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -397,7 +397,7 @@
             var accountService = new AccountService(data, mapper);
 
             // Act
-            var result = accountService.GetTrainingFrequenciesInAccountFormModel();
+            var result = await accountService.GetTrainingFrequenciesInAccountFormModel();
 
             // Assert
             Assert.Empty(result);

@@ -10,22 +10,22 @@
     {
         Task<bool> IsUserAccountComplete(string userId);
 
-        bool IsUserDataExists(string userId);
+        Task<bool> IsUserDataExists(string userId);
 
-        bool IsValidSportId(int id);
+        Task<bool> IsValidSportId(int id);
 
-        bool IsValidGoalId(int id);
+        Task<bool> IsValidGoalId(int id);
 
-        bool IsValidTrainingFrequencyId(int id);
+        Task<bool> IsValidTrainingFrequencyId(int id);
 
         Task CompleteAccount(string userId, int sportId, int goalId, int trainingFrequency, int weight, int height, string description);
 
-        AccountViewModel GetAccount(string username);
+        Task<AccountViewModel> GetAccount(string username);
 
-        IEnumerable<SportViewModel> GetSportsInAccountFormModel();
+        Task<IEnumerable<SportViewModel>> GetSportsInAccountFormModel();
 
-        IEnumerable<GoalInAccountViewModel> GetGoalsInAccountFormModel();
+        Task<IEnumerable<GoalInAccountViewModel>> GetGoalsInAccountFormModel();
 
-        IEnumerable<TrainingFrequencyInAccountViewModel> GetTrainingFrequenciesInAccountFormModel();
+        Task<IEnumerable<TrainingFrequencyInAccountViewModel>> GetTrainingFrequenciesInAccountFormModel();
     }
 }

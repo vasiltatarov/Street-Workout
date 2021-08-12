@@ -7,6 +7,7 @@
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Microsoft.EntityFrameworkCore;
 
     using Data;
     using Data.Models;
@@ -32,17 +33,17 @@
             return user?.IsAccountCompleted ?? false;
         }
 
-        public bool IsUserDataExists(string userId)
-            => this.data.UserDatas.Any(x => x.UserId == userId);
+        public async Task<bool> IsUserDataExists(string userId)
+            => await this.data.UserDatas.AnyAsync(x => x.UserId == userId);
 
-        public bool IsValidSportId(int id)
-            => this.data.Sports.Any(x => x.Id == id);
+        public async Task<bool> IsValidSportId(int id)
+            => await this.data.Sports.AnyAsync(x => x.Id == id);
 
-        public bool IsValidGoalId(int id)
-            => this.data.Goals.Any(x => x.Id == id);
+        public async Task<bool> IsValidGoalId(int id)
+            => await this.data.Goals.AnyAsync(x => x.Id == id);
 
-        public bool IsValidTrainingFrequencyId(int id)
-            => this.data.TrainingFrequencies.Any(x => x.Id == id);
+        public async Task<bool> IsValidTrainingFrequencyId(int id)
+            => await this.data.TrainingFrequencies.AnyAsync(x => x.Id == id);
 
         public async Task CompleteAccount(string userId, int sportId, int goalId, int trainingFrequency, int weight, int height,
             string description)
@@ -60,12 +61,12 @@
 
             var user = await this.data.Users.FindAsync(userId);
             user.IsAccountCompleted = true;
-            
+
             await this.data.SaveChangesAsync();
         }
 
-        public AccountViewModel GetAccount(string username)
-            => this.data.Users
+        public async Task<AccountViewModel> GetAccount(string username)
+            => await this.data.Users
                 .Where(x => x.UserName == username)
                 .Select(x => new AccountViewModel
                 {
@@ -97,25 +98,25 @@
                             })
                             .FirstOrDefault(),
                 })
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
-        public IEnumerable<SportViewModel> GetSportsInAccountFormModel()
-            => this.data.Sports
+        public async Task<IEnumerable<SportViewModel>> GetSportsInAccountFormModel()
+            => await this.data.Sports
                 .ProjectTo<SportViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+                .ToListAsync();
 
-        public IEnumerable<GoalInAccountViewModel> GetGoalsInAccountFormModel()
-            => this.data.Goals
+        public async Task<IEnumerable<GoalInAccountViewModel>> GetGoalsInAccountFormModel()
+            => await this.data.Goals
                 .ProjectTo<GoalInAccountViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+                .ToListAsync();
 
-        public IEnumerable<TrainingFrequencyInAccountViewModel> GetTrainingFrequenciesInAccountFormModel()
-            => this.data.TrainingFrequencies
+        public async Task<IEnumerable<TrainingFrequencyInAccountViewModel>> GetTrainingFrequenciesInAccountFormModel()
+            => await this.data.TrainingFrequencies
                 .Select(x => new TrainingFrequencyInAccountViewModel()
                 {
                     Id = x.Id,
                     Name = x.Name
                 })
-                .ToList();
+                .ToListAsync();
     }
 }
