@@ -1,3 +1,5 @@
+using StreetWorkout.Hubs;
+
 namespace StreetWorkout
 {
     using Microsoft.AspNetCore.Mvc;
@@ -50,6 +52,7 @@ namespace StreetWorkout
                 .AddEntityFrameworkStores<StreetWorkoutDbContext>();
 
             services.AddAutoMapper(typeof(Startup));
+            services.AddSignalR();
 
             services
                 .AddAuthentication()
@@ -109,6 +112,7 @@ namespace StreetWorkout
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
+                    endpoints.MapHub<ChatHub>("/chat");
                     endpoints.MapDefaultAreaRoute();
                     endpoints.MapDefaultRoutes();
                     endpoints.MapDefaultControllerRoute();
