@@ -138,9 +138,10 @@ if (latestWorkouts == null)
 30. Fixed UI of the administration page.
 31. Implemented user payments statistics administration.
 32. Introduced DataTables JS library.
+33. Implemented a chat where all registered users can exchange messages in real time (using SignalR).
 
 Potential Tasks:
-- Implement a chat where all registered users can exchange messages.
+- Add async and await.
 
 # Note
 ConnectionStrings:
