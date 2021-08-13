@@ -1,7 +1,9 @@
 ﻿namespace StreetWorkout.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
+
     using Services.WorkoutPayments;
 
     using static WebConstants;
@@ -14,7 +16,7 @@
         public WorkoutPaymentsController(IWorkoutPaymentService workoutPayments)
             => this.workoutPayments = workoutPayments;
 
-        public IActionResult All()
-            => this.View(this.workoutPayments.All());
+        public async Task<IActionResult> All()
+            => this.View(await this.workoutPayments.All());
     }
 }

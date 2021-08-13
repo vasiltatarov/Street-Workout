@@ -1,10 +1,11 @@
 ﻿namespace StreetWorkout.Services.WorkoutPayments
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Models;
 
     public interface IWorkoutPaymentService
     {
-        IEnumerable<UserWorkoutPaymentServiceModel> All();
+        Task<IEnumerable<UserWorkoutPaymentServiceModel>> All();
     }
 }

@@ -229,11 +229,11 @@
         [Theory]
         [InlineData(11)]
         [InlineData(22)]
-        public void DetailsShouldReturnNullWhenWorkoutWithGivenIdNotExist(int workoutId)
+        public async Task DetailsShouldReturnNullWhenWorkoutWithGivenIdNotExist(int workoutId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            data.Workouts.Add(new Workout
+            await data.Workouts.AddAsync(new Workout
             {
                 Title = "test",
                 User = new ApplicationUser
@@ -251,14 +251,14 @@
                 },
                 Content = "Have Content"
             });
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = workoutService.Details(workoutId);
+            var result = await workoutService.Details(workoutId);
 
             // Assert
             Assert.Null(result);

@@ -2,8 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+
     using Data;
     using Models;
 
@@ -18,11 +22,11 @@
             this.mapper = mapper;
         }
 
-        public IEnumerable<UserWorkoutPaymentServiceModel> All()
-            => this.data
+        public async Task<IEnumerable<UserWorkoutPaymentServiceModel>> All()
+            => await this.data
                 .UserWorkoutPayments
                 .OrderByDescending(x => x.Id)
                 .ProjectTo<UserWorkoutPaymentServiceModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+                .ToListAsync();
     }
 }
