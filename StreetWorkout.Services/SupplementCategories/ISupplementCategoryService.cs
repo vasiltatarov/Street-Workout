@@ -1,18 +1,19 @@
 ﻿namespace StreetWorkout.Services.SupplementCategories
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Models;
 
     public interface ISupplementCategoryService
     {
-        IEnumerable<SupplementCategoryServiceModel> GetAll();
+        Task<IEnumerable<SupplementCategoryServiceModel>> GetAll();
 
-        bool Delete(int id);
+        Task<bool> Delete(int id);
 
-        bool Restore(int id);
+        Task<bool> Restore(int id);
 
-        bool Edit(int id, string name);
+        Task<bool> Edit(int id, string name);
 
-        SupplementCategoryEditServiceModel GetSupplementCategoryEditModel(int id);
+        Task<SupplementCategoryEditServiceModel> GetSupplementCategoryEditModel(int id);
     }
 }

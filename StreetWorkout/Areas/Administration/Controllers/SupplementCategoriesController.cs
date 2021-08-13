@@ -1,5 +1,6 @@
 ﻿namespace StreetWorkout.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
@@ -17,12 +18,12 @@
         public SupplementCategoriesController(ISupplementCategoryService supplementCategories)
             => this.supplementCategories = supplementCategories;
 
-        public IActionResult All()
-            => this.View(this.supplementCategories.GetAll());
+        public async Task<IActionResult> All()
+            => this.View(await this.supplementCategories.GetAll());
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!this.supplementCategories.Delete(id))
+            if (!await this.supplementCategories.Delete(id))
             {
                 return this.BadRequest();
             }
@@ -32,9 +33,9 @@
             return this.RedirectToAction("All");
         }
 
-        public IActionResult Restore(int id)
+        public async Task<IActionResult> Restore(int id)
         {
-            if (!this.supplementCategories.Restore(id))
+            if (!await this.supplementCategories.Restore(id))
             {
                 return this.BadRequest();
             }
@@ -44,18 +45,18 @@
             return this.RedirectToAction("All");
         }
 
-        public IActionResult Edit(int id)
-            => this.View(this.supplementCategories.GetSupplementCategoryEditModel(id));
+        public async Task<IActionResult> Edit(int id)
+            => this.View(await this.supplementCategories.GetSupplementCategoryEditModel(id));
 
         [HttpPost]
-        public IActionResult Edit(int id, SupplementCategoryEditServiceModel model)
+        public async Task<IActionResult> Edit(int id, SupplementCategoryEditServiceModel model)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-            if (!this.supplementCategories.Edit(id, model.Name))
+            if (!await this.supplementCategories.Edit(id, model.Name))
             {
                 return this.BadRequest();
             }

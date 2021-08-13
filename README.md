@@ -146,6 +146,7 @@ Potential Tasks:
 - Add async and await.
 - Fix latest workouts in workouts and group workouts page.
 - Implement Buy button in supplements details page.
+- Fix content in home page.
 
 # Note
 ConnectionStrings:

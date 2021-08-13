@@ -2,8 +2,9 @@
 {
     using System;
     using System.Threading.Tasks;
-    using ViewModels.GroupWorkouts;
     using Microsoft.AspNetCore.Mvc;
+
+    using ViewModels.GroupWorkouts;
     using Services.GroupWorkouts;
     using Services.Workouts;
     using Infrastructure;

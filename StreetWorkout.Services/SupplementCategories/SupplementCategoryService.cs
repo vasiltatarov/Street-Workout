@@ -2,6 +2,9 @@
 {
     using System.Linq;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
@@ -19,15 +22,15 @@
             this.mapper = mapper;
         }
 
-        public IEnumerable<SupplementCategoryServiceModel> GetAll()
-            => this.data
+        public async Task<IEnumerable<SupplementCategoryServiceModel>> GetAll()
+            => await this.data
                 .SupplementCategories
                 .ProjectTo<SupplementCategoryServiceModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+                .ToListAsync();
 
-        public bool Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var supplementCategory = this.data.SupplementCategories.FirstOrDefault(x => x.Id == id);
+            var supplementCategory = await this.data.SupplementCategories.FirstOrDefaultAsync(x => x.Id == id);
 
             if (supplementCategory == null)
             {
@@ -35,14 +38,14 @@
             }
 
             supplementCategory.IsDeleted = true;
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
-        public bool Restore(int id)
+        public async Task<bool> Restore(int id)
         {
-            var supplementCategory = this.data.SupplementCategories.FirstOrDefault(x => x.Id == id);
+            var supplementCategory = await this.data.SupplementCategories.FirstOrDefaultAsync(x => x.Id == id);
 
             if (supplementCategory == null)
             {
@@ -55,14 +58,14 @@
             }
 
             supplementCategory.IsDeleted = false;
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
-        public bool Edit(int id, string name)
+        public async Task<bool> Edit(int id, string name)
         {
-            var supplementCategory = this.data.SupplementCategories.FirstOrDefault(x => x.Id == id);
+            var supplementCategory = await this.data.SupplementCategories.FirstOrDefaultAsync(x => x.Id == id);
 
             if (supplementCategory == null)
             {
@@ -70,16 +73,16 @@
             }
 
             supplementCategory.Name = name;
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
-        public SupplementCategoryEditServiceModel GetSupplementCategoryEditModel(int id)
-            => this.data
+        public async Task<SupplementCategoryEditServiceModel> GetSupplementCategoryEditModel(int id)
+            => await this.data
                 .SupplementCategories
                 .Where(x => x.Id == id)
                 .ProjectTo<SupplementCategoryEditServiceModel>(this.mapper.ConfigurationProvider)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
     }
 }
