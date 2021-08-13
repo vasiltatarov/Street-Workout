@@ -20,8 +20,6 @@
         {
             // From Services
             this.CreateMap<ApplicationUser, UserIndexServiceModel>()
-                .ForMember(x => x.ImageUrl,
-                    y => y.MapFrom(x => x.ImageUrl))
                 .ForMember(x => x.Country,
                     y => y.MapFrom(x => x.Country.Name))
                 .ForMember(x => x.Gender,

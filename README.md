@@ -142,9 +142,9 @@ if (latestWorkouts == null)
 33. Implemented a chat where all registered users can exchange messages in real time (using SignalR).
 34. Added Momment.JS client library.
 35. Introduced 'async && await' where is appropriate.
+36. Fixed bug in Workouts/GroupWorkouts details with latest workouts route.
 
 Potential Tasks:
-- Fix latest workouts in workouts and group workouts page.
 - Implement Buy button in supplements details page.
 - Fix content in home page.
 
