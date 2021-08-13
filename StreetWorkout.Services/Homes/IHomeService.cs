@@ -1,18 +1,20 @@
 ﻿namespace StreetWorkout.Services.Homes
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     using Models;
     using StreetWorkout.Services.Workouts.Models;
     using StreetWorkout.Services.Supplements.Models;
 
     public interface IHomeService
     {
-        IndexServiceModel IndexViewModel(string userId);
+        Task<IndexServiceModel> IndexViewModel(string userId);
 
-        IEnumerable<WorkoutServiceModel> Workouts();
+        Task<IEnumerable<WorkoutServiceModel>> Workouts();
 
-        IEnumerable<UserIndexServiceModel> Users();
+        Task<IEnumerable<UserIndexServiceModel>> Users();
 
-        IEnumerable<SupplementServiceModel> Supplements();
+        Task<IEnumerable<SupplementServiceModel>> Supplements();
     }
 }

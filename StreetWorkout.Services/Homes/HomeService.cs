@@ -1,10 +1,10 @@
-﻿using StreetWorkout.Services.Supplements.Models;
-
-namespace StreetWorkout.Services.Homes
+﻿namespace StreetWorkout.Services.Homes
 {
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
@@ -13,6 +13,7 @@ namespace StreetWorkout.Services.Homes
     using Models;
     using Data.Models.Enums;
     using StreetWorkout.Services.Workouts.Models;
+    using StreetWorkout.Services.Supplements.Models;
 
     public class HomeService : IHomeService
     {
@@ -25,9 +26,9 @@ namespace StreetWorkout.Services.Homes
             this.mapper = mapper;
         }
 
-        public IndexServiceModel IndexViewModel(string userId)
+        public async Task<IndexServiceModel> IndexViewModel(string userId)
         {
-            var user = this.data.Users.Find(userId);
+            var user = await this.data.Users.FindAsync(userId);
 
             return new IndexServiceModel
             {
@@ -36,8 +37,8 @@ namespace StreetWorkout.Services.Homes
             };
         }
 
-        public IEnumerable<WorkoutServiceModel> Workouts()
-            => this.data
+        public async Task<IEnumerable<WorkoutServiceModel>> Workouts()
+            => await this.data
                 .Workouts
                 .OrderByDescending(x => x.Id)
                 .Take(3)
@@ -51,23 +52,23 @@ namespace StreetWorkout.Services.Homes
                     ImageUrl = GetImage(x.BodyPart.Name),
                     Minutes = x.Minutes,
                 })
-                .ToList();
+                .ToListAsync();
 
-        public IEnumerable<UserIndexServiceModel> Users()
-            => this.data
-                .UserDatas
+        public async Task<IEnumerable<UserIndexServiceModel>> Users()
+            => await this.data
+                .Users
                 .OrderByDescending(x => Guid.NewGuid())
                 .Take(3)
                 .ProjectTo<UserIndexServiceModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+                .ToListAsync();
 
-        public IEnumerable<SupplementServiceModel> Supplements()
-            => this.data
+        public async Task<IEnumerable<SupplementServiceModel>> Supplements()
+            => await this.data
                 .Supplements
                 .OrderByDescending(x => x.Id)
                 .Take(3)
                 .ProjectTo<SupplementServiceModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+                .ToListAsync();
 
         private static string GetImage(string bodyPart)
             => bodyPart switch

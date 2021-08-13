@@ -19,13 +19,17 @@
         public MappingProfile()
         {
             // From Services
-            this.CreateMap<UserData, UserIndexServiceModel>()
+            this.CreateMap<ApplicationUser, UserIndexServiceModel>()
+                .ForMember(x => x.ImageUrl,
+                    y => y.MapFrom(x => x.ImageUrl))
                 .ForMember(x => x.Country,
-                    y => y.MapFrom(x => x.User.Country.Name))
+                    y => y.MapFrom(x => x.Country.Name))
                 .ForMember(x => x.Gender,
-                    y => y.MapFrom(x => x.User.Gender))
+                    y => y.MapFrom(x => x.Gender))
+                .ForMember(x => x.UserRole,
+                    y => y.MapFrom(x => x.UserRole))
                 .ForMember(x => x.Age,
-                    y => y.MapFrom(x => DateTime.Now.Year - x.User.DateOfBirth.Year));
+                    y => y.MapFrom(x => DateTime.Now.Year - x.DateOfBirth.Year));
             this.CreateMap<Supplement, SupplementServiceModel>()
                 .ForMember(x => x.Category,
                 y => y.MapFrom(x => x.Category.Name));

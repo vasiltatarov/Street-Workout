@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
@@ -27,7 +28,7 @@
         }
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             const string LatestWorkoutsCacheKey = "WorkoutsKey";
             const string UsersCacheKey = "UsersKey";
@@ -39,9 +40,9 @@
 
             if (latestWorkouts == null || users == null || latestSupplements == null)
             {
-                latestWorkouts = this.homeService.Workouts();
-                users = this.homeService.Users();
-                latestSupplements = this.homeService.Supplements();
+                latestWorkouts = await this.homeService.Workouts();
+                users = await this.homeService.Users();
+                latestSupplements = await this.homeService.Supplements();
 
                 var cacheOptions = new MemoryCacheEntryOptions()
                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(10));
@@ -51,7 +52,7 @@
                 this.cache.Set(SupplementsCacheKey, latestSupplements, cacheOptions);
             }
 
-            var model = this.homeService.IndexViewModel(this.User.GetId());
+            var model = await this.homeService.IndexViewModel(this.User.GetId());
             model.LatestWorkouts = latestWorkouts;
             model.Users = users;
             model.LatestSupplements = latestSupplements;

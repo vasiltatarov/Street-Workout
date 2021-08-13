@@ -161,17 +161,17 @@
             <div class="component">
                 <div class="card card-home-height">
                     <div class="card-header">
-                        <img class="card-img card-home-img" src="@user.UserImageUrl" alt="@user.UserUserName">
+                        <img class="card-img card-home-img" src="@user.ImageUrl" alt="@user.UserName">
                     </div>
                     <div class="card-body">
-                        <span class="badge badge-warning mb-2">@user.SportName</span>
-                        <h4 class="card-title">@user.UserUserName</h4>
+                        <span class="badge badge-success mb-2">@user.UserRole</span>
+                        <h4 class="card-title">@user.UserName</h4>
                         <p class="card-text">Country: <b>@user.Country</b></p>
                         <p class="card-text">Gender: <b>@user.Gender</b></p>
                         <p class="card-text">Age: <b>@user.Age Years</b></p>
                     </div>
                     <div class="card-footer">
-                        <a asp-controller="Accounts" asp-action="Account" asp-route-username="@user.UserUserName" class="btn btn-primary">View More</a>
+                        <a asp-controller="Accounts" asp-action="Account" asp-route-username="@user.UserName" class="btn btn-primary">View More</a>
                     </div>
                 </div>
             </div>
