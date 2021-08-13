@@ -113,7 +113,7 @@
                             <img class="d-flex mr-3 img-fluid latest-workout-img" width="64" src="@workout.ImageUrl" alt="Generic placeholder image">
                             <div class="media-body">
                                 <h5 class="mt-0 mb-1">
-                                    <a asp-controller="Workouts" asp-action="Details" asp-route-id="@workout.Id">@workout.Title</a>
+                                    <a asp-controller="Workouts" asp-action="Details" asp-route-id="@workout.Id" asp-route-information="@workout.Title">@workout.Title</a>
                                 </h5> @workout.CreatedOn.ToString("D")
                             </div>
                         </li>
