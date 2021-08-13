@@ -2,8 +2,10 @@
 {
     using System;
     using System.Linq;
+    using System.Threading.Tasks;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Microsoft.EntityFrameworkCore;
 
     using Data;
     using Data.Models;
@@ -23,9 +25,9 @@
             this.mapper = mapper;
         }
 
-        public bool IsUserTrainer(string userId)
+        public async Task<bool> IsUserTrainer(string userId)
         {
-            var user = this.data.Users.FirstOrDefault(x => x.Id == userId);
+            var user = await this.data.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
             if (user == null)
             {
@@ -35,14 +37,14 @@
             return user.UserRole == UserRole.Trainer;
         }
 
-        public bool IsUserCreator(string userId, int groupWorkoutId)
-            => this.data
+        public async Task<bool> IsUserCreator(string userId, int groupWorkoutId)
+            => await this.data
                 .GroupWorkouts
-                .Any(x => x.TrainerId == userId && x.Id == groupWorkoutId);
+                .AnyAsync(x => x.TrainerId == userId && x.Id == groupWorkoutId);
 
-        public void Create(string title, int sportId, string address, DateTime startOn, DateTime endOn, byte maximumParticipants, byte pricePerPerson, string trainerId, string content)
+        public async Task Create(string title, int sportId, string address, DateTime startOn, DateTime endOn, byte maximumParticipants, byte pricePerPerson, string trainerId, string content)
         {
-            var groupWorkout = new GroupWorkout
+            await this.data.GroupWorkouts.AddAsync(new GroupWorkout
             {
                 Title = title,
                 SportId = sportId,
@@ -54,14 +56,13 @@
                 TrainerId = trainerId,
                 Content = content,
                 CreatedOn = DateTime.UtcNow,
-            };
-            this.data.GroupWorkouts.Add(groupWorkout);
-            this.data.SaveChanges();
+            });
+            await this.data.SaveChangesAsync();
         }
 
-        public bool Edit(int id, string title, int sportId, string address, DateTime startOn, DateTime endOn, byte maximumParticipants, byte pricePerPerson, string content)
+        public async Task<bool> Edit(int id, string title, int sportId, string address, DateTime startOn, DateTime endOn, byte maximumParticipants, byte pricePerPerson, string content)
         {
-            var groupWorkout = this.data.GroupWorkouts.FirstOrDefault(x => x.Id == id);
+            var groupWorkout = await this.data.GroupWorkouts.FirstOrDefaultAsync(x => x.Id == id);
 
             if (groupWorkout == null)
             {
@@ -76,14 +77,14 @@
             groupWorkout.MaximumParticipants = maximumParticipants;
             groupWorkout.PricePerPerson = pricePerPerson;
             groupWorkout.Content = content;
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
-        public bool Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var groupWorkout = this.data.GroupWorkouts.FirstOrDefault(x => x.Id == id);
+            var groupWorkout = await this.data.GroupWorkouts.FirstOrDefaultAsync(x => x.Id == id);
 
             if (groupWorkout == null)
             {
@@ -91,14 +92,14 @@
             }
 
             groupWorkout.IsDeleted = true;
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
-        public byte AvailableTickets(int groupWorkoutId)
+        public async Task<byte> AvailableTickets(int groupWorkoutId)
         {
-            var groupWorkout = this.data.GroupWorkouts.FirstOrDefault(x => x.Id == groupWorkoutId);
+            var groupWorkout = await this.data.GroupWorkouts.FirstOrDefaultAsync(x => x.Id == groupWorkoutId);
 
             if (groupWorkout == null)
             {
@@ -107,17 +108,17 @@
 
             var maxPlaces = groupWorkout.MaximumParticipants;
 
-            var boughtTickets = this.data
+            var boughtTickets = await this.data
                 .UserWorkoutPayments
                 .Where(x => x.GroupWorkoutId == groupWorkoutId)
-                .Sum(x => x.BoughtTickets);
+                .SumAsync(x => x.BoughtTickets);
 
             return (byte)(maxPlaces - boughtTickets);
         }
 
-        public void BuyTicket(string userId, int groupWorkoutId, string fullName, string phoneNumber, string card, byte boughtTickets)
+        public async Task BuyTicket(string userId, int groupWorkoutId, string fullName, string phoneNumber, string card, byte boughtTickets)
         {
-            var userWorkoutPayment = new UserWorkoutPayment
+            await this.data.UserWorkoutPayments.AddAsync(new UserWorkoutPayment
             {
                 UserId = userId,
                 GroupWorkoutId = groupWorkoutId,
@@ -126,18 +127,17 @@
                 Card = card,
                 BoughtTickets = boughtTickets,
                 CreatedOn = DateTime.UtcNow,
-            };
-            this.data.UserWorkoutPayments.Add(userWorkoutPayment);
-            this.data.SaveChanges();
+            });
+            await this.data.SaveChangesAsync();
         }
 
-        public GroupWorkoutsQueryModel All(int currentPage, string userId)
+        public async Task<GroupWorkoutsQueryModel> All(int currentPage, string userId)
         {
             var workoutsQuery = this.data.GroupWorkouts
                 .Where(x => !x.IsDeleted)
                 .AsQueryable();
 
-            var groupWorkouts = workoutsQuery
+            var groupWorkouts = await workoutsQuery
                 .Skip((currentPage - 1) * GroupWorkoutsQueryModel.WorkoutsPerPage)
                 .Take(GroupWorkoutsQueryModel.WorkoutsPerPage)
                 .Select(x => new GroupWorkoutModel
@@ -151,21 +151,21 @@
                     StartOn = x.StartOn.ToString("g"),
                     ImageUrl = GetImageBySport(x.Sport.Name),
                 })
-                .ToList();
+                .ToListAsync();
 
-            var totalGroupWorkouts = workoutsQuery.Count();
+            var totalGroupWorkouts = await workoutsQuery.CountAsync();
 
             return new GroupWorkoutsQueryModel
             {
-                IsUserTrainer = this.IsUserTrainer(userId),
+                IsUserTrainer = await this.IsUserTrainer(userId),
                 CurrentPage = currentPage,
                 GroupWorkouts = groupWorkouts,
                 TotalGroupWorkouts = totalGroupWorkouts,
             };
         }
 
-        public GroupWorkoutDetailsModel Details(int id)
-            => this.data
+        public async Task<GroupWorkoutDetailsModel> Details(int id)
+            => await this.data
                 .GroupWorkouts
                 .Where(x => x.Id == id)
                 .Select(x => new GroupWorkoutDetailsModel
@@ -188,7 +188,7 @@
                     StartOn = x.StartOn,
                     EndOn = x.EndOn,
                     CreatedOn = x.CreatedOn.ToString("D"),
-                    AvailableTickets = AvailableTickets(id),
+                    AvailableTickets = AvailableTickets(id).GetAwaiter().GetResult(),
                     LatestWorkouts = this.data
                         .Workouts
                         .OrderByDescending(w => w.Id)
@@ -202,14 +202,14 @@
                         })
                         .ToList(),
                 })
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
-        public GroupWorkoutFormModel EditFormModel(int id)
-            => this.data
+        public async Task<GroupWorkoutFormModel> EditFormModel(int id)
+            => await this.data
                 .GroupWorkouts
                 .Where(x => x.Id == id)
                 .ProjectTo<GroupWorkoutFormModel>(this.mapper.ConfigurationProvider)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
         public static string GetImageBySport(string sport)
             => sport switch

@@ -1,5 +1,6 @@
 ﻿namespace StreetWorkout.Test.Controllers.Api
 {
+    using System.Threading.Tasks;
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
     using Xunit;
@@ -11,7 +12,7 @@
     public class GroupWorkoutsApiControllerTest
     {
         [Fact]
-        public void BuyTicketShouldReturnActionResultWithGroupWorkoutResponseModelAndShouldBeAllowedOnlyByPostRequest()
+        public void BuyTicketShouldReturnActionResultWithGroupWorkoutResponseModel()
             => MyController<GroupWorkoutsApiController>
                 .Instance()
                 .WithUser()
@@ -29,11 +30,7 @@
                     FullName = "test testov",
                     PhoneNumber = "08885948872",
                     GroupWorkoutId = 1,
-                }))
-                .ShouldHave()
-                .ActionAttributes(attr => attr
-                    .RestrictingForHttpMethod(HttpMethod.Post))
-                .AndAlso()
+                }).GetAwaiter().GetResult())
                 .ShouldReturn()
                 .ActionResult<GroupWorkoutResponseModel>(result => result
                     .Passing(data => ((int)data.AvailableTickets).ShouldBe(10)));

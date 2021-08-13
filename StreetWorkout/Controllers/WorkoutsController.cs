@@ -1,7 +1,6 @@
 ﻿namespace StreetWorkout.Controllers
 {
     using System;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

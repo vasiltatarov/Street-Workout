@@ -1,6 +1,7 @@
 ﻿namespace StreetWorkout.Areas.Administration.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using ViewModels.GroupWorkouts;
     using Microsoft.AspNetCore.Mvc;
     using Services.GroupWorkouts;
@@ -18,28 +19,28 @@
             this.workouts = workouts;
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.groupWorkouts.IsUserCreator(this.User.GetId(), id))
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !await this.groupWorkouts.IsUserCreator(this.User.GetId(), id))
             {
                 return this.Unauthorized();
             }
 
-            var model = this.groupWorkouts.EditFormModel(id);
+            var model = await this.groupWorkouts.EditFormModel(id);
             model.Sports = this.workouts.GetSports();
 
             return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(GroupWorkoutFormModel model)
+        public async Task<IActionResult> Edit(GroupWorkoutFormModel model)
         {
-            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.groupWorkouts.IsUserCreator(this.User.GetId(), model.Id))
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !await this.groupWorkouts.IsUserCreator(this.User.GetId(), model.Id))
             {
                 return this.Unauthorized();
             }
 
-            if (!this.groupWorkouts.IsUserTrainer(this.User.GetId()))
+            if (!await this.groupWorkouts.IsUserTrainer(this.User.GetId()))
             {
                 return this.Unauthorized();
             }
@@ -65,19 +66,19 @@
                 return this.View(model);
             }
 
-            this.groupWorkouts.Edit(model.Id, model.Title, model.SportId, model.Address, model.StartOn, model.EndOn, model.MaximumParticipants, model.PricePerPerson, model.Content);
+            await this.groupWorkouts.Edit(model.Id, model.Title, model.SportId, model.Address, model.StartOn, model.EndOn, model.MaximumParticipants, model.PricePerPerson, model.Content);
 
             return this.RedirectToAction("Details", "GroupWorkouts", new { area = "", Id = model.Id });
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.groupWorkouts.IsUserCreator(this.User.GetId(), id))
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !await this.groupWorkouts.IsUserCreator(this.User.GetId(), id))
             {
                 return this.Unauthorized();
             }
 
-            if (!this.groupWorkouts.Delete(id))
+            if (!await this.groupWorkouts.Delete(id))
             {
                 return this.BadRequest();
             }

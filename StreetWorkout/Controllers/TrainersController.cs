@@ -1,6 +1,7 @@
 ﻿namespace StreetWorkout.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+
     using Services.Trainings;
     using ViewModels.Trainers;
 

@@ -1,29 +1,31 @@
 ﻿namespace StreetWorkout.Services.GroupWorkouts
 {
     using System;
+    using System.Threading.Tasks;
+
     using Models;
     using StreetWorkout.ViewModels.GroupWorkouts;
 
     public interface IGroupWorkoutService
     {
-        bool IsUserTrainer(string userId);
+        Task<bool> IsUserTrainer(string userId);
 
-        bool IsUserCreator(string userId, int groupWorkoutId);
+        Task<bool> IsUserCreator(string userId, int groupWorkoutId);
 
-        void Create(string title, int sportId, string address, DateTime startOn, DateTime endOn, byte maximumParticipants, byte pricePerPerson, string trainerId, string content);
+        Task Create(string title, int sportId, string address, DateTime startOn, DateTime endOn, byte maximumParticipants, byte pricePerPerson, string trainerId, string content);
 
-        bool Edit(int id, string title, int sportId, string address, DateTime startOn, DateTime endOn, byte maximumParticipants, byte pricePerPerson, string content);
+        Task<bool> Edit(int id, string title, int sportId, string address, DateTime startOn, DateTime endOn, byte maximumParticipants, byte pricePerPerson, string content);
 
-        bool Delete(int id);
+        Task<bool> Delete(int id);
 
-        byte AvailableTickets(int groupWorkoutId);
+        Task<byte> AvailableTickets(int groupWorkoutId);
 
-        void BuyTicket(string userId, int groupWorkoutId, string fullName, string phoneNumber, string card, byte boughtTickets);
+        Task BuyTicket(string userId, int groupWorkoutId, string fullName, string phoneNumber, string card, byte boughtTickets);
 
-        GroupWorkoutsQueryModel All(int currentPage, string userId);
+        Task<GroupWorkoutsQueryModel> All(int currentPage, string userId);
 
-        GroupWorkoutDetailsModel Details(int id);
+        Task<GroupWorkoutDetailsModel> Details(int id);
 
-        GroupWorkoutFormModel EditFormModel(int id);
+        Task<GroupWorkoutFormModel> EditFormModel(int id);
     }
 }

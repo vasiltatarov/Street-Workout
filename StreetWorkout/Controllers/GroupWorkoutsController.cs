@@ -1,6 +1,7 @@
 ﻿namespace StreetWorkout.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -22,8 +23,8 @@
             this.groupWorkouts = groupWorkouts;
         }
 
-        public IActionResult All([FromQuery] GroupWorkoutsQueryModel model)
-            => this.View(this.groupWorkouts.All(model.CurrentPage, this.User.GetId()));
+        public async Task<IActionResult> All([FromQuery] GroupWorkoutsQueryModel model)
+            => this.View(await this.groupWorkouts.All(model.CurrentPage, this.User.GetId()));
 
         public IActionResult Create()
             => this.View(new GroupWorkoutFormModel
@@ -32,11 +33,11 @@
             });
 
         [HttpPost]
-        public IActionResult Create(GroupWorkoutFormModel input)
+        public async Task<IActionResult> Create(GroupWorkoutFormModel input)
         {
             var userId = this.User.GetId();
 
-            if (!this.groupWorkouts.IsUserTrainer(userId))
+            if (!await this.groupWorkouts.IsUserTrainer(userId))
             {
                 return this.Unauthorized();
             }
@@ -62,12 +63,12 @@
                 return this.View(input);
             }
 
-            this.groupWorkouts.Create(input.Title, input.SportId, input.Address, input.StartOn, input.EndOn, input.MaximumParticipants, input.PricePerPerson, userId, input.Content);
+            await this.groupWorkouts.Create(input.Title, input.SportId, input.Address, input.StartOn, input.EndOn, input.MaximumParticipants, input.PricePerPerson, userId, input.Content);
 
             return this.RedirectToAction("All");
         }
 
-        public IActionResult Details(int id)
-            => this.View(this.groupWorkouts.Details(id));
+        public async Task<IActionResult> Details(int id)
+            => this.View(await this.groupWorkouts.Details(id));
     }
 }

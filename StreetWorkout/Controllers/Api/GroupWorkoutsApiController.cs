@@ -1,11 +1,12 @@
 ﻿namespace StreetWorkout.Controllers.Api
 {
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
 
     using Infrastructure;
     using Services.GroupWorkouts;
     using ViewModels.GroupWorkouts;
-    
+
     [Route("api/workouts")]
     public class GroupWorkoutsApiController : ApiController
     {
@@ -15,20 +16,20 @@
             => this.groupWorkouts = groupWorkouts;
 
         [HttpPost]
-        public ActionResult<GroupWorkoutResponseModel> BuyTicket(GroupWorkoutInputModel model)
+        public async Task<ActionResult<GroupWorkoutResponseModel>> BuyTicket(GroupWorkoutInputModel model)
         {
-            var availableTickets = this.groupWorkouts.AvailableTickets(model.GroupWorkoutId);
+            var availableTickets = await this.groupWorkouts.AvailableTickets(model.GroupWorkoutId);
 
             if (model.BoughtTickets > availableTickets)
             {
                 return this.BadRequest();
             }
 
-            this.groupWorkouts.BuyTicket(this.User.GetId(), model.GroupWorkoutId, model.FullName, model.PhoneNumber, model.Card, model.BoughtTickets);
+            await this.groupWorkouts.BuyTicket(this.User.GetId(), model.GroupWorkoutId, model.FullName, model.PhoneNumber, model.Card, model.BoughtTickets);
 
             return new GroupWorkoutResponseModel()
             {
-                AvailableTickets = this.groupWorkouts.AvailableTickets(model.GroupWorkoutId),
+                AvailableTickets = await this.groupWorkouts.AvailableTickets(model.GroupWorkoutId),
             };
         }
     }
