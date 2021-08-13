@@ -1,5 +1,6 @@
 ﻿namespace StreetWorkout.Controllers
 {
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
 
     using Services.Trainings;
@@ -12,7 +13,7 @@
         public TrainersController(ITrainerService trainerService)
             => this.trainerService = trainerService;
 
-        public IActionResult All([FromQuery]AllTrainersViewModel model)
-            => this.View(this.trainerService.All(model.CurrentPage));
+        public async Task<IActionResult> All([FromQuery]AllTrainersViewModel model)
+            => this.View(await this.trainerService.All(model.CurrentPage));
     }
 }

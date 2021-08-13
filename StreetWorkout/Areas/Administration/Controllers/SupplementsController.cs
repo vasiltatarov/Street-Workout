@@ -1,5 +1,6 @@
 ﻿namespace StreetWorkout.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
@@ -17,43 +18,43 @@
         public SupplementsController(ISupplementService supplements)
             => this.supplements = supplements;
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
             => this.View(new SupplementFormModel
             {
-                Categories = this.supplements.GetSupplementCategories(),
+                Categories = await this.supplements.GetSupplementCategories(),
             });
 
         [HttpPost]
-        public IActionResult Create(SupplementFormModel model)
+        public async Task<IActionResult> Create(SupplementFormModel model)
         {
-            if (!this.supplements.IsValidCategoryId(model.CategoryId))
+            if (!await this.supplements.IsValidCategoryId(model.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(model.CategoryId), "Invalid category.");
             }
 
             if (!this.ModelState.IsValid)
             {
-                model.Categories = this.supplements.GetSupplementCategories();
+                model.Categories = await this.supplements.GetSupplementCategories();
                 return this.View(model);
             }
 
-            this.supplements.Create(model.Name, model.CategoryId, model.ImageUrl, model.Content, model.Price, model.Quantity);
+            await this.supplements.Create(model.Name, model.CategoryId, model.ImageUrl, model.Content, model.Price, model.Quantity);
 
             return this.RedirectToAction("All");
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             const string SupplementIdKey = "SupplementIdKey";
 
-            var supplementFormModel = this.supplements.EditForModel(id);
+            var supplementFormModel = await this.supplements.EditForModel(id);
 
             if (supplementFormModel == null)
             {
                 return this.BadRequest();
             }
 
-            supplementFormModel.Categories = this.supplements.GetSupplementCategories();
+            supplementFormModel.Categories = await this.supplements.GetSupplementCategories();
 
             this.TempData[SupplementIdKey] = id;
 
@@ -61,9 +62,9 @@
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, SupplementFormModel model)
+        public async Task<IActionResult> Edit(int id, SupplementFormModel model)
         {
-            if (!this.supplements.IsValidCategoryId(model.CategoryId))
+            if (!await this.supplements.IsValidCategoryId(model.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(model.CategoryId), "Invalid category.");
             }
@@ -73,7 +74,7 @@
                 return this.View(model);
             }
 
-            var isEdited = this.supplements.Edit(id, model.Name, model.CategoryId, model.ImageUrl, model.Content, model.Price, model.Quantity);
+            var isEdited = await this.supplements.Edit(id, model.Name, model.CategoryId, model.ImageUrl, model.Content, model.Price, model.Quantity);
 
             if (!isEdited)
             {
@@ -85,9 +86,9 @@
             return this.RedirectToAction("Details", "Supplements", new { area = "", Id = id });
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var isDeleted = this.supplements.Delete(id);
+            var isDeleted = await this.supplements.Delete(id);
 
             if (!isDeleted)
             {

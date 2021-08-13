@@ -1,9 +1,10 @@
 ﻿namespace StreetWorkout.Services.Trainings
 {
+    using System.Threading.Tasks;
     using ViewModels.Trainers;
 
     public interface ITrainerService
     {
-        AllTrainersViewModel All(int currentPage);
+        Task<AllTrainersViewModel> All(int currentPage);
     }
 }

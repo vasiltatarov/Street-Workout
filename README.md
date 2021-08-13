@@ -144,6 +144,8 @@ if (latestWorkouts == null)
 
 Potential Tasks:
 - Add async and await.
+- Fix latest workouts in workouts and group workouts page.
+- Implement Buy button in supplements details page.
 
 # Note
 ConnectionStrings:

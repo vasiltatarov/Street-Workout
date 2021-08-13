@@ -18,7 +18,7 @@ body {
 }
 
 .supplement-img {
-    width: 200px;
+    width: 500px;
     height: 300px;
 }
 
@@ -87,7 +87,7 @@ h1, .h1 {
 
 .postcard__img {
     max-height: 180px;
-    width: 100px;
+    width: 100%;
     object-fit: cover;
     position: relative;
 }

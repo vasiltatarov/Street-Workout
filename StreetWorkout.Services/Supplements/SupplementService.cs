@@ -1,9 +1,11 @@
 ﻿namespace StreetWorkout.Services.Supplements
 {
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
+    using System.Threading.Tasks;
     using System.Linq;
     using System.Collections.Generic;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+    using Microsoft.EntityFrameworkCore;
 
     using StreetWorkout.ViewModels.Supplements;
     using Models;
@@ -21,7 +23,7 @@
             this.mapper = mapper;
         }
 
-        public SupplementsQueryModel All(int currentPage, string searchTerms, int categoryId)
+        public async Task<SupplementsQueryModel> All(int currentPage, string searchTerms, int categoryId)
         {
             var supplementsQuery = this.data
                 .Supplements
@@ -45,7 +47,7 @@
                     .AsQueryable();
             }
 
-            var supplements = supplementsQuery
+            var supplements = await supplementsQuery
                 .Skip((currentPage - 1) * SupplementsQueryModel.SupplementsPerPage)
                 .Take(SupplementsQueryModel.SupplementsPerPage)
                 .Select(x => new SupplementServiceModel
@@ -58,36 +60,36 @@
                     Price = x.Price,
                     Quantity = x.Quantity,
                 })
-                .ToList();
+                .ToListAsync();
 
             return new SupplementsQueryModel
             {
-                 CurrentPage = currentPage,
-                 Supplements = supplements,
-                 TotalSupplements = supplementsQuery.Count(),
-                 Categories = this.GetSupplementCategories(),
-                 CategoryId = categoryId,
-                 SearchTerms = searchTerms,
+                CurrentPage = currentPage,
+                Supplements = supplements,
+                TotalSupplements = supplementsQuery.Count(),
+                Categories = await this.GetSupplementCategories(),
+                CategoryId = categoryId,
+                SearchTerms = searchTerms,
             };
         }
 
-        public SupplementServiceModel Details(int id)
-            => this.data
+        public async Task<SupplementServiceModel> Details(int id)
+            => await this.data
                 .Supplements
                 .Where(x => x.Id == id)
                 .ProjectTo<SupplementServiceModel>(this.mapper.ConfigurationProvider)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
-        public SupplementFormModel EditForModel(int id)
-            => this.data
+        public async Task<SupplementFormModel> EditForModel(int id)
+            => await this.data
                 .Supplements
                 .Where(x => x.Id == id)
                 .ProjectTo<SupplementFormModel>(this.mapper.ConfigurationProvider)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
-        public bool Edit(int id, string name, int categoryId, string imageUrl, string content, decimal price, short quantity)
+        public async Task<bool> Edit(int id, string name, int categoryId, string imageUrl, string content, decimal price, short quantity)
         {
-            var supplement = this.data.Supplements.FirstOrDefault(x => x.Id == id);
+            var supplement = await this.data.Supplements.FirstOrDefaultAsync(x => x.Id == id);
 
             if (supplement == null)
             {
@@ -101,14 +103,14 @@
             supplement.Price = price;
             supplement.Quantity = quantity;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
-        public bool Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var supplement = this.data.Supplements.FirstOrDefault(x => x.Id == id);
+            var supplement = await this.data.Supplements.FirstOrDefaultAsync(x => x.Id == id);
 
             if (supplement == null)
             {
@@ -117,14 +119,14 @@
 
             supplement.IsDeleted = true;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
-        public void Create(string name, int categoryId, string imageUrl, string content, decimal price, short quantity)
+        public async Task Create(string name, int categoryId, string imageUrl, string content, decimal price, short quantity)
         {
-            var supplement = new Supplement
+            await this.data.Supplements.AddAsync(new Supplement
             {
                 Name = name,
                 CategoryId = categoryId,
@@ -132,22 +134,20 @@
                 Content = content,
                 Price = price,
                 Quantity = quantity,
-            };
-
-            this.data.Supplements.Add(supplement);
-            this.data.SaveChanges();
+            });
+            await this.data.SaveChangesAsync();
         }
 
-        public IEnumerable<SupplementCategoryViewModel> GetSupplementCategories()
-            => this.data
+        public async Task<IEnumerable<SupplementCategoryViewModel>> GetSupplementCategories()
+            => await this.data
                 .SupplementCategories
                 .Where(x => !x.IsDeleted)
                 .ProjectTo<SupplementCategoryViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+                .ToListAsync();
 
-        public bool IsValidCategoryId(int id)
-            => this.data
+        public async Task<bool> IsValidCategoryId(int id)
+            => await this.data
                 .SupplementCategories
-                .Any(x => x.Id == id);
+                .AnyAsync(x => x.Id == id);
     }
 }

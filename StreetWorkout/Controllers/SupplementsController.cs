@@ -1,6 +1,7 @@
 ﻿namespace StreetWorkout.Controllers
 {
     using System.Linq;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +18,9 @@
         public SupplementsController(ISupplementService supplements)
             => this.supplements = supplements;
 
-        public IActionResult All([FromQuery]SupplementsQueryModel query)
+        public async Task<IActionResult> All([FromQuery]SupplementsQueryModel query)
         {
-            var model = this.supplements.All(query.CurrentPage, query.SearchTerms, query.CategoryId);
+            var model = await this.supplements.All(query.CurrentPage, query.SearchTerms, query.CategoryId);
 
             if (!model.Supplements.Any())
             {
@@ -29,7 +30,7 @@
             return this.View(model);
         }
 
-        public IActionResult Details(int id)
-            => this.View(this.supplements.Details(id));
+        public async Task<IActionResult> Details(int id)
+            => this.View(await this.supplements.Details(id));
     }
 }

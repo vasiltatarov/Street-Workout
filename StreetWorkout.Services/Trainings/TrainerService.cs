@@ -1,6 +1,9 @@
 ﻿namespace StreetWorkout.Services.Trainings
 {
     using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+
     using Data;
     using ViewModels.Trainers;
     using Data.Models.Enums;
@@ -12,10 +15,10 @@
         public TrainerService(StreetWorkoutDbContext data)
             => this.data = data;
 
-        public AllTrainersViewModel All(int currentPage)
+        public async Task<AllTrainersViewModel> All(int currentPage)
             => new()
             {
-                Trainers = this.data
+                Trainers = await this.data
                     .UserDatas
                     .Where(x => x.User.UserRole == UserRole.Trainer)
                     .Skip((currentPage - 1) * AllTrainersViewModel.TrainersPerPage)
@@ -35,10 +38,10 @@
                             .Average(v => v.Value)
                             : 0,
                     })
-                    .ToList(),
-                TotalTrainers = this.data
+                    .ToListAsync(),
+                TotalTrainers = await this.data
                     .UserDatas
-                    .Count(x => x.User.UserRole == UserRole.Trainer),
+                    .CountAsync(x => x.User.UserRole == UserRole.Trainer),
                 CurrentPage = currentPage,
             };
     }

@@ -1,7 +1,8 @@
 ﻿namespace StreetWorkout.Test.Services
 {
-    using Xunit;
     using System.Linq;
+    using System.Threading.Tasks;
+    using Xunit;
 
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
@@ -12,12 +13,12 @@
     public class TrainerServiceTest
     {
         [Fact]
-        public void AllShouldReturnCorrectViewModelWithCorrectCountTrainers()
+        public async Task AllShouldReturnCorrectViewModelWithCorrectCountTrainers()
         {
             // Arrange
             var data = DatabaseMock.Instance;
 
-            data.UserDatas.AddRange(Enumerable.Range(1, 10).Select(x => new UserData
+            await data.UserDatas.AddRangeAsync(Enumerable.Range(1, 10).Select(x => new UserData
             {
                 User = new ApplicationUser
                 {
@@ -32,12 +33,12 @@
                     Name = "sdfs",
                 },
             }));
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var trainerService = new TrainerService(data);
 
             // Act
-            var result = trainerService.All(1);
+            var result = await trainerService.All(1);
             var trainers = result.Trainers;
 
             // Assert
@@ -49,12 +50,12 @@
         }
 
         [Fact]
-        public void AllShouldReturnNotZeroCountTrainers()
+        public async Task AllShouldReturnNotZeroCountTrainers()
         {
             // Arrange
             var data = DatabaseMock.Instance;
 
-            data.UserDatas.AddRange(Enumerable.Range(1, 10).Select(x => new UserData
+            await data.UserDatas.AddRangeAsync(Enumerable.Range(1, 10).Select(x => new UserData
             {
                 User = new ApplicationUser
                 {
@@ -69,12 +70,12 @@
                     Name = "sdfs",
                 },
             }));
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var trainerService = new TrainerService(data);
 
             // Act
-            var result = trainerService.All(1);
+            var result = await trainerService.All(1);
             var trainers = result.Trainers;
 
             // Assert
@@ -86,12 +87,12 @@
         }
 
         [Fact]
-        public void AllShouldReturnZeroCountTrainersWhenTrainersNotExistsInDatabase()
+        public async Task AllShouldReturnZeroCountTrainersWhenTrainersNotExistsInDatabase()
         {
             // Arrange
             var data = DatabaseMock.Instance;
 
-            data.UserDatas.AddRange(Enumerable.Range(1, 10).Select(x => new UserData
+            await data.UserDatas.AddRangeAsync(Enumerable.Range(1, 10).Select(x => new UserData
             {
                 User = new ApplicationUser
                 {
@@ -106,12 +107,12 @@
                     Name = "sdfs",
                 },
             }));
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var trainerService = new TrainerService(data);
 
             // Act
-            var result = trainerService.All(1);
+            var result = await trainerService.All(1);
             var trainers = result.Trainers;
 
             // Assert
@@ -123,12 +124,12 @@
         }
 
         [Fact]
-        public void AllShouldReturnCorrectViewModelWithCorrectCountTrainersWhenCurrentPageIsTwo()
+        public async Task AllShouldReturnCorrectViewModelWithCorrectCountTrainersWhenCurrentPageIsTwo()
         {
             // Arrange
             var data = DatabaseMock.Instance;
 
-            data.UserDatas.AddRange(Enumerable.Range(1, 13).Select(x => new UserData
+            await data.UserDatas.AddRangeAsync(Enumerable.Range(1, 13).Select(x => new UserData
             {
                 User = new ApplicationUser
                 {
@@ -143,12 +144,12 @@
                     Name = "sdfs",
                 },
             }));
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var trainerService = new TrainerService(data);
 
             // Act
-            var result = trainerService.All(2);
+            var result = await trainerService.All(2);
             var trainers = result.Trainers;
 
             // Assert
