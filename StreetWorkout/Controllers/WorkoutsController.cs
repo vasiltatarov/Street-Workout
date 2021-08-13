@@ -1,6 +1,7 @@
 ﻿namespace StreetWorkout.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -18,12 +19,12 @@
         public WorkoutsController(IWorkoutService workouts)
             => this.workouts = workouts;
 
-        public IActionResult All([FromQuery]WorkoutsQueryModel query)
-            => this.View(this.workouts.Workouts(this.User.GetId(), query.Sport, query.BodyPart, query.SearchTerms, query.CurrentPage));
+        public async Task<IActionResult> All([FromQuery] WorkoutsQueryModel query)
+            => this.View(await this.workouts.Workouts(this.User.GetId(), query.Sport, query.BodyPart, query.SearchTerms, query.CurrentPage));
 
-        public IActionResult Details(int id, string information)
+        public async Task<IActionResult> Details(int id, string information)
         {
-            var workout = this.workouts.Details(id);
+            var workout = await this.workouts.Details(id);
 
             if (workout == null)
             {
@@ -42,39 +43,39 @@
             return this.View(workout);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
             => this.View(new WorkoutFormModel
             {
-                Sports = this.workouts.GetSports(),
-                BodyParts = this.workouts.GetBodyParts(),
+                Sports = await this.workouts.GetSports(),
+                BodyParts = await this.workouts.GetBodyParts(),
             });
 
         [HttpPost]
-        public IActionResult Create(WorkoutFormModel workout)
+        public async Task<IActionResult> Create(WorkoutFormModel workout)
         {
             if (!Enum.IsDefined(typeof(DifficultLevel), workout.DifficultLevel))
             {
                 this.ModelState.AddModelError(nameof(workout.DifficultLevel), "Invalid difficult level.");
             }
 
-            if (!this.workouts.IsValidSportId(workout.SportId))
+            if (!await this.workouts.IsValidSportId(workout.SportId))
             {
                 this.ModelState.AddModelError(nameof(workout.SportId), "Invalid sport.");
             }
 
-            if (!this.workouts.IsValidBodyPartId(workout.BodyPartId))
+            if (!await this.workouts.IsValidBodyPartId(workout.BodyPartId))
             {
                 this.ModelState.AddModelError(nameof(workout.BodyPartId), "Invalid body part.");
             }
 
             if (!this.ModelState.IsValid)
             {
-                workout.Sports = this.workouts.GetSports();
-                workout.BodyParts = this.workouts.GetBodyParts();
+                workout.Sports = await this.workouts.GetSports();
+                workout.BodyParts = await this.workouts.GetBodyParts();
                 return this.View(workout);
             }
 
-            this.workouts.Create(workout.Title, workout.SportId, (DifficultLevel)workout.DifficultLevel, workout.BodyPartId, this.User.GetId(), workout.Minutes, workout.Content);
+            await this.workouts.Create(workout.Title, workout.SportId, (DifficultLevel)workout.DifficultLevel, workout.BodyPartId, this.User.GetId(), workout.Minutes, workout.Content);
 
             return this.RedirectToAction("All");
         }

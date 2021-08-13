@@ -1,32 +1,34 @@
 ﻿namespace StreetWorkout.Services.Workouts
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     using StreetWorkout.ViewModels.Workouts;
     using Data.Models.Enums;
     using Models;
 
     public interface IWorkoutService
     {
-        void Create(string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, string userId, int minutes, string content);
+        Task Create(string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, string userId, int minutes, string content);
 
-        bool Edit(int id, string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, int minutes, string content);
+        Task<bool> IsValidSportId(int id);
 
-        WorkoutsQueryModel Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage);
+        Task<bool> IsValidBodyPartId(int id);
 
-        WorkoutDetailsServiceModel Details(int id);
+        Task<bool> Delete(int id);
 
-        public WorkoutFormModel EditFormModel(int id);
+        Task<bool> Edit(int id, string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, int minutes, string content);
 
-        IEnumerable<SportViewModel> GetSports();
+        Task<bool> IsUserCreator(string userId, int workoutId);
 
-        IEnumerable<BodyPartViewModel> GetBodyParts();
+        Task<WorkoutsQueryModel> Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage);
 
-        bool IsUserCreator(string userId, int workoutId);
+        Task<WorkoutDetailsServiceModel> Details(int id);
 
-        bool IsValidSportId(int id);
+        Task<WorkoutFormModel> EditFormModel(int id);
 
-        bool IsValidBodyPartId(int id);
+        Task<IEnumerable<SportViewModel>> GetSports();
 
-        bool Delete(int id);
+        Task<IEnumerable<BodyPartViewModel>> GetBodyParts();
     }
 }

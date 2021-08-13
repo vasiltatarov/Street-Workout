@@ -27,7 +27,7 @@
             }
 
             var model = await this.groupWorkouts.EditFormModel(id);
-            model.Sports = this.workouts.GetSports();
+            model.Sports = await this.workouts.GetSports();
 
             return this.View(model);
         }
@@ -45,7 +45,7 @@
                 return this.Unauthorized();
             }
 
-            if (!this.workouts.IsValidSportId(model.SportId))
+            if (!await this.workouts.IsValidSportId(model.SportId))
             {
                 this.ModelState.AddModelError(nameof(model.SportId), "Sport is invalid.");
             }
@@ -62,7 +62,7 @@
 
             if (!this.ModelState.IsValid)
             {
-                model.Sports = this.workouts.GetSports();
+                model.Sports = await this.workouts.GetSports();
                 return this.View(model);
             }
 

@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
@@ -24,9 +26,9 @@
             this.mapper = mapper;
         }
 
-        public void Create(string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, string userId, int minutes, string content)
+        public async Task Create(string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, string userId, int minutes, string content)
         {
-            var workout = new Workout
+            await this.data.Workouts.AddAsync(new Workout
             {
                 Title = title,
                 SportId = sportId,
@@ -36,14 +38,13 @@
                 Minutes = minutes,
                 Content = content,
                 CreatedOn = DateTime.UtcNow,
-            };
-            this.data.Workouts.Add(workout);
-            this.data.SaveChanges();
+            });
+            await this.data.SaveChangesAsync();
         }
 
-        public bool Edit(int id, string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, int minutes, string content)
+        public async Task<bool> Edit(int id, string title, int sportId, DifficultLevel difficultLevel, int bodyPartId, int minutes, string content)
         {
-            var workout = this.data.Workouts.FirstOrDefault(x => x.Id == id);
+            var workout = await this.data.Workouts.FirstOrDefaultAsync(x => x.Id == id);
 
             if (workout == null)
             {
@@ -57,12 +58,12 @@
             workout.Minutes = minutes;
             workout.Content = content;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
-        public WorkoutsQueryModel Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage)
+        public async Task<WorkoutsQueryModel> Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage)
         {
             var workoutsQuery = this.data
                 .Workouts
@@ -86,7 +87,7 @@
                                 x.Content.ToLower().Contains(searchTerms.ToLower()));
             }
 
-            var workouts = workoutsQuery
+            var workouts = await workoutsQuery
                 .OrderByDescending(x => x.Id)
                 .Skip((currentPage - 1) * WorkoutsQueryModel.WorkoutsPerPage)
                 .Take(WorkoutsQueryModel.WorkoutsPerPage)
@@ -99,23 +100,26 @@
                     BodyPart = x.BodyPart.Name,
                     ImageUrl = GetImage(x.BodyPart.Name),
                     Minutes = x.Minutes,
-                });
+                })
+                .ToListAsync();
 
-            var sports = this.data
+            var sports = await this.data
                 .Sports
                 .Select(x => x.Name)
-                .ToList();
+                .ToListAsync();
 
-            var bodyParts = this.data
+            var bodyParts = await this.data
                 .BodyParts
                 .Select(x => x.Name)
-                .ToList();
+                .ToListAsync();
 
             var totalWorkouts = workoutsQuery.Count();
 
+            var user = await this.data.Users.FindAsync(userId);
+
             return new()
             {
-                IsUserTrainer = this.data.Users.Find(userId).UserRole == UserRole.Trainer,
+                IsUserTrainer = user.UserRole == UserRole.Trainer,
                 Workouts = workouts,
                 CurrentPage = currentPage,
                 TotalWorkouts = totalWorkouts,
@@ -127,8 +131,8 @@
             };
         }
 
-        public WorkoutDetailsServiceModel Details(int id)
-            => this.data
+        public async Task<WorkoutDetailsServiceModel> Details(int id)
+            => await this.data
                 .Workouts
                 .Where(x => x.Id == id)
                 .Select(x => new WorkoutDetailsServiceModel
@@ -178,39 +182,39 @@
                         .OrderByDescending(c => c.Id)
                         .ToList(),
                 })
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
-        public WorkoutFormModel EditFormModel(int id)
-            => this.data
+        public async Task<WorkoutFormModel> EditFormModel(int id)
+            => await this.data
                 .Workouts
                 .Where(x => x.Id == id)
                 .ProjectTo<WorkoutFormModel>(this.mapper.ConfigurationProvider)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
-        public IEnumerable<SportViewModel> GetSports()
-            => this.data.Sports
+        public async Task<IEnumerable<SportViewModel>> GetSports()
+            => await this.data.Sports
                 .ProjectTo<SportViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+                .ToListAsync();
 
-        public IEnumerable<BodyPartViewModel> GetBodyParts()
-            => this.data.BodyParts
+        public async Task<IEnumerable<BodyPartViewModel>> GetBodyParts()
+            => await this.data.BodyParts
                 .ProjectTo<BodyPartViewModel>(this.mapper.ConfigurationProvider)
-                .ToList();
+                .ToListAsync();
 
-        public bool IsUserCreator(string userId, int workoutId)
-            => this.data
+        public async Task<bool> IsUserCreator(string userId, int workoutId)
+            => await this.data
                 .Workouts
-                .Any(x => x.Id == workoutId && x.UserId == userId);
+                .AnyAsync(x => x.Id == workoutId && x.UserId == userId);
 
-        public bool IsValidSportId(int id)
-            => this.data.Sports.Any(x => x.Id == id);
+        public async Task<bool> IsValidSportId(int id)
+            => await this.data.Sports.AnyAsync(x => x.Id == id);
 
-        public bool IsValidBodyPartId(int id)
-            => this.data.BodyParts.Any(x => x.Id == id);
+        public async Task<bool> IsValidBodyPartId(int id)
+            => await this.data.BodyParts.AnyAsync(x => x.Id == id);
 
-        public bool Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var workout = this.data.Workouts.FirstOrDefault(x => x.Id == id);
+            var workout = await this.data.Workouts.FirstOrDefaultAsync(x => x.Id == id);
 
             if (workout == null)
             {
@@ -218,7 +222,7 @@
             }
 
             workout.IsDeleted = true;
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }

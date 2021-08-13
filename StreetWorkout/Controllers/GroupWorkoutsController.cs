@@ -26,10 +26,10 @@
         public async Task<IActionResult> All([FromQuery] GroupWorkoutsQueryModel model)
             => this.View(await this.groupWorkouts.All(model.CurrentPage, this.User.GetId()));
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
             => this.View(new GroupWorkoutFormModel
             {
-                Sports = this.workouts.GetSports(),
+                Sports = await this.workouts.GetSports(),
             });
 
         [HttpPost]
@@ -42,7 +42,7 @@
                 return this.Unauthorized();
             }
 
-            if (!this.workouts.IsValidSportId(input.SportId))
+            if (!await this.workouts.IsValidSportId(input.SportId))
             {
                 this.ModelState.AddModelError(nameof(input.SportId), "Sport is invalid.");
             }
@@ -59,7 +59,7 @@
 
             if (!this.ModelState.IsValid)
             {
-                input.Sports = this.workouts.GetSports();
+                input.Sports = await this.workouts.GetSports();
                 return this.View(input);
             }
 

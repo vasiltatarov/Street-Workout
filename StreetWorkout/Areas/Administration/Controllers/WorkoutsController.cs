@@ -1,7 +1,9 @@
 ﻿namespace StreetWorkout.Areas.Administration.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
+
     using Services.Workouts;
     using ViewModels.Workouts;
     using Data.Models.Enums;
@@ -16,30 +18,30 @@
         public WorkoutsController(IWorkoutService workouts)
             => this.workouts = workouts;
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserCreator(this.User.GetId(), id))
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !await this.workouts.IsUserCreator(this.User.GetId(), id))
             {
                 return this.Unauthorized();
             }
 
-            var model = this.workouts.EditFormModel(id);
+            var model = await this.workouts.EditFormModel(id);
 
             if (model == null)
             {
                 return this.BadRequest();
             }
 
-            model.Sports = this.workouts.GetSports();
-            model.BodyParts = this.workouts.GetBodyParts();
+            model.Sports = await this.workouts.GetSports();
+            model.BodyParts = await this.workouts.GetBodyParts();
 
             return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(WorkoutFormModel model)
+        public async Task<IActionResult> Edit(WorkoutFormModel model)
         {
-            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserCreator(this.User.GetId(), model.Id))
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !await this.workouts.IsUserCreator(this.User.GetId(), model.Id))
             {
                 return this.Unauthorized();
             }
@@ -49,38 +51,38 @@
                 this.ModelState.AddModelError(nameof(model.DifficultLevel), "Invalid difficult level.");
             }
 
-            if (!this.workouts.IsValidSportId(model.SportId))
+            if (!await this.workouts.IsValidSportId(model.SportId))
             {
                 this.ModelState.AddModelError(nameof(model.SportId), "Invalid sport.");
             }
 
-            if (!this.workouts.IsValidBodyPartId(model.BodyPartId))
+            if (!await this.workouts.IsValidBodyPartId(model.BodyPartId))
             {
                 this.ModelState.AddModelError(nameof(model.BodyPartId), "Invalid body part.");
             }
 
             if (!this.ModelState.IsValid)
             {
-                model.Sports = this.workouts.GetSports();
-                model.BodyParts = this.workouts.GetBodyParts();
+                model.Sports = await this.workouts.GetSports();
+                model.BodyParts = await this.workouts.GetBodyParts();
                 return this.View(model);
             }
 
-            this.workouts.Edit(model.Id, model.Title, model.SportId , (DifficultLevel)model.DifficultLevel, model.BodyPartId, model.Minutes, model.Content);
+            await this.workouts.Edit(model.Id, model.Title, model.SportId, (DifficultLevel)model.DifficultLevel, model.BodyPartId, model.Minutes, model.Content);
 
             this.TempData[EditKey] = string.Format(EditMessage, model.Title);
 
             return this.RedirectToAction("Details", "Workouts", new { area = "", Id = model.Id, information = model.Title });
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !this.workouts.IsUserCreator(this.User.GetId(), id))
+            if (!this.User.IsInRole(WebConstants.AdministratorRoleName) && !await this.workouts.IsUserCreator(this.User.GetId(), id))
             {
                 return this.Unauthorized();
             }
 
-            var isDeleted = this.workouts.Delete(id);
+            var isDeleted = await this.workouts.Delete(id);
 
             if (!isDeleted)
             {

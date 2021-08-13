@@ -1,7 +1,8 @@
 ﻿namespace StreetWorkout.Test.Services
 {
-    using Xunit;
     using System.Linq;
+    using System.Threading.Tasks;
+    using Xunit;
 
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
@@ -12,7 +13,7 @@
     public class WorkoutServiceTest
     {
         [Fact]
-        public void CreateShouldCreateNewWorkoutCorrectlyAndIncreaseWorkoutsCount()
+        public async Task CreateShouldCreateNewWorkoutCorrectlyAndIncreaseWorkoutsCount()
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -21,14 +22,14 @@
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            workoutService.Create("test", 1, DifficultLevel.Advanced, 2, "sad", 1, "");
+            await workoutService.Create("test", 1, DifficultLevel.Advanced, 2, "sad", 1, "");
 
             // Assert
             Assert.Equal(1, data.Workouts.Count());
         }
 
         [Fact]
-        public void GetSportsShouldReturnEmptyCollection()
+        public async Task GetSportsShouldReturnEmptyCollection()
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -37,26 +38,26 @@
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var sports = workoutService.GetSports();
+            var sports = await workoutService.GetSports();
 
             // Assert
             Assert.Empty(sports);
         }
 
         [Fact]
-        public void GetSportsShouldReturnCollectionWithAllSportsFromDatabase()
+        public async Task GetSportsShouldReturnCollectionWithAllSportsFromDatabase()
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            data.Sports.AddRange(Enumerable.Range(1, 5).Select(x => new Sport()));
-            data.SaveChanges();
+            await data.Sports.AddRangeAsync(Enumerable.Range(1, 5).Select(x => new Sport()));
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var sports = workoutService.GetSports();
+            var sports = await workoutService.GetSports();
 
             // Assert
             Assert.NotNull(sports);
@@ -64,7 +65,7 @@
         }
 
         [Fact]
-        public void GetBodyPartsShouldReturnEmptyCollection()
+        public async Task GetBodyPartsShouldReturnEmptyCollection()
         {
             // Arrange
             var data = DatabaseMock.Instance;
@@ -73,26 +74,26 @@
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var bodyParts = workoutService.GetBodyParts();
+            var bodyParts = await workoutService.GetBodyParts();
 
             // Assert
             Assert.Empty(bodyParts);
         }
 
         [Fact]
-        public void GetBodyPartsShouldReturnCollectionWithAllSportsFromDatabase()
+        public async Task GetBodyPartsShouldReturnCollectionWithAllSportsFromDatabase()
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            data.BodyParts.AddRange(Enumerable.Range(1, 5).Select(x => new BodyPart()));
-            data.SaveChanges();
+            await data.BodyParts.AddRangeAsync(Enumerable.Range(1, 5).Select(x => new BodyPart()));
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var bodyParts = workoutService.GetBodyParts();
+            var bodyParts = await workoutService.GetBodyParts();
 
             // Assert
             Assert.NotNull(bodyParts);
@@ -102,19 +103,19 @@
         [Theory]
         [InlineData(1)]
         [InlineData(5)]
-        public void IsValidSportIdShouldReturnTrueWhenSportWithGivenIdNotExistInDatabase(int sportId)
+        public async Task IsValidSportIdShouldReturnTrueWhenSportWithGivenIdNotExistInDatabase(int sportId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            data.Sports.Add(new Sport { Id = sportId });
-            data.SaveChanges();
+            await data.Sports.AddAsync(new Sport { Id = sportId });
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = workoutService.IsValidSportId(sportId);
+            var result = await workoutService.IsValidSportId(sportId);
 
             // Assert
             Assert.True(result);
@@ -123,40 +124,40 @@
         [Theory]
         [InlineData(1)]
         [InlineData(5)]
-        public void IsValidSportIdShouldReturnFalseWhenSportWithGivenIdNotExistInDatabase(int sportId)
+        public async Task IsValidSportIdShouldReturnFalseWhenSportWithGivenIdNotExistInDatabase(int sportId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            data.Sports.Add(new Sport { Id = sportId });
-            data.SaveChanges();
+            await data.Sports.AddAsync(new Sport { Id = sportId });
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = workoutService.IsValidSportId(2);
+            var result = await workoutService.IsValidSportId(2);
 
             // Assert
             Assert.False(result);
         }
-        
+
         [Theory]
         [InlineData(1)]
         [InlineData(5)]
-        public void IsValidBodyPartIdShouldReturnTrueWhenSportWithGivenIdNotExistInDatabase(int bodyPartId)
+        public async Task IsValidBodyPartIdShouldReturnTrueWhenSportWithGivenIdNotExistInDatabase(int bodyPartId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            data.BodyParts.Add(new BodyPart { Id = bodyPartId });
-            data.SaveChanges();
+            await data.BodyParts.AddRangeAsync(new BodyPart { Id = bodyPartId });
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = workoutService.IsValidBodyPartId(bodyPartId);
+            var result = await workoutService.IsValidBodyPartId(bodyPartId);
 
             // Assert
             Assert.True(result);
@@ -165,19 +166,19 @@
         [Theory]
         [InlineData(1)]
         [InlineData(5)]
-        public void IsValidBodyPartIdShouldReturnFalseWhenSportWithGivenIdNotExistInDatabase(int bodyPartId)
+        public async Task IsValidBodyPartIdShouldReturnFalseWhenSportWithGivenIdNotExistInDatabase(int bodyPartId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            data.BodyParts.Add(new BodyPart() { Id = bodyPartId });
-            data.SaveChanges();
+            await data.BodyParts.AddAsync(new BodyPart() { Id = bodyPartId });
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = workoutService.IsValidBodyPartId(2);
+            var result = await workoutService.IsValidBodyPartId(2);
 
             // Assert
             Assert.False(result);
@@ -185,11 +186,11 @@
 
         [Theory]
         [InlineData(1)]
-        public void DetailsShouldReturnValidServiceModelWithValidData(int workoutId)
+        public async Task DetailsShouldReturnValidServiceModelWithValidData(int workoutId)
         {
             // Arrange
             var data = DatabaseMock.Instance;
-            data.Workouts.Add(new Workout
+            await data.Workouts.AddAsync(new Workout
             {
                 Id = workoutId,
                 Title = "test",
@@ -208,14 +209,14 @@
                 },
                 Content = "Have Content"
             });
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = workoutService.Details(workoutId);
+            var result = await workoutService.Details(workoutId);
 
             // Assert
             Assert.IsType<WorkoutDetailsServiceModel>(result);
@@ -265,17 +266,17 @@
 
         [Theory]
         [InlineData("vs1", 1)]
-        public void WorkoutsShouldReturnValidWorkoutModelWithExactlyWorkoutsPerFirstPage(string userId, int currentPage)
+        public async Task WorkoutsShouldReturnValidWorkoutModelWithExactlyWorkoutsPerFirstPage(string userId, int currentPage)
         {
             // Arrange
             var data = DatabaseMock.Instance;
 
-            data.Users.Add(new ApplicationUser
+            await data.Users.AddAsync(new ApplicationUser
             {
                 Id = userId,
                 UserRole = UserRole.Trainer,
             });
-            data.Workouts.AddRange(Enumerable.Range(1, 10).Select(x => new Workout
+            await data.Workouts.AddRangeAsync(Enumerable.Range(1, 10).Select(x => new Workout
             {
                 Sport = new Sport
                 {
@@ -287,14 +288,14 @@
                 },
                 UserId = userId,
             }));
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = workoutService.Workouts(userId, null, null, null, currentPage);
+            var result = await workoutService.Workouts(userId, null, null, null, currentPage);
 
             // Assert
             Assert.IsType<WorkoutsQueryModel>(result);
@@ -307,17 +308,17 @@
 
         [Theory]
         [InlineData("vs1", 2)]
-        public void WorkoutsShouldReturnValidWorkoutModelWithExactlyWorkoutsPerSecondPage(string userId, int currentPage)
+        public async Task WorkoutsShouldReturnValidWorkoutModelWithExactlyWorkoutsPerSecondPage(string userId, int currentPage)
         {
             // Arrange
             var data = DatabaseMock.Instance;
 
-            data.Users.Add(new ApplicationUser
+            await data.Users.AddAsync(new ApplicationUser
             {
                 Id = userId,
                 UserRole = UserRole.Trainer,
             });
-            data.Workouts.AddRange(Enumerable.Range(1, 12).Select(x => new Workout
+            await data.Workouts.AddRangeAsync(Enumerable.Range(1, 12).Select(x => new Workout
             {
                 Sport = new Sport
                 {
@@ -329,14 +330,14 @@
                 },
                 UserId = userId,
             }));
-            data.SaveChanges();
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = workoutService.Workouts(userId, null, null, null, currentPage);
+            var result = await workoutService.Workouts(userId, null, null, null, currentPage);
 
             // Assert
             Assert.IsType<WorkoutsQueryModel>(result);
@@ -351,25 +352,25 @@
         [InlineData("vs1", 1)]
         [InlineData("vs1", 2)]
         [InlineData("vs1", 5)]
-        public void WorkoutsShouldReturnValidWorkoutModelWithZeroWorkoutsWhenInDatabaseNotExistAnyWorkouts(string userId, int currentPage)
+        public async Task WorkoutsShouldReturnValidWorkoutModelWithZeroWorkoutsWhenInDatabaseNotExistAnyWorkouts(string userId, int currentPage)
         {
             // Arrange
             var data = DatabaseMock.Instance;
 
-            data.Users.Add(new ApplicationUser
+            await data.Users.AddAsync(new ApplicationUser
             {
                 Id = userId,
                 UserRole = UserRole.Trainer,
             });
-            data.BodyParts.AddRange(Enumerable.Range(1, 10).Select(x => new BodyPart()));
-            data.SaveChanges();
+            await data.BodyParts.AddRangeAsync(Enumerable.Range(1, 10).Select(x => new BodyPart()));
+            await data.SaveChangesAsync();
 
             var mapper = MapperMock.Instance;
 
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = workoutService.Workouts(userId, null, null, null, currentPage);
+            var result = await workoutService.Workouts(userId, null, null, null, currentPage);
 
             // Assert
             Assert.IsType<WorkoutsQueryModel>(result);
