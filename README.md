@@ -143,9 +143,9 @@ if (latestWorkouts == null)
 34. Added Momment.JS client library.
 35. Introduced 'async && await' where is appropriate.
 36. Fixed bug in Workouts/GroupWorkouts details with latest workouts route.
+37. Implemented Checkout functionality of supplements.
 
 Potential Tasks:
-- Implement Buy button in supplements details page.
 - Fix content in home page.
 
 # Note
