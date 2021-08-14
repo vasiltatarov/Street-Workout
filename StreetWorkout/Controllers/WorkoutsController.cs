@@ -20,7 +20,7 @@
             => this.workouts = workouts;
 
         public async Task<IActionResult> All([FromQuery] WorkoutsQueryModel query)
-            => this.View(await this.workouts.Workouts(this.User.GetId(), query.Sport, query.BodyPart, query.SearchTerms, query.CurrentPage));
+            => this.View(await this.workouts.All(this.User.GetId(), query.Sport, query.BodyPart, query.SearchTerms, query.CurrentPage));
 
         public async Task<IActionResult> Details(int id, string information)
         {

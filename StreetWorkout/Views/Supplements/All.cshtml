@@ -88,6 +88,10 @@
         previousPage = 1;
     }
     var maxPage = (int)Math.Ceiling((double)Model.TotalSupplements / SupplementsQueryModel.SupplementsPerPage);
+    if (maxPage == 0)
+    {
+        maxPage = 1;
+    }
 }
 
 <nav aria-label="Page navigation example">
@@ -138,7 +142,7 @@
                 @Model.CurrentPage
             </a>
         </li>
-        @if (Model.CurrentPage != maxPage)
+        @if (Model.CurrentPage < maxPage)
         {
             <li class="page-item @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)">
                 <a class="page-link"

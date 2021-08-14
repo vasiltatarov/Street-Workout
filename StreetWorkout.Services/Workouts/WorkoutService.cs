@@ -63,7 +63,7 @@
             return true;
         }
 
-        public async Task<WorkoutsQueryModel> Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage)
+        public async Task<WorkoutsQueryModel> All(string userId, string sport, string bodyPart, string searchTerms, int currentPage)
         {
             var workoutsQuery = this.data
                 .Workouts

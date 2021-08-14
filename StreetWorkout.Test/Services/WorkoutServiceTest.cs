@@ -295,7 +295,7 @@
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = await workoutService.Workouts(userId, null, null, null, currentPage);
+            var result = await workoutService.All(userId, null, null, null, currentPage);
 
             // Assert
             Assert.IsType<WorkoutsQueryModel>(result);
@@ -337,7 +337,7 @@
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = await workoutService.Workouts(userId, null, null, null, currentPage);
+            var result = await workoutService.All(userId, null, null, null, currentPage);
 
             // Assert
             Assert.IsType<WorkoutsQueryModel>(result);
@@ -370,7 +370,7 @@
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            var result = await workoutService.Workouts(userId, null, null, null, currentPage);
+            var result = await workoutService.All(userId, null, null, null, currentPage);
 
             // Assert
             Assert.IsType<WorkoutsQueryModel>(result);

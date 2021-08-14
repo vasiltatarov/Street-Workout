@@ -21,7 +21,7 @@
 
         Task<bool> IsUserCreator(string userId, int workoutId);
 
-        Task<WorkoutsQueryModel> Workouts(string userId, string sport, string bodyPart, string searchTerms, int currentPage);
+        Task<WorkoutsQueryModel> All(string userId, string sport, string bodyPart, string searchTerms, int currentPage);
 
         Task<WorkoutDetailsServiceModel> Details(int id);
 
