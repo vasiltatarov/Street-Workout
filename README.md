@@ -145,9 +145,9 @@ if (latestWorkouts == null)
 35. Introduced 'async && await' where is appropriate.
 36. Fixed bug in Workouts/GroupWorkouts details with latest workouts route.
 37. Implemented Checkout functionality of supplements.
+38. Fixed content in home page.
 
 Potential Tasks:
-- Fix content in home page.
 
 # Note
 ConnectionStrings:
