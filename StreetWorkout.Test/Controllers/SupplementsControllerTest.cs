@@ -43,7 +43,7 @@
                 .Calling(c => c.All(With.Default<SupplementsQueryModel>()))
                 .ShouldHave()
                 .TempData(data => data
-                    .ContainingEntryWithKey(NotFoundSupplementsKey))
+                    .ContainingEntryWithKey(NotFoundDataKey))
                 .AndAlso()
                 .ShouldReturn()
                 .View(view => view

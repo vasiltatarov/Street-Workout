@@ -1,12 +1,12 @@
 ﻿namespace StreetWorkout.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Services.Supplements;
     using Services.Supplements.Models;
+    using Infrastructure;
 
     using static WebConstants.TempDataMessageKeys;
 
@@ -22,9 +22,9 @@
         {
             var model = await this.supplements.All(query.CurrentPage, query.SearchTerms, query.CategoryId);
 
-            if (!model.Supplements.Any())
+            if (model.TotalSupplements == 0)
             {
-                this.TempData[NotFoundSupplementsKey] = NotFoundSupplementsMessage;
+                this.TempData[NotFoundDataKey] = string.Format(NotFoundDataMessage, typeof(SupplementsController).GetControllerName());
             }
 
             return this.View(model);

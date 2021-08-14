@@ -11,6 +11,8 @@
     using ViewModels.Workouts;
     using Services.Workouts.Models;
 
+    using static WebConstants.TempDataMessageKeys;
+
     [Authorize]
     public class WorkoutsController : Controller
     {
@@ -20,7 +22,16 @@
             => this.workouts = workouts;
 
         public async Task<IActionResult> All([FromQuery] WorkoutsQueryModel query)
-            => this.View(await this.workouts.All(this.User.GetId(), query.Sport, query.BodyPart, query.SearchTerms, query.CurrentPage));
+        {
+            var workoutsQuery = await this.workouts.All(this.User.GetId(), query.Sport, query.BodyPart, query.SearchTerms, query.CurrentPage);
+
+            if (workoutsQuery.TotalWorkouts == 0)
+            {
+                this.TempData[NotFoundDataKey] = string.Format(NotFoundDataMessage, typeof(WorkoutsController).GetControllerName());
+            }
+
+            return this.View(workoutsQuery);
+        }
 
         public async Task<IActionResult> Details(int id, string information)
         {

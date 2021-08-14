@@ -14,8 +14,8 @@
             public const string DeleteKey = "DeleteKey";
             public const string DeleteMessage = "You Deleted {0} Successfully.";
 
-            public const string NotFoundSupplementsKey = "NotFoundSupplements";
-            public const string NotFoundSupplementsMessage = "Not Found Supplement with given searched criteria.";
+            public const string NotFoundDataKey = "NotFoundData";
+            public const string NotFoundDataMessage = "Not Found {0} with given searched criteria.";
 
             public const string RestoreKey = "RestoreKey";
             public const string RestoreMessage = "You Restored {0} Successfully.";

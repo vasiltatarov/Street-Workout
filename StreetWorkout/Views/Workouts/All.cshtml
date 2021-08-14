@@ -43,6 +43,15 @@
 </form>
 <hr/>
 
+@{
+    var message = TempData[WebConstants.TempDataMessageKeys.NotFoundDataKey];
+    if (message != null)
+    {
+        <br />
+        <h1 class="text-center text-danger">@message</h1>
+    }
+}
+
 <partial name="_WorkoutsPartial" model="Model.Workouts"/>
 <hr/>
 
