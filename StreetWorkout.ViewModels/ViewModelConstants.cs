@@ -68,6 +68,10 @@
 
             public const int AddressMinLength = 5;
             public const int AddressMaxLength = 100;
+
+            public const int CardNameMaxLength = 30;
+            public const int CardNumberMaxLength = 20;
+            public const int ExpirationMaxLength = 10;
         }
     }
 }

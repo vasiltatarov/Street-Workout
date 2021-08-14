@@ -41,6 +41,10 @@
 
         public DbSet<ChatMessage> ChatMessages { get; set; }
 
+        public DbSet<Payment> Payments { get; set; }
+
+        public DbSet<SupplementPayment> SupplementPayments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
@@ -51,6 +55,7 @@
             builder.ApplyConfiguration(new UserWorkoutPaymentConfiguration());
             builder.ApplyConfiguration(new SupplementConfiguration());
             builder.ApplyConfiguration(new ChatMessageConfiguration());
+            builder.ApplyConfiguration(new SupplementPaymentConfiguration());
 
             base.OnModelCreating(builder);
         }

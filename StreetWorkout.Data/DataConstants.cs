@@ -59,5 +59,15 @@
         {
             public const int TextMaxLength = 300;
         }
+
+        public class PaymentConstants
+        {
+            public const int FirstNameMaxLength = 30;
+            public const int LastNameMaxLength = 30;
+            public const int AddressMaxLength = 100;
+            public const int CardNameMaxLength = 30;
+            public const int CardNumberMaxLength = 20;
+            public const int ExpirationMaxLength = 10;
+        }
     }
 }

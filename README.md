@@ -47,6 +47,7 @@ StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (Apri
 * Page about Body Calculator with functionality to calculate how many calories you need per day to maintains your body weight, gain weight or lose weight.
 * Cache Data 'Memory Cache' (see below) to reduce database queries.
 * Interactive, flexible UX (User Experience)
+* All of the payments on the website are fake.
 
 # Project Architecture
 * I use simple project architecture consisting of 5 projects.

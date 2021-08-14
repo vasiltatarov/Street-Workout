@@ -12,7 +12,7 @@
 
         public byte VAT { get; set; } = 1;
 
-        public int WorkoutId { get; set; }
+        public int SupplementId { get; set; }
 
         [Display(Name = "First Name")]
         [Required]
@@ -37,14 +37,17 @@
         public string Address { get; set; }
 
         [Display(Name = "Card Name")]
+        [MaxLength(CardNameMaxLength)]
         [Required]
         public string CardName { get; set; }
 
         [Display(Name = "Card Number")]
+        [MaxLength(CardNumberMaxLength)]
         [Required]
         public string CardNumber { get; set; }
 
         [Display(Name = "Expiration")]
+        [MaxLength(ExpirationMaxLength)]
         [Required]
         public string Expiration { get; set; }
     }

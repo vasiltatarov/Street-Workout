@@ -10,6 +10,8 @@
     {
         Task Create(string name, int categoryId, string imageUrl, string content, decimal price, short quantity);
 
+        Task BuySupplement(int supplementId, string userId, string firstName, string lastName, string phone, string email, string address, string cardName, string cardNumber, string expiration);
+
         Task<IEnumerable<SupplementCategoryViewModel>> GetSupplementCategories();
 
         Task<SupplementsQueryModel> All(int currentPage, string searchTerms, int categoryId);
@@ -26,6 +28,6 @@
 
         Task<bool> IsValidCategoryId(int id);
 
-        Task<bool> IsValidWorkoutId(int id);
+        Task<bool> IsValidSupplementId(int id);
     }
 }

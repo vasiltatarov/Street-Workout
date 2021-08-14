@@ -1,5 +1,6 @@
 ﻿namespace StreetWorkout.Data.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using static DataConstants.SupplementConstants;
@@ -28,5 +29,7 @@
         public short Quantity { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public IEnumerable<SupplementPayment> SupplementPayments { get; set; } = new HashSet<SupplementPayment>();
     }
 }

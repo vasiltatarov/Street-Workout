@@ -157,9 +157,31 @@
                 .SupplementCategories
                 .AnyAsync(x => x.Id == id);
 
-        public async Task<bool> IsValidWorkoutId(int id)
+        public async Task<bool> IsValidSupplementId(int id)
             => await this.data
                 .Workouts
                 .AnyAsync(x => x.Id == id);
+
+        public async Task BuySupplement(int supplementId, string userId, string firstName, string lastName, string phone, string email,
+            string address, string cardName, string cardNumber, string expiration)
+        {
+            await this.data.SupplementPayments.AddAsync(new SupplementPayment
+            {
+                SupplementId = supplementId,
+                Payment = new Payment
+                {
+                    UserId = userId,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    PhoneNumber = phone,
+                    Email = email,
+                    Address = address,
+                    CardName = cardName,
+                    CardNumber = cardNumber,
+                    Expiration = expiration,
+                }
+            });
+            await this.data.SaveChangesAsync();
+        }
     }
 }

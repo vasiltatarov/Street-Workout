@@ -43,18 +43,18 @@
         [HttpPost]
         public async Task<IActionResult> Buy(BuySupplementFormModel model)
         {
-            if (!await this.supplements.IsValidWorkoutId(model.WorkoutId))
+            if (!await this.supplements.IsValidSupplementId(model.SupplementId))
             {
                 this.BadRequest();
             }
 
             if (!this.ModelState.IsValid)
             {
-                model.SupplementModel = await this.supplements.BuySupplementModel<BuySupplementViewModel>(model.WorkoutId);
+                model.SupplementModel = await this.supplements.BuySupplementModel<BuySupplementViewModel>(model.SupplementId);
                 return this.View(model);
             }
 
-            // Call service that save data.
+            await this.supplements.BuySupplement(model.SupplementId, this.User.GetId(), model.FirstName, model.LastName, model.PhoneNumber, model.Email, model.Address, model.CardName, model.CardNumber, model.Expiration);
 
             return this.RedirectToAction("ThankYou");
         }
