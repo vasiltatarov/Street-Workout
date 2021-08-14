@@ -3,8 +3,6 @@
     ViewData["Title"] = Model.Username;
 }
 
-<link href="~/css/account.css" rel="stylesheet" asp-append-version="true" />
-
 @if (User.Identity.Name == Model.Username)
 {
     @if (Model.IsAccountComplete)
