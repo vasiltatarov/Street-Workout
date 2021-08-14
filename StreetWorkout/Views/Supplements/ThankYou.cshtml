@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Complete Payment";
+    var date = DateTime.Now;
+    var toAdded = 0;
+
+    for (int i = 1; i <= 3; i++)
+    {
+        date = date.AddDays(1);
+        var day = date.DayOfWeek;
+
+        if (day == DayOfWeek.Saturday || day == DayOfWeek.Sunday)
+        {
+            toAdded += 2;
+        }
+        else
+        {
+            toAdded++;
+        }
+    }
+
+    var deliveryDay = DateTime.Now.AddDays(toAdded).ToString("d");
+}
+
+<div class="text-center">
+    <h2>Thank you for your order!</h2>
+    <hr />
+    <h3>Delivery will be made within three working days!</h3>
+    <br />
+    <h3>Expect delivery to the address you specified on @deliveryDay</h3>
+</div>

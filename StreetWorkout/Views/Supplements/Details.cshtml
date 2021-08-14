@@ -46,8 +46,14 @@
         <img class="suppl-details-img" src="@Model.ImageUrl" alt="@Model.Name" />
         <div class="card-body text-center ">
             <h2 class="text-center">@Model.Category</h2>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class=" tests text-uppercase text-center">Buy</a>
+            <p class="card-text text-danger">Free delivery for products over 50 BGN.</p>
+            <a asp-area=""
+               asp-controller="Supplements"
+               asp-action="Buy"
+               asp-route-id="@Model.Id"
+               class=" tests text-uppercase text-center">
+                Buy
+            </a>
         </div>
     </div>
 </div>

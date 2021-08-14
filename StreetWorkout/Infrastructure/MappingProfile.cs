@@ -55,6 +55,7 @@
                     y => y.MapFrom(x => x.User.UserName))
                 .ForMember(x => x.UserImageUrl,
                     y => y.MapFrom(x => x.User.ImageUrl));
+            this.CreateMap<Supplement, BuySupplementViewModel>();
         }
     }
 }

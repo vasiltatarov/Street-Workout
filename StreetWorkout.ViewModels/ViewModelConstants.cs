@@ -57,5 +57,17 @@
             public const int QuantityMinValue = 200;
             public const int QuantityMaxValue = 7000;
         }
+
+        public class BuySupplementFormModelConstants
+        {
+            public const int FirstNameMinLength = 2;
+            public const int FirstNameMaxLength = 30;
+
+            public const int LastNameMinLength = 2;
+            public const int LastNameMaxLength = 30;
+
+            public const int AddressMinLength = 5;
+            public const int AddressMaxLength = 100;
+        }
     }
 }

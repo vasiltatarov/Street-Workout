@@ -18,6 +18,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Chat\Models\" />
-    <Folder Include="Supplements\Models\" />
   </ItemGroup>
 </Project>

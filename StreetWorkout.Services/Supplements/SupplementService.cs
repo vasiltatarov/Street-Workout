@@ -87,6 +87,13 @@
                 .ProjectTo<SupplementFormModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
+        public async Task<T> BuySupplementModel<T>(int id)
+            => await this.data
+                .Supplements
+                .Where(x => x.Id == id)
+                .ProjectTo<T>(this.mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
+
         public async Task<bool> Edit(int id, string name, int categoryId, string imageUrl, string content, decimal price, short quantity)
         {
             var supplement = await this.data.Supplements.FirstOrDefaultAsync(x => x.Id == id);
@@ -148,6 +155,11 @@
         public async Task<bool> IsValidCategoryId(int id)
             => await this.data
                 .SupplementCategories
+                .AnyAsync(x => x.Id == id);
+
+        public async Task<bool> IsValidWorkoutId(int id)
+            => await this.data
+                .Workouts
                 .AnyAsync(x => x.Id == id);
     }
 }
