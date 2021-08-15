@@ -1,59 +1,23 @@
 ﻿@model IEnumerable<Message>
 @{
     ViewData["Title"] = "Chat Room";
-    var groupedMessages = Model
-        .GroupBy(x => x.Username)
-        .Select(x => x.Last())
-        .ToList();
 }
 
 <div class="container">
     <h3 class=" text-center">Messenger</h3>
     <div class="messaging">
         <div class="inbox_msg">
-            <div class="inbox_people">
-                <div class="headind_srch">
-                    <div class="recent_heading">
-                        <h4>Last Active</h4>
-                    </div>
-                </div>
-                <div class="inbox_chat">
-                    @foreach (var message in groupedMessages)
-                    {
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_img">
-                                    <img class="rounded-circle" src="@message.UserImageUrl" alt="@message.Username">
-                                </div>
-                                <div class="chat_ib">
-                                    <h5>
-                                        @message.Username
-                                        <span class="chat_date">
-                                            <time>@message.CreatedOn.ToLocalTime()</time>
-                                        </span>
-                                    </h5>
-                                    <p>@message.Text</p>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
             <div class="mesgs">
                 <div id="messagesList" class="msg_history messages">
                     @foreach (var message in Model)
                     {
-                        <br />
-                        <div class="incoming_msg">
-                            <div class="incoming_msg_img">
-                                <img class="rounded-circle" src="@message.UserImageUrl" alt="@message.Username" />
-                            </div>
-                            <div class="received_msg">
-                                <div class="received_withd_msg">
-                                    <p>@message.Text</p>
-                                    <span class="text-danger">@message.Username</span>:
-                                    <time>@message.CreatedOn.ToLocalTime()</time>
+                        <div class="media mb-3">
+                            <img src="@message.UserImageUrl" alt="@message.Username" class="rounded-circle img-message">
+                            <div class="media-body ml-3">
+                                <div class="bg-primary rounded py-2 px-3 mb-2">
+                                    <p class="mb-0 text-white">@message.Text</p>
                                 </div>
+                                <p class="small text-muted">@message.Username: @message.CreatedOn.ToLocalTime()</p>
                             </div>
                         </div>
                     }
@@ -68,12 +32,13 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
 @section Scripts {
     <script>
+        $(".messages").animate({ scrollTop: "99999" }, "fast");
+
         var connection = new signalR
             .HubConnectionBuilder()
             .withUrl("/chat")
@@ -82,17 +47,14 @@
         connection.on("NewMessage",
             function (message) {
                 var chatInfo = `
-<br />
-<div class="incoming_msg">
-        <div class="incoming_msg_img">
-            <img class="rounded-circle" src="${message.userImageUrl}" alt="" />
+<div class="media mb-3">
+    <img style="width: 50px;" src="${message.userImageUrl}" alt="" class="rounded-circle img-message">
+    <div class="media-body ml-3">
+        <div class="bg-primary rounded py-2 px-3 mb-2">
+            <p class="mb-0 text-white">${message.text}</p>
         </div>
-        <div class="received_msg">
-            <div class="received_withd_msg">
-                <p>${message.text}</p>
-                <span style="color: red">${message.username}</span>: ${moment().format('DD.MM.yyyy HH:mm:ss')}
-            </div>
-        </div>
+        <p class="small text-muted">${message.username}: ${moment().format('DD.MM.yyyy HH:mm:ss')}</p>
+    </div>
 </div>`;
                 $("#messagesList").append(chatInfo);
                 $(".messages").animate({ scrollTop: "99999" }, "fast");

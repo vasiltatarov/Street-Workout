@@ -3,8 +3,9 @@
     margin: auto;
 }
 
-img {
-    max-width: 100%;
+.img-message {
+    max-width: 50px;
+    height: 50px;
 }
 
 .inbox_people {
@@ -162,7 +163,7 @@ img {
 .mesgs {
     float: left;
     padding: 30px 15px 0 25px;
-    width: 60%;
+    width: 100%;
 }
 
 .sent_msg p {
