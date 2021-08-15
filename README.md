@@ -1,5 +1,7 @@
 #  Street-Workout
 ASP .NET Core MVC application designed to help people who are active in all sports.
+<br />
+Link of the Website - https://streetworkout.azurewebsites.net/
 
 # Project Introduction
 StreetWorkout is a ASP.NET Core MVC project I builded in course at SoftUni (April-June 2021). <br /> The website is application for people who are active in the sports. The Project follow the best practices for Object Oriented design and high-quality code for the Web application.
@@ -88,7 +90,7 @@ if (latestWorkouts == null)
 ![](img/DbDiagram.jpg)
 
 # Test
-## Writed Tests - 127
+## Writed Tests - 131
 ### Libraries used for testing:
 
 * XUnit
@@ -146,6 +148,7 @@ if (latestWorkouts == null)
 36. Fixed bug in Workouts/GroupWorkouts details with latest workouts route.
 37. Implemented Checkout functionality of supplements.
 38. Fixed content in home page.
+39. Published Website in Azure App Service (Windows).
 
 Potential Tasks:
 
