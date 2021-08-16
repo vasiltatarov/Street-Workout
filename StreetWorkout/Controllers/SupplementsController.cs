@@ -45,7 +45,7 @@
         {
             if (!await this.supplements.IsValidSupplementId(model.SupplementId))
             {
-                this.BadRequest();
+                return this.BadRequest();
             }
 
             if (!this.ModelState.IsValid)

@@ -159,7 +159,7 @@
 
         public async Task<bool> IsValidSupplementId(int id)
             => await this.data
-                .Workouts
+                .Supplements
                 .AnyAsync(x => x.Id == id);
 
         public async Task BuySupplement(int supplementId, string userId, string firstName, string lastName, string phone, string email,
