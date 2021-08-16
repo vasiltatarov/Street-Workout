@@ -101,12 +101,20 @@ if (latestWorkouts == null)
 ---
 
 * Services Test Coverage 100%
-
 ![](img/ServicesTest.jpg)
 
 * Controllers Test Coverage 100%
-
 ![](img/ControllersTests.jpg)
+
+* Integration Test
+![](img/IntegrationTest.jpg)
+![](img/IntegrationTest2.jpg)
+
+* Routing Test
+![](img/RoutingTest.jpg)
+
+* Service Test
+![](img/ServiceTest.jpg)
 
 # Steps to create a similar web application from scratch:
 
