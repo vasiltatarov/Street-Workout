@@ -90,7 +90,7 @@ if (latestWorkouts == null)
 ![](img/DbDiagram.jpg)
 
 # Test
-## Writed Tests - 131
+## Written Tests - 200
 ### Libraries used for testing:
 
 * XUnit
