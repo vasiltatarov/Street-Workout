@@ -1,19 +1,37 @@
-﻿@model AllTrainersViewModel
+﻿@model AllUsersQueryModel
 @{
     ViewData["Title"] = "Trainers";
 }
 
 <div class="container">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-        <i class="fa fa-warning"></i>
-        <strong>Oops!</strong> Only the users who are completed their account will be listed here.
-    </div>
+
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label asp-for="Role"></label>
+                <select asp-for="Role" class="form-control">
+                    <option selected="" value="">--- All ---</option>
+                    <option value="trainers">Trainers</option>
+                    <option value="enthusiasts">Enthusiasts</option>
+                </select>
+            </div>
+            <div class="form-group col-md-8">
+                <label asp-for="Sport"></label>
+                <select asp-for="Sport" class="form-control">
+                    <option value="">--- Search by Sport ---</option>
+                    @foreach (var sport in Model.Sports)
+                    {
+                        <option value="@sport.Name">@sport.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+        <hr />
+    </form>
 
     <div class="row">
-        @foreach (var trainer in Model.Trainers)
+        @foreach (var trainer in Model.Users)
         {
             var isStarChecked = (int)Math.Floor(trainer.VotesAverageValue);
             <div class="col-sm-6 col-md-4 mb-4">
@@ -23,14 +41,21 @@
                             <img class="card-img workout-img" src="@trainer.ImageUrl" alt="@trainer.Username">
                         </div>
                         <div class="card-body">
-                            <span class="badge badge-success mb-2">@trainer.Sport</span>
+                            <span class="badge badge-success mb-2">@(trainer.IsTrainer ? "Trainer" : "Enthusiast")</span>
                             <h4 class="card-title">@trainer.Username</h4>
-                            <p class="card-text">Goal: <b>@trainer.Goal</b></p>
-                            @for (int i = 1; i <= 5; i++)
+                            <p class="card-text">Sport: <b>@trainer.Sport</b></p>
+                            @if (trainer.IsTrainer)
                             {
-                                <span class="fa fa-star @(isStarChecked >= i ? "star-checked" : "")" data-vote="@i"></span>
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <span class="fa fa-star @(isStarChecked >= i ? "star-checked" : "")" data-vote="@i"></span>
+                                }
+                                <span>&nbsp; <b id="avg-vote-rating">@trainer.VotesAverageValue.ToString("F1")</b></span><span> / <b>5</b></span>
                             }
-                            <span>&nbsp; <b id="avg-vote-rating">@trainer.VotesAverageValue.ToString("F1")</b></span><span> / <b>5</b></span>
+                            else
+                            {
+                                <p class="card-text">Rate: <b>Cannot Be Rate</b></p>
+                            }
                         </div>
                         <div class="card-footer">
                             <a asp-controller="Accounts" asp-action="Account" asp-route-username="@trainer.Username" class="btn btn-primary">View More</a>
@@ -48,7 +73,7 @@
         {
             previousPage = 1;
         }
-        var maxPage = (int)Math.Ceiling((double)Model.TotalTrainers / AllTrainersViewModel.TrainersPerPage);
+        var maxPage = (int)Math.Ceiling((double)Model.TotalUsers / AllUsersQueryModel.TrainersPerPage);
         if (maxPage == 0)
         {
             maxPage = 1;
@@ -61,7 +86,9 @@
                 <a class="page-link"
                    asp-controller="Trainers"
                    asp-action="All"
-                   asp-route-currentPage="@previousPage">
+                   asp-route-currentPage="@previousPage"
+                   asp-route-role="@Model.Role"
+                   asp-route-sport="@Model.Sport">
                     Previous
                 </a>
             </li>
@@ -71,7 +98,9 @@
                     <a class="page-link"
                        asp-controller="Trainers"
                        asp-action="All"
-                       asp-route-currentPage="@(Model.CurrentPage - 2)">
+                       asp-route-currentPage="@(Model.CurrentPage - 2)"
+                       asp-route-role="@Model.Role"
+                       asp-route-sport="@Model.Sport">
                         @(Model.CurrentPage - 2)
                     </a>
                 </li>
@@ -82,7 +111,9 @@
                     <a class="page-link"
                        asp-controller="Trainers"
                        asp-action="All"
-                       asp-route-currentPage="@(Model.CurrentPage - 1)">
+                       asp-route-currentPage="@(Model.CurrentPage - 1)"
+                       asp-route-role="@Model.Role"
+                       asp-route-sport="@Model.Sport">
                         @(Model.CurrentPage - 1)
                     </a>
                 </li>
@@ -91,7 +122,9 @@
                 <a class="page-link"
                    asp-controller="Trainers"
                    asp-action="All"
-                   asp-route-currentPage="@Model.CurrentPage">
+                   asp-route-currentPage="@Model.CurrentPage"
+                   asp-route-role="@Model.Role"
+                   asp-route-sport="@Model.Sport">
                     @Model.CurrentPage
                 </a>
             </li>
@@ -101,7 +134,9 @@
                     <a class="page-link"
                        asp-controller="Trainers"
                        asp-action="All"
-                       asp-route-currentPage="@(Model.CurrentPage + 1)">
+                       asp-route-currentPage="@(Model.CurrentPage + 1)"
+                       asp-route-role="@Model.Role"
+                       asp-route-sport="@Model.Sport">
                         @(Model.CurrentPage + 1)
                     </a>
                 </li>
@@ -112,7 +147,9 @@
                     <a class="page-link"
                        asp-controller="Trainers"
                        asp-action="All"
-                       asp-route-currentPage="@(Model.CurrentPage + 2)">
+                       asp-route-currentPage="@(Model.CurrentPage + 2)"
+                       asp-route-role="@Model.Role"
+                       asp-route-sport="@Model.Sport">
                         @(Model.CurrentPage + 2)
                     </a>
                 </li>
@@ -121,7 +158,9 @@
                 <a class="page-link"
                    asp-controller="Trainers"
                    asp-action="All"
-                   asp-route-currentPage="@(Model.CurrentPage + 1)">
+                   asp-route-currentPage="@(Model.CurrentPage + 1)"
+                   asp-route-role="@Model.Role"
+                   asp-route-sport="@Model.Sport">
                     Next
                 </a>
             </li>

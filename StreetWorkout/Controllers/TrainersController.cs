@@ -13,7 +13,7 @@
         public TrainersController(ITrainerService trainerService)
             => this.trainerService = trainerService;
 
-        public async Task<IActionResult> All([FromQuery]AllTrainersViewModel model)
-            => this.View(await this.trainerService.All(model.CurrentPage));
+        public async Task<IActionResult> All([FromQuery]AllUsersQueryModel model)
+            => this.View(await this.trainerService.All(model.CurrentPage, model.Role, model.Sport));
     }
 }

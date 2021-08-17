@@ -5,6 +5,6 @@
 
     public interface ITrainerService
     {
-        Task<AllTrainersViewModel> All(int currentPage);
+        Task<AllUsersQueryModel> All(int currentPag, string role, string sport);
     }
 }

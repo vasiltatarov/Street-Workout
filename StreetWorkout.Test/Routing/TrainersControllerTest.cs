@@ -12,6 +12,6 @@
             => MyRouting
                 .Configuration()
                 .ShouldMap("/Trainers/All")
-                .To<TrainersController>(c => c.All(With.Any<AllTrainersViewModel>()));
+                .To<TrainersController>(c => c.All(With.Any<AllUsersQueryModel>()));
     }
 }

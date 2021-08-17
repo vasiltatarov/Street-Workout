@@ -1,4 +1,6 @@
-﻿namespace StreetWorkout.Test.Services
+﻿using StreetWorkout.Services.Workouts;
+
+namespace StreetWorkout.Test.Services
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -35,17 +37,20 @@
             }));
             await data.SaveChangesAsync();
 
-            var trainerService = new TrainerService(data);
+            var mapper = MapperMock.Instance;
+            var workoutService = new WorkoutService(data, mapper);
+
+            var trainerService = new TrainerService(data, workoutService);
 
             // Act
-            var result = await trainerService.All(1);
-            var trainers = result.Trainers;
+            var result = await trainerService.All(1, "", "");
+            var trainers = result.Users;
 
             // Assert
             Assert.NotNull(result);
-            Assert.IsType<AllTrainersViewModel>(result);
+            Assert.IsType<AllUsersQueryModel>(result);
             Assert.Equal(1, result.CurrentPage);
-            Assert.Equal(10, result.TotalTrainers);
+            Assert.Equal(10, result.TotalUsers);
             Assert.Equal(9, trainers.Count());
         }
 
@@ -72,17 +77,20 @@
             }));
             await data.SaveChangesAsync();
 
-            var trainerService = new TrainerService(data);
+            var mapper = MapperMock.Instance;
+            var workoutService = new WorkoutService(data, mapper);
+
+            var trainerService = new TrainerService(data, workoutService);
 
             // Act
-            var result = await trainerService.All(1);
-            var trainers = result.Trainers;
+            var result = await trainerService.All(1, "", "");
+            var trainers = result.Users;
 
             // Assert
             Assert.NotNull(result);
-            Assert.IsType<AllTrainersViewModel>(result);
+            Assert.IsType<AllUsersQueryModel>(result);
             Assert.NotEqual(0, result.CurrentPage);
-            Assert.NotEqual(0, result.TotalTrainers);
+            Assert.NotEqual(0, result.TotalUsers);
             Assert.NotEmpty(trainers);
         }
 
@@ -109,18 +117,19 @@
             }));
             await data.SaveChangesAsync();
 
-            var trainerService = new TrainerService(data);
+            var mapper = MapperMock.Instance;
+            var workoutService = new WorkoutService(data, mapper);
+
+            var trainerService = new TrainerService(data, workoutService);
 
             // Act
-            var result = await trainerService.All(1);
-            var trainers = result.Trainers;
+            var result = await trainerService.All(1, "", "");
 
             // Assert
             Assert.NotNull(result);
-            Assert.IsType<AllTrainersViewModel>(result);
+            Assert.IsType<AllUsersQueryModel>(result);
             Assert.Equal(1, result.CurrentPage);
-            Assert.Equal(0, result.TotalTrainers);
-            Assert.Empty(trainers);
+            Assert.Equal(10, result.TotalUsers);
         }
 
         [Fact]
@@ -146,17 +155,20 @@
             }));
             await data.SaveChangesAsync();
 
-            var trainerService = new TrainerService(data);
+            var mapper = MapperMock.Instance;
+            var workoutService = new WorkoutService(data, mapper);
+
+            var trainerService = new TrainerService(data, workoutService);
 
             // Act
-            var result = await trainerService.All(2);
-            var trainers = result.Trainers;
+            var result = await trainerService.All(2, "", "");
+            var trainers = result.Users;
 
             // Assert
             Assert.NotNull(result);
-            Assert.IsType<AllTrainersViewModel>(result);
+            Assert.IsType<AllUsersQueryModel>(result);
             Assert.Equal(2, result.CurrentPage);
-            Assert.Equal(13, result.TotalTrainers);
+            Assert.Equal(13, result.TotalUsers);
             Assert.Equal(4, trainers.Count());
         }
     }

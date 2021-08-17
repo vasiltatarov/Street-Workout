@@ -7,42 +7,85 @@
     using Data;
     using ViewModels.Trainers;
     using Data.Models.Enums;
+    using Workouts;
 
     public class TrainerService : ITrainerService
     {
         private readonly StreetWorkoutDbContext data;
+        private readonly IWorkoutService workouts;
 
-        public TrainerService(StreetWorkoutDbContext data)
-            => this.data = data;
+        public TrainerService(StreetWorkoutDbContext data, IWorkoutService workouts)
+        {
+            this.data = data;
+            this.workouts = workouts;
+        }
 
-        public async Task<AllTrainersViewModel> All(int currentPage)
-            => new()
+        public async Task<AllUsersQueryModel> All(int currentPage, string role, string sport)
+        {
+            var usersQuery = this.data.Users.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(role))
             {
-                Trainers = await this.data
-                    .UserDatas
-                    .Where(x => x.User.UserRole == UserRole.Trainer)
-                    .Skip((currentPage - 1) * AllTrainersViewModel.TrainersPerPage)
-                    .Take(AllTrainersViewModel.TrainersPerPage)
-                    .Select(x => new TrainerViewModel
-                    {
-                        Username = x.User.UserName,
-                        ImageUrl = x.User.ImageUrl,
-                        Sport = x.Sport.Name,
-                        Goal = x.Goal.Name,
-                        VotesAverageValue = this.data
+                if (role == "trainers")
+                {
+                    usersQuery = usersQuery
+                        .Where(x => x.UserRole == UserRole.Trainer)
+                        .AsQueryable();
+                }
+                else if (role == "enthusiasts")
+                {
+                    usersQuery = usersQuery
+                        .Where(x => x.UserRole == UserRole.Enthusiast)
+                        .AsQueryable();
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(sport))
+            {
+                usersQuery = usersQuery
+                    .Where(x => this.data.UserDatas
+                        .Any(ud => ud.UserId == x.Id &&
+                                   ud.Sport.Name.ToLower() == sport.ToLower()));
+            }
+            
+
+            var users = await usersQuery
+                .Skip((currentPage - 1) * AllUsersQueryModel.TrainersPerPage)
+                .Take(AllUsersQueryModel.TrainersPerPage)
+                .Select(x => new UserViewModel()
+                {
+                    IsTrainer = x.UserRole == UserRole.Trainer,
+                    Username = x.UserName,
+                    ImageUrl = x.ImageUrl,
+                    Sport = this.data
+                        .UserDatas
+                        .Any(ud => ud.UserId == x.Id)
+                        ? this.data.UserDatas.FirstOrDefault(ud => ud.UserId == x.Id).Sport.Name
+                        : "Missing",
+                    VotesAverageValue = this.data
+                        .Votes
+                        .Any(v => v.UserId == x.Id)
+                        ? this.data
                             .Votes
-                            .Any(v => v.UserId == x.UserId)
-                            ? this.data
-                            .Votes
-                            .Where(v => v.UserId == x.UserId)
+                            .Where(v => v.UserId == x.Id)
                             .Average(v => v.Value)
-                            : 0,
-                    })
-                    .ToListAsync(),
-                TotalTrainers = await this.data
-                    .UserDatas
-                    .CountAsync(x => x.User.UserRole == UserRole.Trainer),
+                        : 0,
+                })
+                .ToListAsync();
+
+            var totalUsers = usersQuery.Count();
+
+            var sports = await this.workouts.GetSports();
+
+            return new AllUsersQueryModel
+            {
+                Users = users,
+                TotalUsers = totalUsers,
                 CurrentPage = currentPage,
+                Role = role,
+                Sport = sport,
+                Sports = sports,
             };
+        }
     }
 }

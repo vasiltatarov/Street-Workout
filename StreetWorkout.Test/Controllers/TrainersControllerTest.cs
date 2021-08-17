@@ -26,32 +26,32 @@
                             UserRole = UserRole.Trainer,
                         },
                     }))
-                .Calling(c => c.All(With.Default<AllTrainersViewModel>()))
+                .Calling(c => c.All(With.Default<AllUsersQueryModel>()))
                 .ShouldReturn()
                 .View(view => view
-                    .WithModelOfType<AllTrainersViewModel>()
+                    .WithModelOfType<AllUsersQueryModel>()
                     .Passing(data =>
                     {
                         data.ShouldNotBeNull();
                         data.CurrentPage.ShouldBe(1);
-                        data.TotalTrainers.ShouldBe(1);
-                        data.TotalTrainers.ShouldBe(1);
+                        data.TotalUsers.ShouldBe(1);
+                        data.TotalUsers.ShouldBe(1);
                     }));
 
         [Fact]
         public void AllShouldReturnViewWithoutTrainersWhenDatabaseIsEmpty()
             => MyController<TrainersController>
                 .Instance()
-                .Calling(c => c.All(With.Default<AllTrainersViewModel>()))
+                .Calling(c => c.All(With.Default<AllUsersQueryModel>()))
                 .ShouldReturn()
                 .View(view => view
-                    .WithModelOfType<AllTrainersViewModel>()
+                    .WithModelOfType<AllUsersQueryModel>()
                     .Passing(data =>
                     {
                         data.ShouldNotBeNull();
                         data.CurrentPage.ShouldBe(1);
-                        data.TotalTrainers.ShouldBe(0);
-                        data.TotalTrainers.ShouldBe(0);
+                        data.TotalUsers.ShouldBe(0);
+                        data.TotalUsers.ShouldBe(0);
                     }));
     }
 }
