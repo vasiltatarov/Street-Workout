@@ -45,6 +45,47 @@
         public async Task<bool> IsValidTrainingFrequencyId(int id)
             => await this.data.TrainingFrequencies.AnyAsync(x => x.Id == id);
 
+        public async Task<bool> Edit(string userId, string imageUrl, int weight, int height, string city, string description, int sportId, int goalId, int trainingFrequencyId)
+        {
+            var user = await this.data.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            var userData = await this.data.UserDatas.FirstOrDefaultAsync(x => x.UserId == userId);
+
+            if (userData == null || user == null)
+            {
+                return false;
+            }
+
+            user.ImageUrl = imageUrl;
+            user.City = city;
+
+            userData.SportId = sportId;
+            userData.GoalId = goalId;
+            userData.TrainingFrequencyId = trainingFrequencyId;
+            userData.Weight = weight;
+            userData.Height = height;
+            userData.Description = description;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> EditImage(string userId, string imageUrl)
+        {
+            var user = await this.data.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.ImageUrl = imageUrl;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task CompleteAccount(string userId, int sportId, int goalId, int trainingFrequency, int weight, int height,
             string description)
         {
@@ -98,6 +139,32 @@
                             })
                             .FirstOrDefault(),
                 })
+                .FirstOrDefaultAsync();
+
+        public async Task<EditFormModel> GetEditFormModel(string userId)
+            => await this.data
+                .UserDatas
+                .Where(x => x.UserId == userId)
+                .Select(x => new EditFormModel
+                {
+                    Id = x.User.Id,
+                    Username = x.User.UserName,
+                    ImageUrl = x.User.ImageUrl,
+                    Weight = x.Weight,
+                    Height = x.Height,
+                    Description = x.Description,
+                    City = x.User.City,
+                    SportId = x.SportId,
+                    GoalId = x.GoalId,
+                    TrainingFrequencyId = x.TrainingFrequencyId,
+                })
+                .FirstOrDefaultAsync();
+
+        public async Task<EditImageFormModel> GetEditImageFormModel(string userId)
+            => await this.data
+                .Users
+                .Where(x => x.Id == userId)
+                .ProjectTo<EditImageFormModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
         public async Task<IEnumerable<SportViewModel>> GetSportsInAccountFormModel()

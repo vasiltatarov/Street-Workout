@@ -35,6 +35,12 @@
             public const int DescriptionMaxLength = 2000;
         }
 
+        public class EditFormModelConstants
+        {
+            public const int CityMinLength = 5;
+            public const int CityMaxLength = 40;
+        }
+
         public class WorkoutFormModelConstants
         {
             public const int CreateWorkoutFormModelMinutesMinValue = 5;

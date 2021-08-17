@@ -8,6 +8,8 @@
     using Infrastructure;
     using ViewModels.Accounts;
 
+    using static WebConstants;
+
     [Authorize]
     public class AccountsController : Controller
     {
@@ -66,6 +68,101 @@
             await this.accountService.CompleteAccount(userId, data.SportId, data.GoalId, data.TrainingFrequencyId, data.Weight, data.Height, data.Description);
 
             return this.RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> Edit(string userId)
+        {
+            if (!await this.accountService.IsUserAccountComplete(userId))
+            {
+                return BadRequest("Cannot edit this account because is not completed");
+            }
+
+            if (this.User.GetId() != userId && !this.User.IsInRole(AdministratorRoleName))
+            {
+                return Unauthorized();
+            }
+
+            var model = await this.accountService.GetEditFormModel(userId);
+            model.Sports = await this.accountService.GetSportsInAccountFormModel();
+            model.Goals = await this.accountService.GetGoalsInAccountFormModel();
+            model.TrainingFrequencies = await this.accountService.GetTrainingFrequenciesInAccountFormModel();
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditFormModel model)
+        {
+            if (!await this.accountService.IsUserAccountComplete(model.Id))
+            {
+                return BadRequest("Cannot edit this account because is not completed");
+            }
+
+            if (this.User.GetId() != model.Id && !this.User.IsInRole(AdministratorRoleName))
+            {
+                return Unauthorized();
+            }
+
+            if (!await this.accountService.IsValidSportId(model.SportId))
+            {
+                this.ModelState.AddModelError(nameof(model.SportId), "Sport is Invalid.");
+            }
+
+            if (!await this.accountService.IsValidGoalId(model.GoalId))
+            {
+                this.ModelState.AddModelError(nameof(model.GoalId), "Goal is Invalid.");
+            }
+
+            if (!await this.accountService.IsValidTrainingFrequencyId(model.TrainingFrequencyId))
+            {
+                this.ModelState.AddModelError(nameof(model.TrainingFrequencyId), "Training Frequency is Invalid.");
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                model.Sports = await this.accountService.GetSportsInAccountFormModel();
+                model.Goals = await this.accountService.GetGoalsInAccountFormModel();
+                model.TrainingFrequencies = await this.accountService.GetTrainingFrequenciesInAccountFormModel();
+                return View(model);
+            }
+
+            if (!await this.accountService.Edit(model.Id, model.ImageUrl, model.Weight, model.Height, model.City, model.Description, model.SportId, model.GoalId, model.TrainingFrequencyId))
+            {
+                return BadRequest();
+            }
+
+            return this.RedirectToAction("Account", new { username = model.Username });
+        }
+
+        public async Task<IActionResult> EditImage(string userId)
+        {
+            if (!this.User.IsInRole(AdministratorRoleName))
+            {
+                return Unauthorized();
+            }
+
+            return this.View(await this.accountService.GetEditImageFormModel(userId));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditImage(EditImageFormModel model)
+        {
+            if (!this.User.IsInRole(AdministratorRoleName))
+            {
+                return Unauthorized();
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            if (!await this.accountService.EditImage(model.Id, model.ImageUrl))
+            {
+                return BadRequest();
+            }
+
+            return this.RedirectToAction("Account", new { username = model.UserName });
         }
 
         private async Task<bool> IsAccountComplete()

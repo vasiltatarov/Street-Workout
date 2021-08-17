@@ -28,171 +28,183 @@
 }
 
 <div class="container emp-profile">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="@Model.ImageUrl" alt="" />
-                </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-img">
+                <img src="@Model.ImageUrl" alt="" />
             </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5>
-                        @Model.Username
-                    </h5>
-                    @{
-                        var isStarChecked = (int)Math.Floor(Model.VotesAverageValue);
-                    }
-                    @if (User.Identity.Name == Model.Username)
+        </div>
+        <div class="col-md-6">
+            <div class="profile-head">
+                <h5>
+                    @Model.Username
+                </h5>
+                @{
+                    var isStarChecked = (int)Math.Floor(Model.VotesAverageValue);
+                }
+                @if (User.Identity.Name == Model.Username)
+                {
+                    <br />
+                    <p>Star Rating:</p>
+                    for (int i = 1; i <= 5; i++)
                     {
-                        <br />
-                        <p>Star Rating:</p>
-                        <p>Note: You cannot rate yourself!</p>
+                        <span class="fa fa-star @(isStarChecked >= i ? "star-checked" : "")" data-vote="@i"></span>
                     }
-                    else if (Model.IsTrainer)
+                    <span>&nbsp; <b id="avg-vote-rating">@Model.VotesAverageValue.ToString("F1")</b></span><span> / <b>5</b></span>
+                    <br />
+                    <br />
+                    <p class="text-danger">Note: You cannot rate yourself!</p>
+                }
+                else if (Model.IsTrainer)
+                {
+                    <br />
+                    <p>Star Rating:</p>
+                    for (int i = 1; i <= 5; i++)
                     {
-                        <br />
-                        <p>Star Rating:</p>
-                        for (int i = 1; i <= 5; i++)
-                        {
-                            <span class="fa fa-star @(isStarChecked >= i ? "star-checked" : "")" data-vote="@i"></span>
-                        }
-                        <span>&nbsp; <b id="avg-vote-rating">@Model.VotesAverageValue.ToString("F1")</b></span><span> / <b>5</b></span>
-                        <hr />
+                        <span class="fa fa-star @(isStarChecked >= i ? "star-checked" : "")" data-vote="@i"></span>
+                    }
+                    <span>&nbsp; <b id="avg-vote-rating">@Model.VotesAverageValue.ToString("F1")</b></span><span> / <b>5</b></span>
+                    <hr />
+                }
+                else
+                {
+                    <br />
+                    <p>Star Rating:</p>
+                    <p>Note: Only the trainers can be rated!</p>
+                }
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Professional</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-2">
+            @if (Model.IsAccountComplete && User.Identity.Name == Model.Username || User.IsInRole(WebConstants.AdministratorRoleName))
+            {
+                <a asp-area="" asp-controller="Accounts" asp-action="Edit" asp-route-userId="@Model.Id" class="btn btn-light">Edit Profile</a>
+            }
+            @if (User.IsInRole(WebConstants.AdministratorRoleName))
+            {
+                <a asp-area="" asp-controller="Accounts" asp-action="EditImage" asp-route-userId="@Model.Id" class="btn btn-light mt-2">Edit Image URL</a>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @*<div class="profile-work">
+                    <p>WORK LINK</p>
+                    <a href="">Website Link</a><br />
+                </div>*@
+        </div>
+        <div class="col-md-8">
+            <div class="tab-content profile-tab" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Title</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@(Model.IsTrainer ? "Trainer" : "Enthusiast")</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Country</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Country</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>City</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.City</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Gender</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Gender</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Age</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Age</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    @if (Model.Data != null)
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Sport</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Data.Sport</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Goal</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Data.Goal</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Training Frequency</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Data.TrainingFrequency</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Weight</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Data.Weight</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Height</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Data.Height</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Description</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Data.Description</p>
+                            </div>
+                        </div>
                     }
                     else
                     {
                         <br />
-                        <p>Star Rating:</p>
-                        <p>Note: Only the trainers can be rated!</p>
+                        <p class="lead mb-0 mt-2"><b>Cannot see other data, because this account is not completed.</b></p>
                     }
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Professional</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                @*<div class="profile-work">
-                    <p>WORK LINK</p>
-                    <a href="">Website Link</a><br />
-                </div>*@
-            </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Title</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>@(Model.IsTrainer ? "Trainer" : "Enthusiast")</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Country</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>@Model.Country</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>City</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>@Model.City</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Gender</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>@Model.Gender</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Age</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>@Model.Age</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        @if (Model.Data != null)
-                        {
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Sport</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>@Model.Data.Sport</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Goal</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>@Model.Data.Goal</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Training Frequency</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>@Model.Data.TrainingFrequency</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Weight</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>@Model.Data.Weight</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Height</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>@Model.Data.Height</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Description</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>@Model.Data.Description</p>
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <br />
-                            <p class="lead mb-0 mt-2"><b>Cannot see other data, because this account is not completed.</b></p>
-                        }
-                    </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
 <form method="post" id="antiForgeryForm"></form>

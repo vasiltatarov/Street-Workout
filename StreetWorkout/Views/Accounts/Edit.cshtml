@@ -1,0 +1,82 @@
+﻿@model EditFormModel
+@{
+    ViewData["Title"] = "Edit Account";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-10 offset-xl-1 col-xl-10">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+            <form method="post">
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+                <input type="hidden" asp-for="Username" value="@Model.Username" />
+                <div class="form-group">
+                    <label asp-for="ImageUrl"></label>
+                    <input asp-for="ImageUrl" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="ImageUrl" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SportId"></label>
+                    <select asp-for="SportId" class="form-control">
+                        <option value="0">--- Select Sport ---</option>
+                        @foreach (var sport in Model.Sports)
+                        {
+                            <option value="@sport.Id">@sport.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="SportId" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GoalId"></label>
+                    <select asp-for="GoalId" class="form-control">
+                        <option value="0">--- Select Sport ---</option>
+                        @foreach (var goal in Model.Goals)
+                        {
+                            <option value="@goal.Id">@goal.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="GoalId" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TrainingFrequencyId"></label>
+                    <select asp-for="TrainingFrequencyId" class="form-control">
+                        <option value="0">--- Select Sport ---</option>
+                        @foreach (var trainingFrequency in Model.TrainingFrequencies)
+                        {
+                            <option value="@trainingFrequency.Id">@trainingFrequency.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="TrainingFrequencyId" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Weight"></label>
+                    <input asp-for="Weight" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="Weight" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Height"></label>
+                    <input asp-for="Height" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="Height" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City"></label>
+                    <input asp-for="City" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="City" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" rows="4" class="form-control" placeholder="Description, What is your Interests ..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger small"></span>
+                </div>
+                <input type="submit" class="btn btn-success" value="Edit" />
+                <a asp-area=""
+                   asp-controller="Accounts"
+                   asp-action="Account"
+                   asp-route-username="@Model.Username"
+                   class="btn btn-info">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>

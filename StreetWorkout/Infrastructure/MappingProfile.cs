@@ -56,6 +56,7 @@
                 .ForMember(x => x.UserImageUrl,
                     y => y.MapFrom(x => x.User.ImageUrl));
             this.CreateMap<Supplement, BuySupplementViewModel>();
+            this.CreateMap<ApplicationUser, EditImageFormModel>();
         }
     }
 }

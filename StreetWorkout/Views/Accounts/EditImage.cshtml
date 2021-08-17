@@ -1,0 +1,29 @@
+﻿@model EditImageFormModel
+@{
+    ViewData["Title"] = "Edit Image";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-10 offset-xl-1 col-xl-10">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+            <form method="post">
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+                <input type="hidden" asp-for="UserName" value="@Model.UserName" />
+                <div class="form-group">
+                    <label asp-for="ImageUrl"></label>
+                    <input asp-for="ImageUrl" class="form-control" placeholder="Workout Title">
+                    <span asp-validation-for="ImageUrl" class="text-danger small"></span>
+                </div>
+                <input type="submit" class="btn btn-success" value="Edit" />
+                <a asp-area=""
+                   asp-controller="Accounts"
+                   asp-action="Account"
+                   asp-route-username="@Model.UserName"
+                   class="btn btn-info">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
