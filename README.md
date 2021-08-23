@@ -158,9 +158,9 @@ if (latestWorkouts == null)
 38. Fixed content in home page.
 39. Published Website in Azure App Service (Windows).
 40. Removed magic strings.
+41. Added CreatedOn property on Application User.
 
 Potential Tasks:
-* Add column CreatedOn in ApplicationUser entity and order users on it.
 * Add StyleCop.
 
 # Note
