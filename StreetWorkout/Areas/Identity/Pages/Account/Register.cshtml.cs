@@ -121,7 +121,7 @@ namespace StreetWorkout.Areas.Identity.Pages.Account
                 {
                     UserName = Input.UserName,
                     Email = Input.Email,
-                    ImageUrl = Input.ImageUrl,
+                    ImageUrl = Input.ImageUrl ?? "https://pbs.twimg.com/profile_images/746460305396371456/4QYRblQD_400x400.jpg",
                     CountryId = Input.CountryId,
                     City = Input.City,
                     Gender = Input.Gender,
