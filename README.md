@@ -159,6 +159,9 @@ if (latestWorkouts == null)
 39. Published Website in Azure App Service (Windows).
 
 Potential Tasks:
+* Remove magic strings.
+* Add column CreatedOn in ApplicationUser entity and order users on it.
+* Add StyleCop.
 
 # Note
 ConnectionStrings:
