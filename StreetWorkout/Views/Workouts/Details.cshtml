@@ -169,7 +169,14 @@
                     },
                     success: function(data) {
                         $('#comment-content').val('');
-                        var newComment = `<div class="media mb40"><i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i><img src=${data.userImageUrl} class="d-flex mr-3 img-fluid rounded-circle comment-img" /><div class="media-body"><h5 class="mt-0 font400 clearfix"><b>${data.userUsername}</b></h5> ${data.content}</div></div>`;
+                        var newComment = `
+                            <div class="media mb40">
+                                <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i>
+                                <img src=${data.userImageUrl} class="d-flex mr-3 img-fluid rounded-circle comment-img" />
+                                <div class="media-body">
+                                    <h5 class="mt-0 font400 clearfix"><b>${data.userUsername}</b></h5> ${data.content}
+                                </div>
+                            </div>`;
                         $('#all-comments').append(newComment);
                     },
                     contentType: 'application/json'

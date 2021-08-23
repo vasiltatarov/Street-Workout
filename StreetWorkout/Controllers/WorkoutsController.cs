@@ -46,7 +46,8 @@
 
             if (!informationDecode.Contains(workout.Title) &&
                 !information.Contains(workout.Title) &&
-                !informationDecode.Contains(workout.Sport))
+                !informationDecode.Contains(workout.Sport) &&
+                !information.Contains(workout.Sport))
             {
                 return this.BadRequest();
             }
