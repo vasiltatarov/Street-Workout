@@ -100,7 +100,9 @@ namespace StreetWorkout.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            Countries = this.data.Countries;
+            Countries = this.data
+                .Countries
+                .OrderBy(x => x.Name);
             ReturnUrl = returnUrl;
             ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
