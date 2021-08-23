@@ -1,15 +1,12 @@
-﻿using Shouldly;
-
-namespace StreetWorkout.Test.Controllers.Administration
+﻿namespace StreetWorkout.Test.Controllers.Administration
 {
     using System.Collections.Generic;
     using MyTested.AspNetCore.Mvc;
-    using Xunit;
-
+    using Shouldly;
     using StreetWorkout.Areas.Administration.Controllers;
-    using StreetWorkout.Services.SupplementCategories.Models;
     using StreetWorkout.Data.Models;
-
+    using StreetWorkout.Services.SupplementCategories.Models;
+    using Xunit;
     using static WebConstants.TempDataMessageKeys;
 
     public class SupplementCategoriesControllerTest
@@ -109,7 +106,7 @@ namespace StreetWorkout.Test.Controllers.Administration
                 .WithUser()
                 .Calling(c => c.Edit(1, new SupplementCategoryEditServiceModel
                 {
-                    Name = "test"
+                    Name = "test",
                 }))
                 .ShouldHave()
                 .ActionAttributes(attr => attr
@@ -127,7 +124,7 @@ namespace StreetWorkout.Test.Controllers.Administration
                     .WithEntities(new SupplementCategory()))
                 .Calling(c => c.Edit(1, new SupplementCategoryEditServiceModel
                 {
-                    Name = "test"
+                    Name = "test",
                 }))
                 .ShouldHave()
                 .ActionAttributes(attr => attr

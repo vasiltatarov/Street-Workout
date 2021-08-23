@@ -2,9 +2,8 @@
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-
-    using Models;
-    using Configurations;
+    using StreetWorkout.Data.Configurations;
+    using StreetWorkout.Data.Models;
 
     public class StreetWorkoutDbContext : IdentityDbContext<ApplicationUser>
     {

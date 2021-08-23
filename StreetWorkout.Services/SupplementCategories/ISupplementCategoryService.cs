@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Models;
+    using StreetWorkout.Services.SupplementCategories.Models;
 
     public interface ISupplementCategoryService
     {

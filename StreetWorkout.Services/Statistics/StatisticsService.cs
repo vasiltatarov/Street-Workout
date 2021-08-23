@@ -1,9 +1,9 @@
 ﻿namespace StreetWorkout.Services.Statistics
 {
     using System.Linq;
-    using Data;
-    using Models;
-    using Data.Models.Enums;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models.Enums;
+    using StreetWorkout.Services.Statistics.Models;
 
     public class StatisticsService : IStatisticsService
     {

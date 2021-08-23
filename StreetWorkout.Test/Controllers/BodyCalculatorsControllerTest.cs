@@ -1,8 +1,8 @@
 ﻿namespace StreetWorkout.Test.Controllers
 {
-    using Xunit;
     using MyTested.AspNetCore.Mvc;
     using StreetWorkout.Controllers;
+    using Xunit;
 
     public class BodyCalculatorsControllerTest
     {

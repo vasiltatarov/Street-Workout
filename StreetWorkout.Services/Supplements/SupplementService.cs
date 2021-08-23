@@ -1,16 +1,15 @@
 ﻿namespace StreetWorkout.Services.Supplements
 {
-    using System.Threading.Tasks;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
-
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Services.Supplements.Models;
     using StreetWorkout.ViewModels.Supplements;
-    using Models;
-    using Data;
-    using Data.Models;
 
     public class SupplementService : ISupplementService
     {
@@ -162,8 +161,7 @@
                 .Supplements
                 .AnyAsync(x => x.Id == id);
 
-        public async Task BuySupplement(int supplementId, string userId, string firstName, string lastName, string phone, string email,
-            string address, string cardName, string cardNumber, string expiration)
+        public async Task BuySupplement(int supplementId, string userId, string firstName, string lastName, string phone, string email, string address, string cardName, string cardNumber, string expiration)
         {
             await this.data.SupplementPayments.AddAsync(new SupplementPayment
             {
@@ -179,7 +177,7 @@
                     CardName = cardName,
                     CardNumber = cardNumber,
                     Expiration = expiration,
-                }
+                },
             });
             await this.data.SaveChangesAsync();
         }

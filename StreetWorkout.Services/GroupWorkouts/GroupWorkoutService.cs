@@ -6,12 +6,11 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
-
-    using Data;
-    using Data.Models;
-    using Data.Models.Enums;
-    using Workouts.Models;
-    using Models;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Data.Models.Enums;
+    using StreetWorkout.Services.GroupWorkouts.Models;
+    using StreetWorkout.Services.Workouts.Models;
     using StreetWorkout.ViewModels.GroupWorkouts;
 
     public class GroupWorkoutService : IGroupWorkoutService
@@ -24,6 +23,24 @@
             this.data = data;
             this.mapper = mapper;
         }
+
+        public static string GetImageBySport(string sport)
+            => sport switch
+            {
+                "Street Workout/Calisthenics" => "https://www.grenoble.fr/uploads/Image/d3/IMF_100/GAB_GRENOBLE2019/7564_833_Street-workout-des-Allies.jpg",
+                "Fitness" => "https://img5.goodfon.com/wallpaper/nbig/f/15/back-fitness-gym-power-pose.jpg",
+                "CrossFit" => "https://www.crossfit.com/wp-content/uploads/2020/10/19092755/2018072814475780_ND_ND5_6593-1-copy-1920x1080.jpg",
+                "Weightlifting" => "https://cdn.dmcl.biz/media/image/110556/o/Mohamed+Ehab+World+Championships+2017.jpg",
+                "Gymnastics" => "https://images.daznservices.com/di/library/sporting_news/6/bd/suni-lee-062721-getty-ftr_1hvg4exe4a4b31u0eybvvydgoj.jpg?t=1353181914&quality=100&w=1280&h=720",
+                "Athletics" => string.Empty,
+                "MMA" => "https://m.allboxing.ru/sites/default/files/ufndublin_10-mcgregor_vs_brandao_09.jpg",
+                "Box" => "https://citystage.bg/wp-content/uploads/2017/09/box-sport-men-training-163403.jpeg",
+                "Kick-Box" => "https://i.pinimg.com/originals/ff/0c/74/ff0c7433639e861a9d04e34f6d370a21.png",
+                "Taekwondo" => "https://image.shutterstock.com/image-vector/taekwondo-vector-icon-design-illustration-260nw-1847590639.jpg",
+                "Judo" => "https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2019/02/ijf-03-1550476738-1550476738.jpg",
+                "Karate" => "https://img.freepik.com/free-vector/martial-art-karate-logo-sport-symbol-illustration_7496-886.jpg?size=626&ext=jpg",
+                _ => string.Empty,
+            };
 
         public async Task<bool> IsUserTrainer(string userId)
         {
@@ -188,7 +205,7 @@
                     StartOn = x.StartOn,
                     EndOn = x.EndOn,
                     CreatedOn = x.CreatedOn.ToString("D"),
-                    AvailableTickets = AvailableTickets(id).GetAwaiter().GetResult(),
+                    AvailableTickets = this.AvailableTickets(id).GetAwaiter().GetResult(),
                     LatestWorkouts = this.data
                         .Workouts
                         .OrderByDescending(w => w.Id)
@@ -210,23 +227,5 @@
                 .Where(x => x.Id == id)
                 .ProjectTo<GroupWorkoutFormModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
-
-        public static string GetImageBySport(string sport)
-            => sport switch
-            {
-                "Street Workout/Calisthenics" => "https://www.grenoble.fr/uploads/Image/d3/IMF_100/GAB_GRENOBLE2019/7564_833_Street-workout-des-Allies.jpg",
-                "Fitness" => "https://img5.goodfon.com/wallpaper/nbig/f/15/back-fitness-gym-power-pose.jpg",
-                "CrossFit" => "https://www.crossfit.com/wp-content/uploads/2020/10/19092755/2018072814475780_ND_ND5_6593-1-copy-1920x1080.jpg",
-                "Weightlifting" => "https://cdn.dmcl.biz/media/image/110556/o/Mohamed+Ehab+World+Championships+2017.jpg",
-                "Gymnastics" => "https://images.daznservices.com/di/library/sporting_news/6/bd/suni-lee-062721-getty-ftr_1hvg4exe4a4b31u0eybvvydgoj.jpg?t=1353181914&quality=100&w=1280&h=720",
-                "Athletics" => "",
-                "MMA" => "https://m.allboxing.ru/sites/default/files/ufndublin_10-mcgregor_vs_brandao_09.jpg",
-                "Box" => "https://citystage.bg/wp-content/uploads/2017/09/box-sport-men-training-163403.jpeg",
-                "Kick-Box" => "https://i.pinimg.com/originals/ff/0c/74/ff0c7433639e861a9d04e34f6d370a21.png",
-                "Taekwondo" => "https://image.shutterstock.com/image-vector/taekwondo-vector-icon-design-illustration-260nw-1847590639.jpg",
-                "Judo" => "https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2019/02/ijf-03-1550476738-1550476738.jpg",
-                "Karate" => "https://img.freepik.com/free-vector/martial-art-karate-logo-sport-symbol-illustration_7496-886.jpg?size=626&ext=jpg",
-                _ => "",
-            };
     }
 }

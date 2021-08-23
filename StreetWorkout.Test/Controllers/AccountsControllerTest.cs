@@ -1,15 +1,14 @@
 ﻿namespace StreetWorkout.Test.Controllers
 {
-    using System.Linq;
     using System.Collections.Generic;
-    using Shouldly;
-    using Xunit;
+    using System.Linq;
     using MyTested.AspNetCore.Mvc;
-
+    using Shouldly;
+    using StreetWorkout.Controllers;
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
-    using StreetWorkout.Controllers;
-    using ViewModels.Accounts;
+    using StreetWorkout.ViewModels.Accounts;
+    using Xunit;
 
     public class AccountsControllerTest
     {
@@ -24,7 +23,7 @@
                             UserName = "vasko",
                             Country = new Country(),
                             City = "Chakalo",
-                            ImageUrl = "test.png"
+                            ImageUrl = "test.png",
                         })))
                 .Calling(c => c.Account("vasko"))
                 .ShouldReturn()
@@ -52,8 +51,8 @@
                         })
                         .WithEntities(new List<Sport>
                         {
-                            new (){ Name = "a" },
-                            new (){ Name = "b" }
+                            new () { Name = "a" },
+                            new () { Name = "b" },
                         })
                         .WithEntities(new Goal { Name = "sads" })))
                 .Calling(c => c.CompleteAccount())
@@ -76,7 +75,7 @@
                     .WithData(data => data
                         .WithEntities(new ApplicationUser
                         {
-                            Id = "vs1"
+                            Id = "vs1",
                         })))
                 .Calling(c => c.CompleteAccount(With.Default<AccountFormModel>()))
                 .ShouldHave()
@@ -92,7 +91,7 @@
                     .WithData(data => data
                         .WithEntities(new ApplicationUser
                         {
-                            Id = "vs"
+                            Id = "vs",
                         })
                         .WithEntities(new List<Sport>
                         {
@@ -126,19 +125,19 @@
                     .WithData(data => data
                         .WithEntities(new ApplicationUser
                         {
-                            Id = "vs"
+                            Id = "vs",
                         })
                         .WithEntities(new Goal
                         {
-                            Name = "as"
+                            Name = "as",
                         })
                         .WithEntities(new Sport
                         {
-                            Name = "ads"
+                            Name = "ads",
                         })
                         .WithEntities(new TrainingFrequency()
                         {
-                            Name = "ads"
+                            Name = "ads",
                         })))
                 .Calling(c => c.CompleteAccount(new AccountFormModel
                 {

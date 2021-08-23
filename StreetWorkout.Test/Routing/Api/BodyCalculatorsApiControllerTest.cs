@@ -1,9 +1,9 @@
 ﻿namespace StreetWorkout.Test.Routing.Api
 {
-    using Xunit;
     using MyTested.AspNetCore.Mvc;
     using StreetWorkout.Controllers.Api;
-    using ViewModels.BodyCalculators;
+    using StreetWorkout.ViewModels.BodyCalculators;
+    using Xunit;
 
     public class BodyCalculatorsApiControllerTest
     {

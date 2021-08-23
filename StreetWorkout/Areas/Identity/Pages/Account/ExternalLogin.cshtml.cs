@@ -13,8 +13,8 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
-    using Data.Models;
-    using Data.Models.Enums;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Data.Models.Enums;
 
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel
@@ -55,72 +55,75 @@
 
         public IActionResult OnGetAsync()
         {
-            return RedirectToPage("./Login");
+            return this.RedirectToPage("./Login");
         }
 
         public IActionResult OnPost(string provider, string returnUrl = null)
         {
-            var redirectUrl = Url.Page("./ExternalLogin", pageHandler: "Callback", values: new { returnUrl });
+            var redirectUrl = this.Url.Page("./ExternalLogin", pageHandler: "Callback", values: new { returnUrl });
             var properties = this.signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties);
         }
 
         public async Task<IActionResult> OnGetCallbackAsync(string returnUrl = null, string remoteError = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? this.Url.Content("~/");
             if (remoteError != null)
             {
-                ErrorMessage = $"Error from external provider: {remoteError}";
-                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
+                this.ErrorMessage = $"Error from external provider: {remoteError}";
+                return this.RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
+
             var info = await this.signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information.";
-                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
+                this.ErrorMessage = "Error loading external login information.";
+                return this.RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
             var result = await this.signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (result.Succeeded)
             {
-                logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
-                return LocalRedirect(returnUrl);
+                this.logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+                return this.LocalRedirect(returnUrl);
             }
+
             if (result.IsLockedOut)
             {
-                return RedirectToPage("./Lockout");
+                return this.RedirectToPage("./Lockout");
             }
             else
             {
-                ReturnUrl = returnUrl;
-                ProviderDisplayName = info.ProviderDisplayName;
+                this.ReturnUrl = returnUrl;
+                this.ProviderDisplayName = info.ProviderDisplayName;
                 if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email))
                 {
-                    Input = new InputModel
+                    this.Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
                     };
                 }
-                return Page();
+
+                return this.Page();
             }
         }
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? this.Url.Content("~/");
             var info = await this.signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information during confirmation.";
-                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
+                this.ErrorMessage = "Error loading external login information during confirmation.";
+                return this.RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
                     UserName = info.Principal.FindFirstValue(ClaimTypes.Name),
-                    Email = Input.Email,
+                    Email = this.Input.Email,
                     CountryId = 1,
                     UserRole = UserRole.Enthusiast,
                 };
@@ -128,7 +131,7 @@
                 var result = await this.userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    result = await userManager.AddLoginAsync(user, info);
+                    result = await this.userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
                         this.logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
@@ -136,34 +139,37 @@
                         var userId = await this.userManager.GetUserIdAsync(user);
                         var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                        var callbackUrl = Url.Page(
+                        var callbackUrl = this.Url.Page(
                             "/Account/ConfirmEmail",
                             pageHandler: null,
                             values: new { area = "Identity", userId = userId, code = code },
-                            protocol: Request.Scheme);
+                            protocol: this.Request.Scheme);
 
-                        await this.emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        await this.emailSender.SendEmailAsync(
+                            this.Input.Email,
+                            "Confirm your email",
                             $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                         if (this.userManager.Options.SignIn.RequireConfirmedAccount)
                         {
-                            return RedirectToPage("./RegisterConfirmation", new { Email = Input.Email });
+                            return this.RedirectToPage("./RegisterConfirmation", new { Email = this.Input.Email });
                         }
 
                         await this.signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
 
-                        return LocalRedirect(returnUrl);
+                        return this.LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    this.ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            ProviderDisplayName = info.ProviderDisplayName;
-            ReturnUrl = returnUrl;
-            return Page();
+            this.ProviderDisplayName = info.ProviderDisplayName;
+            this.ReturnUrl = returnUrl;
+            return this.Page();
         }
     }
 }

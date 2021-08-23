@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace StreetWorkout.Data.Models
+﻿namespace StreetWorkout.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
     using static DataConstants.GroupWorkoutConstants;
 
     public class GroupWorkout
@@ -26,7 +24,7 @@ namespace StreetWorkout.Data.Models
         public DateTime StartOn { get; set; }
 
         public DateTime EndOn { get; set; }
-        
+
         public byte MaximumParticipants { get; set; }
 
         public byte PricePerPerson { get; set; }

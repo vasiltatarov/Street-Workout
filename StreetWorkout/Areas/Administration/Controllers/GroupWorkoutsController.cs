@@ -3,12 +3,10 @@
     using System;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-
-    using ViewModels.GroupWorkouts;
-    using Services.GroupWorkouts;
-    using Services.Workouts;
-    using Infrastructure;
-
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.GroupWorkouts;
+    using StreetWorkout.Services.Workouts;
+    using StreetWorkout.ViewModels.GroupWorkouts;
     using static WebConstants.ModelStateMessage;
 
     public class GroupWorkoutsController : AdministrationController

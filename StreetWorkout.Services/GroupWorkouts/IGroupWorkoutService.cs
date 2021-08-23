@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
-    using Models;
+    using StreetWorkout.Services.GroupWorkouts.Models;
     using StreetWorkout.ViewModels.GroupWorkouts;
 
     public interface IGroupWorkoutService

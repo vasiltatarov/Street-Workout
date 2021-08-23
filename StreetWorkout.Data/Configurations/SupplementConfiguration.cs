@@ -2,7 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Models;
+    using StreetWorkout.Data.Models;
 
     public class SupplementConfiguration : IEntityTypeConfiguration<Supplement>
     {

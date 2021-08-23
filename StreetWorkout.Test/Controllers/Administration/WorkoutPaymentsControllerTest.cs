@@ -2,11 +2,9 @@
 {
     using System.Collections.Generic;
     using MyTested.AspNetCore.Mvc;
-    using Xunit;
-
     using StreetWorkout.Areas.Administration.Controllers;
     using StreetWorkout.Services.WorkoutPayments.Models;
-
+    using Xunit;
     using static WebConstants;
 
     public class WorkoutPaymentsControllerTest

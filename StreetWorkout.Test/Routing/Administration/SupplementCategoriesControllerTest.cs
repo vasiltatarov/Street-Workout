@@ -1,10 +1,9 @@
 ﻿namespace StreetWorkout.Test.Routing.Administration
 {
     using MyTested.AspNetCore.Mvc;
-    using Xunit;
-
     using StreetWorkout.Areas.Administration.Controllers;
     using StreetWorkout.Services.SupplementCategories.Models;
+    using Xunit;
 
     public class SupplementCategoriesControllerTest
     {

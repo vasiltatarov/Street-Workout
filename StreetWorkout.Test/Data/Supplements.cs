@@ -1,7 +1,7 @@
 ﻿namespace StreetWorkout.Test.Data
 {
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using StreetWorkout.Data.Models;
 
     public static class Supplements

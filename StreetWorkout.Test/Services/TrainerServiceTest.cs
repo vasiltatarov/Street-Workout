@@ -1,16 +1,14 @@
-﻿using StreetWorkout.Services.Workouts;
-
-namespace StreetWorkout.Test.Services
+﻿namespace StreetWorkout.Test.Services
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Xunit;
-
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Services.Trainings;
-    using Mocks;
-    using ViewModels.Trainers;
+    using StreetWorkout.Services.Workouts;
+    using StreetWorkout.Test.Mocks;
+    using StreetWorkout.ViewModels.Trainers;
+    using Xunit;
 
     public class TrainerServiceTest
     {
@@ -43,7 +41,7 @@ namespace StreetWorkout.Test.Services
             var trainerService = new TrainerService(data, workoutService);
 
             // Act
-            var result = await trainerService.All(1, "", "");
+            var result = await trainerService.All(1, string.Empty, string.Empty);
             var trainers = result.Users;
 
             // Assert
@@ -83,7 +81,7 @@ namespace StreetWorkout.Test.Services
             var trainerService = new TrainerService(data, workoutService);
 
             // Act
-            var result = await trainerService.All(1, "", "");
+            var result = await trainerService.All(1, string.Empty, string.Empty);
             var trainers = result.Users;
 
             // Assert
@@ -123,7 +121,7 @@ namespace StreetWorkout.Test.Services
             var trainerService = new TrainerService(data, workoutService);
 
             // Act
-            var result = await trainerService.All(1, "", "");
+            var result = await trainerService.All(1, string.Empty, string.Empty);
 
             // Assert
             Assert.NotNull(result);
@@ -161,7 +159,7 @@ namespace StreetWorkout.Test.Services
             var trainerService = new TrainerService(data, workoutService);
 
             // Act
-            var result = await trainerService.All(2, "", "");
+            var result = await trainerService.All(2, string.Empty, string.Empty);
             var trainers = result.Users;
 
             // Assert

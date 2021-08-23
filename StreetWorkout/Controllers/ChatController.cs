@@ -4,7 +4,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Services.Chat;
+    using StreetWorkout.Services.Chat;
 
     [Authorize]
     public class ChatController : Controller

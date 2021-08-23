@@ -4,13 +4,11 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
-    using Infrastructure;
-    using Services.Workouts;
-    using ViewModels.GroupWorkouts;
-    using Services.GroupWorkouts;
-    using Services.GroupWorkouts.Models;
-
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.GroupWorkouts;
+    using StreetWorkout.Services.GroupWorkouts.Models;
+    using StreetWorkout.Services.Workouts;
+    using StreetWorkout.ViewModels.GroupWorkouts;
     using static WebConstants.ModelStateMessage;
 
     [Authorize]
@@ -67,7 +65,7 @@
 
             await this.groupWorkouts.Create(input.Title, input.SportId, input.Address, input.StartOn, input.EndOn, input.MaximumParticipants, input.PricePerPerson, userId, input.Content);
 
-            return this.RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> Details(int id)

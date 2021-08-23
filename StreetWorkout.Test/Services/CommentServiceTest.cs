@@ -1,11 +1,11 @@
 ﻿namespace StreetWorkout.Test.Services
 {
     using System.Linq;
-    using Xunit;
     using StreetWorkout.Data.Models;
-    using Mocks;
     using StreetWorkout.Services.Comments;
-    using ViewModels.Comments;
+    using StreetWorkout.Test.Mocks;
+    using StreetWorkout.ViewModels.Comments;
+    using Xunit;
 
     public class CommentServiceTest
     {

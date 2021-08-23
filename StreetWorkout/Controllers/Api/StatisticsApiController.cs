@@ -1,8 +1,8 @@
 ﻿namespace StreetWorkout.Controllers.Api
 {
     using Microsoft.AspNetCore.Mvc;
-    using Services.Statistics;
-    using Services.Statistics.Models;
+    using StreetWorkout.Services.Statistics;
+    using StreetWorkout.Services.Statistics.Models;
 
     [Route("api/statistics")]
     public class StatisticsApiController : ApiController

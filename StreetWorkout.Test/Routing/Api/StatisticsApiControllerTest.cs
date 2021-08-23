@@ -1,8 +1,8 @@
 ﻿namespace StreetWorkout.Test.Routing.Api
 {
-    using Xunit;
     using MyTested.AspNetCore.Mvc;
     using StreetWorkout.Controllers.Api;
+    using Xunit;
 
     public class StatisticsApiControllerTest
     {

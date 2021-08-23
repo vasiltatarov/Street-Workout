@@ -159,9 +159,9 @@ if (latestWorkouts == null)
 39. Published Website in Azure App Service (Windows).
 40. Removed magic strings.
 41. Added CreatedOn property on Application User.
+42. Added StyleCop Analyzers.
 
 Potential Tasks:
-* Add StyleCop.
 
 # Note
 ConnectionStrings:

@@ -13,7 +13,7 @@
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Value = table.Column<byte>(type: "tinyint", nullable: false)
+                    Value = table.Column<byte>(type: "tinyint", nullable: false),
                 },
                 constraints: table =>
                 {

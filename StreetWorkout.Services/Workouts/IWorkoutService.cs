@@ -2,10 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using StreetWorkout.Data.Models.Enums;
+    using StreetWorkout.Services.Workouts.Models;
     using StreetWorkout.ViewModels.Workouts;
-    using Data.Models.Enums;
-    using Models;
 
     public interface IWorkoutService
     {

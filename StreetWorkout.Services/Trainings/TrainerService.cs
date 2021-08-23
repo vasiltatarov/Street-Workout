@@ -3,11 +3,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
-
-    using Data;
-    using ViewModels.Trainers;
-    using Data.Models.Enums;
-    using Workouts;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models.Enums;
+    using StreetWorkout.Services.Workouts;
+    using StreetWorkout.ViewModels.Trainers;
 
     public class TrainerService : ITrainerService
     {
@@ -50,7 +49,6 @@
                         .Any(ud => ud.UserId == x.Id &&
                                    ud.Sport.Name.ToLower() == sport.ToLower()));
             }
-            
 
             var users = await usersQuery
                 .Skip((currentPage - 1) * AllUsersQueryModel.TrainersPerPage)

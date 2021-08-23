@@ -8,8 +8,8 @@
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
 
-    using Data;
-    using Data.Models;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
     using StreetWorkout.ViewModels.Chat;
 
     public class ChatService : IChatService

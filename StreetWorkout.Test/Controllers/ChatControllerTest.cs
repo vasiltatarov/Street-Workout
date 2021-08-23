@@ -1,9 +1,9 @@
-﻿using MyTested.AspNetCore.Mvc;
-using StreetWorkout.Controllers;
-using Xunit;
-
-namespace StreetWorkout.Test.Controllers
+﻿namespace StreetWorkout.Test.Controllers
 {
+    using MyTested.AspNetCore.Mvc;
+    using StreetWorkout.Controllers;
+    using Xunit;
+
     public class ChatControllerTest
     {
         [Fact]

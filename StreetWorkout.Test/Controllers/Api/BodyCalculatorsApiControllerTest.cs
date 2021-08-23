@@ -2,9 +2,9 @@
 {
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
-    using Xunit;
     using StreetWorkout.Controllers.Api;
-    using ViewModels.BodyCalculators;
+    using StreetWorkout.ViewModels.BodyCalculators;
+    using Xunit;
 
     public class BodyCalculatorsApiControllerTest
     {

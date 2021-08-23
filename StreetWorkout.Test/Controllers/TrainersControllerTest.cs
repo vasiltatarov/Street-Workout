@@ -1,12 +1,12 @@
 ﻿namespace StreetWorkout.Test.Controllers
 {
-    using Xunit;
-    using Shouldly;
     using MyTested.AspNetCore.Mvc;
+    using Shouldly;
     using StreetWorkout.Controllers;
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
-    using ViewModels.Trainers;
+    using StreetWorkout.ViewModels.Trainers;
+    using Xunit;
 
     public class TrainersControllerTest
     {

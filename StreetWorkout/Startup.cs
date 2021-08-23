@@ -1,31 +1,30 @@
 namespace StreetWorkout
 {
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-
-    using Data;
-    using Data.Models;
-    using Hubs;
-    using Infrastructure;
-    using Services.Accounts;
-    using Services.BodyCalculators;
-    using Services.Comments;
-    using Services.GroupWorkouts;
-    using Services.Homes;
-    using Services.Trainings;
-    using Services.Statistics;
-    using Services.Votes;
-    using Services.Supplements;
-    using Services.SupplementCategories;
-    using Services.Workouts;
-    using Services.WorkoutPayments;
-    using Services.Chat;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Hubs;
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.Accounts;
+    using StreetWorkout.Services.BodyCalculators;
+    using StreetWorkout.Services.Chat;
+    using StreetWorkout.Services.Comments;
+    using StreetWorkout.Services.GroupWorkouts;
+    using StreetWorkout.Services.Homes;
+    using StreetWorkout.Services.Statistics;
+    using StreetWorkout.Services.SupplementCategories;
+    using StreetWorkout.Services.Supplements;
+    using StreetWorkout.Services.Trainings;
+    using StreetWorkout.Services.Votes;
+    using StreetWorkout.Services.WorkoutPayments;
+    using StreetWorkout.Services.Workouts;
 
     public class Startup
     {

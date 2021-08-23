@@ -3,9 +3,9 @@
     using System;
     using Microsoft.AspNetCore.Mvc;
 
-    using Data.Models.Enums;
-    using Services.BodyCalculators;
-    using ViewModels.BodyCalculators;
+    using StreetWorkout.Data.Models.Enums;
+    using StreetWorkout.Services.BodyCalculators;
+    using StreetWorkout.ViewModels.BodyCalculators;
 
     using static WebConstants.ModelStateMessage;
 

@@ -1,7 +1,7 @@
 ﻿namespace StreetWorkout.Services.Trainings
 {
     using System.Threading.Tasks;
-    using ViewModels.Trainers;
+    using StreetWorkout.ViewModels.Trainers;
 
     public interface ITrainerService
     {

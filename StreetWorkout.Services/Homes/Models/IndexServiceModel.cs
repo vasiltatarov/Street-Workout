@@ -1,8 +1,7 @@
-﻿using StreetWorkout.Services.Supplements.Models;
-
-namespace StreetWorkout.Services.Homes.Models
+﻿namespace StreetWorkout.Services.Homes.Models
 {
     using System.Collections.Generic;
+    using StreetWorkout.Services.Supplements.Models;
     using StreetWorkout.Services.Workouts.Models;
 
     public class IndexServiceModel

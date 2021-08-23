@@ -4,15 +4,13 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
-    using Services.Workouts;
-    using Data.Models.Enums;
-    using Infrastructure;
-    using ViewModels.Workouts;
-    using Services.Workouts.Models;
-
-    using static WebConstants.TempDataMessageKeys;
+    using StreetWorkout.Data.Models.Enums;
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.Workouts;
+    using StreetWorkout.Services.Workouts.Models;
+    using StreetWorkout.ViewModels.Workouts;
     using static WebConstants.ModelStateMessage;
+    using static WebConstants.TempDataMessageKeys;
 
     [Authorize]
     public class WorkoutsController : Controller
@@ -71,7 +69,7 @@
 
             if (!await this.workouts.IsValidSportId(workout.SportId))
             {
-                this.ModelState.AddModelError(nameof(workout.SportId),InvalidSport);
+                this.ModelState.AddModelError(nameof(workout.SportId), InvalidSport);
             }
 
             if (!await this.workouts.IsValidBodyPartId(workout.BodyPartId))
@@ -88,7 +86,7 @@
 
             await this.workouts.Create(workout.Title, workout.SportId, (DifficultLevel)workout.DifficultLevel, workout.BodyPartId, this.User.GetId(), workout.Minutes, workout.Content);
 
-            return this.RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

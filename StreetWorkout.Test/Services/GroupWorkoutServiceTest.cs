@@ -4,13 +4,12 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
-
-    using Xunit;
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Services.GroupWorkouts;
     using StreetWorkout.Services.GroupWorkouts.Models;
-    using Mocks;
+    using StreetWorkout.Test.Mocks;
+    using Xunit;
 
     public class GroupWorkoutServiceTest
     {
@@ -281,7 +280,7 @@
                 {
                     Name = "test",
                 },
-                Trainer = new ApplicationUser()
+                Trainer = new ApplicationUser(),
             }));
             await data.SaveChangesAsync();
 
@@ -320,7 +319,7 @@
                 {
                     Name = "test",
                 },
-                Trainer = new ApplicationUser()
+                Trainer = new ApplicationUser(),
             }));
             await data.SaveChangesAsync();
 

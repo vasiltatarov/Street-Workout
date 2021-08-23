@@ -1,8 +1,8 @@
 ﻿namespace StreetWorkout.Test.Routing
 {
     using MyTested.AspNetCore.Mvc;
-    using Xunit;
     using StreetWorkout.Controllers;
+    using Xunit;
 
     public class ChatControllerTest
     {

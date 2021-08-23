@@ -2,12 +2,11 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Xunit;
-
     using StreetWorkout.Data.Models;
     using StreetWorkout.Services.Accounts;
-    using ViewModels.Accounts;
-    using Mocks;
+    using StreetWorkout.Test.Mocks;
+    using StreetWorkout.ViewModels.Accounts;
+    using Xunit;
 
     public class AccountServiceTest
     {
@@ -56,7 +55,6 @@
             Assert.False(result);
         }
 
-
         [Theory]
         [InlineData("vs1")]
         public async Task IsUserAccountCompleteShouldReturnFalseWhenUserNotExist(string userId)
@@ -87,7 +85,7 @@
                 User = new ApplicationUser
                 {
                     Id = userId,
-                }
+                },
             });
             await data.SaveChangesAsync();
 

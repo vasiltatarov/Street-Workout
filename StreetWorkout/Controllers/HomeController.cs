@@ -4,17 +4,15 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading.Tasks;
-
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Caching.Memory;
-
-    using Services.Homes;
-    using Services.Homes.Models;
-    using Services.Workouts.Models;
-    using Services.Supplements.Models;
-    using ViewModels;
-    using Infrastructure;
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.Homes;
+    using StreetWorkout.Services.Homes.Models;
+    using StreetWorkout.Services.Supplements.Models;
+    using StreetWorkout.Services.Workouts.Models;
+    using StreetWorkout.ViewModels;
 
     public class HomeController : Controller
     {
@@ -57,14 +55,14 @@
             model.Users = users;
             model.LatestSupplements = latestSupplements;
 
-            return View(model);
+            return this.View(model);
         }
 
         public IActionResult Privacy()
-            => View();
+            => this.View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
-            => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            => this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
     }
 }

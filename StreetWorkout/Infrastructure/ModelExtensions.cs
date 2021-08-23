@@ -1,6 +1,6 @@
 ﻿namespace StreetWorkout.Infrastructure
 {
-    using Services.Workouts.Models;
+    using StreetWorkout.Services.Workouts.Models;
 
     public static class ModelExtensions
     {

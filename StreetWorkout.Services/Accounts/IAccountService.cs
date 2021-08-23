@@ -1,8 +1,7 @@
 ﻿namespace StreetWorkout.Services.Accounts
 {
-    using System.Threading.Tasks;
     using System.Collections.Generic;
-    
+    using System.Threading.Tasks;
     using StreetWorkout.ViewModels.Accounts;
     using StreetWorkout.ViewModels.Workouts;
 

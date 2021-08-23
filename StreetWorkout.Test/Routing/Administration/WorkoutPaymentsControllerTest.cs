@@ -1,9 +1,8 @@
 ﻿namespace StreetWorkout.Test.Routing.Administration
 {
     using MyTested.AspNetCore.Mvc;
-    using Xunit;
-
     using StreetWorkout.Areas.Administration.Controllers;
+    using Xunit;
 
     public class WorkoutPaymentsControllerTest
     {

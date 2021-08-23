@@ -2,10 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using Models;
-    using StreetWorkout.Services.Workouts.Models;
+    using StreetWorkout.Services.Homes.Models;
     using StreetWorkout.Services.Supplements.Models;
+    using StreetWorkout.Services.Workouts.Models;
 
     public interface IHomeService
     {

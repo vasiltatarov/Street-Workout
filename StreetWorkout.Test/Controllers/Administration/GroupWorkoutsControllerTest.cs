@@ -2,13 +2,11 @@
 {
     using System;
     using MyTested.AspNetCore.Mvc;
-    using Xunit;
-
     using StreetWorkout.Areas.Administration.Controllers;
-    using ViewModels.GroupWorkouts;
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
-
+    using StreetWorkout.ViewModels.GroupWorkouts;
+    using Xunit;
     using static WebConstants;
 
     public class GroupWorkoutsControllerTest
@@ -82,7 +80,7 @@
                             Id = userId,
                             Country = new Country(),
                             UserRole = UserRole.Trainer,
-                        }
+                        },
                     }))
                 .Calling(c => c.Edit(new GroupWorkoutFormModel
                 {
@@ -119,7 +117,7 @@
                             Id = userId,
                             Country = new Country(),
                             UserRole = UserRole.Trainer,
-                        }
+                        },
                     }))
                 .Calling(c => c.Edit(new GroupWorkoutFormModel
                 {

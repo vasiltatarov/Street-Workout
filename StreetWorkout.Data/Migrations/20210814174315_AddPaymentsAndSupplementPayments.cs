@@ -20,7 +20,7 @@
                     Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CardName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     CardNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Expiration = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
+                    Expiration = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                 },
                 constraints: table =>
                 {
@@ -40,7 +40,7 @@
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SupplementId = table.Column<int>(type: "int", nullable: false),
-                    PaymentId = table.Column<int>(type: "int", nullable: false)
+                    PaymentId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

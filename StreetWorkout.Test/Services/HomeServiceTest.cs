@@ -2,13 +2,12 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Xunit;
-    using Mocks;
-
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Services.Homes;
     using StreetWorkout.Services.Homes.Models;
+    using StreetWorkout.Test.Mocks;
+    using Xunit;
 
     public class HomeServiceTest
     {

@@ -1,7 +1,7 @@
 ﻿namespace StreetWorkout.Test.Mocks
 {
     using AutoMapper;
-    using Infrastructure;
+    using StreetWorkout.Infrastructure;
 
     public static class MapperMock
     {

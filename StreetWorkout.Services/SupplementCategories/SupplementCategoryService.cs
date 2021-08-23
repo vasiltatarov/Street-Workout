@@ -1,15 +1,13 @@
 ﻿namespace StreetWorkout.Services.SupplementCategories
 {
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
-
-    using Microsoft.EntityFrameworkCore;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-
-    using Data;
-    using Models;
+    using Microsoft.EntityFrameworkCore;
+    using StreetWorkout.Data;
+    using StreetWorkout.Services.SupplementCategories.Models;
 
     public class SupplementCategoryService : ISupplementCategoryService
     {

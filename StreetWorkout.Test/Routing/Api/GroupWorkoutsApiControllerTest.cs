@@ -1,9 +1,9 @@
 ﻿namespace StreetWorkout.Test.Routing.Api
 {
-    using Xunit;
     using MyTested.AspNetCore.Mvc;
     using StreetWorkout.Controllers.Api;
-    using ViewModels.GroupWorkouts;
+    using StreetWorkout.ViewModels.GroupWorkouts;
+    using Xunit;
 
     public class GroupWorkoutsApiControllerTest
     {

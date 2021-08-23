@@ -1,10 +1,9 @@
-﻿using StreetWorkout.Data;
-
-namespace StreetWorkout.Test.Mocks
+﻿namespace StreetWorkout.Test.Mocks
 {
     using System;
     using Microsoft.EntityFrameworkCore;
-    using Data;
+    using StreetWorkout.Data;
+    using StreetWorkout.Test.Data;
 
     public static class DatabaseMock
     {

@@ -1,11 +1,10 @@
 ﻿namespace StreetWorkout.Controllers.Api
 {
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-
-    using ViewModels.Votes;
-    using Infrastructure;
-    using Services.Votes;
+    using Microsoft.AspNetCore.Mvc;
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.Votes;
+    using StreetWorkout.ViewModels.Votes;
 
     [Route("api/votes")]
     public class VotesApiController : ApiController

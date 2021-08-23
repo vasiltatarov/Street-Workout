@@ -3,11 +3,10 @@
     using System.Threading.Tasks;
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
-    using Xunit;
-
     using StreetWorkout.Controllers.Api;
     using StreetWorkout.Data.Models;
-    using ViewModels.GroupWorkouts;
+    using StreetWorkout.ViewModels.GroupWorkouts;
+    using Xunit;
 
     public class GroupWorkoutsApiControllerTest
     {
@@ -26,7 +25,7 @@
                 .Calling(c => c.BuyTicket(new GroupWorkoutInputModel
                 {
                     BoughtTickets = 10,
-                    Card = "",
+                    Card = string.Empty,
                     FullName = "test testov",
                     PhoneNumber = "08885948872",
                     GroupWorkoutId = 1,
@@ -51,7 +50,7 @@
                 .Calling(c => c.BuyTicket(new GroupWorkoutInputModel
                 {
                     BoughtTickets = 22,
-                    Card = "",
+                    Card = string.Empty,
                     FullName = "test testov",
                     PhoneNumber = "08885948872",
                     GroupWorkoutId = 1,

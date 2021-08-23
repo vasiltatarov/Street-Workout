@@ -2,14 +2,12 @@
 {
     using System;
     using System.Threading.Tasks;
-    
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
-
-    using Data.Models;
-    using ViewModels.Chat;
-    using Services.Chat;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Services.Chat;
+    using StreetWorkout.ViewModels.Chat;
 
     [Authorize]
     public class ChatHub : Hub

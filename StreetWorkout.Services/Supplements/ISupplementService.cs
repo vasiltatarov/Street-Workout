@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Models;
+    using StreetWorkout.Services.Supplements.Models;
     using StreetWorkout.ViewModels.Supplements;
 
     public interface ISupplementService

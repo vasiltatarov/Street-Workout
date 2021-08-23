@@ -2,13 +2,12 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Xunit;
-
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
-    using Mocks;
     using StreetWorkout.Services.Workouts;
     using StreetWorkout.Services.Workouts.Models;
+    using StreetWorkout.Test.Mocks;
+    using Xunit;
 
     public class WorkoutServiceTest
     {
@@ -22,7 +21,7 @@
             var workoutService = new WorkoutService(data, mapper);
 
             // Act
-            await workoutService.Create("test", 1, DifficultLevel.Advanced, 2, "sad", 1, "");
+            await workoutService.Create("test", 1, DifficultLevel.Advanced, 2, "sad", 1, string.Empty);
 
             // Assert
             Assert.Equal(1, data.Workouts.Count());
@@ -201,13 +200,13 @@
                 },
                 Sport = new Sport
                 {
-                    Name = "sport"
+                    Name = "sport",
                 },
                 BodyPart = new BodyPart
                 {
-                    Name = "bdp"
+                    Name = "bdp",
                 },
-                Content = "Have Content"
+                Content = "Have Content",
             });
             await data.SaveChangesAsync();
 
@@ -243,13 +242,13 @@
                 },
                 Sport = new Sport
                 {
-                    Name = "sport"
+                    Name = "sport",
                 },
                 BodyPart = new BodyPart
                 {
-                    Name = "bdp"
+                    Name = "bdp",
                 },
-                Content = "Have Content"
+                Content = "Have Content",
             });
             await data.SaveChangesAsync();
 
@@ -280,11 +279,11 @@
             {
                 Sport = new Sport
                 {
-                    Name = "test"
+                    Name = "test",
                 },
                 BodyPart = new BodyPart
                 {
-                    Name = "test"
+                    Name = "test",
                 },
                 UserId = userId,
             }));
@@ -322,11 +321,11 @@
             {
                 Sport = new Sport
                 {
-                    Name = "test"
+                    Name = "test",
                 },
                 BodyPart = new BodyPart
                 {
-                    Name = "test"
+                    Name = "test",
                 },
                 UserId = userId,
             }));

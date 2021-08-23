@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Identity;
 
-    using Enums;
+    using StreetWorkout.Data.Models.Enums;
 
     using static DataConstants;
 

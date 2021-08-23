@@ -1,19 +1,17 @@
 ﻿namespace StreetWorkout.Services.Homes
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
-    using Microsoft.EntityFrameworkCore;
-
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-
-    using Data;
-    using Models;
-    using Data.Models.Enums;
-    using StreetWorkout.Services.Workouts.Models;
+    using Microsoft.EntityFrameworkCore;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models.Enums;
+    using StreetWorkout.Services.Homes.Models;
     using StreetWorkout.Services.Supplements.Models;
+    using StreetWorkout.Services.Workouts.Models;
 
     public class HomeService : IHomeService
     {

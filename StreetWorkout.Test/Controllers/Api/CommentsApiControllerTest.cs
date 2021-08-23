@@ -1,11 +1,11 @@
-﻿using MyTested.AspNetCore.Mvc;
-using StreetWorkout.Controllers.Api;
-using StreetWorkout.Data.Models;
-using StreetWorkout.ViewModels.Comments;
-using Xunit;
-
-namespace StreetWorkout.Test.Controllers.Api
+﻿namespace StreetWorkout.Test.Controllers.Api
 {
+    using MyTested.AspNetCore.Mvc;
+    using StreetWorkout.Controllers.Api;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.ViewModels.Comments;
+    using Xunit;
+
     public class CommentsApiControllerTest
     {
         [Fact]

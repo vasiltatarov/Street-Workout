@@ -4,14 +4,13 @@
     using System.Linq;
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
-    using Xunit;
-
-    using Data;
-    using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Controllers;
     using StreetWorkout.Data.Models;
+    using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Services.GroupWorkouts.Models;
-    using ViewModels.GroupWorkouts;
+    using StreetWorkout.Test.Data;
+    using StreetWorkout.ViewModels.GroupWorkouts;
+    using Xunit;
 
     public class GroupWorkoutsControllerTest
     {

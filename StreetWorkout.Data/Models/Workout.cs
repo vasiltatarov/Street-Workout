@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Enums;
+    using StreetWorkout.Data.Models.Enums;
 
     using static DataConstants;
 

@@ -1,17 +1,37 @@
 ﻿namespace StreetWorkout.Test.Services
 {
     using System.Linq;
-    using Xunit;
-
     using StreetWorkout.Data;
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.Services.Statistics;
     using StreetWorkout.Services.Statistics.Models;
-    using Mocks;
+    using StreetWorkout.Test.Mocks;
+    using Xunit;
 
     public class StatisticsServiceTest
     {
+        public static StreetWorkoutDbContext GetDatabase()
+        {
+            var data = DatabaseMock.Instance;
+
+            data.Users.Add(new ApplicationUser
+            {
+                UserRole = UserRole.Trainer,
+            });
+
+            data.Users.AddRange(Enumerable.Range(1, 4).Select(x => new ApplicationUser
+            {
+                UserRole = UserRole.Enthusiast,
+            }));
+
+            data.Workouts.AddRange(Enumerable.Range(1, 6).Select(x => new Workout()));
+
+            data.SaveChanges();
+
+            return data;
+        }
+
         [Fact]
         public void TotalShouldReturnCorrectStatisticsModelWithCorrectCountData()
         {
@@ -46,27 +66,6 @@
             Assert.NotEqual(0, result.TotalTrainers);
             Assert.NotEqual(0, result.TotalEnthusiasts);
             Assert.NotEqual(1, result.TotalWorkouts);
-        }
-
-        public static StreetWorkoutDbContext GetDatabase()
-        {
-            var data = DatabaseMock.Instance;
-
-            data.Users.Add(new ApplicationUser
-            {
-                UserRole = UserRole.Trainer,
-            });
-
-            data.Users.AddRange(Enumerable.Range(1, 4).Select(x => new ApplicationUser
-            {
-                UserRole = UserRole.Enthusiast,
-            }));
-
-            data.Workouts.AddRange(Enumerable.Range(1, 6).Select(x => new Workout()));
-
-            data.SaveChanges();
-
-            return data;
         }
     }
 }

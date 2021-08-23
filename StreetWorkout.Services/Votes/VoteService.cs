@@ -1,8 +1,8 @@
 ﻿namespace StreetWorkout.Services.Votes
 {
     using System.Linq;
-    using Data;
-    using Data.Models;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
     using StreetWorkout.ViewModels.Votes;
 
     public class VoteService : IVoteService
@@ -32,7 +32,7 @@
         }
 
         public VoteResponseModel GetAverageVotes(string userId)
-            => new()
+            => new ()
             {
                 AverageVotes = this.data.Votes
                     .Any(x => x.UserId == userId)
@@ -40,7 +40,7 @@
                     .Votes
                     .Where(x => x.UserId == userId)
                     .Average(x => x.Value)
-                    : 0
+                    : 0,
             };
     }
 }

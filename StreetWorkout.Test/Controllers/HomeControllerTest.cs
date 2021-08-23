@@ -1,14 +1,14 @@
 ﻿namespace StreetWorkout.Test.Controllers
 {
-    using System.Linq;
     using System.Collections.Generic;
-    using Xunit;
+    using System.Linq;
     using MyTested.AspNetCore.Mvc;
+    using StreetWorkout.Controllers;
     using StreetWorkout.Data.Models;
     using StreetWorkout.Data.Models.Enums;
-    using StreetWorkout.Controllers;
     using StreetWorkout.Services.Homes.Models;
-    using ViewModels;
+    using StreetWorkout.ViewModels;
+    using Xunit;
 
     public class HomeControllerTest
     {
@@ -38,7 +38,7 @@
                         {
                             Id = "sv",
                             UserName = "vasko",
-                            UserRole = UserRole.Trainer
+                            UserRole = UserRole.Trainer,
                         })
                         .WithEntities(GetWorkouts())))
                 .Calling(x => x.Index())

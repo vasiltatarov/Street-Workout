@@ -3,12 +3,11 @@
     using System.Linq;
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
-    using Xunit;
-
-    using StreetWorkout.Data.Models;
     using StreetWorkout.Controllers.Api;
+    using StreetWorkout.Data.Models;
     using StreetWorkout.Services.Statistics.Models;
     using StreetWorkout.Test.Mocks.Services;
+    using Xunit;
 
     public class StatisticsApiControllerTest
     {

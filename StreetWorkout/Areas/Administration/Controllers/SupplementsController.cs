@@ -1,15 +1,13 @@
 ﻿namespace StreetWorkout.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-
-    using Services.Supplements;
-    using ViewModels.Supplements;
-
+    using Microsoft.AspNetCore.Mvc;
+    using StreetWorkout.Services.Supplements;
+    using StreetWorkout.ViewModels.Supplements;
     using static WebConstants;
-    using static WebConstants.TempDataMessageKeys;
     using static WebConstants.ModelStateMessage;
+    using static WebConstants.TempDataMessageKeys;
 
     [Authorize(Roles = AdministratorRoleName)]
     public class SupplementsController : AdministrationController

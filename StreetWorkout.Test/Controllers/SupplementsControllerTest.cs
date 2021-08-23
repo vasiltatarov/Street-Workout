@@ -3,14 +3,12 @@
     using System.Linq;
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
-    using Xunit;
-
-    using Data;
-    using StreetWorkout.Data.Models;
     using StreetWorkout.Controllers;
+    using StreetWorkout.Data.Models;
     using StreetWorkout.Services.Supplements.Models;
-    using ViewModels.Supplements;
-
+    using StreetWorkout.Test.Data;
+    using StreetWorkout.ViewModels.Supplements;
+    using Xunit;
     using static WebConstants.TempDataMessageKeys;
 
     public class SupplementsControllerTest

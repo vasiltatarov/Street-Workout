@@ -1,9 +1,9 @@
 ﻿namespace StreetWorkout.Test.Routing
 {
-    using Xunit;
     using MyTested.AspNetCore.Mvc;
     using StreetWorkout.Controllers;
-    using ViewModels.Accounts;
+    using StreetWorkout.ViewModels.Accounts;
+    using Xunit;
 
     public class AccountsControllerTest
     {

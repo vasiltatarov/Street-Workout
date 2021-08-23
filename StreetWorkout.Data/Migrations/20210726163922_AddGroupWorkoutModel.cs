@@ -21,7 +21,7 @@
                     MaximumParticipants = table.Column<byte>(type: "tinyint", nullable: false),
                     PricePerPerson = table.Column<byte>(type: "tinyint", nullable: false),
                     TrainerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                 },
                 constraints: table =>
                 {

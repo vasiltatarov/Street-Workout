@@ -1,10 +1,9 @@
-﻿using System.Linq;
-
-namespace StreetWorkout.Services.Comments
+﻿namespace StreetWorkout.Services.Comments
 {
     using System;
-    using Data;
-    using Data.Models;
+    using System.Linq;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
     using StreetWorkout.ViewModels.Comments;
 
     public class CommentService : ICommentService

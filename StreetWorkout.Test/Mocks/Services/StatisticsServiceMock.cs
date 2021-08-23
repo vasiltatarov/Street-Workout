@@ -17,7 +17,7 @@
                     {
                         TotalEnthusiasts = 10,
                         TotalTrainers = 5,
-                        TotalWorkouts = 20
+                        TotalWorkouts = 20,
                     });
 
                 return statisticsServiceMock.Object;

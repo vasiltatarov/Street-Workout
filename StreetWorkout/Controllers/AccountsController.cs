@@ -4,9 +4,9 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Services.Accounts;
-    using Infrastructure;
-    using ViewModels.Accounts;
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.Accounts;
+    using StreetWorkout.ViewModels.Accounts;
 
     using static WebConstants;
     using static WebConstants.ModelStateMessage;
@@ -79,12 +79,12 @@
         {
             if (!await this.accountService.IsUserAccountComplete(userId))
             {
-                return BadRequest(CannotEditAccount);
+                return this.BadRequest(CannotEditAccount);
             }
 
             if (this.User.GetId() != userId && !this.User.IsInRole(AdministratorRoleName))
             {
-                return Unauthorized();
+                return this.Unauthorized();
             }
 
             var model = await this.accountService.GetEditFormModel(userId);
@@ -100,12 +100,12 @@
         {
             if (!await this.accountService.IsUserAccountComplete(model.Id))
             {
-                return BadRequest(CannotEditAccount);
+                return this.BadRequest(CannotEditAccount);
             }
 
             if (this.User.GetId() != model.Id && !this.User.IsInRole(AdministratorRoleName))
             {
-                return Unauthorized();
+                return this.Unauthorized();
             }
 
             if (!await this.accountService.IsValidSportId(model.SportId))
@@ -128,12 +128,12 @@
                 model.Sports = await this.accountService.GetSportsInAccountFormModel();
                 model.Goals = await this.accountService.GetGoalsInAccountFormModel();
                 model.TrainingFrequencies = await this.accountService.GetTrainingFrequenciesInAccountFormModel();
-                return View(model);
+                return this.View(model);
             }
 
             if (!await this.accountService.Edit(model.Id, model.ImageUrl, model.Weight, model.Height, model.City, model.Description, model.SportId, model.GoalId, model.TrainingFrequencyId))
             {
-                return BadRequest();
+                return this.BadRequest();
             }
 
             return this.RedirectToAction(RedirectAccountActionName, new { username = model.Username });
@@ -143,7 +143,7 @@
         {
             if (!this.User.IsInRole(AdministratorRoleName))
             {
-                return Unauthorized();
+                return this.Unauthorized();
             }
 
             return this.View(await this.accountService.GetEditImageFormModel(userId));
@@ -154,7 +154,7 @@
         {
             if (!this.User.IsInRole(AdministratorRoleName))
             {
-                return Unauthorized();
+                return this.Unauthorized();
             }
 
             if (!this.ModelState.IsValid)
@@ -164,7 +164,7 @@
 
             if (!await this.accountService.EditImage(model.Id, model.ImageUrl))
             {
-                return BadRequest();
+                return this.BadRequest();
             }
 
             return this.RedirectToAction(RedirectAccountActionName, new { username = model.UserName });

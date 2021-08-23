@@ -1,7 +1,7 @@
 ﻿namespace StreetWorkout.ViewModels.Trainers
 {
     using System.Collections.Generic;
-    using Workouts;
+    using StreetWorkout.ViewModels.Workouts;
 
     public class AllUsersQueryModel
     {

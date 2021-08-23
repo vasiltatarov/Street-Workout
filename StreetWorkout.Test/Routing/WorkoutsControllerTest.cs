@@ -1,10 +1,10 @@
 ﻿namespace StreetWorkout.Test.Routing
 {
-    using Xunit;
     using MyTested.AspNetCore.Mvc;
     using StreetWorkout.Controllers;
     using StreetWorkout.Services.Workouts.Models;
-    using ViewModels.Workouts;
+    using StreetWorkout.ViewModels.Workouts;
+    using Xunit;
 
     public class WorkoutsControllerTest
     {

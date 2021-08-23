@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetWorkout", "StreetWorkout\StreetWorkout.csproj", "{DAEA95FC-0FAC-40AF-8237-3F1DAD039124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout", "StreetWorkout\StreetWorkout.csproj", "{DAEA95FC-0FAC-40AF-8237-3F1DAD039124}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout.Data", "StreetWorkout.Data\StreetWorkout.Data.csproj", "{112EC844-F369-4C2A-B572-FC63A90F1842}"
 EndProject
@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout.Services", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout.ViewModels", "StreetWorkout.ViewModels\StreetWorkout.ViewModels.csproj", "{4A694325-041E-4C3B-AC2B-6CACBD923E53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetWorkout.Test", "StreetWorkout.Test\StreetWorkout.Test.csproj", "{00348A00-69B6-4D2B-8024-8782F0105952}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetWorkout.Test", "StreetWorkout.Test\StreetWorkout.Test.csproj", "{00348A00-69B6-4D2B-8024-8782F0105952}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{914960ED-D61D-43CF-A53E-3D0D19CE1122}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

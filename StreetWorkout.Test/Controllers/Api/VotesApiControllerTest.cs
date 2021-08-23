@@ -2,10 +2,9 @@
 {
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
-    using Xunit;
-
     using StreetWorkout.Controllers.Api;
-    using ViewModels.Votes;
+    using StreetWorkout.ViewModels.Votes;
+    using Xunit;
 
     public class VotesApiControllerTest
     {

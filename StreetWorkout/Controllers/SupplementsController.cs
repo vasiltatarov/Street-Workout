@@ -3,12 +3,10 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
-    using Services.Supplements;
-    using Services.Supplements.Models;
-    using Infrastructure;
-    using ViewModels.Supplements;
-
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.Supplements;
+    using StreetWorkout.Services.Supplements.Models;
+    using StreetWorkout.ViewModels.Supplements;
     using static WebConstants.TempDataMessageKeys;
 
     [Authorize]

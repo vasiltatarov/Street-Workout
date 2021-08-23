@@ -1,6 +1,6 @@
 ﻿namespace StreetWorkout.Services.BodyCalculators
 {
-    using Data.Models.Enums;
+    using StreetWorkout.Data.Models.Enums;
 
     public class BodyCalculatorService : IBodyCalculatorService
     {

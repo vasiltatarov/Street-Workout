@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Routing;
 
-    using Controllers;
+    using StreetWorkout.Controllers;
 
     public static class EndpointRouteBuilderExtensions
     {
@@ -29,7 +29,7 @@
                 defaults: new
                 {
                     controller = typeof(AccountsController).GetControllerName(),
-                    action = nameof(AccountsController.Account)
+                    action = nameof(AccountsController.Account),
                 });
         }
     }

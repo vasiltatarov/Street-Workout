@@ -1,9 +1,8 @@
 ﻿namespace StreetWorkout.Test.Controllers.Administration
 {
     using MyTested.AspNetCore.Mvc;
-    using Xunit;
-
     using StreetWorkout.Areas.Administration.Controllers;
+    using Xunit;
 
     public class HomeControllerTest
     {

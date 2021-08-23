@@ -1,11 +1,10 @@
-﻿using StreetWorkout.ViewModels.Supplements;
-
-namespace StreetWorkout.Test.Routing
+﻿namespace StreetWorkout.Test.Routing
 {
-    using Xunit;
     using MyTested.AspNetCore.Mvc;
     using StreetWorkout.Controllers;
     using StreetWorkout.Services.Supplements.Models;
+    using StreetWorkout.ViewModels.Supplements;
+    using Xunit;
 
     public class SupplementsControllerTest
     {

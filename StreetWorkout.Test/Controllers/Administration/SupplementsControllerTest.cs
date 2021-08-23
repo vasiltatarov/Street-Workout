@@ -2,12 +2,10 @@
 {
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
-    using Xunit;
-
     using StreetWorkout.Areas.Administration.Controllers;
-    using ViewModels.Supplements;
     using StreetWorkout.Data.Models;
-
+    using StreetWorkout.ViewModels.Supplements;
+    using Xunit;
     using static WebConstants;
     using static WebConstants.TempDataMessageKeys;
 

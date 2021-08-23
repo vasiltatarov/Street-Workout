@@ -9,9 +9,9 @@
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
 
-    using Data;
-    using Data.Models;
-    using Data.Models.Enums;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Data.Models.Enums;
     using StreetWorkout.ViewModels.Accounts;
     using StreetWorkout.ViewModels.Workouts;
 
@@ -86,8 +86,7 @@
             return true;
         }
 
-        public async Task CompleteAccount(string userId, int sportId, int goalId, int trainingFrequency, int weight, int height,
-            string description)
+        public async Task CompleteAccount(string userId, int sportId, int goalId, int trainingFrequency, int weight, int height, string description)
         {
             await this.data.UserDatas.AddAsync(new UserData
             {
@@ -182,7 +181,7 @@
                 .Select(x => new TrainingFrequencyInAccountViewModel()
                 {
                     Id = x.Id,
-                    Name = x.Name
+                    Name = x.Name,
                 })
                 .ToListAsync();
     }

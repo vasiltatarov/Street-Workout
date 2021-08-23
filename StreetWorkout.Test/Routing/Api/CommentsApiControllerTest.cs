@@ -1,9 +1,9 @@
 ﻿namespace StreetWorkout.Test.Routing.Api
 {
-    using Xunit;
     using MyTested.AspNetCore.Mvc;
     using StreetWorkout.Controllers.Api;
-    using ViewModels.Comments;
+    using StreetWorkout.ViewModels.Comments;
+    using Xunit;
 
     public class CommentsApiControllerTest
     {

@@ -9,7 +9,7 @@
         [Required]
         [StringLength(CommentInputModelContentMaxLength, MinimumLength = CommentInputModelContentMinLength)]
         public string Content { get; set; }
-        
+
         public int WorkoutId { get; set; }
     }
 }

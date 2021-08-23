@@ -1,14 +1,13 @@
 ﻿namespace StreetWorkout.Test.Controllers
 {
     using System.Linq;
-    using Xunit;
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
-
-    using StreetWorkout.Data.Models;
     using StreetWorkout.Controllers;
+    using StreetWorkout.Data.Models;
     using StreetWorkout.Services.Workouts.Models;
-    using ViewModels.Workouts;
+    using StreetWorkout.ViewModels.Workouts;
+    using Xunit;
 
     public class WorkoutsControllerTest
     {
@@ -85,7 +84,6 @@
                         data.Title.ShouldBe(title);
                     }));
 
-
         [Theory]
         [InlineData("TestId", 1)]
         public void DetailsShouldReturnBadRequestWhenWorkoutWithGivenIdNotExistInDatabase(string userId, int workoutId)
@@ -144,7 +142,6 @@
                 .AndAlso()
                 .ShouldReturn()
                 .RedirectToAction("All");
-
 
         [Fact]
         public void CreateShouldReturnViewWithTheSameModelWhenModelStateIsInvalidAndShouldBeAllowedOnlyByPostRequest()

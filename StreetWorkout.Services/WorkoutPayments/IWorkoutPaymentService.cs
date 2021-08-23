@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Models;
+    using StreetWorkout.Services.WorkoutPayments.Models;
 
     public interface IWorkoutPaymentService
     {

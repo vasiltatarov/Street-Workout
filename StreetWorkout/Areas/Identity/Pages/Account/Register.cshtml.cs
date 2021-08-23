@@ -1,6 +1,4 @@
-﻿using StreetWorkout.Data.Models.Enums;
-
-namespace StreetWorkout.Areas.Identity.Pages.Account
+﻿namespace StreetWorkout.Areas.Identity.Pages.Account
 {
     using System;
     using System.Collections.Generic;
@@ -8,18 +6,16 @@ namespace StreetWorkout.Areas.Identity.Pages.Account
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
-
-    using Data.Models;
-    using Data;
-
+    using Microsoft.EntityFrameworkCore;
+    using StreetWorkout.Data;
+    using StreetWorkout.Data.Models;
+    using StreetWorkout.Data.Models.Enums;
     using static Data.DataConstants;
 
     [AllowAnonymous]
@@ -100,68 +96,69 @@ namespace StreetWorkout.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            Countries = this.data
+            this.Countries = this.data
                 .Countries
                 .OrderBy(x => x.Name);
-            ReturnUrl = returnUrl;
-            ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            this.ReturnUrl = returnUrl;
+            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            returnUrl ??= this.Url.Content("~/");
+            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            if (!await this.data.Countries.AnyAsync(x => x.Id == Input.CountryId))
+            if (!await this.data.Countries.AnyAsync(x => x.Id == this.Input.CountryId))
             {
-                ModelState.AddModelError(nameof(Input.CountryId), "Please select valid Country.");
+                this.ModelState.AddModelError(nameof(this.Input.CountryId), "Please select valid Country.");
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = Input.UserName,
-                    Email = Input.Email,
-                    ImageUrl = Input.ImageUrl ?? "https://pbs.twimg.com/profile_images/746460305396371456/4QYRblQD_400x400.jpg",
-                    CountryId = Input.CountryId,
-                    City = Input.City,
-                    Gender = Input.Gender,
-                    UserRole = Input.UserRole,
-                    DateOfBirth = Input.DateOfBirth,
+                    UserName = this.Input.UserName,
+                    Email = this.Input.Email,
+                    ImageUrl = this.Input.ImageUrl ?? "https://pbs.twimg.com/profile_images/746460305396371456/4QYRblQD_400x400.jpg",
+                    CountryId = this.Input.CountryId,
+                    City = this.Input.City,
+                    Gender = this.Input.Gender,
+                    UserRole = this.Input.UserRole,
+                    DateOfBirth = this.Input.DateOfBirth,
                     IsAccountCompleted = false,
                     CreatedOn = DateTime.UtcNow,
                 };
-                var result = await this.userManager.CreateAsync(user, Input.Password);
+                var result = await this.userManager.CreateAsync(user, this.Input.Password);
 
                 if (result.Succeeded)
                 {
                     var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
+                    var callbackUrl = this.Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                        protocol: this.Request.Scheme);
 
                     if (this.userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        return this.RedirectToPage("RegisterConfirmation", new { email = this.Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {
                         await this.signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        return this.LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    this.ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            Countries = this.data.Countries;
-            return Page();
+            this.Countries = this.data.Countries;
+            return this.Page();
         }
     }
 }

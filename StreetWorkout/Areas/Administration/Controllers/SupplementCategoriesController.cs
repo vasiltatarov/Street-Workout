@@ -1,12 +1,10 @@
 ﻿namespace StreetWorkout.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-
-    using Services.SupplementCategories;
-    using Services.SupplementCategories.Models;
-
+    using Microsoft.AspNetCore.Mvc;
+    using StreetWorkout.Services.SupplementCategories;
+    using StreetWorkout.Services.SupplementCategories.Models;
     using static WebConstants;
     using static WebConstants.TempDataMessageKeys;
 

@@ -1,10 +1,9 @@
 ﻿namespace StreetWorkout.Controllers.Api
 {
     using Microsoft.AspNetCore.Mvc;
-
-    using ViewModels.Comments;
-    using Services.Comments;
-    using Infrastructure;
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.Comments;
+    using StreetWorkout.ViewModels.Comments;
 
     [Route("api/comments")]
     public class CommentsApiController : ApiController

@@ -1,11 +1,9 @@
 ﻿namespace StreetWorkout.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-
-    using Services.WorkoutPayments;
-
+    using Microsoft.AspNetCore.Mvc;
+    using StreetWorkout.Services.WorkoutPayments;
     using static WebConstants;
 
     [Authorize(Roles = AdministratorRoleName)]

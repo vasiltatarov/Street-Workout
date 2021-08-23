@@ -1,6 +1,6 @@
 ﻿namespace StreetWorkout.Services.Statistics
 {
-    using Models;
+    using StreetWorkout.Services.Statistics.Models;
 
     public interface IStatisticsService
     {

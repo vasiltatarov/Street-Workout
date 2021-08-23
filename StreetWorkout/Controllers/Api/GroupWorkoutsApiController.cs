@@ -3,9 +3,9 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
 
-    using Infrastructure;
-    using Services.GroupWorkouts;
-    using ViewModels.GroupWorkouts;
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.GroupWorkouts;
+    using StreetWorkout.ViewModels.GroupWorkouts;
 
     [Route("api/workouts")]
     public class GroupWorkoutsApiController : ApiController

@@ -1,11 +1,10 @@
 ﻿namespace StreetWorkout.Test.Services
 {
-    using Xunit;
     using System.Linq;
-
     using StreetWorkout.Services.Votes;
-    using ViewModels.Votes;
-    using Mocks;
+    using StreetWorkout.Test.Mocks;
+    using StreetWorkout.ViewModels.Votes;
+    using Xunit;
 
     public class VoteServiceTest
     {

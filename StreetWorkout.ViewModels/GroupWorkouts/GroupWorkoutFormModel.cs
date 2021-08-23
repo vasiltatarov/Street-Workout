@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using Workouts;
+    using StreetWorkout.ViewModels.Workouts;
 
     using static ViewModelConstants.GroupWorkoutConstants;
 

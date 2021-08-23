@@ -3,14 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-
-    using Services.Workouts;
-    using ViewModels.Workouts;
-    using Data.Models.Enums;
-    using Infrastructure;
-
-    using static WebConstants.TempDataMessageKeys;
+    using StreetWorkout.Data.Models.Enums;
+    using StreetWorkout.Infrastructure;
+    using StreetWorkout.Services.Workouts;
+    using StreetWorkout.ViewModels.Workouts;
     using static WebConstants.ModelStateMessage;
+    using static WebConstants.TempDataMessageKeys;
 
     public class WorkoutsController : AdministrationController
     {
