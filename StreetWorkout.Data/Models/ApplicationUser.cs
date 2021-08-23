@@ -1,11 +1,11 @@
-﻿using StreetWorkout.Data.Models.Enums;
-
-namespace StreetWorkout.Data.Models
+﻿namespace StreetWorkout.Data.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Identity;
+
+    using Enums;
 
     using static DataConstants;
 
@@ -28,6 +28,8 @@ namespace StreetWorkout.Data.Models
         public DateTime DateOfBirth { get; set; }
 
         public bool IsAccountCompleted { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public IEnumerable<Workout> Workouts { get; set; } = new HashSet<Workout>();
 

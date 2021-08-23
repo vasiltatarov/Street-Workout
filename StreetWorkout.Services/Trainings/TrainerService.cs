@@ -22,7 +22,10 @@
 
         public async Task<AllUsersQueryModel> All(int currentPage, string role, string sport)
         {
-            var usersQuery = this.data.Users.AsQueryable();
+            var usersQuery = this.data
+                .Users
+                .OrderByDescending(x => x.CreatedOn)
+                .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(role))
             {

@@ -57,7 +57,7 @@
         public async Task<IEnumerable<UserIndexServiceModel>> Users()
             => await this.data
                 .Users
-                .OrderByDescending(x => Guid.NewGuid())
+                .OrderByDescending(x => x.CreatedOn)
                 .Take(3)
                 .ProjectTo<UserIndexServiceModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();

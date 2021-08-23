@@ -130,6 +130,7 @@ namespace StreetWorkout.Areas.Identity.Pages.Account
                     UserRole = Input.UserRole,
                     DateOfBirth = Input.DateOfBirth,
                     IsAccountCompleted = false,
+                    CreatedOn = DateTime.UtcNow,
                 };
                 var result = await this.userManager.CreateAsync(user, Input.Password);
 
