@@ -46,9 +46,7 @@
             var informationDecode = System.Web.HttpUtility.UrlDecode(information);
 
             if (!informationDecode.Contains(workout.Title) &&
-                !information.Contains(workout.Title) &&
-                !informationDecode.Contains(workout.Sport) &&
-                !information.Contains(workout.Sport))
+                !information.Contains(workout.Title))
             {
                 return this.BadRequest();
             }

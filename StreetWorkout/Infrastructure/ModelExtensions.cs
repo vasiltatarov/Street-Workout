@@ -5,6 +5,6 @@
     public static class ModelExtensions
     {
         public static string GetInformation(this IWorkoutModel model)
-            => $"{model.Title}_{model.Sport}";
+            => $"{model.Title}";
     }
 }
