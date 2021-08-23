@@ -13,6 +13,8 @@
     [Authorize(Roles = AdministratorRoleName)]
     public class SupplementCategoriesController : AdministrationController
     {
+        private const string SupplementCategory = "Supplement Category";
+
         private readonly ISupplementCategoryService supplementCategories;
 
         public SupplementCategoriesController(ISupplementCategoryService supplementCategories)
@@ -28,9 +30,9 @@
                 return this.BadRequest();
             }
 
-            this.TempData[DeleteKey] = string.Format(DeleteMessage, "Supplement Category");
+            this.TempData[DeleteKey] = string.Format(DeleteMessage, SupplementCategory);
 
-            return this.RedirectToAction("All");
+            return this.RedirectToAction(nameof(All));
         }
 
         public async Task<IActionResult> Restore(int id)
@@ -40,9 +42,9 @@
                 return this.BadRequest();
             }
 
-            this.TempData[RestoreKey] = string.Format(RestoreMessage, "Supplement Category");
+            this.TempData[RestoreKey] = string.Format(RestoreMessage, SupplementCategory);
 
-            return this.RedirectToAction("All");
+            return this.RedirectToAction(nameof(All));
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -63,7 +65,7 @@
 
             this.TempData[EditKey] = string.Format(EditMessage, model.Name);
 
-            return this.RedirectToAction("All");
+            return this.RedirectToAction(nameof(All));
         }
     }
 }

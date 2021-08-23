@@ -7,6 +7,8 @@
     using Services.BodyCalculators;
     using ViewModels.BodyCalculators;
 
+    using static WebConstants.ModelStateMessage;
+
     [Route("api/calculator")]
     public class BodyCalculatorsApiController : ApiController
     {
@@ -20,7 +22,7 @@
         {
             if (!Enum.IsDefined(typeof(Gender), model.Gender))
             {
-                this.ModelState.AddModelError(nameof(model.Gender), "Invalid Gender type.");
+                this.ModelState.AddModelError(nameof(model.Gender), InvalidGenderType);
             }
 
             return new CalculatorResponseModel()

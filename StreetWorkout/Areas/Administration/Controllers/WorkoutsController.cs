@@ -10,9 +10,14 @@
     using Infrastructure;
 
     using static WebConstants.TempDataMessageKeys;
+    using static WebConstants.ModelStateMessage;
 
     public class WorkoutsController : AdministrationController
     {
+        private const string RedirectWorkoutsControllerName = "Workouts";
+        private const string RedirectAllActionName = nameof(StreetWorkout.Controllers.WorkoutsController.All);
+        private const string RedirectDetailsActionName = nameof(StreetWorkout.Controllers.WorkoutsController.Details);
+
         private readonly IWorkoutService workouts;
 
         public WorkoutsController(IWorkoutService workouts)
@@ -48,17 +53,17 @@
 
             if (!Enum.IsDefined(typeof(DifficultLevel), model.DifficultLevel))
             {
-                this.ModelState.AddModelError(nameof(model.DifficultLevel), "Invalid difficult level.");
+                this.ModelState.AddModelError(nameof(model.DifficultLevel), InvalidDifficultLevel);
             }
 
             if (!await this.workouts.IsValidSportId(model.SportId))
             {
-                this.ModelState.AddModelError(nameof(model.SportId), "Invalid sport.");
+                this.ModelState.AddModelError(nameof(model.SportId), InvalidSport);
             }
 
             if (!await this.workouts.IsValidBodyPartId(model.BodyPartId))
             {
-                this.ModelState.AddModelError(nameof(model.BodyPartId), "Invalid body part.");
+                this.ModelState.AddModelError(nameof(model.BodyPartId), InvalidBodyPart);
             }
 
             if (!this.ModelState.IsValid)
@@ -72,7 +77,7 @@
 
             this.TempData[EditKey] = string.Format(EditMessage, model.Title);
 
-            return this.RedirectToAction("Details", "Workouts", new { area = "", Id = model.Id, information = model.Title });
+            return this.RedirectToAction(RedirectDetailsActionName, RedirectWorkoutsControllerName, new { area = string.Empty, Id = model.Id, information = model.Title });
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -89,7 +94,7 @@
                 return this.BadRequest();
             }
 
-            return this.RedirectToAction("All", "Workouts", new { area = "" });
+            return this.RedirectToAction(RedirectAllActionName, RedirectWorkoutsControllerName, new { area = string.Empty });
         }
     }
 }

@@ -11,6 +11,8 @@
     using Services.GroupWorkouts;
     using Services.GroupWorkouts.Models;
 
+    using static WebConstants.ModelStateMessage;
+
     [Authorize]
     public class GroupWorkoutsController : Controller
     {
@@ -44,17 +46,17 @@
 
             if (!await this.workouts.IsValidSportId(input.SportId))
             {
-                this.ModelState.AddModelError(nameof(input.SportId), "Sport is invalid.");
+                this.ModelState.AddModelError(nameof(input.SportId), InvalidSport);
             }
 
             if (input.StartOn <= DateTime.UtcNow || input.EndOn <= input.StartOn)
             {
-                this.ModelState.AddModelError(nameof(input.StartOn), "Start Workout Time must be bigger than now. Also End Time must be bigger than the Start Time");
+                this.ModelState.AddModelError(nameof(input.StartOn), InvalidStartWorkoutTime);
             }
 
             if (input.EndOn <= DateTime.UtcNow || input.EndOn <= input.StartOn)
             {
-                this.ModelState.AddModelError(nameof(input.EndOn), "End Workout Time must be bigger than now. Also End Time must be bigger than the Start Time");
+                this.ModelState.AddModelError(nameof(input.EndOn), InvalidEndWorkoutTime);
             }
 
             if (!this.ModelState.IsValid)
@@ -65,7 +67,7 @@
 
             await this.groupWorkouts.Create(input.Title, input.SportId, input.Address, input.StartOn, input.EndOn, input.MaximumParticipants, input.PricePerPerson, userId, input.Content);
 
-            return this.RedirectToAction("All");
+            return this.RedirectToAction(nameof(All));
         }
 
         public async Task<IActionResult> Details(int id)

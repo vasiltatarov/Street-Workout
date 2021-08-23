@@ -56,7 +56,7 @@
 
             await this.supplements.BuySupplement(model.SupplementId, this.User.GetId(), model.FirstName, model.LastName, model.PhoneNumber, model.Email, model.Address, model.CardName, model.CardNumber, model.Expiration);
 
-            return this.RedirectToAction("ThankYou");
+            return this.RedirectToAction(nameof(ThankYou));
         }
 
         public IActionResult ThankYou()

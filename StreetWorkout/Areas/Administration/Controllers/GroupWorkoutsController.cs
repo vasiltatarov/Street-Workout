@@ -9,8 +9,14 @@
     using Services.Workouts;
     using Infrastructure;
 
+    using static WebConstants.ModelStateMessage;
+
     public class GroupWorkoutsController : AdministrationController
     {
+        private const string RedirectDetailsActionName = nameof(StreetWorkout.Controllers.GroupWorkoutsController.Details);
+        private const string RedirectAllActionName = nameof(StreetWorkout.Controllers.GroupWorkoutsController.All);
+        private const string RedirectGroupWorkoutsControllerName = "GroupWorkouts";
+
         private readonly IGroupWorkoutService groupWorkouts;
         private readonly IWorkoutService workouts;
 
@@ -48,17 +54,17 @@
 
             if (!await this.workouts.IsValidSportId(model.SportId))
             {
-                this.ModelState.AddModelError(nameof(model.SportId), "Sport is invalid.");
+                this.ModelState.AddModelError(nameof(model.SportId), InvalidSport);
             }
 
             if (model.StartOn <= DateTime.UtcNow || model.EndOn <= model.StartOn)
             {
-                this.ModelState.AddModelError(nameof(model.StartOn), "Start Workout Time must be bigger than now. Also End Time must be bigger than the Start Time");
+                this.ModelState.AddModelError(nameof(model.StartOn), InvalidStartWorkoutTime);
             }
 
             if (model.EndOn <= DateTime.UtcNow || model.EndOn <= model.StartOn)
             {
-                this.ModelState.AddModelError(nameof(model.EndOn), "End Workout Time must be bigger than now. Also End Time must be bigger than the Start Time");
+                this.ModelState.AddModelError(nameof(model.EndOn), InvalidEndWorkoutTime);
             }
 
             if (!this.ModelState.IsValid)
@@ -69,7 +75,7 @@
 
             await this.groupWorkouts.Edit(model.Id, model.Title, model.SportId, model.Address, model.StartOn, model.EndOn, model.MaximumParticipants, model.PricePerPerson, model.Content);
 
-            return this.RedirectToAction("Details", "GroupWorkouts", new { area = "", Id = model.Id });
+            return this.RedirectToAction(RedirectDetailsActionName, RedirectGroupWorkoutsControllerName, new { area = string.Empty, Id = model.Id });
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -84,7 +90,7 @@
                 return this.BadRequest();
             }
 
-            return this.RedirectToAction("All", "GroupWorkouts", new { area = "" });
+            return this.RedirectToAction(RedirectAllActionName, RedirectGroupWorkoutsControllerName, new { area = string.Empty });
         }
     }
 }

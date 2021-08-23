@@ -9,10 +9,15 @@
     using ViewModels.Accounts;
 
     using static WebConstants;
+    using static WebConstants.ModelStateMessage;
 
     [Authorize]
     public class AccountsController : Controller
     {
+        private const string RedirectIndexActionName = nameof(HomeController.Index);
+        private const string RedirectAccountActionName = nameof(Account);
+        private const string RedirectControllerName = "Home";
+
         private readonly IAccountService accountService;
 
         public AccountsController(IAccountService accountService)
@@ -23,7 +28,7 @@
 
         public async Task<IActionResult> CompleteAccount()
             => await this.IsAccountComplete()
-                ? this.RedirectToAction("Index", "Home")
+                ? this.RedirectToAction(RedirectIndexActionName, RedirectControllerName)
                 : this.View(new AccountFormModel
                 {
                     Sports = await this.accountService.GetSportsInAccountFormModel(),
@@ -38,22 +43,22 @@
 
             if (await this.IsAccountComplete() || await this.accountService.IsUserDataExists(userId))
             {
-                return this.RedirectToAction("Index", "Home");
+                return this.RedirectToAction(RedirectIndexActionName, RedirectControllerName);
             }
 
             if (!await this.accountService.IsValidSportId(data.SportId))
             {
-                this.ModelState.AddModelError(nameof(data.SportId), "Invalid Sport.");
+                this.ModelState.AddModelError(nameof(data.SportId), InvalidSport);
             }
 
             if (!await this.accountService.IsValidGoalId(data.GoalId))
             {
-                this.ModelState.AddModelError(nameof(data.GoalId), "Invalid Goal.");
+                this.ModelState.AddModelError(nameof(data.GoalId), InvalidGoal);
             }
 
             if (!await this.accountService.IsValidTrainingFrequencyId(data.TrainingFrequencyId))
             {
-                this.ModelState.AddModelError(nameof(data.TrainingFrequencyId), "Invalid Training Frequency.");
+                this.ModelState.AddModelError(nameof(data.TrainingFrequencyId), InvalidTrainingFrequency);
             }
 
             if (!this.ModelState.IsValid)
@@ -67,14 +72,14 @@
 
             await this.accountService.CompleteAccount(userId, data.SportId, data.GoalId, data.TrainingFrequencyId, data.Weight, data.Height, data.Description);
 
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction(RedirectIndexActionName, RedirectControllerName);
         }
 
         public async Task<IActionResult> Edit(string userId)
         {
             if (!await this.accountService.IsUserAccountComplete(userId))
             {
-                return BadRequest("Cannot edit this account because is not completed");
+                return BadRequest(CannotEditAccount);
             }
 
             if (this.User.GetId() != userId && !this.User.IsInRole(AdministratorRoleName))
@@ -95,7 +100,7 @@
         {
             if (!await this.accountService.IsUserAccountComplete(model.Id))
             {
-                return BadRequest("Cannot edit this account because is not completed");
+                return BadRequest(CannotEditAccount);
             }
 
             if (this.User.GetId() != model.Id && !this.User.IsInRole(AdministratorRoleName))
@@ -105,17 +110,17 @@
 
             if (!await this.accountService.IsValidSportId(model.SportId))
             {
-                this.ModelState.AddModelError(nameof(model.SportId), "Sport is Invalid.");
+                this.ModelState.AddModelError(nameof(model.SportId), InvalidSport);
             }
 
             if (!await this.accountService.IsValidGoalId(model.GoalId))
             {
-                this.ModelState.AddModelError(nameof(model.GoalId), "Goal is Invalid.");
+                this.ModelState.AddModelError(nameof(model.GoalId), InvalidGoal);
             }
 
             if (!await this.accountService.IsValidTrainingFrequencyId(model.TrainingFrequencyId))
             {
-                this.ModelState.AddModelError(nameof(model.TrainingFrequencyId), "Training Frequency is Invalid.");
+                this.ModelState.AddModelError(nameof(model.TrainingFrequencyId), InvalidTrainingFrequency);
             }
 
             if (!this.ModelState.IsValid)
@@ -131,7 +136,7 @@
                 return BadRequest();
             }
 
-            return this.RedirectToAction("Account", new { username = model.Username });
+            return this.RedirectToAction(RedirectAccountActionName, new { username = model.Username });
         }
 
         public async Task<IActionResult> EditImage(string userId)
@@ -162,7 +167,7 @@
                 return BadRequest();
             }
 
-            return this.RedirectToAction("Account", new { username = model.UserName });
+            return this.RedirectToAction(RedirectAccountActionName, new { username = model.UserName });
         }
 
         private async Task<bool> IsAccountComplete()

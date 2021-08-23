@@ -9,10 +9,15 @@
 
     using static WebConstants;
     using static WebConstants.TempDataMessageKeys;
+    using static WebConstants.ModelStateMessage;
 
     [Authorize(Roles = AdministratorRoleName)]
     public class SupplementsController : AdministrationController
     {
+        private const string RedirectSupplementsControllerName = "Supplements";
+        private const string RedirectAllActionName = nameof(StreetWorkout.Controllers.SupplementsController.All);
+        private const string RedirectDetailsActionName = nameof(StreetWorkout.Controllers.SupplementsController.Details);
+
         private readonly ISupplementService supplements;
 
         public SupplementsController(ISupplementService supplements)
@@ -29,7 +34,7 @@
         {
             if (!await this.supplements.IsValidCategoryId(model.CategoryId))
             {
-                this.ModelState.AddModelError(nameof(model.CategoryId), "Invalid category.");
+                this.ModelState.AddModelError(nameof(model.CategoryId), InvalidSupplementCategory);
             }
 
             if (!this.ModelState.IsValid)
@@ -40,7 +45,7 @@
 
             await this.supplements.Create(model.Name, model.CategoryId, model.ImageUrl, model.Content, model.Price, model.Quantity);
 
-            return this.RedirectToAction("All");
+            return this.RedirectToAction();
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -66,7 +71,7 @@
         {
             if (!await this.supplements.IsValidCategoryId(model.CategoryId))
             {
-                this.ModelState.AddModelError(nameof(model.CategoryId), "Invalid category.");
+                this.ModelState.AddModelError(nameof(model.CategoryId), InvalidSupplementCategory);
             }
 
             if (!this.ModelState.IsValid)
@@ -83,11 +88,13 @@
 
             this.TempData[EditKey] = string.Format(EditMessage, model.Name);
 
-            return this.RedirectToAction("Details", "Supplements", new { area = "", Id = id });
+            return this.RedirectToAction(RedirectDetailsActionName, RedirectSupplementsControllerName, new { area = string.Empty, Id = id });
         }
 
         public async Task<IActionResult> Delete(int id)
         {
+            const string Supplement = "Supplement";
+
             var isDeleted = await this.supplements.Delete(id);
 
             if (!isDeleted)
@@ -95,9 +102,9 @@
                 return this.BadRequest();
             }
 
-            this.TempData[DeleteKey] = string.Format(DeleteMessage, "Supplement");
+            this.TempData[DeleteKey] = string.Format(DeleteMessage, Supplement);
 
-            return this.RedirectToAction("All", "Supplements", new { area = "" });
+            return this.RedirectToAction(RedirectAllActionName, RedirectSupplementsControllerName, new { area = string.Empty });
         }
     }
 }

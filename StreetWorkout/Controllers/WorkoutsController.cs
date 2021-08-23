@@ -12,6 +12,7 @@
     using Services.Workouts.Models;
 
     using static WebConstants.TempDataMessageKeys;
+    using static WebConstants.ModelStateMessage;
 
     [Authorize]
     public class WorkoutsController : Controller
@@ -67,17 +68,17 @@
         {
             if (!Enum.IsDefined(typeof(DifficultLevel), workout.DifficultLevel))
             {
-                this.ModelState.AddModelError(nameof(workout.DifficultLevel), "Invalid difficult level.");
+                this.ModelState.AddModelError(nameof(workout.DifficultLevel), InvalidDifficultLevel);
             }
 
             if (!await this.workouts.IsValidSportId(workout.SportId))
             {
-                this.ModelState.AddModelError(nameof(workout.SportId), "Invalid sport.");
+                this.ModelState.AddModelError(nameof(workout.SportId),InvalidSport);
             }
 
             if (!await this.workouts.IsValidBodyPartId(workout.BodyPartId))
             {
-                this.ModelState.AddModelError(nameof(workout.BodyPartId), "Invalid body part.");
+                this.ModelState.AddModelError(nameof(workout.BodyPartId), InvalidBodyPart);
             }
 
             if (!this.ModelState.IsValid)
@@ -89,7 +90,7 @@
 
             await this.workouts.Create(workout.Title, workout.SportId, (DifficultLevel)workout.DifficultLevel, workout.BodyPartId, this.User.GetId(), workout.Minutes, workout.Content);
 
-            return this.RedirectToAction("All");
+            return this.RedirectToAction(nameof(All));
         }
     }
 }
