@@ -85,6 +85,41 @@ if (latestWorkouts == null)
 }
 ```
 
+* AJAX/jQuery
+
+```javascript
+$('#add-comment').on('click',
+ev => {
+    ev.preventDefault();
+    var content = $('#comment-content').val();
+    var workoutId = @Model.Id;
+    var antiForgeryToken = $('#comment-form').find('input[name="__RequestVerificationToken"]').val();
+    var data = { content: content, workoutId: workoutId };
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/comments',
+        data: JSON.stringify(data),
+        headers: {
+            'X-CSRF-TOKEN': antiForgeryToken
+        },
+        success: function(data) {
+            $('#comment-content').val('');
+            var newComment = `
+                <div class="media mb40">
+                    <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i>
+                    <img src=${data.userImageUrl} class="d-flex mr-3 img-fluid rounded-circle comment-img" />
+                    <div class="media-body">
+                        <h5 class="mt-0 font400 clearfix"><b>${data.userUsername}</b></h5> ${data.content}
+                    </div>
+                </div>`;
+            $('#all-comments').append(newComment);
+        },
+        contentType: 'application/json'
+    });
+})
+```
+
 # Database Diagram
 
 ![](img/DbDiagram.jpg)
